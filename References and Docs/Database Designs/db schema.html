@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes'?>
-<!DOCTYPE html>
-<html lang='en' xmlns='http://www.w3.org/1999/xhtml' >
+<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.0 Transitional//EN'>
+<html>
 <head>
 <title>DB Layout</title>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
@@ -21,1281 +21,209 @@ body {
 </head>
 
 <body>
-<div class='svg-container'>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'   width='1065' height='1355' viewBox='0 0 1065 1355' >
-  <script type='text/ecmascript'>
-  <![CDATA[
-  function hghl(el) { for ( var i in el ){ var elem = document.getElementById(el[i]); if ( elem != null ) elem.setAttribute('class','highlight');  }  }
-  function uhghl(el) { for ( var i in el ){ var elem = document.getElementById(el[i]); if ( elem != null ) elem.setAttribute('class','scene'); }  } 
-  ]]>
-  </script> 
-
-<style type='text/css'>
-  text                { fill:#000000; font-family: Tahoma, 'Trebuchet MS', Dialog; font-size:11px; }
-  a text:hover        { fill:#94025f; text-shadow: 0px 0px 6px #d0ce00; font-size:13px; }
-  text.highlight      { fill:#94025f; text-shadow: 0px 0px 4px #eac533; font-size:13px; }
-  text.colType        { fill:#b3b3b3; }
-  text.relName        { fill:#b09c7c; }
-  path                { stroke:#5c554f; stroke-width:1.15; fill:none; stroke-dasharray: 1000px; stroke-dashoffset: 1000px; animation: dash 5s linear forwards;}
-  path                { stroke:#5c554f; stroke-width:1.15; fill:none; stroke-dasharray: 1035px; stroke-dashoffset: 1035px; animation: dash 5s linear forwards; }@keyframes dash { to { stroke-dashoffset: 0px; } }
-  path.virtual        { stroke:#b7642d; }
-  path.logo           { fill:#fbeac0;fill-opacity:1;stroke-width:0.3;stroke:#222222; }
-  path.dotted         { stroke-dasharray:4,2; }
-  path.scene          { stroke-width:10; opacity:0;}
-  path.highlight      { stroke-width:5; stroke:#c1a662; opacity:0.6;}
-  rect.entity         { fill:#ffffff; stroke:#aaa; stroke-width:1;shape-rendering:crispEdges;filter:url(#shadow); }
-  line.delim          { stroke-width:1; shape-rendering:crispEdges; }
-  text.callout        { fill:#000000; font-family: Tahoma, 'Trebuchet MS', Dialog; font-size:12px; }
-  rect.callout        { fill:url(#calloutGradient); stroke:#bebdbd; stroke-width:0.5; filter: url(#shadow);}
-  rect.grp            { stroke:#b1b1b1; stroke-width:1.7; opacity:0.8; }
-  path.st0            { fill:#ececec;fill-opacity:1;stroke-width:0.6;stroke:#aaaaaa; }
-</style>
-<defs>
-  <pattern id='layoutBgA' patternUnits='userSpaceOnUse'  width='10' height='20' x='0' y='0' viewBox='0 0 5 10'>  
-     <line x1='-2' y1='1' x2='7' y2='10' stroke='#f3f3f3' stroke-width='.5'/>  
-     <line x1='-2' y1='6' x2='7' y2='15' stroke='#f3f3f3' stroke-width='.5'/>  
-     <line x1='-2' y1='-4' x2='7' y2='5' stroke='#f3f3f3' stroke-width='.5'/>  
-  </pattern>  
-  <radialGradient id='layoutBgB' gradientUnits='userSpaceOnUse' cx='50%' cy='50%' r='75%' fx='46%' fy='22%'>
-     <stop offset='0%' stop-opacity='.2' stop-color='#f5f5f5' />  
-     <stop offset='100%' stop-color='#efefef' />  
-  </radialGradient>
-  <pattern id='layoutBgTr' patternUnits='userSpaceOnUse'  width='300' height='300' x='0' y='0' viewBox='0 0 300 300'>  
-  <path class='st0' d='m 62.011835,91.267143 c 3.536475,3.175214 2.262669,8.705999 -1.637711,11.015197 -3.594697,5.8423 -6.34682,-2.892623 -9.715478,-4.653898 -5.609222,-2.838926 2.050802,-6.680123 4.77004,-8.319046 2.334696,-0.724067 4.935143,0.312302 6.583149,1.957747 z m -2.720492,2.538595 c -2.698397,-3.517732 -9.282815,1.269287 -3.69635,3.568637 2.765331,5.605665 7.052809,-0.56184 3.69635,-3.568637 z' />
-  <path class='st0' d='m 72.25864,84.624638 c 4.108046,3.143003 -0.737059,6.895259 -1.994918,8.323564 -3.586718,5.561143 -6.495079,-4.197379 -10.07759,-5.582178 -4.443422,-1.088878 1.349298,-7.249213 2.503526,-2.503449 2.464639,4.517161 2.304019,-3.70697 6.291113,-1.995914 1.280083,0.137865 2.410691,0.864819 3.277869,1.757977 z m -2.646109,2.323242 c -4.797162,-3.078383 -2.810517,6.305507 0.515161,1.990646 0.296432,-0.688582 0.01209,-1.493412 -0.515161,-1.990646 z' />
-  <path class='st0' d='m 78.230641,79.436735 c 4.142121,3.027466 -2.020102,10.435276 -3.450543,5.477315 3.306312,-5.248112 -9.186019,-2.220094 -5.805994,-8.77679 -0.544141,-3.93011 6.797826,-2.102227 3.386015,0.245477 -0.181085,2.915838 4.637371,1.019311 5.870522,3.053982 z' />
-  <path class='st0' d='m 82.744502,72.597397 c -4.901605,1.926521 1.146497,6.285555 2.559694,2.225783 6.21817,3.539297 -6.640186,8.416664 -7.590325,1.997457 -2.24365,-2.914883 4.026676,-10.148618 5.030631,-4.22324 z' />
-  <path class='st0' d='m 90.727458,64.259158 c 1.583987,1.690029 3.321317,3.2696 4.81267,5.026353 -2.535706,6.849794 -6.445583,-5.918773 -8.388458,-0.167017 0.782768,2.03426 5.877405,3.752079 2.670979,5.711199 -3.315119,1.519161 -5.782422,-5.157931 -8.858893,-6.780537 -4.229842,-1.139816 1.510134,-7.074128 2.586227,-2.385939 3.141198,5.495193 1.840537,-5.598295 7.177489,-1.404062 z' />
-  <path class='st0' d='m 99.622027,58.374253 c 1.493293,1.9548 -6.281936,7.024659 -0.885258,4.740447 0.386238,-4.434477 6.131941,-1.133173 2.175851,1.618005 -4.421491,6.12739 -13.666659,-3.151506 -7.058299,-7.136537 1.785129,-1.119329 4.348209,-0.743179 5.767706,0.778085 z m -2.900824,1.89746 c -3.608188,-2.208543 -2.280489,5.00803 -0.12563,0.329531 z' />
-  <path class='st0' d='m 115.18023,50.570441 c -1.61703,5.201678 -4.6204,-0.364502 -7.01598,-1.749619 -4.40977,2.122562 4.89641,4.913939 1.89606,7.018157 -2.48061,3.877635 -4.11404,-4.060614 -7.01192,-2.6391 -1.76318,3.107252 7.28394,6.252304 0.87346,7.876177 -1.74515,-2.956649 -9.055498,-5.610518 -3.950378,-8.66062 1.696478,1.897023 1.770418,-5.43503 5.347308,-3.072411 -0.44014,-5.474701 6.11995,-4.950882 7.7846,-0.815355 0.69076,0.682329 1.39587,1.351469 2.07685,2.042771 z' />
-  <path class='st0' d='m 120.54891,39.417125 c 2.50681,1.334124 4.80466,4.941837 0.75044,5.297362 -0.46414,1.89865 -5.25369,5.602652 -8.01742,1.815475 -3.87345,-2.809139 -0.0676,-7.603869 2.3036,-8.133924 1.6795,-3.853018 3.16703,-1.199465 4.96338,1.021087 z m -2.2464,2.175828 c -4.8049,-2.992167 -3.08987,6.380358 0.42374,2.036159 0.33052,-0.677508 0.12099,-1.525836 -0.42374,-2.036159 z' />
-  <path class='st0' d='m 128.50836,24.06821 c -5.10403,3.035506 3.20535,6.383175 5.05938,9.450276 -0.91853,2.95886 -4.06493,3.650723 -5.34691,0.265618 -2.25715,-2.089033 -4.65672,-6.948595 -7.07024,-2.584686 -4.71758,-3.764394 3.81217,-5.812054 5.12382,-9.226328 0.75738,0.677487 1.38637,1.498638 2.23389,2.095175 z' />
-  <path class='st0' d='m 137.14366,22.299812 c -3.09615,2.259885 0.71537,4.412454 1.99042,6.435866 -3.08975,5.080354 -5.91384,-2.98648 -8.92144,-4.094939 1.44369,-3.219573 3.3497,-1.335928 4.27156,-4.41058 0.97822,-0.894325 1.75044,1.871047 2.65946,2.069653 z' />
-  <path class='st0' d='m 136.85093,14.890174 c 2.31562,5.283511 -7.17975,1.771993 -1.29675,-0.475107 l 0.7108,0.08973 z m 4.867,5.317354 c 2.56912,1.439678 4.26517,4.725219 0.30678,5.233637 -1.56592,-3.098864 -9.51683,-5.749448 -3.64502,-8.633714 1.17746,0.325095 2.15375,2.591149 3.33824,3.400077 z' />
-  <path class='st0' d='m 149.95578,11.976423 c 2.50679,1.334142 4.80455,4.94192 0.75041,5.297394 -0.4641,1.898604 -5.25368,5.602645 -8.0174,1.81545 -3.87347,-2.80918 -0.0676,-7.603844 2.30366,-8.133968 1.67949,-3.8530525 3.16695,-1.1993573 4.96333,1.021124 z m -2.24641,2.175828 c -4.80489,-2.992177 -3.08986,6.380343 0.42374,2.036167 0.33055,-0.677518 0.121,-1.52585 -0.42374,-2.036167 z' />
-  <path class='st0' d='m 153.26135,7.538431 c 2.60497,1.5799548 6.03999,5.944272 1.08117,6.050232 -2.53319,-3.231828 -7.20316,-6.4304525 -8.84748,-9.4582682 1.89121,-2.8664883 3.78452,-2.247699 5.38514,0.8929426 0.78017,0.8503859 1.57195,1.6911437 2.38118,2.5150667 z' />
-  </pattern>  
-  <linearGradient id='groupUnderTitleLine' x1='0%' y1='0%' x2='100%' y2='0%' >
-          <stop offset='0%' stop-color='#999999' stop-opacity='0.7'/> 
-          <stop offset='100%' stop-color='#999999' stop-opacity='0' /> 
-   </linearGradient>
-  <radialGradient id='calloutGradient' cx='25%' cy='20%' r='80%' fx='10%' fy='10%'>
-	   <stop offset='0%' stop-color='#ffffff' />
-    <stop offset='100%' stop-color='#f8f6d1' />
-  </radialGradient>
-  <filter id='shadow' width='120%' height='120%'> 
-      <feOffset result='offOut' in='SourceGraphic' dx='1' dy='1' /> 
-      <feColorMatrix result='matrixOut' in='offOut' type='matrix' 
-      values='0.1 0 0 0 0 0 0.4 0 0 0 0 0 0.6 0 0 0 0 0 0.3 0' /> 
-      <feGaussianBlur result='blurOut' in='matrixOut' stdDeviation='3' /> 
-      <feBlend in='SourceGraphic' in2='blurOut' mode='normal' /> 
-    </filter> 
-  <filter id='fkShadow' height='130%'> 
-    <feGaussianBlur in='SourceAlpha' stdDeviation='1.5'/> <!-- stdDeviation is how much to blur -->
-    <feOffset dx='1.2' dy='1.2' result='offsetblur'/> <!-- how much to offset -->
-    <feMerge>
-    <feMergeNode/> <!-- this contains the offset blurred image -->
-    <feMergeNode in='SourceGraphic'/> <!-- this contains the element that the filter is applied to -->
-    </feMerge>
-  </filter>
-  <radialGradient id='legendGradient' fx='5%' fy='5%' r='75%' spreadMethod='pad'>
-          <stop offset='0%' stop-color='#eefbf2' stop-opacity='1'/> 
-          <stop offset='100%' stop-color='#cff9cb' stop-opacity='1' /> 
-   </radialGradient>
-  <symbol id='calloutArrowDown' overflow='visible' >
-      <path d='M 0,0 L 7,11 L 15,0 z' style='fill:#f8f6d1;stroke:none; filter: url(#shadow);' />
-      <path d='M 0,0 L 7,11 L 15,0' style='stroke:#bebdbd; stroke-width:0.5;' />
-  </symbol>
-  <symbol id='calloutArrowUp' overflow='visible' >
-      <path d='M 0,15 L 7,3 L 15,15 z' style='fill:#ffffff; stroke:none; filter: url(#shadow);' />
-      <path d='M 0,15 L 7,3 L 15,15' style='stroke:#bebdbd; stroke-width:0.5;' />
-  </symbol>
-  <symbol id='pk' overflow='visible' >
-    <g transform='scale(0.99)'>
-     <path style='fill:#fffa7d;stroke:#765f03;stroke-width:0.6;stroke-linecap:round;stroke-linejoin:round;'
-        d='M 9.3678877,3.5695485 C 9.1030218,3.2729386 9.0796382,2.7628519 9.3396185,2.4517097 9.5449651,2.1956495 9.9040386,2.0980533 10.199638,2.2169415 10.533525,2.3415459 10.775153,2.706942 10.750675,3.0842709 10.737029,3.3980003 10.541153,3.699122 10.258248,3.8066067 9.966649,3.9250429 9.6169668,3.8418805 9.4008073,3.6062324 9.3894892,3.5943518 9.3785264,3.582104 9.3678886,3.5695487 z M 11.226617,6.9916004 C 11.888137,6.3548946 12.293488,5.4172188 12.311087,4.442353 12.378144,2.7379364 11.248678,1.0541269 9.7322318,0.44767357 8.3887112,-0.1280313 6.7865012,0.26822889 5.8918395,1.4007929 5.080823,2.3839145 4.9336815,3.8452096 5.3635544,5.101615 L 4.3670905,5.315913 C 4.0664984,5.3682645 4.0967703,5.6316724 4.2574957,5.8208829 L 4.9124,6.5655244 4.1543436,7.2512357 3.2136002,7.2163506 3.1674775,8.5586827 2.0406832,8.5086512 1.5965306,8.9299953 1.5471661,10.179833 0.75616674,10.195223 0.2112857,10.758575 0.15354288,11.735988 0.07199052,12.765553 c 0.36440953,0.238225 0.79006967,0.195492 1.44938278,-0.02675 L 6.3033562,8.1282037 6.8217102,8.6765688 C 6.9985465,8.8799427 7.3003699,8.7497574 7.358381,8.5016252 L 7.4938877,7.5084164 c 0.8537488,0.3985387 1.8303125,0.4711541 2.6851793,0.1427713 0.393927,-0.1407258 0.746858,-0.3701772 1.04755,-0.6595873 z'/>
-     <path d='M 6.8014948,6.3102123 0.15369063,13.024481 0.21560535,12.141962 6.0062342,6.2683782 z'
-        style='fill:#ffe5a5;fill-opacity:1;stroke:#854e31;stroke-width:0.06912433;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:3.00300009'/>
-    </g>
-  </symbol>
-  <symbol id='dist' overflow='visible' >
-    <g transform='scale(0.99)'>
-      <path style='fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;' d='M 0.177,11.431 12.28,11.449'/>
-      <path style='fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;' d='m 6.124,3.954 0.066,7.154 v 0'/>
-      <rect width='11.78' height='3.40' x='0.40' y='0.44' style='fill:#fffa7d;stroke:#765f03;stroke-width:0.6;' ry='0.83'/>
-      <rect width='11.78' height='3.40' x='0.40' y='5.609' style='fill:#fffa7d;stroke:#765f03;stroke-width:0.6;' ry='0.832'/>
-    </g>
-  </symbol>
-  <symbol id='unq' overflow='visible' >
-    <g transform='scale(0.99)'>
-      <rect style='fill:#fbea8e;stroke:#7e4d31;stroke-width:0.71934468;stroke-linecap:round;stroke-linejoin:round;'
-         width='2.29' height='8.43' x='7.48' y='-0.76' ry='1.14' transform='matrix(0.701,0.713,-0.727,0.685,0,0)' />
-      <path style='fill:white;stroke:#858585;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;'
-         d='m 26.04,8.64 a 4.13,4.13 0 1 1 -8.26,0 4.13,4.13 0 1 1 8.26,0 z'
-         transform='matrix(1.025,0,0,0.987,-14.690,-3.862)' />
-      <text x='5.8' y='7.4' style='font-size:7px;fill:#8a8a8a;'>1</text>
-    </g>
-  </symbol>
-  <symbol id='idx' overflow='visible' >
-    <g transform='scale(0.99)'>
-      <rect style='fill:#fbea8e;stroke:#7e4d31;stroke-width:0.71934468;stroke-linecap:round;stroke-linejoin:round;'
-         width='2.29' height='8.43' x='7.48' y='-0.76' ry='1.14' transform='matrix(0.701,0.713,-0.727,0.685,0,0)' />
-      <path style='fill:white;stroke:#858585;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;'
-         d='m 26.04,8.64 a 4.13,4.13 0 1 1 -8.26,0 4.13,4.13 0 1 1 8.26,0 z'
-         transform='matrix(1.025,0,0,0.987,-14.690,-3.862)' />
-    </g>
-  </symbol>
-  <symbol id='fk' overflow='visible' >
-    <g transform='scale(0.87)'>
-      <path style='fill:#f3e1b7;stroke:#7e471f;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
-      d='M 12.48,0.33 7.07,0.89 9.067,2.974 0.329,11.731 1.073,12.597 9.811,3.841 11.77,5.78 z' />
-    </g>
-  </symbol>
-  <symbol id='ref' overflow='visible' >
-    <g transform='scale(0.87)'>
-      <path style='fill:#f3e1b7;stroke:#7e471f;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
-          d='M 0.10,12.70 5.31,12.15 3.40,10.06 11.82,1.32 11.11,0.45 2.68,9.19 0.80,7.24 z'/>
-    </g>
-  </symbol>
-  <symbol id='flag0' overflow='visible' >
-    <g transform='scale(0.92)'>
-      <path style='fill:#b7d0f6;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
-          d='M 0.12,12.67 0.16,7.22 C 2.59,7.22 4.13,8.78 9.22,4.22 5.68,4.98 2.53,4.50 0.09,1.80 z'/>
-    </g>
-  </symbol>
-  <symbol id='flag1' overflow='visible' >
-    <g transform='scale(0.92)'>
-      <path style='fill:#f4a393;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
-          d='M 0.12,12.67 0.16,7.22 C 2.59,7.22 4.13,8.78 9.22,4.22 5.68,4.98 2.53,4.50 0.09,1.80 z'/>
-    </g>
-  </symbol>
-  <symbol id='flag2' overflow='visible' >
-    <g transform='scale(0.92)'>
-      <path style='fill:#77ec8b;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
-          d='M 0.12,12.67 0.16,7.22 C 2.59,7.22 4.13,8.78 9.22,4.22 5.68,4.98 2.53,4.50 0.09,1.80 z'/>
-    </g>
-  </symbol>
-  <symbol id='nn' overflow='visible' >
-  <path style='stroke:#9b3e50;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;'
-          d='M 0,0 3,3 M 0,3 3,0 z'/>
-  </symbol>
-  <symbol id='view' overflow='visible' >
-    <g transform='scale(0.99)'>
-     <line x1='12' y1='6' x2='19' y2='0' stroke='black' stroke-width='0.5' />
-     <line x1='0' y1='6' x2='7' y2='0' stroke='black' stroke-width='0.5' />
-     <circle cx='3' cy='6' r='3' fill='#f9ebbc' stroke='black' stroke-width='0.5'/>
-     <circle cx='10' cy='6' r='3' fill='#f9ebbc' stroke='black' stroke-width='0.5'/>
-    </g>
-  </symbol>
-  <marker id='arrow01' viewBox='0 0 15.00 7.50' refX='7.50' refY='3.75' markerUnits='strokeWidth' markerWidth='15.00' markerHeight='7.50' orient='auto'>
-    <path d='M 7.500,3.750 L 15.000,3.750 L 7.500,0.000 L 15.000,3.750 L 7.500,7.500' />
-  </marker>
-  <marker id='arrow1' viewBox='0 0 15.00 7.50' refX='7.50' refY='3.75' markerUnits='strokeWidth' markerWidth='15.00' markerHeight='7.50' orient='auto'>
-    <path d='M 7.500,3.750 L 15.000,3.750 L 7.500,0.000 L 15.000,3.750 L 7.500,7.500' />
-  </marker>
-  <marker id='foot01' viewBox='0 0 15.00 7.50' refX='7.50' refY='3.75' markerUnits='strokeWidth' markerWidth='15.00' markerHeight='7.50' orient='auto'>
-    <path d='M 0.00,3.75 L 15.00,3.75 z' />
-    <circle cx='11.25' cy='3.75' r='2.50' style='fill:white;stroke:#5e554d;' />
-    <path d='M 3.75,0.00 L 3.75, 7.50 z' />
-  </marker>
-  <marker id='foot0p' viewBox='0 0 15.00 7.50' refX='7.50' refY='3.75' markerUnits='strokeWidth' markerWidth='15.00' markerHeight='7.50' orient='auto'>
-    <path d='M 0.00,3.75 L 15.00,3.75 z' />
-    <circle cx='11.25' cy='3.75' r='2.50' style='fill:white;stroke:#5e554d;' />
-    <path d='M 0.00,0.00 L 7.50,3.75 L 0.00,7.50' />
-  </marker>
-  <marker id='foot1' viewBox='0 0 15.00 7.50' refX='7.50' refY='3.75' markerUnits='strokeWidth' markerWidth='15.00' markerHeight='7.50' orient='auto'>
-    <path d='M 0.00,3.75 L 15.00,3.75 z' />
-    <path d='M 7.50,0.00 L 7.50, 7.50 z' />
-    <path d='M 3.75,0.00 L 3.75, 7.50 z' />
-  </marker>
-  <marker id='foot1p' viewBox='0 0 15.00 7.50' refX='7.50' refY='3.75' markerUnits='strokeWidth' markerWidth='15.00' markerHeight='7.50' orient='auto'>
-    <path d='M 0.00,3.75 L 15.00,3.75 z' />
-    <path d='M 7.50,0.00 L 7.50, 7.50 z' />
-    <path d='M 0.00,0.00 L 7.50,3.75 L 0.00,7.50' />
-  </marker>
-  <linearGradient id='tbg_bfd4f5' x1='0%' y1='0%' x2='0%' y2='100%' >
-     <stop offset='0%' stop-color='#496ba1' /> 
-     <stop offset='100%' stop-color='#1f4682' /> 
-  </linearGradient>
-  <linearGradient id='tbg_f5ddbf' x1='0%' y1='0%' x2='0%' y2='100%' >
-     <stop offset='0%' stop-color='#a17a49' /> 
-     <stop offset='100%' stop-color='#82561f' /> 
-  </linearGradient>
-  <linearGradient id='tbg_c8f5bf' x1='0%' y1='0%' x2='0%' y2='100%' >
-     <stop offset='0%' stop-color='#58a149' /> 
-     <stop offset='100%' stop-color='#30821f' /> 
-  </linearGradient>
-  <linearGradient id='tbg_ff3399' x1='0%' y1='0%' x2='0%' y2='100%' >
-     <stop offset='0%' stop-color='#a14975' /> 
-     <stop offset='100%' stop-color='#821f51' /> 
-  </linearGradient>
-  <linearGradient id='tbg_bfbff5' x1='0%' y1='0%' x2='0%' y2='100%' >
-     <stop offset='0%' stop-color='#4949a1' /> 
-     <stop offset='100%' stop-color='#1f1f82' /> 
-  </linearGradient>
-</defs>
-
-<!-- == Desktop == -->
-<rect x='1' y='1' width='1063' height='1353' rx='7' ry='7' style='fill:url(#layoutBgB); stroke:#777777; stroke-width:0.5;' />
-<rect x='1' y='1' width='1063' height='1353' rx='7' ry='7' style='fill:url(#layoutBgA); stroke:#777777; stroke-width:0.5;' />
-<rect x='1' y='1' width='1063' height='1353' rx='7' ry='7' style='fill:url(#layoutBgTr);' />
-
-<!-- == Legend == -->
-<g transform='translate(10,10)'>
-  <rect x='10' y='10' width='330' height='56' rx='6' ry='6' style='fill:url(#legendGradient);filter:url(#shadow);'/> 
-  <text x='20' y='43'>DB Layout</text> 
-  <text x='20' y='57' style='fill:#aaaaaa; font-size:11px;'><tspan>Move the mouse over tables &amp; columns to read the comments.</tspan></text> 
-<a xlink:href='https://www.dbschema.com'> <path class='logo' d='m 32.309685,20.963194 c 0.411708,4.732616 -4.298055,7.925636 -8.723583,6.970196 -6.616967,1.8448 -2.656457,-6.434594 -3.911969,-10.01566 -2.15469,-5.89407 6.06247,-3.508505 9.167655,-2.863689 2.199228,1.054873 3.389343,3.582089 3.467897,5.909153 z m -3.720955,0.01451 c 0.434195,-4.414565 -7.644142,-5.37533 -5.137307,0.107342 -1.812268,5.992146 5.532698,4.379388 5.137307,-0.107342 z' /> <path class='logo' d='m 44.329732,23.050637 c 0.850982,5.097305 -5.250434,4.558924 -7.144836,4.752415 -6.418993,1.64391 -1.872992,-7.49274 -3.541914,-10.942842 -2.499646,-3.817859 5.939283,-4.402698 3.538545,-0.13612 -1.287874,4.989123 4.215411,-1.154796 5.956717,2.809584 0.840273,0.970849 1.168829,2.272413 1.191488,3.516963 z m -3.519477,-0.09299 c -1.398216,-5.518069 -6.361061,2.717467 -0.984368,1.810718 0.686994,-0.30388 1.029454,-1.087638 0.984368,-1.810718 z' /> <path class='logo' d='m 52.234961,23.301163 c 0.954818,5.035675 -8.606408,6.284861 -6.262292,1.674914 6.000358,-1.604717 -5.188764,-7.870044 1.75972,-10.384908 2.288682,-3.253567 6.399287,3.075831 2.304111,2.48058 -2.124941,2.016587 2.688777,3.89858 2.198472,6.229403 z' /> <path class='logo' d='m 60.204336,21.349224 c -4.894917,-1.916474 -3.458707,5.391212 0.347494,3.37231 2.120589,6.821713 -10.599623,1.664746 -6.906229,-3.691132 0.354172,-3.663246 9.875349,-4.711252 6.558735,0.318822 z' /> <path class='logo' d='m 71.730617,20.654299 c 0.0013,2.316285 0.190131,4.655698 0.07825,6.958009 -6.532419,3.303565 -0.660423,-8.722256 -6.009639,-5.821653 -0.818815,2.024533 1.726403,6.746337 -1.95327,6.005484 -3.458346,-1.137537 -0.696275,-7.713407 -1.833252,-10.994208 -2.308916,-3.710131 5.93704,-4.164951 3.518609,0.0063 -1.462376,6.166445 5.169629,-2.857523 6.19931,3.846079 z' /> <path class='logo' d='m 82.245738,22.378957 c -0.24581,2.448954 -9.386766,0.8867 -3.885979,2.877055 3.312576,-2.99157 5.250902,3.334514 0.482647,2.665545 -7.415384,1.492275 -7.823196,-11.597641 -0.275476,-10.032117 2.068161,0.391458 3.682204,2.408824 3.678808,4.489517 z m -3.414436,-0.578473 c -1.124703,-4.072004 -5.087405,2.125488 -0.316922,0.156453 z' /> <path class='logo' d='m 98.936899,27.222794 c -4.73541,2.718339 -3.1239,-3.406557 -3.92611,-6.050494 -4.66985,-1.438471 0.21621,6.932413 -3.41219,6.438039 -4.46096,1.160054 -0.22824,-5.774711 -3.31526,-6.700429 -3.410722,1.082173 1.04451,9.536575 -4.745091,6.372895 0.746632,-3.355214 -2.776394,-10.269232 3.034971,-9.038963 -0.058,2.544602 5.00686,-2.785359 6.00342,1.37844 3.42021,-4.316316 7.851251,0.524966 6.24018,4.690538 0.0379,0.969988 0.0954,1.940046 0.12008,2.909974 z' /> <path class='logo' d='m 110.47859,22.686058 c 0.91826,2.682088 0.13016,6.890551 -3.0725,4.397004 -1.63641,1.077877 -7.664291,0.541832 -7.09365,-4.114836 -0.907891,-4.692933 5.14729,-5.625578 7.24058,-4.40354 3.85932,-1.686263 3.13176,1.271515 2.92557,4.121372 z m -3.12695,0.0704 c -1.46278,-5.460062 -6.61615,2.5826 -1.08221,1.782003 0.70431,-0.272594 1.13111,-1.037444 1.08221,-1.782003 z' /> </a>
-</g>
-
-<g transform='translate(0,110)'>
-<!-- == Group 'User' == -->
-<rect class='grp' style='fill:#ffff00;stroke:#636353' x='239' y='40' width='182' height='530' />
-<text x='250' y='55'>User</text>
-<rect style='fill:url(#groupUnderTitleLine); stroke-width:2;' x='250' y='58' width='160' height='2' />
-
-<!-- == Group 'Entity' == -->
-<rect class='grp' style='fill:#0000ff;stroke:#535363' x='704' y='520' width='332' height='455' />
-<text x='715' y='535'>Entity</text>
-<rect style='fill:url(#groupUnderTitleLine); stroke-width:2;' x='715' y='538' width='310' height='2' />
-
-<!-- == Group 'Project' == -->
-<rect class='grp' style='fill:#660066;stroke:#635363' x='689' y='40' width='302' height='440' />
-<text x='700' y='55'>Project</text>
-<rect style='fill:url(#groupUnderTitleLine); stroke-width:2;' x='700' y='58' width='280' height='2' />
-
-<!-- == Group 'Group' == -->
-<rect class='grp' style='fill:#33ff33;stroke:#536353' x='254' y='640' width='137' height='410' />
-<text x='265' y='655'>Group</text>
-<rect style='fill:url(#groupUnderTitleLine); stroke-width:2;' x='265' y='658' width='115' height='2' />
-
-<!-- == Group 'Team' == -->
-<rect class='grp' style='fill:#33ffff;stroke:#536363' x='464' y='40' width='137' height='545' />
-<text x='475' y='55'>Team</text>
-<rect style='fill:url(#groupUnderTitleLine); stroke-width:2;' x='475' y='58' width='115' height='2' />
-
-<!-- == Group 'Role' == -->
-<rect class='grp' style='fill:#ff6666;stroke:#635353' x='464' y='625' width='152' height='545' />
-<text x='475' y='640'>Role</text>
-<rect style='fill:url(#groupUnderTitleLine); stroke-width:2;' x='475' y='643' width='130' height='2' />
-
-<!-- == Group 'SystemSettings' == -->
-<rect class='grp' style='fill:#ffffff;stroke:#635353' x='29' y='700' width='152' height='485' />
-<text x='40' y='715'>SystemSettings</text>
-<rect style='fill:url(#groupUnderTitleLine); stroke-width:2;' x='40' y='718' width='130' height='2' />
-
-<!-- == Group 'UserLogging' == -->
-<rect class='grp' style='fill:#ffffff;stroke:#635353' x='29' y='40' width='152' height='590' />
-<text x='40' y='55'>UserLogging</text>
-<rect style='fill:url(#groupUnderTitleLine); stroke-width:2;' x='40' y='58' width='130' height='2' />
-
-<!-- == Fk 'EntityField_Fk_EntityField_EntityFieldType' == -->
-<path id='EntityField_Fk_EntityField_EntityFieldType'  onmouseover="hghl(['EntityField_Fk_EntityField_EntityFieldType','dbo.EntityField.EntityFieldTypeId','dbo.EntityFieldType.EntityFieldTypeId'])" onmouseout="uhghl(['EntityField_Fk_EntityField_EntityFieldType','dbo.EntityField.EntityFieldTypeId','dbo.EntityFieldType.EntityFieldTypeId'])" transform='translate(7,0)' class='scene' d='M 840 795 L 885,795' >
-	<title>Fk Fk_EntityField_EntityFieldType
-EntityField ref EntityFieldType ( EntityFieldTypeId )</title>
-</path>
-<path transform='translate(7,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'  class='virtual'  d='M 840 795 L 885,795' ></path>
-<text x='847' y='790' transform='rotate(0 847,790)' title='Fk Fk_EntityField_EntityFieldType
-EntityField ref EntityFieldType ( EntityFieldTypeId )' class='relName' style='fill:#5f789f'>EntityFieldTypeId</text>
-<!-- == Fk 'EntityFieldMapping_FK__EntityFie__Entit__05D8E0BE' == -->
-<path id='EntityFieldMapping_FK__EntityFie__Entit__05D8E0BE'  onmouseover="hghl(['EntityFieldMapping_FK__EntityFie__Entit__05D8E0BE','dbo.EntityFieldMapping.EntityId','dbo.Entity.EntityId'])" onmouseout="uhghl(['EntityFieldMapping_FK__EntityFie__Entit__05D8E0BE','dbo.EntityFieldMapping.EntityId','dbo.Entity.EntityId'])" transform='translate(7,0)' class='scene' d='M 840 570 L 885,570' >
-	<title>Fk FK__EntityFie__Entit__05D8E0BE
-EntityFieldMapping ref Entity ( EntityId )</title>
-</path>
-<path transform='translate(7,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'    d='M 840 570 L 885,570' ></path>
-<text x='847' y='565' transform='rotate(0 847,565)' title='Fk FK__EntityFie__Entit__05D8E0BE
-EntityFieldMapping ref Entity ( EntityId )' class='relName' style='fill:#5f789f'>EntityId</text>
-<!-- == Fk 'EntityFieldMapping_FK__EntityFie__Entit__06CD04F7' == -->
-<path id='EntityFieldMapping_FK__EntityFie__Entit__06CD04F7'  onmouseover="hghl(['EntityFieldMapping_FK__EntityFie__Entit__06CD04F7','dbo.EntityFieldMapping.EntityFieldId','dbo.EntityField.EntityFieldId'])" onmouseout="uhghl(['EntityFieldMapping_FK__EntityFie__Entit__06CD04F7','dbo.EntityFieldMapping.EntityFieldId','dbo.EntityField.EntityFieldId'])" transform='translate(7,0)' class='scene' d='M 750 720 L 750,765' >
-	<title>Fk FK__EntityFie__Entit__06CD04F7
-EntityFieldMapping ref EntityField ( EntityFieldId )</title>
-</path>
-<path transform='translate(7,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'    d='M 750 720 L 750,765' ></path>
-<text x='763' y='720' transform='rotate(90 763,720)' title='Fk FK__EntityFie__Entit__06CD04F7
-EntityFieldMapping ref EntityField ( EntityFieldId )' class='relName' style='fill:#5f789f'>EntityFieldId</text>
-<!-- == Fk 'GroupRole_FK__GroupRole__Group__70DDC3D8' == -->
-<path id='GroupRole_FK__GroupRole__Group__70DDC3D8'  onmouseover="hghl(['GroupRole_FK__GroupRole__Group__70DDC3D8','dbo.GroupRole.GroupId','dbo.Group.GroupId'])" onmouseout="uhghl(['GroupRole_FK__GroupRole__Group__70DDC3D8','dbo.GroupRole.GroupId','dbo.Group.GroupId'])" transform='translate(7,0)' class='scene' d='M 495 810 L 495,817 Q 495,825 487,825 L 367,825 Q 360,825 360,832 L 360,840' >
-	<title>Fk FK__GroupRole__Group__70DDC3D8
-GroupRole ref Group ( GroupId )</title>
-</path>
-<path transform='translate(7,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'    d='M 495 810 L 495,817 Q 495,825 487,825 L 367,825 Q 360,825 360,832 L 360,840' ></path>
-<text x='508' y='810' transform='rotate(90 508,810)' title='Fk FK__GroupRole__Group__70DDC3D8
-GroupRole ref Group ( GroupId )' class='relName' style='fill:#6b9f5f'>GroupId</text>
-<!-- == Fk 'GroupRole_Fk_GroupRole_EntityFieldMapping' == -->
-<path id='GroupRole_Fk_GroupRole_EntityFieldMapping'  onmouseover="hghl(['GroupRole_Fk_GroupRole_EntityFieldMapping','dbo.GroupRole.Id','dbo.EntityFieldMapping.Id'])" onmouseout="uhghl(['GroupRole_Fk_GroupRole_EntityFieldMapping','dbo.GroupRole.Id','dbo.EntityFieldMapping.Id'])" transform='translate(7,0)' class='scene' d='M 585 675 L 720,675' >
-	<title>Fk Fk_GroupRole_EntityFieldMapping
-GroupRole ref EntityFieldMapping ( Id )</title>
-</path>
-<path transform='translate(7,0)' marker-start='url(#foot1)' marker-end='url(#arrow1)'  class='virtual'  d='M 585 675 L 720,675' ></path>
-<text x='592' y='670' transform='rotate(0 592,670)' title='Fk Fk_GroupRole_EntityFieldMapping
-GroupRole ref EntityFieldMapping ( Id )' class='relName' style='fill:#6b9f5f'>Id</text>
-<!-- == Fk 'GroupRole_Fk_GroupRole_Role' == -->
-<path id='GroupRole_Fk_GroupRole_Role'  onmouseover="hghl(['GroupRole_Fk_GroupRole_Role','dbo.GroupRole.RoleId','dbo.Role.RoleId'])" onmouseout="uhghl(['GroupRole_Fk_GroupRole_Role','dbo.GroupRole.RoleId','dbo.Role.RoleId'])" transform='translate(7,0)' class='scene' d='M 465 780 L 457,780 Q 450,780 450,787 L 450,1012 Q 450,1020 457,1020 L 465,1020' >
-	<title>Fk Fk_GroupRole_Role
-GroupRole ref Role ( RoleId )</title>
-</path>
-<path transform='translate(7,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'  class='virtual'  d='M 465 780 L 457,780 Q 450,780 450,787 L 450,1012 Q 450,1020 457,1020 L 465,1020' ></path>
-<text x='441' y='775' transform='rotate(0 441,775)' title='Fk Fk_GroupRole_Role
-GroupRole ref Role ( RoleId )' class='relName' style='fill:#6b9f5f'>RoleId</text>
-<!-- == Fk 'GroupRole_fk_grouprole_team' == -->
-<path id='GroupRole_fk_grouprole_team'  onmouseover="hghl(['GroupRole_fk_grouprole_team','dbo.GroupRole.TeamId','dbo.Team.TeamId'])" onmouseout="uhghl(['GroupRole_fk_grouprole_team','dbo.GroupRole.TeamId','dbo.Team.TeamId'])" transform='translate(7,0)' class='scene' d='M 465 660 L 457,660 Q 450,660 450,652 L 450,382 Q 450,375 457,375 L 465,375' >
-	<title>Fk fk_grouprole_team
-GroupRole ref Team ( TeamId )</title>
-</path>
-<path transform='translate(7,0)' marker-start='url(#foot0p)' marker-end='url(#arrow1)'    d='M 465 660 L 457,660 Q 450,660 450,652 L 450,382 Q 450,375 457,375 L 465,375' ></path>
-<text x='436' y='655' transform='rotate(0 436,655)' title='Fk fk_grouprole_team
-GroupRole ref Team ( TeamId )' class='relName' style='fill:#6b9f5f'>TeamId</text>
-<!-- == Fk 'SystemSettings_FK__SystemSet__Creat__5629CD9C' == -->
-<path id='SystemSettings_FK__SystemSet__Creat__5629CD9C'  onmouseover="hghl(['SystemSettings_FK__SystemSet__Creat__5629CD9C','dbo.SystemSettings.CreatedBy','dbo.User.UserId'])" onmouseout="uhghl(['SystemSettings_FK__SystemSet__Creat__5629CD9C','dbo.SystemSettings.CreatedBy','dbo.User.UserId'])" transform='translate(7,0)' class='scene' d='M 135 720 L 135,637 Q 135,630 142,630 L 277,630 Q 285,630 285,622 L 285,555' >
-	<title>Fk FK__SystemSet__Creat__5629CD9C
-SystemSettings ref User ( CreatedBy -&gt; UserId )</title>
-</path>
-<path transform='translate(7,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'    d='M 135 720 L 135,637 Q 135,630 142,630 L 277,630 Q 285,630 285,622 L 285,555' ></path>
-<text x='137' y='715' transform='rotate(270 137,715)' title='Fk FK__SystemSet__Creat__5629CD9C
-SystemSettings ref User ( CreatedBy -&gt; UserId )' class='relName' style='fill:#5f5f9f'>CreatedBy</text>
-<!-- == Fk 'SystemSettings_FK__SystemSet__Modif__571DF1D5' == -->
-<path id='SystemSettings_FK__SystemSet__Modif__571DF1D5'  onmouseover="hghl(['SystemSettings_FK__SystemSet__Modif__571DF1D5','dbo.SystemSettings.ModifiedBy','dbo.User.UserId'])" onmouseout="uhghl(['SystemSettings_FK__SystemSet__Modif__571DF1D5','dbo.SystemSettings.ModifiedBy','dbo.User.UserId'])" transform='translate(7,0)' class='scene' d='M 150 750 L 202,750 Q 210,750 210,742 L 210,517 Q 210,510 217,510 L 240,510' >
-	<title>Fk FK__SystemSet__Modif__571DF1D5
-SystemSettings ref User ( ModifiedBy -&gt; UserId )</title>
-</path>
-<path transform='translate(7,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'    d='M 150 750 L 202,750 Q 210,750 210,742 L 210,517 Q 210,510 217,510 L 240,510' ></path>
-<text x='157' y='745' transform='rotate(0 157,745)' title='Fk FK__SystemSet__Modif__571DF1D5
-SystemSettings ref User ( ModifiedBy -&gt; UserId )' class='relName' style='fill:#5f5f9f'>ModifiedBy</text>
-<!-- == Fk 'SystemLog_Fk_SystemLog_SystemLogType' == -->
-<path id='SystemLog_Fk_SystemLog_SystemLogType'  onmouseover="hghl(['SystemLog_Fk_SystemLog_SystemLogType','dbo.SystemLog.SystemLogTypeId','dbo.SystemLogType.SystemLogTypeId'])" onmouseout="uhghl(['SystemLog_Fk_SystemLog_SystemLogType','dbo.SystemLog.SystemLogTypeId','dbo.SystemLogType.SystemLogTypeId'])" transform='translate(7,0)' class='scene' d='M 60 1050 L 60,1065' >
-	<title>Fk Fk_SystemLog_SystemLogType
-SystemLog ref SystemLogType ( SystemLogTypeId )</title>
-</path>
-<path transform='translate(7,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'  class='virtual'  d='M 60 1050 L 60,1065' ></path>
-<text x='73' y='1050' transform='rotate(90 73,1050)' title='Fk Fk_SystemLog_SystemLogType
-SystemLog ref SystemLogType ( SystemLogTypeId )' class='relName' style='fill:#5f5f9f'>SystemLogTypeId</text>
-<!-- == Fk 'SystemLog_FK__SystemLog__Targe__534D60F1' == -->
-<path id='SystemLog_FK__SystemLog__Targe__534D60F1'  onmouseover="hghl(['SystemLog_FK__SystemLog__Targe__534D60F1','dbo.SystemLog.TargetUserId','dbo.User.UserId'])" onmouseout="uhghl(['SystemLog_FK__SystemLog__Targe__534D60F1','dbo.SystemLog.TargetUserId','dbo.User.UserId'])" transform='translate(7,0)' class='scene' d='M 165 930 L 217,930 Q 225,930 225,922 L 225,532 Q 225,525 232,525 L 240,525' >
-	<title>Fk FK__SystemLog__Targe__534D60F1
-SystemLog ref User ( TargetUserId -&gt; UserId )</title>
-</path>
-<path transform='translate(7,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'    d='M 165 930 L 217,930 Q 225,930 225,922 L 225,532 Q 225,525 232,525 L 240,525' ></path>
-<text x='172' y='925' transform='rotate(0 172,925)' title='Fk FK__SystemLog__Targe__534D60F1
-SystemLog ref User ( TargetUserId -&gt; UserId )' class='relName' style='fill:#5f5f9f'>TargetUserId</text>
-<!-- == Fk 'SystemLog_FK__SystemLog__Updat__52593CB8' == -->
-<path id='SystemLog_FK__SystemLog__Updat__52593CB8'  onmouseover="hghl(['SystemLog_FK__SystemLog__Updat__52593CB8','dbo.SystemLog.UpdatedUserId','dbo.User.UserId'])" onmouseout="uhghl(['SystemLog_FK__SystemLog__Updat__52593CB8','dbo.SystemLog.UpdatedUserId','dbo.User.UserId'])" transform='translate(7,0)' class='scene' d='M 165 945 L 232,945 Q 240,945 240,937 L 240,577 Q 240,570 247,570 L 262,570 Q 270,570 270,562 L 270,555' >
-	<title>Fk FK__SystemLog__Updat__52593CB8
-SystemLog ref User ( UpdatedUserId -&gt; UserId )</title>
-</path>
-<path transform='translate(7,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'    d='M 165 945 L 232,945 Q 240,945 240,937 L 240,577 Q 240,570 247,570 L 262,570 Q 270,570 270,562 L 270,555' ></path>
-<text x='172' y='940' transform='rotate(0 172,940)' title='Fk FK__SystemLog__Updat__52593CB8
-SystemLog ref User ( UpdatedUserId -&gt; UserId )' class='relName' style='fill:#5f5f9f'>UpdatedUserId</text>
-<!-- == Fk 'TeamGroup_FK__TeamGroup__Group__6383C8BA' == -->
-<path id='TeamGroup_FK__TeamGroup__Group__6383C8BA'  onmouseover="hghl(['TeamGroup_FK__TeamGroup__Group__6383C8BA','dbo.TeamGroup.GroupId','dbo.Group.GroupId'])" onmouseout="uhghl(['TeamGroup_FK__TeamGroup__Group__6383C8BA','dbo.TeamGroup.GroupId','dbo.Group.GroupId'])" transform='translate(7,0)' class='scene' d='M 495 570 L 495,622 Q 495,630 487,630 L 427,630 Q 420,630 420,637 L 420,862 Q 420,870 412,870 L 375,870' >
-	<title>Fk FK__TeamGroup__Group__6383C8BA
-TeamGroup ref Group ( GroupId )</title>
-</path>
-<path transform='translate(7,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'    d='M 495 570 L 495,622 Q 495,630 487,630 L 427,630 Q 420,630 420,637 L 420,862 Q 420,870 412,870 L 375,870' ></path>
-<text x='508' y='570' transform='rotate(90 508,570)' title='Fk FK__TeamGroup__Group__6383C8BA
-TeamGroup ref Group ( GroupId )' class='relName' style='fill:#9f825f'>GroupId</text>
-<!-- == Fk 'TeamGroup_FK__TeamGroup__TeamI__6477ECF3' == -->
-<path id='TeamGroup_FK__TeamGroup__TeamI__6477ECF3'  onmouseover="hghl(['TeamGroup_FK__TeamGroup__TeamI__6477ECF3','dbo.TeamGroup.TeamId','dbo.Team.TeamId'])" onmouseout="uhghl(['TeamGroup_FK__TeamGroup__TeamI__6477ECF3','dbo.TeamGroup.TeamId','dbo.Team.TeamId'])" transform='translate(7,0)' class='scene' d='M 495 420 L 495,405' >
-	<title>Fk FK__TeamGroup__TeamI__6477ECF3
-TeamGroup ref Team ( TeamId )</title>
-</path>
-<path transform='translate(7,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'    d='M 495 420 L 495,405' ></path>
-<text x='497' y='415' transform='rotate(270 497,415)' title='Fk FK__TeamGroup__TeamI__6477ECF3
-TeamGroup ref Team ( TeamId )' class='relName' style='fill:#9f825f'>TeamId</text>
-<!-- == Fk 'UserLog_FK__UserLog__GroupId__44FF419A' == -->
-<path id='UserLog_FK__UserLog__GroupId__44FF419A'  onmouseover="hghl(['UserLog_FK__UserLog__GroupId__44FF419A','dbo.UserLog.GroupId','dbo.Group.GroupId'])" onmouseout="uhghl(['UserLog_FK__UserLog__GroupId__44FF419A','dbo.UserLog.GroupId','dbo.Group.GroupId'])" transform='translate(7,0)' class='scene' d='M 150 375 L 187,375 Q 195,375 195,382 L 195,847 Q 195,855 202,855 L 255,855' >
-	<title>Fk FK__UserLog__GroupId__44FF419A
-UserLog ref Group ( GroupId )</title>
-</path>
-<path transform='translate(7,0)' marker-start='url(#foot0p)' marker-end='url(#arrow1)'    d='M 150 375 L 187,375 Q 195,375 195,382 L 195,847 Q 195,855 202,855 L 255,855' ></path>
-<text x='157' y='370' transform='rotate(0 157,370)' title='Fk FK__UserLog__GroupId__44FF419A
-UserLog ref Group ( GroupId )' class='relName' style='fill:#5f789f'>GroupId</text>
-<!-- == Fk 'UserLog_FK__UserLog__TargetU__45F365D3' == -->
-<path id='UserLog_FK__UserLog__TargetU__45F365D3'  onmouseover="hghl(['UserLog_FK__UserLog__TargetU__45F365D3','dbo.UserLog.TargetUserId','dbo.User.UserId'])" onmouseout="uhghl(['UserLog_FK__UserLog__TargetU__45F365D3','dbo.UserLog.TargetUserId','dbo.User.UserId'])" transform='translate(7,0)' class='scene' d='M 150 225 L 240,225' >
-	<title>Fk FK__UserLog__TargetU__45F365D3
-UserLog ref User ( TargetUserId -&gt; UserId )</title>
-</path>
-<path transform='translate(7,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'    d='M 150 225 L 240,225' ></path>
-<text x='157' y='220' transform='rotate(0 157,220)' title='Fk FK__UserLog__TargetU__45F365D3
-UserLog ref User ( TargetUserId -&gt; UserId )' class='relName' style='fill:#5f789f'>TargetUserId</text>
-<!-- == Fk 'UserLog_FK__UserLog__Updated__46E78A0C' == -->
-<path id='UserLog_FK__UserLog__Updated__46E78A0C'  onmouseover="hghl(['UserLog_FK__UserLog__Updated__46E78A0C','dbo.UserLog.UpdatedUserId','dbo.User.UserId'])" onmouseout="uhghl(['UserLog_FK__UserLog__Updated__46E78A0C','dbo.UserLog.UpdatedUserId','dbo.User.UserId'])" transform='translate(7,0)' class='scene' d='M 150 240 L 240,240' >
-	<title>Fk FK__UserLog__Updated__46E78A0C
-UserLog ref User ( UpdatedUserId -&gt; UserId )</title>
-</path>
-<path transform='translate(7,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'    d='M 150 240 L 240,240' ></path>
-<text x='157' y='235' transform='rotate(0 157,235)' title='Fk FK__UserLog__Updated__46E78A0C
-UserLog ref User ( UpdatedUserId -&gt; UserId )' class='relName' style='fill:#5f789f'>UpdatedUserId</text>
-<!-- == Fk 'UserLog_Fk_UserLog_EntityFieldMapping' == -->
-<path id='UserLog_Fk_UserLog_EntityFieldMapping'  onmouseover="hghl(['UserLog_Fk_UserLog_EntityFieldMapping','dbo.UserLog.Id','dbo.EntityFieldMapping.Id'])" onmouseout="uhghl(['UserLog_Fk_UserLog_EntityFieldMapping','dbo.UserLog.Id','dbo.EntityFieldMapping.Id'])" transform='translate(7,0)' class='scene' d='M 30 360 L 22,360 Q 15,360 15,367 L 15,637 Q 15,645 22,645 L 397,645 Q 405,645 405,637 L 405,622 Q 405,615 412,615 L 720,615' >
-	<title>Fk Fk_UserLog_EntityFieldMapping
-UserLog ref EntityFieldMapping ( Id )</title>
-</path>
-<path transform='translate(7,0)' marker-start='url(#foot1)' marker-end='url(#arrow1)'  class='virtual'  d='M 30 360 L 22,360 Q 15,360 15,367 L 15,637 Q 15,645 22,645 L 397,645 Q 405,645 405,637 L 405,622 Q 405,615 412,615 L 720,615' ></path>
-<text x='27' y='355' transform='rotate(0 27,355)' title='Fk Fk_UserLog_EntityFieldMapping
-UserLog ref EntityFieldMapping ( Id )' class='relName' style='fill:#5f789f'>Id</text>
-<!-- == Fk 'UserLog_Fk_UserLog_UserLogType' == -->
-<path id='UserLog_Fk_UserLog_UserLogType'  onmouseover="hghl(['UserLog_Fk_UserLog_UserLogType','dbo.UserLog.UserLogTypeId','dbo.UserLogType.UserLogTypeId'])" onmouseout="uhghl(['UserLog_Fk_UserLog_UserLogType','dbo.UserLog.UserLogTypeId','dbo.UserLogType.UserLogTypeId'])" transform='translate(7,0)' class='scene' d='M 75 195 L 75,165' >
-	<title>Fk Fk_UserLog_UserLogType
-UserLog ref UserLogType ( UserLogTypeId )</title>
-</path>
-<path transform='translate(7,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'  class='virtual'  d='M 75 195 L 75,165' ></path>
-<text x='77' y='190' transform='rotate(270 77,190)' title='Fk Fk_UserLog_UserLogType
-UserLog ref UserLogType ( UserLogTypeId )' class='relName' style='fill:#5f789f'>UserLogTypeId</text>
-<!-- == Fk 'UserPreference_FK__UserPrefe__UserI__4CA06362' == -->
-<path id='UserPreference_FK__UserPrefe__UserI__4CA06362'  onmouseover="hghl(['UserPreference_FK__UserPrefe__UserI__4CA06362','dbo.UserPreference.UserId','dbo.User.UserId'])" onmouseout="uhghl(['UserPreference_FK__UserPrefe__UserI__4CA06362','dbo.UserPreference.UserId','dbo.User.UserId'])" transform='translate(7,0)' class='scene' d='M 150 435 L 240,435' >
-	<title>Fk FK__UserPrefe__UserI__4CA06362
-UserPreference ref User ( UserId )</title>
-</path>
-<path transform='translate(7,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'    d='M 150 435 L 240,435' ></path>
-<text x='157' y='430' transform='rotate(0 157,430)' title='Fk FK__UserPrefe__UserI__4CA06362
-UserPreference ref User ( UserId )' class='relName' style='fill:#5f789f'>UserId</text>
-<!-- == Fk 'UserLogin_FK__UserLogin__UserI__49C3F6B7' == -->
-<path id='UserLogin_FK__UserLogin__UserI__49C3F6B7'  onmouseover="hghl(['UserLogin_FK__UserLogin__UserI__49C3F6B7','dbo.UserLogin.UserId','dbo.User.UserId'])" onmouseout="uhghl(['UserLogin_FK__UserLogin__UserI__49C3F6B7','dbo.UserLogin.UserId','dbo.User.UserId'])" transform='translate(7,0)' class='scene' d='M 375 195 L 412,195 Q 420,195 420,202 L 420,232 Q 420,240 412,240 L 405,240' >
-	<title>Fk FK__UserLogin__UserI__49C3F6B7
-UserLogin ref User ( UserId )</title>
-</path>
-<path transform='translate(7,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'    d='M 375 195 L 412,195 Q 420,195 420,202 L 420,232 Q 420,240 412,240 L 405,240' ></path>
-<text x='382' y='190' transform='rotate(0 382,190)' title='Fk FK__UserLogin__UserI__49C3F6B7
-UserLogin ref User ( UserId )' class='relName' style='fill:#5f789f'>UserId</text>
-<!-- == Fk 'Group_FK__Group__CreatedBy__3A81B327' == -->
-<path id='Group_FK__Group__CreatedBy__3A81B327'  onmouseover="hghl(['Group_FK__Group__CreatedBy__3A81B327','dbo.Group.CreatedBy','dbo.User.UserId'])" onmouseout="uhghl(['Group_FK__Group__CreatedBy__3A81B327','dbo.Group.CreatedBy','dbo.User.UserId'])" transform='translate(7,0)' class='scene' d='M 255 870 L 187,870 Q 180,870 180,862 L 180,367 Q 180,360 187,360 L 240,360' >
-	<title>Fk FK__Group__CreatedBy__3A81B327
-Group ref User ( CreatedBy -&gt; UserId )</title>
-</path>
-<path transform='translate(7,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'    d='M 255 870 L 187,870 Q 180,870 180,862 L 180,367 Q 180,360 187,360 L 240,360' ></path>
-<text x='211' y='865' transform='rotate(0 211,865)' title='Fk FK__Group__CreatedBy__3A81B327
-Group ref User ( CreatedBy -&gt; UserId )' class='relName' style='fill:#6b9f5f'>CreatedBy</text>
-<!-- == Fk 'Group_FK__Group__ModifiedB__3B75D760' == -->
-<path id='Group_FK__Group__ModifiedB__3B75D760'  onmouseover="hghl(['Group_FK__Group__ModifiedB__3B75D760','dbo.Group.ModifiedBy','dbo.User.UserId'])" onmouseout="uhghl(['Group_FK__Group__ModifiedB__3B75D760','dbo.Group.ModifiedBy','dbo.User.UserId'])" transform='translate(7,0)' class='scene' d='M 255 885 L 172,885 Q 165,885 165,877 L 165,352 Q 165,345 172,345 L 240,345' >
-	<title>Fk FK__Group__ModifiedB__3B75D760
-Group ref User ( ModifiedBy -&gt; UserId )</title>
-</path>
-<path transform='translate(7,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'    d='M 255 885 L 172,885 Q 165,885 165,877 L 165,352 Q 165,345 172,345 L 240,345' ></path>
-<text x='210' y='880' transform='rotate(0 210,880)' title='Fk FK__Group__ModifiedB__3B75D760
-Group ref User ( ModifiedBy -&gt; UserId )' class='relName' style='fill:#6b9f5f'>ModifiedBy</text>
-<!-- == Fk 'ProjectTeam_FK__ProjectTe__Proje__6C190EBB' == -->
-<path id='ProjectTeam_FK__ProjectTe__Proje__6C190EBB'  onmouseover="hghl(['ProjectTeam_FK__ProjectTe__Proje__6C190EBB','dbo.ProjectTeam.ProjectId','dbo.Project.ProjectId'])" onmouseout="uhghl(['ProjectTeam_FK__ProjectTe__Proje__6C190EBB','dbo.ProjectTeam.ProjectId','dbo.Project.ProjectId'])" transform='translate(7,0)' class='scene' d='M 720 315 L 720,300' >
-	<title>Fk FK__ProjectTe__Proje__6C190EBB
-ProjectTeam ref Project ( ProjectId )</title>
-</path>
-<path transform='translate(7,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'    d='M 720 315 L 720,300' ></path>
-<text x='722' y='310' transform='rotate(270 722,310)' title='Fk FK__ProjectTe__Proje__6C190EBB
-ProjectTeam ref Project ( ProjectId )' class='relName' style='fill:#9f825f'>ProjectId</text>
-<!-- == Fk 'ProjectTeam_Fk_ProjectTeam_Team' == -->
-<path id='ProjectTeam_Fk_ProjectTeam_Team'  onmouseover="hghl(['ProjectTeam_Fk_ProjectTeam_Team','dbo.ProjectTeam.TeamId','dbo.Team.TeamId'])" onmouseout="uhghl(['ProjectTeam_Fk_ProjectTeam_Team','dbo.ProjectTeam.TeamId','dbo.Team.TeamId'])" transform='translate(7,0)' class='scene' d='M 690 330 L 585,330' >
-	<title>Fk Fk_ProjectTeam_Team
-ProjectTeam ref Team ( TeamId )</title>
-</path>
-<path transform='translate(7,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'  class='virtual'  d='M 690 330 L 585,330' ></path>
-<text x='661' y='325' transform='rotate(0 661,325)' title='Fk Fk_ProjectTeam_Team
-ProjectTeam ref Team ( TeamId )' class='relName' style='fill:#9f825f'>TeamId</text>
-<!-- == Fk 'UserRole_FK__UserRole__RoleId__75A278F5' == -->
-<path id='UserRole_FK__UserRole__RoleId__75A278F5'  onmouseover="hghl(['UserRole_FK__UserRole__RoleId__75A278F5','dbo.UserRole.RoleId','dbo.Role.RoleId'])" onmouseout="uhghl(['UserRole_FK__UserRole__RoleId__75A278F5','dbo.UserRole.RoleId','dbo.Role.RoleId'])" transform='translate(7,0)' class='scene' d='M 600 990 L 607,990 Q 615,990 615,997 L 615,1027 Q 615,1035 607,1035 L 585,1035' >
-	<title>Fk FK__UserRole__RoleId__75A278F5
-UserRole ref Role ( RoleId )</title>
-</path>
-<path transform='translate(7,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'    d='M 600 990 L 607,990 Q 615,990 615,997 L 615,1027 Q 615,1035 607,1035 L 585,1035' ></path>
-<text x='607' y='985' transform='rotate(0 607,985)' title='Fk FK__UserRole__RoleId__75A278F5
-UserRole ref Role ( RoleId )' class='relName' style='fill:#6b9f5f'>RoleId</text>
-<!-- == Fk 'UserRole_FK__UserRole__UserId__74AE54BC' == -->
-<path id='UserRole_FK__UserRole__UserId__74AE54BC'  onmouseover="hghl(['UserRole_FK__UserRole__UserId__74AE54BC','dbo.UserRole.UserId','dbo.User.UserId'])" onmouseout="uhghl(['UserRole_FK__UserRole__UserId__74AE54BC','dbo.UserRole.UserId','dbo.User.UserId'])" transform='translate(7,0)' class='scene' d='M 480 855 L 442,855 Q 435,855 435,847 L 435,547 Q 435,540 427,540 L 405,540' >
-	<title>Fk FK__UserRole__UserId__74AE54BC
-UserRole ref User ( UserId )</title>
-</path>
-<path transform='translate(7,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'    d='M 480 855 L 442,855 Q 435,855 435,847 L 435,547 Q 435,540 427,540 L 405,540' ></path>
-<text x='455' y='850' transform='rotate(0 455,850)' title='Fk FK__UserRole__UserId__74AE54BC
-UserRole ref User ( UserId )' class='relName' style='fill:#6b9f5f'>UserId</text>
-<!-- == Fk 'UserRole_fk_userrole_team' == -->
-<path id='UserRole_fk_userrole_team'  onmouseover="hghl(['UserRole_fk_userrole_team','dbo.UserRole.TeamId','dbo.Team.TeamId'])" onmouseout="uhghl(['UserRole_fk_userrole_team','dbo.UserRole.TeamId','dbo.Team.TeamId'])" transform='translate(7,0)' class='scene' d='M 585 840 L 585,832 Q 585,825 592,825 L 622,825 Q 630,825 630,817 L 630,397 Q 630,390 622,390 L 585,390' >
-	<title>Fk fk_userrole_team
-UserRole ref Team ( TeamId )</title>
-</path>
-<path transform='translate(7,0)' marker-start='url(#foot0p)' marker-end='url(#arrow1)'    d='M 585 840 L 585,832 Q 585,825 592,825 L 622,825 Q 630,825 630,817 L 630,397 Q 630,390 622,390 L 585,390' ></path>
-<text x='587' y='835' transform='rotate(270 587,835)' title='Fk fk_userrole_team
-UserRole ref Team ( TeamId )' class='relName' style='fill:#6b9f5f'>TeamId</text>
-<!-- == Fk 'Project_Fk_Project_ProjectType' == -->
-<path id='Project_Fk_Project_ProjectType'  onmouseover="hghl(['Project_Fk_Project_ProjectType','dbo.Project.ProjectTypeId','dbo.ProjectType.ProjectTypeId'])" onmouseout="uhghl(['Project_Fk_Project_ProjectType','dbo.Project.ProjectTypeId','dbo.ProjectType.ProjectTypeId'])" transform='translate(7,0)' class='scene' d='M 810 90 L 840,90' >
-	<title>Fk Fk_Project_ProjectType
-Project ref ProjectType ( ProjectTypeId )</title>
-</path>
-<path transform='translate(7,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'  class='virtual'  d='M 810 90 L 840,90' ></path>
-<text x='817' y='85' transform='rotate(0 817,85)' title='Fk Fk_Project_ProjectType
-Project ref ProjectType ( ProjectTypeId )' class='relName' style='fill:#9f825f'>ProjectTypeId</text>
-<!-- == Fk 'ProjectEntity_FK__ProjectEn__Entit__0B91BA14' == -->
-<path id='ProjectEntity_FK__ProjectEn__Entit__0B91BA14'  onmouseover="hghl(['ProjectEntity_FK__ProjectEn__Entit__0B91BA14','dbo.ProjectEntity.EntityId','dbo.Entity.EntityId'])" onmouseout="uhghl(['ProjectEntity_FK__ProjectEn__Entit__0B91BA14','dbo.ProjectEntity.EntityId','dbo.Entity.EntityId'])" transform='translate(7,0)' class='scene' d='M 915 450 L 915,540' >
-	<title>Fk FK__ProjectEn__Entit__0B91BA14
-ProjectEntity ref Entity ( EntityId )</title>
-</path>
-<path transform='translate(7,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'    d='M 915 450 L 915,540' ></path>
-<text x='928' y='450' transform='rotate(90 928,450)' title='Fk FK__ProjectEn__Entit__0B91BA14
-ProjectEntity ref Entity ( EntityId )' class='relName' style='fill:#9f825f'>EntityId</text>
-<!-- == Fk 'ProjectEntity_Fk_ProjectEntity_ProjectType' == -->
-<path id='ProjectEntity_Fk_ProjectEntity_ProjectType'  onmouseover="hghl(['ProjectEntity_Fk_ProjectEntity_ProjectType','dbo.ProjectEntity.ProjectTypeId','dbo.ProjectType.ProjectTypeId'])" onmouseout="uhghl(['ProjectEntity_Fk_ProjectEntity_ProjectType','dbo.ProjectEntity.ProjectTypeId','dbo.ProjectType.ProjectTypeId'])" transform='translate(7,0)' class='scene' d='M 885 270 L 885,240' >
-	<title>Fk Fk_ProjectEntity_ProjectType
-ProjectEntity ref ProjectType ( ProjectTypeId )</title>
-</path>
-<path transform='translate(7,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'  class='virtual'  d='M 885 270 L 885,240' ></path>
-<text x='887' y='265' transform='rotate(270 887,265)' title='Fk Fk_ProjectEntity_ProjectType
-ProjectEntity ref ProjectType ( ProjectTypeId )' class='relName' style='fill:#9f825f'>ProjectTypeId</text>
-<!-- == Fk 'ProjectEntity_FK__ProjectEn__Creat__0D7A0286' == -->
-<path id='ProjectEntity_FK__ProjectEn__Creat__0D7A0286'  onmouseover="hghl(['ProjectEntity_FK__ProjectEn__Creat__0D7A0286','dbo.ProjectEntity.CreatedBy','dbo.User.UserId'])" onmouseout="uhghl(['ProjectEntity_FK__ProjectEn__Creat__0D7A0286','dbo.ProjectEntity.CreatedBy','dbo.User.UserId'])" transform='translate(7,0)' class='scene' d='M 885 450 L 885,517 Q 885,525 877,525 L 607,525 Q 600,525 600,532 L 600,577 Q 600,585 592,585 L 397,585 Q 390,585 390,577 L 390,555' >
-	<title>Fk FK__ProjectEn__Creat__0D7A0286
-ProjectEntity ref User ( CreatedBy -&gt; UserId )</title>
-</path>
-<path transform='translate(7,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'    d='M 885 450 L 885,517 Q 885,525 877,525 L 607,525 Q 600,525 600,532 L 600,577 Q 600,585 592,585 L 397,585 Q 390,585 390,577 L 390,555' ></path>
-<text x='898' y='450' transform='rotate(90 898,450)' title='Fk FK__ProjectEn__Creat__0D7A0286
-ProjectEntity ref User ( CreatedBy -&gt; UserId )' class='relName' style='fill:#9f825f'>CreatedBy</text>
-<!-- == Fk 'ProjectEntity_FK__ProjectEn__Modif__0E6E26BF' == -->
-<path id='ProjectEntity_FK__ProjectEn__Modif__0E6E26BF'  onmouseover="hghl(['ProjectEntity_FK__ProjectEn__Modif__0E6E26BF','dbo.ProjectEntity.ModifiedBy','dbo.User.UserId'])" onmouseout="uhghl(['ProjectEntity_FK__ProjectEn__Modif__0E6E26BF','dbo.ProjectEntity.ModifiedBy','dbo.User.UserId'])" transform='translate(7,0)' class='scene' d='M 855 420 L 832,420 Q 825,420 825,427 L 825,502 Q 825,510 817,510 L 622,510 Q 615,510 615,517 L 615,592 Q 615,600 607,600 L 382,600 Q 375,600 375,592 L 375,555' >
-	<title>Fk FK__ProjectEn__Modif__0E6E26BF
-ProjectEntity ref User ( ModifiedBy -&gt; UserId )</title>
-</path>
-<path transform='translate(7,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'    d='M 855 420 L 832,420 Q 825,420 825,427 L 825,502 Q 825,510 817,510 L 622,510 Q 615,510 615,517 L 615,592 Q 615,600 607,600 L 382,600 Q 375,600 375,592 L 375,555' ></path>
-<text x='810' y='415' transform='rotate(0 810,415)' title='Fk FK__ProjectEn__Modif__0E6E26BF
-ProjectEntity ref User ( ModifiedBy -&gt; UserId )' class='relName' style='fill:#9f825f'>ModifiedBy</text>
-<!-- == Fk 'UserGroup_FK__UserGroup__Group__3E52440B' == -->
-<path id='UserGroup_FK__UserGroup__Group__3E52440B'  onmouseover="hghl(['UserGroup_FK__UserGroup__Group__3E52440B','dbo.UserGroup.GroupId','dbo.Group.GroupId'])" onmouseout="uhghl(['UserGroup_FK__UserGroup__Group__3E52440B','dbo.UserGroup.GroupId','dbo.Group.GroupId'])" transform='translate(7,0)' class='scene' d='M 285 810 L 285,840' >
-	<title>Fk FK__UserGroup__Group__3E52440B
-UserGroup ref Group ( GroupId )</title>
-</path>
-<path transform='translate(7,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'    d='M 285 810 L 285,840' ></path>
-<text x='298' y='810' transform='rotate(90 298,810)' title='Fk FK__UserGroup__Group__3E52440B
-UserGroup ref Group ( GroupId )' class='relName' style='fill:#6b9f5f'>GroupId</text>
-<!-- == Fk 'UserGroup_FK__UserGroup__UserI__3F466844' == -->
-<path id='UserGroup_FK__UserGroup__UserI__3F466844'  onmouseover="hghl(['UserGroup_FK__UserGroup__UserI__3F466844','dbo.UserGroup.UserId','dbo.User.UserId'])" onmouseout="uhghl(['UserGroup_FK__UserGroup__UserI__3F466844','dbo.UserGroup.UserId','dbo.User.UserId'])" transform='translate(7,0)' class='scene' d='M 300 660 L 300,555' >
-	<title>Fk FK__UserGroup__UserI__3F466844
-UserGroup ref User ( UserId )</title>
-</path>
-<path transform='translate(7,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'    d='M 300 660 L 300,555' ></path>
-<text x='302' y='655' transform='rotate(270 302,655)' title='Fk FK__UserGroup__UserI__3F466844
-UserGroup ref User ( UserId )' class='relName' style='fill:#6b9f5f'>UserId</text>
-<!-- == Fk 'TeamUser_FK__TeamUser__TeamId__68487DD7' == -->
-<path id='TeamUser_FK__TeamUser__TeamId__68487DD7'  onmouseover="hghl(['TeamUser_FK__TeamUser__TeamId__68487DD7','dbo.TeamUser.TeamId','dbo.Team.TeamId'])" onmouseout="uhghl(['TeamUser_FK__TeamUser__TeamId__68487DD7','dbo.TeamUser.TeamId','dbo.Team.TeamId'])" transform='translate(7,0)' class='scene' d='M 495 210 L 495,225' >
-	<title>Fk FK__TeamUser__TeamId__68487DD7
-TeamUser ref Team ( TeamId )</title>
-</path>
-<path transform='translate(7,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'    d='M 495 210 L 495,225' ></path>
-<text x='508' y='210' transform='rotate(90 508,210)' title='Fk FK__TeamUser__TeamId__68487DD7
-TeamUser ref Team ( TeamId )' class='relName' style='fill:#9f825f'>TeamId</text>
-<!-- == Fk 'TeamUser_Fk_TeamUser_User' == -->
-<path id='TeamUser_Fk_TeamUser_User'  onmouseover="hghl(['TeamUser_Fk_TeamUser_User','dbo.TeamUser.UserId','dbo.User.UserId'])" onmouseout="uhghl(['TeamUser_Fk_TeamUser_User','dbo.TeamUser.UserId','dbo.User.UserId'])" transform='translate(7,0)' class='scene' d='M 465 180 L 397,180 Q 390,180 390,187 L 390,210' >
-	<title>Fk Fk_TeamUser_User
-TeamUser ref User ( UserId )</title>
-</path>
-<path transform='translate(7,0)' marker-start='url(#foot1p)' marker-end='url(#arrow1)'  class='virtual'  d='M 465 180 L 397,180 Q 390,180 390,187 L 390,210' ></path>
-<text x='440' y='175' transform='rotate(0 440,175)' title='Fk Fk_TeamUser_User
-TeamUser ref User ( UserId )' class='relName' style='fill:#9f825f'>UserId</text>
-<!-- == Table 'Entity' == -->
-<rect class='entity' x='900' y='548' width='105' height='180' rx='7' ry='7' style='stroke:none'/>
-<path d='M 900 574 L 900 555 Q 900 548 907 548 L 998 548 Q 1005 548 1005 555 L 1005 574 L900 574 ' style='fill:url(#tbg_bfd4f5);stroke:1;stroke-opacity:0.1;' />
-<rect class='entity' x='900' y='548' width='105' height='180' rx='7' ry='7' style='fill:none;stroke:#5f656e'/>
-<line class='delim' x1='900' y1='574' x2='1005' y2='574' style='stroke:#5f656e'/>
-<line class='delim' x1='915' y1='574' x2='915' y2='728' style='stroke:#5f656e'/>
-<line class='delim' x1='994' y1='574' x2='994' y2='728' style='stroke:#5f656e'/>
-<a xlink:href='#Entity'><text x='935' y='566'>Entity</text><title>Table dbo.Entity</title></a>
-  <use id='nn' x='902' y='582' xlink:href='#nn'/><a xlink:href='#Entity.EntityId'><use id='pk' x='902' y='581' xlink:href='#pk'/><title>Pk PK__Entity__9C892F9DDFEA8CC3 ( EntityId ) </title></a>
-<a xlink:href='#Entity.EntityId'><text id='dbo.Entity.EntityId' x='918' y='591' onmouseover="hghl(['EntityFieldMapping_FK__EntityFie__Entit__05D8E0BE','dbo.EntityFieldMapping.EntityId','ProjectEntity_FK__ProjectEn__Entit__0B91BA14','dbo.ProjectEntity.EntityId'])" onmouseout="uhghl(['EntityFieldMapping_FK__EntityFie__Entit__05D8E0BE','dbo.EntityFieldMapping.EntityId','ProjectEntity_FK__ProjectEn__Entit__0B91BA14','dbo.ProjectEntity.EntityId'])">EntityId</text><title>EntityId
-* int</title></a>
-<a xlink:href='#Entity.EntityId'><use id='ref' x='994' y='581' xlink:href='#ref'/><title>Referred by EntityFieldMapping ( EntityId ) 
-Referred by ProjectEntity ( EntityId ) </title></a>
-  <use id='nn' x='902' y='597' xlink:href='#nn'/><a xlink:href='#Entity.Name'><text id='dbo.Entity.Name' x='918' y='606'>Name</text><title>Name
-* nvarchar(255)</title></a>
-<text x='1002' y='603' text-anchor='end' class='colType'>t</text>  <a xlink:href='#Entity.Description'><text id='dbo.Entity.Description' x='918' y='621'>Description</text><title>Description
-nvarchar(1026)</title></a>
-<text x='1002' y='618' text-anchor='end' class='colType'>t</text>  <use id='nn' x='902' y='627' xlink:href='#nn'/><a xlink:href='#Entity.Logo'><text id='dbo.Entity.Logo' x='918' y='636'>Logo</text><title>Logo
-* nvarchar(255) default 'White'</title></a>
-<text x='1002' y='633' text-anchor='end' class='colType'>t</text>  <use id='nn' x='902' y='642' xlink:href='#nn'/><a xlink:href='#Entity.CreatedBy'><text id='dbo.Entity.CreatedBy' x='918' y='651' onmouseover="hghl(['Entity_FK__Entity__CreatedB__797309D9','dbo.User.UserId'])" onmouseout="uhghl(['Entity_FK__Entity__CreatedB__797309D9','dbo.User.UserId'])">CreatedBy</text><title>CreatedBy
-* int</title></a>
-<a xlink:href='#Entity.CreatedBy'><use id='fk' x='994' y='641' xlink:href='#fk'/><title>References User ( CreatedBy -&gt; UserId ) </title></a>
-  <use id='nn' x='902' y='657' xlink:href='#nn'/><a xlink:href='#Entity.ModifiedBy'><text id='dbo.Entity.ModifiedBy' x='918' y='666' onmouseover="hghl(['Entity_FK__Entity__Modified__7A672E12','dbo.User.UserId'])" onmouseout="uhghl(['Entity_FK__Entity__Modified__7A672E12','dbo.User.UserId'])">ModifiedBy</text><title>ModifiedBy
-* int</title></a>
-<a xlink:href='#Entity.ModifiedBy'><use id='fk' x='994' y='656' xlink:href='#fk'/><title>References User ( ModifiedBy -&gt; UserId ) </title></a>
-  <use id='nn' x='902' y='672' xlink:href='#nn'/><a xlink:href='#Entity.CreatedDate'><text id='dbo.Entity.CreatedDate' x='918' y='681'>CreatedDate</text><title>CreatedDate
-* datetime</title></a>
-<text x='1002' y='678' text-anchor='end' class='colType'>d</text>  <use id='nn' x='902' y='687' xlink:href='#nn'/><a xlink:href='#Entity.ModifiedDate'><text id='dbo.Entity.ModifiedDate' x='918' y='696'>ModifiedDate</text><title>ModifiedDate
-* datetime</title></a>
-<text x='1002' y='693' text-anchor='end' class='colType'>d</text>  <use id='nn' x='902' y='702' xlink:href='#nn'/><a xlink:href='#Entity.IsActive'><text id='dbo.Entity.IsActive' x='918' y='711'>IsActive</text><title>IsActive
-* bit</title></a>
-<text x='1002' y='708' text-anchor='end' class='colType'>b</text>
-<!-- == Table 'EntityField' == -->
-<rect class='entity' x='720' y='773' width='120' height='180' rx='7' ry='7' style='stroke:none'/>
-<path d='M 720 799 L 720 780 Q 720 773 727 773 L 833 773 Q 840 773 840 780 L 840 799 L720 799 ' style='fill:url(#tbg_bfd4f5);stroke:1;stroke-opacity:0.1;' />
-<rect class='entity' x='720' y='773' width='120' height='180' rx='7' ry='7' style='fill:none;stroke:#5f656e'/>
-<line class='delim' x1='720' y1='799' x2='840' y2='799' style='stroke:#5f656e'/>
-<line class='delim' x1='735' y1='799' x2='735' y2='953' style='stroke:#5f656e'/>
-<line class='delim' x1='829' y1='799' x2='829' y2='953' style='stroke:#5f656e'/>
-<a xlink:href='#EntityField'><text x='752' y='791'>EntityField</text><title>Table dbo.EntityField</title></a>
-  <use id='nn' x='722' y='807' xlink:href='#nn'/><a xlink:href='#EntityField.EntityFieldId'><use id='pk' x='722' y='806' xlink:href='#pk'/><title>Pk PK__EntityFi__DCD2AA017CE1E9DD ( EntityFieldId ) </title></a>
-<a xlink:href='#EntityField.EntityFieldId'><text id='dbo.EntityField.EntityFieldId' x='738' y='816' onmouseover="hghl(['EntityFieldMapping_FK__EntityFie__Entit__06CD04F7','dbo.EntityFieldMapping.EntityFieldId'])" onmouseout="uhghl(['EntityFieldMapping_FK__EntityFie__Entit__06CD04F7','dbo.EntityFieldMapping.EntityFieldId'])">EntityFieldId</text><title>EntityFieldId
-* int</title></a>
-<a xlink:href='#EntityField.EntityFieldId'><use id='ref' x='829' y='806' xlink:href='#ref'/><title>Referred by EntityFieldMapping ( EntityFieldId ) </title></a>
-  <use id='nn' x='722' y='822' xlink:href='#nn'/><a xlink:href='#EntityField.EntityFieldTypeId'><text id='dbo.EntityField.EntityFieldTypeId' x='738' y='831' onmouseover="hghl(['EntityField_Fk_EntityField_EntityFieldType','dbo.EntityFieldType.EntityFieldTypeId'])" onmouseout="uhghl(['EntityField_Fk_EntityField_EntityFieldType','dbo.EntityFieldType.EntityFieldTypeId'])">EntityFieldTypeId</text><title>EntityFieldTypeId
-* int</title></a>
-<a xlink:href='#EntityField.EntityFieldTypeId'><use id='fk' x='829' y='821' xlink:href='#fk'/><title>References EntityFieldType ( EntityFieldTypeId ) </title></a>
-  <use id='nn' x='722' y='837' xlink:href='#nn'/><a xlink:href='#EntityField.Name'><text id='dbo.EntityField.Name' x='738' y='846'>Name</text><title>Name
-* nvarchar(255)</title></a>
-<text x='837' y='843' text-anchor='end' class='colType'>t</text>  <a xlink:href='#EntityField.Description'><text id='dbo.EntityField.Description' x='738' y='861'>Description</text><title>Description
-nvarchar(1026)</title></a>
-<text x='837' y='858' text-anchor='end' class='colType'>t</text>  <use id='nn' x='722' y='867' xlink:href='#nn'/><a xlink:href='#EntityField.CreatedBy'><text id='dbo.EntityField.CreatedBy' x='738' y='876' onmouseover="hghl(['EntityField_FK__EntityFie__Creat__02084FDA','dbo.User.UserId'])" onmouseout="uhghl(['EntityField_FK__EntityFie__Creat__02084FDA','dbo.User.UserId'])">CreatedBy</text><title>CreatedBy
-* int</title></a>
-<a xlink:href='#EntityField.CreatedBy'><use id='fk' x='829' y='866' xlink:href='#fk'/><title>References User ( CreatedBy -&gt; UserId ) </title></a>
-  <use id='nn' x='722' y='882' xlink:href='#nn'/><a xlink:href='#EntityField.ModifiedBy'><text id='dbo.EntityField.ModifiedBy' x='738' y='891' onmouseover="hghl(['EntityField_FK__EntityFie__Modif__02FC7413','dbo.User.UserId'])" onmouseout="uhghl(['EntityField_FK__EntityFie__Modif__02FC7413','dbo.User.UserId'])">ModifiedBy</text><title>ModifiedBy
-* int</title></a>
-<a xlink:href='#EntityField.ModifiedBy'><use id='fk' x='829' y='881' xlink:href='#fk'/><title>References User ( ModifiedBy -&gt; UserId ) </title></a>
-  <use id='nn' x='722' y='897' xlink:href='#nn'/><a xlink:href='#EntityField.CreatedDate'><text id='dbo.EntityField.CreatedDate' x='738' y='906'>CreatedDate</text><title>CreatedDate
-* datetime</title></a>
-<text x='837' y='903' text-anchor='end' class='colType'>d</text>  <use id='nn' x='722' y='912' xlink:href='#nn'/><a xlink:href='#EntityField.ModifiedDate'><text id='dbo.EntityField.ModifiedDate' x='738' y='921'>ModifiedDate</text><title>ModifiedDate
-* datetime</title></a>
-<text x='837' y='918' text-anchor='end' class='colType'>d</text>  <use id='nn' x='722' y='927' xlink:href='#nn'/><a xlink:href='#EntityField.IsActive'><text id='dbo.EntityField.IsActive' x='738' y='936'>IsActive</text><title>IsActive
-* bit</title></a>
-<text x='837' y='933' text-anchor='end' class='colType'>b</text>
-<!-- == Table 'EntityFieldType' == -->
-<rect class='entity' x='900' y='788' width='120' height='165' rx='7' ry='7' style='stroke:none'/>
-<path d='M 900 814 L 900 795 Q 900 788 907 788 L 1013 788 Q 1020 788 1020 795 L 1020 814 L900 814 ' style='fill:url(#tbg_bfd4f5);stroke:1;stroke-opacity:0.1;' />
-<rect class='entity' x='900' y='788' width='120' height='165' rx='7' ry='7' style='fill:none;stroke:#5f656e'/>
-<line class='delim' x1='900' y1='814' x2='1020' y2='814' style='stroke:#5f656e'/>
-<line class='delim' x1='915' y1='814' x2='915' y2='953' style='stroke:#5f656e'/>
-<line class='delim' x1='1009' y1='814' x2='1009' y2='953' style='stroke:#5f656e'/>
-<a xlink:href='#EntityFieldType'><text x='920' y='806'>EntityFieldType</text><title>Table dbo.EntityFieldType</title></a>
-  <use id='nn' x='902' y='822' xlink:href='#nn'/><a xlink:href='#EntityFieldType.EntityFieldTypeId'><use id='pk' x='902' y='821' xlink:href='#pk'/><title>Pk PK__EntityFi__56CDDBA325B83144 ( EntityFieldTypeId ) </title></a>
-<a xlink:href='#EntityFieldType.EntityFieldTypeId'><text id='dbo.EntityFieldType.EntityFieldTypeId' x='918' y='831' onmouseover="hghl(['EntityField_Fk_EntityField_EntityFieldType','dbo.EntityField.EntityFieldTypeId'])" onmouseout="uhghl(['EntityField_Fk_EntityField_EntityFieldType','dbo.EntityField.EntityFieldTypeId'])">EntityFieldTypeId</text><title>EntityFieldTypeId
-* int</title></a>
-<a xlink:href='#EntityFieldType.EntityFieldTypeId'><use id='ref' x='1009' y='821' xlink:href='#ref'/><title>Referred by EntityField ( EntityFieldTypeId ) </title></a>
-  <use id='nn' x='902' y='837' xlink:href='#nn'/><a xlink:href='#EntityFieldType.Name'><text id='dbo.EntityFieldType.Name' x='918' y='846'>Name</text><title>Name
-* nvarchar(255)</title></a>
-<text x='1017' y='843' text-anchor='end' class='colType'>t</text>  <a xlink:href='#EntityFieldType.Description'><text id='dbo.EntityFieldType.Description' x='918' y='861'>Description</text><title>Description
-nvarchar(1026)</title></a>
-<text x='1017' y='858' text-anchor='end' class='colType'>t</text>  <use id='nn' x='902' y='867' xlink:href='#nn'/><a xlink:href='#EntityFieldType.CreatedBy'><text id='dbo.EntityFieldType.CreatedBy' x='918' y='876' onmouseover="hghl(['EntityFieldType_FK__EntityFie__Creat__7D439ABD','dbo.User.UserId'])" onmouseout="uhghl(['EntityFieldType_FK__EntityFie__Creat__7D439ABD','dbo.User.UserId'])">CreatedBy</text><title>CreatedBy
-* int</title></a>
-<a xlink:href='#EntityFieldType.CreatedBy'><use id='fk' x='1009' y='866' xlink:href='#fk'/><title>References User ( CreatedBy -&gt; UserId ) </title></a>
-  <use id='nn' x='902' y='882' xlink:href='#nn'/><a xlink:href='#EntityFieldType.ModifiedBy'><text id='dbo.EntityFieldType.ModifiedBy' x='918' y='891' onmouseover="hghl(['EntityFieldType_FK__EntityFie__Modif__7E37BEF6','dbo.User.UserId'])" onmouseout="uhghl(['EntityFieldType_FK__EntityFie__Modif__7E37BEF6','dbo.User.UserId'])">ModifiedBy</text><title>ModifiedBy
-* int</title></a>
-<a xlink:href='#EntityFieldType.ModifiedBy'><use id='fk' x='1009' y='881' xlink:href='#fk'/><title>References User ( ModifiedBy -&gt; UserId ) </title></a>
-  <use id='nn' x='902' y='897' xlink:href='#nn'/><a xlink:href='#EntityFieldType.CreatedDate'><text id='dbo.EntityFieldType.CreatedDate' x='918' y='906'>CreatedDate</text><title>CreatedDate
-* datetime</title></a>
-<text x='1017' y='903' text-anchor='end' class='colType'>d</text>  <use id='nn' x='902' y='912' xlink:href='#nn'/><a xlink:href='#EntityFieldType.ModifiedDate'><text id='dbo.EntityFieldType.ModifiedDate' x='918' y='921'>ModifiedDate</text><title>ModifiedDate
-* datetime</title></a>
-<text x='1017' y='918' text-anchor='end' class='colType'>d</text>  <use id='nn' x='902' y='927' xlink:href='#nn'/><a xlink:href='#EntityFieldType.IsActive'><text id='dbo.EntityFieldType.IsActive' x='918' y='936'>IsActive</text><title>IsActive
-* bit</title></a>
-<text x='1017' y='933' text-anchor='end' class='colType'>b</text>
-<!-- == Table 'EntityFieldMapping' == -->
-<rect class='entity' x='735' y='548' width='105' height='165' rx='7' ry='7' style='stroke:none'/>
-<path d='M 735 574 L 735 555 Q 735 548 742 548 L 833 548 Q 840 548 840 555 L 840 574 L735 574 ' style='fill:url(#tbg_bfd4f5);stroke:1;stroke-opacity:0.1;' />
-<rect class='entity' x='735' y='548' width='105' height='165' rx='7' ry='7' style='fill:none;stroke:#5f656e'/>
-<line class='delim' x1='735' y1='574' x2='840' y2='574' style='stroke:#5f656e'/>
-<line class='delim' x1='750' y1='574' x2='750' y2='713' style='stroke:#5f656e'/>
-<line class='delim' x1='829' y1='574' x2='829' y2='713' style='stroke:#5f656e'/>
-<a xlink:href='#EntityFieldMapping'><text x='739' y='566'>EntityFieldMapping</text><title>Table dbo.EntityFieldMapping</title></a>
-  <use id='nn' x='737' y='582' xlink:href='#nn'/><a xlink:href='#EntityFieldMapping.Id'><use id='pk' x='737' y='581' xlink:href='#pk'/><title>Pk PK__EntityFi__3214EC077B4C9C16 ( Id ) </title></a>
-<a xlink:href='#EntityFieldMapping.Id'><text id='dbo.EntityFieldMapping.Id' x='753' y='591' onmouseover="hghl(['GroupRole_Fk_GroupRole_EntityFieldMapping','dbo.GroupRole.Id','UserLog_Fk_UserLog_EntityFieldMapping','dbo.UserLog.Id','UserPreference_Fk_UserPreference_EntityFieldMapping','dbo.UserPreference.Id'])" onmouseout="uhghl(['GroupRole_Fk_GroupRole_EntityFieldMapping','dbo.GroupRole.Id','UserLog_Fk_UserLog_EntityFieldMapping','dbo.UserLog.Id','UserPreference_Fk_UserPreference_EntityFieldMapping','dbo.UserPreference.Id'])">Id</text><title>Id
-* int</title></a>
-<a xlink:href='#EntityFieldMapping.Id'><use id='ref' x='829' y='581' xlink:href='#ref'/><title>Referred by GroupRole ( Id ) 
-Referred by UserLog ( Id ) 
-Referred by UserPreference ( Id ) </title></a>
-  <use id='nn' x='737' y='597' xlink:href='#nn'/><a xlink:href='#EntityFieldMapping.EntityId'><text id='dbo.EntityFieldMapping.EntityId' x='753' y='606' onmouseover="hghl(['EntityFieldMapping_FK__EntityFie__Entit__05D8E0BE','dbo.Entity.EntityId'])" onmouseout="uhghl(['EntityFieldMapping_FK__EntityFie__Entit__05D8E0BE','dbo.Entity.EntityId'])">EntityId</text><title>EntityId
-* int</title></a>
-<a xlink:href='#EntityFieldMapping.EntityId'><use id='fk' x='829' y='596' xlink:href='#fk'/><title>References Entity ( EntityId ) </title></a>
-  <use id='nn' x='737' y='612' xlink:href='#nn'/><a xlink:href='#EntityFieldMapping.EntityFieldId'><text id='dbo.EntityFieldMapping.EntityFieldId' x='753' y='621' onmouseover="hghl(['EntityFieldMapping_FK__EntityFie__Entit__06CD04F7','dbo.EntityField.EntityFieldId'])" onmouseout="uhghl(['EntityFieldMapping_FK__EntityFie__Entit__06CD04F7','dbo.EntityField.EntityFieldId'])">EntityFieldId</text><title>EntityFieldId
-* int</title></a>
-<a xlink:href='#EntityFieldMapping.EntityFieldId'><use id='fk' x='829' y='611' xlink:href='#fk'/><title>References EntityField ( EntityFieldId ) </title></a>
-  <use id='nn' x='737' y='627' xlink:href='#nn'/><a xlink:href='#EntityFieldMapping.CreatedBy'><text id='dbo.EntityFieldMapping.CreatedBy' x='753' y='636' onmouseover="hghl(['EntityFieldMapping_FK__EntityFie__Creat__07C12930','dbo.User.UserId'])" onmouseout="uhghl(['EntityFieldMapping_FK__EntityFie__Creat__07C12930','dbo.User.UserId'])">CreatedBy</text><title>CreatedBy
-* int</title></a>
-<a xlink:href='#EntityFieldMapping.CreatedBy'><use id='fk' x='829' y='626' xlink:href='#fk'/><title>References User ( CreatedBy -&gt; UserId ) </title></a>
-  <use id='nn' x='737' y='642' xlink:href='#nn'/><a xlink:href='#EntityFieldMapping.ModifiedBy'><text id='dbo.EntityFieldMapping.ModifiedBy' x='753' y='651' onmouseover="hghl(['EntityFieldMapping_FK__EntityFie__Modif__08B54D69','dbo.User.UserId'])" onmouseout="uhghl(['EntityFieldMapping_FK__EntityFie__Modif__08B54D69','dbo.User.UserId'])">ModifiedBy</text><title>ModifiedBy
-* int</title></a>
-<a xlink:href='#EntityFieldMapping.ModifiedBy'><use id='fk' x='829' y='641' xlink:href='#fk'/><title>References User ( ModifiedBy -&gt; UserId ) </title></a>
-  <use id='nn' x='737' y='657' xlink:href='#nn'/><a xlink:href='#EntityFieldMapping.CreatedDate'><text id='dbo.EntityFieldMapping.CreatedDate' x='753' y='666'>CreatedDate</text><title>CreatedDate
-* datetime</title></a>
-<text x='837' y='663' text-anchor='end' class='colType'>d</text>  <use id='nn' x='737' y='672' xlink:href='#nn'/><a xlink:href='#EntityFieldMapping.ModifiedDate'><text id='dbo.EntityFieldMapping.ModifiedDate' x='753' y='681'>ModifiedDate</text><title>ModifiedDate
-* datetime</title></a>
-<text x='837' y='678' text-anchor='end' class='colType'>d</text>  <use id='nn' x='737' y='687' xlink:href='#nn'/><a xlink:href='#EntityFieldMapping.IsActive'><text id='dbo.EntityFieldMapping.IsActive' x='753' y='696'>IsActive</text><title>IsActive
-* bit</title></a>
-<text x='837' y='693' text-anchor='end' class='colType'>b</text>
-<!-- == Table 'Team' == -->
-<rect class='entity' x='480' y='233' width='105' height='165' rx='7' ry='7' style='stroke:none'/>
-<path d='M 480 259 L 480 240 Q 480 233 487 233 L 578 233 Q 585 233 585 240 L 585 259 L480 259 ' style='fill:url(#tbg_f5ddbf);stroke:1;stroke-opacity:0.1;' />
-<rect class='entity' x='480' y='233' width='105' height='165' rx='7' ry='7' style='fill:none;stroke:#6e675f'/>
-<line class='delim' x1='480' y1='259' x2='585' y2='259' style='stroke:#6e675f'/>
-<line class='delim' x1='495' y1='259' x2='495' y2='398' style='stroke:#6e675f'/>
-<line class='delim' x1='574' y1='259' x2='574' y2='398' style='stroke:#6e675f'/>
-<a xlink:href='#Team'><text x='516' y='251'>Team</text><title>Table dbo.Team</title></a>
-  <use id='nn' x='482' y='267' xlink:href='#nn'/><a xlink:href='#Team.TeamId'><use id='pk' x='482' y='266' xlink:href='#pk'/><title>Pk PK__Team__123AE799EB025450 ( TeamId ) </title></a>
-<a xlink:href='#Team.TeamId'><text id='dbo.Team.TeamId' x='498' y='276' onmouseover="hghl(['TeamGroup_FK__TeamGroup__TeamI__6477ECF3','dbo.TeamGroup.TeamId','TeamUser_FK__TeamUser__TeamId__68487DD7','dbo.TeamUser.TeamId','ProjectTeam_Fk_ProjectTeam_Team','dbo.ProjectTeam.TeamId','GroupRole_fk_grouprole_team','dbo.GroupRole.TeamId','UserRole_fk_userrole_team','dbo.UserRole.TeamId'])" onmouseout="uhghl(['TeamGroup_FK__TeamGroup__TeamI__6477ECF3','dbo.TeamGroup.TeamId','TeamUser_FK__TeamUser__TeamId__68487DD7','dbo.TeamUser.TeamId','ProjectTeam_Fk_ProjectTeam_Team','dbo.ProjectTeam.TeamId','GroupRole_fk_grouprole_team','dbo.GroupRole.TeamId','UserRole_fk_userrole_team','dbo.UserRole.TeamId'])">TeamId</text><title>TeamId
-* int</title></a>
-<a xlink:href='#Team.TeamId'><use id='ref' x='574' y='266' xlink:href='#ref'/><title>Referred by TeamGroup ( TeamId ) 
-Referred by TeamUser ( TeamId ) 
-Referred by ProjectTeam ( TeamId ) 
-Referred by GroupRole ( TeamId ) 
-Referred by UserRole ( TeamId ) </title></a>
-  <use id='nn' x='482' y='282' xlink:href='#nn'/><a xlink:href='#Team.Name'><text id='dbo.Team.Name' x='498' y='291'>Name</text><title>Name
-* nvarchar(255)</title></a>
-<text x='582' y='288' text-anchor='end' class='colType'>t</text>  <a xlink:href='#Team.Description'><text id='dbo.Team.Description' x='498' y='306'>Description</text><title>Description
-nvarchar(1026)</title></a>
-<text x='582' y='303' text-anchor='end' class='colType'>t</text>  <use id='nn' x='482' y='312' xlink:href='#nn'/><a xlink:href='#Team.Color'><text id='dbo.Team.Color' x='498' y='321'>Color</text><title>Color
-* nvarchar(255) default 'White'</title></a>
-<text x='582' y='318' text-anchor='end' class='colType'>t</text>  <use id='nn' x='482' y='327' xlink:href='#nn'/><a xlink:href='#Team.Logo'><text id='dbo.Team.Logo' x='498' y='336'>Logo</text><title>Logo
-* nvarchar(255) default 'White'</title></a>
-<text x='582' y='333' text-anchor='end' class='colType'>t</text>  <use id='nn' x='482' y='342' xlink:href='#nn'/><a xlink:href='#Team.CreatedDate'><text id='dbo.Team.CreatedDate' x='498' y='351'>CreatedDate</text><title>CreatedDate
-* datetime</title></a>
-<text x='582' y='348' text-anchor='end' class='colType'>d</text>  <use id='nn' x='482' y='357' xlink:href='#nn'/><a xlink:href='#Team.ModifiedDate'><text id='dbo.Team.ModifiedDate' x='498' y='366'>ModifiedDate</text><title>ModifiedDate
-* datetime</title></a>
-<text x='582' y='363' text-anchor='end' class='colType'>d</text>  <use id='nn' x='482' y='372' xlink:href='#nn'/><a xlink:href='#Team.IsActive'><text id='dbo.Team.IsActive' x='498' y='381'>IsActive</text><title>IsActive
-* bit</title></a>
-<text x='582' y='378' text-anchor='end' class='colType'>b</text>
-<!-- == Table 'GroupRole' == -->
-<rect class='entity' x='480' y='653' width='105' height='150' rx='7' ry='7' style='stroke:none'/>
-<path d='M 480 679 L 480 660 Q 480 653 487 653 L 578 653 Q 585 653 585 660 L 585 679 L480 679 ' style='fill:url(#tbg_c8f5bf);stroke:1;stroke-opacity:0.1;' />
-<rect class='entity' x='480' y='653' width='105' height='150' rx='7' ry='7' style='fill:none;stroke:#626e5f'/>
-<line class='delim' x1='480' y1='679' x2='585' y2='679' style='stroke:#626e5f'/>
-<line class='delim' x1='495' y1='679' x2='495' y2='803' style='stroke:#626e5f'/>
-<line class='delim' x1='574' y1='679' x2='574' y2='803' style='stroke:#626e5f'/>
-<a xlink:href='#GroupRole'><text x='504' y='671'>GroupRole</text><title>Table dbo.GroupRole</title></a>
-  <use id='nn' x='482' y='687' xlink:href='#nn'/><a xlink:href='#GroupRole.Id'><use id='pk' x='482' y='686' xlink:href='#pk'/><title>Pk PK__GroupRol__3214EC076842EBBF ( Id ) </title></a>
-<a xlink:href='#GroupRole.Id'><text id='dbo.GroupRole.Id' x='498' y='696' onmouseover="hghl(['GroupRole_Fk_GroupRole_EntityFieldMapping','dbo.EntityFieldMapping.Id'])" onmouseout="uhghl(['GroupRole_Fk_GroupRole_EntityFieldMapping','dbo.EntityFieldMapping.Id'])">Id</text><title>Id
-* int</title></a>
-<a xlink:href='#GroupRole.Id'><use id='fk' x='574' y='686' xlink:href='#fk'/><title>References EntityFieldMapping ( Id ) </title></a>
-  <use id='nn' x='482' y='702' xlink:href='#nn'/><a xlink:href='#GroupRole.GroupId'><text id='dbo.GroupRole.GroupId' x='498' y='711' onmouseover="hghl(['GroupRole_FK__GroupRole__Group__70DDC3D8','dbo.Group.GroupId'])" onmouseout="uhghl(['GroupRole_FK__GroupRole__Group__70DDC3D8','dbo.Group.GroupId'])">GroupId</text><title>GroupId
-* int</title></a>
-<a xlink:href='#GroupRole.GroupId'><use id='fk' x='574' y='701' xlink:href='#fk'/><title>References Group ( GroupId ) </title></a>
-  <use id='nn' x='482' y='717' xlink:href='#nn'/><a xlink:href='#GroupRole.RoleId'><text id='dbo.GroupRole.RoleId' x='498' y='726' onmouseover="hghl(['GroupRole_Fk_GroupRole_Role','dbo.Role.RoleId'])" onmouseout="uhghl(['GroupRole_Fk_GroupRole_Role','dbo.Role.RoleId'])">RoleId</text><title>RoleId
-* int</title></a>
-<a xlink:href='#GroupRole.RoleId'><use id='fk' x='574' y='716' xlink:href='#fk'/><title>References Role ( RoleId ) </title></a>
-  <a xlink:href='#GroupRole.TeamId'><use id='idx' x='482' y='731' xlink:href='#idx'/><title>GroupRole_TeamId ( TeamId ) </title></a>
-<a xlink:href='#GroupRole.TeamId'><text id='dbo.GroupRole.TeamId' x='498' y='741' onmouseover="hghl(['GroupRole_fk_grouprole_team','dbo.Team.TeamId'])" onmouseout="uhghl(['GroupRole_fk_grouprole_team','dbo.Team.TeamId'])">TeamId</text><title>TeamId
-int</title></a>
-<a xlink:href='#GroupRole.TeamId'><use id='fk' x='574' y='731' xlink:href='#fk'/><title>References Team ( TeamId ) </title></a>
-  <use id='nn' x='482' y='747' xlink:href='#nn'/><a xlink:href='#GroupRole.CreatedDate'><text id='dbo.GroupRole.CreatedDate' x='498' y='756'>CreatedDate</text><title>CreatedDate
-* datetime</title></a>
-<text x='582' y='753' text-anchor='end' class='colType'>d</text>  <use id='nn' x='482' y='762' xlink:href='#nn'/><a xlink:href='#GroupRole.ModifiedDate'><text id='dbo.GroupRole.ModifiedDate' x='498' y='771'>ModifiedDate</text><title>ModifiedDate
-* datetime</title></a>
-<text x='582' y='768' text-anchor='end' class='colType'>d</text>  <use id='nn' x='482' y='777' xlink:href='#nn'/><a xlink:href='#GroupRole.IsActive'><text id='dbo.GroupRole.IsActive' x='498' y='786'>IsActive</text><title>IsActive
-* bit</title></a>
-<text x='582' y='783' text-anchor='end' class='colType'>b</text>
-<!-- == Table 'User' == -->
-<rect class='entity' x='255' y='218' width='150' height='330' rx='7' ry='7' style='stroke:none'/>
-<path d='M 255 244 L 255 225 Q 255 218 262 218 L 398 218 Q 405 218 405 225 L 405 244 L255 244 ' style='fill:url(#tbg_ff3399);stroke:1;stroke-opacity:0.1;' />
-<rect class='entity' x='255' y='218' width='150' height='330' rx='7' ry='7' style='fill:none;stroke:#6e5f67'/>
-<line class='delim' x1='255' y1='244' x2='405' y2='244' style='stroke:#6e5f67'/>
-<line class='delim' x1='270' y1='244' x2='270' y2='548' style='stroke:#6e5f67'/>
-<line class='delim' x1='394' y1='244' x2='394' y2='548' style='stroke:#6e5f67'/>
-<a xlink:href='#User'><text x='316' y='236'>User</text><title>Table dbo.User</title></a>
-  <use id='nn' x='257' y='252' xlink:href='#nn'/><a xlink:href='#User.UserId'><use id='pk' x='257' y='251' xlink:href='#pk'/><title>Pk PK__User__1788CC4C9993DA56 ( UserId ) </title></a>
-<a xlink:href='#User.UserId'><text id='dbo.User.UserId' x='273' y='261' onmouseover="hghl(['UserGroup_FK__UserGroup__UserI__3F466844','dbo.UserGroup.UserId','UserLog_FK__UserLog__TargetU__45F365D3','dbo.UserLog.TargetUserId','UserLog_FK__UserLog__Updated__46E78A0C','dbo.UserLog.UpdatedUserId','UserLogin_FK__UserLogin__UserI__49C3F6B7','dbo.UserLogin.UserId','UserPreference_FK__UserPrefe__UserI__4CA06362','dbo.UserPreference.UserId','UserRole_FK__UserRole__UserId__74AE54BC','dbo.UserRole.UserId','TeamUser_Fk_TeamUser_User','dbo.TeamUser.UserId','Entity_FK__Entity__CreatedB__797309D9','dbo.Entity.CreatedBy','Entity_FK__Entity__Modified__7A672E12','dbo.Entity.ModifiedBy','EntityField_FK__EntityFie__Creat__02084FDA','dbo.EntityField.CreatedBy','EntityField_FK__EntityFie__Modif__02FC7413','dbo.EntityField.ModifiedBy','EntityFieldMapping_FK__EntityFie__Creat__07C12930','dbo.EntityFieldMapping.CreatedBy','EntityFieldMapping_FK__EntityFie__Modif__08B54D69','dbo.EntityFieldMapping.ModifiedBy','EntityFieldType_FK__EntityFie__Creat__7D439ABD','dbo.EntityFieldType.CreatedBy','EntityFieldType_FK__EntityFie__Modif__7E37BEF6','dbo.EntityFieldType.ModifiedBy','Group_FK__Group__CreatedBy__3A81B327','dbo.Group.CreatedBy','Group_FK__Group__ModifiedB__3B75D760','dbo.Group.ModifiedBy','ProjectEntity_FK__ProjectEn__Creat__0D7A0286','dbo.ProjectEntity.CreatedBy','ProjectEntity_FK__ProjectEn__Modif__0E6E26BF','dbo.ProjectEntity.ModifiedBy','SystemLog_FK__SystemLog__Targe__534D60F1','dbo.SystemLog.TargetUserId','SystemLog_FK__SystemLog__Updat__52593CB8','dbo.SystemLog.UpdatedUserId','SystemSettings_FK__SystemSet__Creat__5629CD9C','dbo.SystemSettings.CreatedBy','SystemSettings_FK__SystemSet__Modif__571DF1D5','dbo.SystemSettings.ModifiedBy'])" onmouseout="uhghl(['UserGroup_FK__UserGroup__UserI__3F466844','dbo.UserGroup.UserId','UserLog_FK__UserLog__TargetU__45F365D3','dbo.UserLog.TargetUserId','UserLog_FK__UserLog__Updated__46E78A0C','dbo.UserLog.UpdatedUserId','UserLogin_FK__UserLogin__UserI__49C3F6B7','dbo.UserLogin.UserId','UserPreference_FK__UserPrefe__UserI__4CA06362','dbo.UserPreference.UserId','UserRole_FK__UserRole__UserId__74AE54BC','dbo.UserRole.UserId','TeamUser_Fk_TeamUser_User','dbo.TeamUser.UserId','Entity_FK__Entity__CreatedB__797309D9','dbo.Entity.CreatedBy','Entity_FK__Entity__Modified__7A672E12','dbo.Entity.ModifiedBy','EntityField_FK__EntityFie__Creat__02084FDA','dbo.EntityField.CreatedBy','EntityField_FK__EntityFie__Modif__02FC7413','dbo.EntityField.ModifiedBy','EntityFieldMapping_FK__EntityFie__Creat__07C12930','dbo.EntityFieldMapping.CreatedBy','EntityFieldMapping_FK__EntityFie__Modif__08B54D69','dbo.EntityFieldMapping.ModifiedBy','EntityFieldType_FK__EntityFie__Creat__7D439ABD','dbo.EntityFieldType.CreatedBy','EntityFieldType_FK__EntityFie__Modif__7E37BEF6','dbo.EntityFieldType.ModifiedBy','Group_FK__Group__CreatedBy__3A81B327','dbo.Group.CreatedBy','Group_FK__Group__ModifiedB__3B75D760','dbo.Group.ModifiedBy','ProjectEntity_FK__ProjectEn__Creat__0D7A0286','dbo.ProjectEntity.CreatedBy','ProjectEntity_FK__ProjectEn__Modif__0E6E26BF','dbo.ProjectEntity.ModifiedBy','SystemLog_FK__SystemLog__Targe__534D60F1','dbo.SystemLog.TargetUserId','SystemLog_FK__SystemLog__Updat__52593CB8','dbo.SystemLog.UpdatedUserId','SystemSettings_FK__SystemSet__Creat__5629CD9C','dbo.SystemSettings.CreatedBy','SystemSettings_FK__SystemSet__Modif__571DF1D5','dbo.SystemSettings.ModifiedBy'])">UserId</text><title>UserId
-* int</title></a>
-<a xlink:href='#User.UserId'><use id='ref' x='394' y='251' xlink:href='#ref'/><title>Referred by UserGroup ( UserId ) 
-Referred by UserLog ( TargetUserId -&gt; UserId ) 
-Referred by UserLog ( UpdatedUserId -&gt; UserId ) 
-Referred by UserLogin ( UserId ) 
-Referred by UserPreference ( UserId ) 
-Referred by UserRole ( UserId ) 
-Referred by TeamUser ( UserId ) 
-Referred by Entity ( CreatedBy -&gt; UserId ) 
-Referred by Entity ( ModifiedBy -&gt; UserId ) 
-Referred by EntityField ( CreatedBy -&gt; UserId ) 
-Referred by EntityField ( ModifiedBy -&gt; UserId ) 
-Referred by EntityFieldMapping ( CreatedBy -&gt; UserId ) 
-Referred by EntityFieldMapping ( ModifiedBy -&gt; UserId ) 
-Referred by EntityFieldType ( CreatedBy -&gt; UserId ) 
-Referred by EntityFieldType ( ModifiedBy -&gt; UserId ) 
-Referred by Group ( CreatedBy -&gt; UserId ) 
-Referred by Group ( ModifiedBy -&gt; UserId ) 
-Referred by ProjectEntity ( CreatedBy -&gt; UserId ) 
-Referred by ProjectEntity ( ModifiedBy -&gt; UserId ) 
-Referred by SystemLog ( TargetUserId -&gt; UserId ) 
-Referred by SystemLog ( UpdatedUserId -&gt; UserId ) 
-Referred by SystemSettings ( CreatedBy -&gt; UserId ) 
-Referred by SystemSettings ( ModifiedBy -&gt; UserId ) </title></a>
-  <use id='nn' x='257' y='267' xlink:href='#nn'/><a xlink:href='#User.UserName'><text id='dbo.User.UserName' x='273' y='276'>UserName</text><title>UserName
-* nvarchar(100)</title></a>
-<text x='402' y='273' text-anchor='end' class='colType'>t</text>  <use id='nn' x='257' y='282' xlink:href='#nn'/><a xlink:href='#User.FirstName'><text id='dbo.User.FirstName' x='273' y='291'>FirstName</text><title>FirstName
-* nvarchar(255)</title></a>
-<text x='402' y='288' text-anchor='end' class='colType'>t</text>  <a xlink:href='#User.LastName'><text id='dbo.User.LastName' x='273' y='306'>LastName</text><title>LastName
-nvarchar(255)</title></a>
-<text x='402' y='303' text-anchor='end' class='colType'>t</text>  <a xlink:href='#User.DisplayName'><text id='dbo.User.DisplayName' x='273' y='321'>DisplayName</text><title>DisplayName
-nvarchar(512)</title></a>
-<text x='402' y='318' text-anchor='end' class='colType'>t</text>  <use id='nn' x='257' y='327' xlink:href='#nn'/><a xlink:href='#User.Email'><text id='dbo.User.Email' x='273' y='336'>Email</text><title>Email
-* nvarchar(255)</title></a>
-<text x='402' y='333' text-anchor='end' class='colType'>t</text>  <use id='nn' x='257' y='342' xlink:href='#nn'/><a xlink:href='#User.Password'><text id='dbo.User.Password' x='273' y='351'>Password</text><title>Password
-* nvarchar(255)</title></a>
-<text x='402' y='348' text-anchor='end' class='colType'>t</text>  <a xlink:href='#User.Contact'><text id='dbo.User.Contact' x='273' y='366'>Contact</text><title>Contact
-nvarchar(20)</title></a>
-<text x='402' y='363' text-anchor='end' class='colType'>t</text>  <use id='nn' x='257' y='372' xlink:href='#nn'/><a xlink:href='#User.Picture'><text id='dbo.User.Picture' x='273' y='381'>Picture</text><title>Picture
-* nvarchar(100)</title></a>
-<text x='402' y='378' text-anchor='end' class='colType'>t</text>  <use id='nn' x='257' y='387' xlink:href='#nn'/><a xlink:href='#User.CreatedDate'><text id='dbo.User.CreatedDate' x='273' y='396'>CreatedDate</text><title>CreatedDate
-* datetime</title></a>
-<text x='402' y='393' text-anchor='end' class='colType'>d</text>  <a xlink:href='#User.ModifiedDate'><text id='dbo.User.ModifiedDate' x='273' y='411'>ModifiedDate</text><title>ModifiedDate
-datetime</title></a>
-<text x='402' y='408' text-anchor='end' class='colType'>d</text>  <a xlink:href='#User.LastLogin'><text id='dbo.User.LastLogin' x='273' y='426'>LastLogin</text><title>LastLogin
-datetime</title></a>
-<text x='402' y='423' text-anchor='end' class='colType'>d</text>  <a xlink:href='#User.ActivationExpirationDate'><text id='dbo.User.ActivationExpirationDate' x='273' y='441'>ActivationExpirationDate</text><title>ActivationExpirationDate
-datetime</title></a>
-<text x='402' y='438' text-anchor='end' class='colType'>d</text>  <use id='nn' x='257' y='447' xlink:href='#nn'/><a xlink:href='#User.ActivationCode'><text id='dbo.User.ActivationCode' x='273' y='456'>ActivationCode</text><title>ActivationCode
-* nvarchar(255)</title></a>
-<text x='402' y='453' text-anchor='end' class='colType'>t</text>  <a xlink:href='#User.ResetPasswordCode'><text id='dbo.User.ResetPasswordCode' x='273' y='471'>ResetPasswordCode</text><title>ResetPasswordCode
-nvarchar(255)</title></a>
-<text x='402' y='468' text-anchor='end' class='colType'>t</text>  <a xlink:href='#User.LastResetAttempt'><text id='dbo.User.LastResetAttempt' x='273' y='486'>LastResetAttempt</text><title>LastResetAttempt
-datetime</title></a>
-<text x='402' y='483' text-anchor='end' class='colType'>d</text>  <use id='nn' x='257' y='492' xlink:href='#nn'/><a xlink:href='#User.IsActivated'><text id='dbo.User.IsActivated' x='273' y='501'>IsActivated</text><title>IsActivated
-* bit</title></a>
-<text x='402' y='498' text-anchor='end' class='colType'>b</text>  <use id='nn' x='257' y='507' xlink:href='#nn'/><a xlink:href='#User.IsActive'><text id='dbo.User.IsActive' x='273' y='516'>IsActive</text><title>IsActive
-* bit</title></a>
-<text x='402' y='513' text-anchor='end' class='colType'>b</text>  <use id='nn' x='257' y='522' xlink:href='#nn'/><a xlink:href='#User.IsDeleted'><text id='dbo.User.IsDeleted' x='273' y='531'>IsDeleted</text><title>IsDeleted
-* bit</title></a>
-<text x='402' y='528' text-anchor='end' class='colType'>b</text>
-<!-- == Table 'SystemSettings' == -->
-<rect class='entity' x='45' y='728' width='105' height='150' rx='7' ry='7' style='stroke:none'/>
-<path d='M 45 754 L 45 735 Q 45 728 52 728 L 143 728 Q 150 728 150 735 L 150 754 L45 754 ' style='fill:url(#tbg_bfbff5);stroke:1;stroke-opacity:0.1;' />
-<rect class='entity' x='45' y='728' width='105' height='150' rx='7' ry='7' style='fill:none;stroke:#5f5f6e'/>
-<line class='delim' x1='45' y1='754' x2='150' y2='754' style='stroke:#5f5f6e'/>
-<line class='delim' x1='60' y1='754' x2='60' y2='878' style='stroke:#5f5f6e'/>
-<line class='delim' x1='139' y1='754' x2='139' y2='878' style='stroke:#5f5f6e'/>
-<a xlink:href='#SystemSettings'><text x='57' y='746'>SystemSettings</text><title>Table dbo.SystemSettings</title></a>
-  <use id='nn' x='47' y='762' xlink:href='#nn'/><a xlink:href='#SystemSettings.Id'><use id='pk' x='47' y='761' xlink:href='#pk'/><title>Pk PK__SystemSe__3214EC0790BDC8BB ( Id ) </title></a>
-<a xlink:href='#SystemSettings.Id'><text id='dbo.SystemSettings.Id' x='63' y='771'>Id</text><title>Id
-* int</title></a>
-<text x='147' y='768' text-anchor='end' class='colType'>#</text>  <use id='nn' x='47' y='777' xlink:href='#nn'/><a xlink:href='#SystemSettings.Key'><text id='dbo.SystemSettings.Key' x='63' y='786'>Key</text><title>Key
-* nvarchar(255)</title></a>
-<text x='147' y='783' text-anchor='end' class='colType'>t</text>  <a xlink:href='#SystemSettings.Value'><text id='dbo.SystemSettings.Value' x='63' y='801'>Value</text><title>Value
-nvarchar(4000)</title></a>
-<text x='147' y='798' text-anchor='end' class='colType'>t</text>  <use id='nn' x='47' y='807' xlink:href='#nn'/><a xlink:href='#SystemSettings.CreatedBy'><text id='dbo.SystemSettings.CreatedBy' x='63' y='816' onmouseover="hghl(['SystemSettings_FK__SystemSet__Creat__5629CD9C','dbo.User.UserId'])" onmouseout="uhghl(['SystemSettings_FK__SystemSet__Creat__5629CD9C','dbo.User.UserId'])">CreatedBy</text><title>CreatedBy
-* int</title></a>
-<a xlink:href='#SystemSettings.CreatedBy'><use id='fk' x='139' y='806' xlink:href='#fk'/><title>References User ( CreatedBy -&gt; UserId ) </title></a>
-  <use id='nn' x='47' y='822' xlink:href='#nn'/><a xlink:href='#SystemSettings.ModifiedBy'><text id='dbo.SystemSettings.ModifiedBy' x='63' y='831' onmouseover="hghl(['SystemSettings_FK__SystemSet__Modif__571DF1D5','dbo.User.UserId'])" onmouseout="uhghl(['SystemSettings_FK__SystemSet__Modif__571DF1D5','dbo.User.UserId'])">ModifiedBy</text><title>ModifiedBy
-* int</title></a>
-<a xlink:href='#SystemSettings.ModifiedBy'><use id='fk' x='139' y='821' xlink:href='#fk'/><title>References User ( ModifiedBy -&gt; UserId ) </title></a>
-  <use id='nn' x='47' y='837' xlink:href='#nn'/><a xlink:href='#SystemSettings.ModifiedDate'><text id='dbo.SystemSettings.ModifiedDate' x='63' y='846'>ModifiedDate</text><title>ModifiedDate
-* datetime</title></a>
-<text x='147' y='843' text-anchor='end' class='colType'>d</text>  <use id='nn' x='47' y='852' xlink:href='#nn'/><a xlink:href='#SystemSettings.IsActive'><text id='dbo.SystemSettings.IsActive' x='63' y='861'>IsActive</text><title>IsActive
-* bit</title></a>
-<text x='147' y='858' text-anchor='end' class='colType'>b</text>
-<!-- == Table 'SystemLog' == -->
-<rect class='entity' x='45' y='908' width='120' height='135' rx='7' ry='7' style='stroke:none'/>
-<path d='M 45 934 L 45 915 Q 45 908 52 908 L 158 908 Q 165 908 165 915 L 165 934 L45 934 ' style='fill:url(#tbg_bfbff5);stroke:1;stroke-opacity:0.1;' />
-<rect class='entity' x='45' y='908' width='120' height='135' rx='7' ry='7' style='fill:none;stroke:#5f5f6e'/>
-<line class='delim' x1='45' y1='934' x2='165' y2='934' style='stroke:#5f5f6e'/>
-<line class='delim' x1='60' y1='934' x2='60' y2='1043' style='stroke:#5f5f6e'/>
-<line class='delim' x1='154' y1='934' x2='154' y2='1043' style='stroke:#5f5f6e'/>
-<a xlink:href='#SystemLog'><text x='76' y='926'>SystemLog</text><title>Table dbo.SystemLog</title></a>
-  <use id='nn' x='47' y='942' xlink:href='#nn'/><a xlink:href='#SystemLog.LogId'><use id='pk' x='47' y='941' xlink:href='#pk'/><title>Pk PK__SystemLo__5E5486481A98DCBB ( LogId ) </title></a>
-<a xlink:href='#SystemLog.LogId'><text id='dbo.SystemLog.LogId' x='63' y='951'>LogId</text><title>LogId
-* int</title></a>
-<text x='162' y='948' text-anchor='end' class='colType'>#</text>  <use id='nn' x='47' y='957' xlink:href='#nn'/><a xlink:href='#SystemLog.SystemLogTypeId'><text id='dbo.SystemLog.SystemLogTypeId' x='63' y='966' onmouseover="hghl(['SystemLog_Fk_SystemLog_SystemLogType','dbo.SystemLogType.SystemLogTypeId'])" onmouseout="uhghl(['SystemLog_Fk_SystemLog_SystemLogType','dbo.SystemLogType.SystemLogTypeId'])">SystemLogTypeId</text><title>SystemLogTypeId
-* int</title></a>
-<a xlink:href='#SystemLog.SystemLogTypeId'><use id='fk' x='154' y='956' xlink:href='#fk'/><title>References SystemLogType ( SystemLogTypeId ) </title></a>
-  <use id='nn' x='47' y='972' xlink:href='#nn'/><a xlink:href='#SystemLog.UpdatedUserId'><text id='dbo.SystemLog.UpdatedUserId' x='63' y='981' onmouseover="hghl(['SystemLog_FK__SystemLog__Updat__52593CB8','dbo.User.UserId'])" onmouseout="uhghl(['SystemLog_FK__SystemLog__Updat__52593CB8','dbo.User.UserId'])">UpdatedUserId</text><title>UpdatedUserId
-* int</title></a>
-<a xlink:href='#SystemLog.UpdatedUserId'><use id='fk' x='154' y='971' xlink:href='#fk'/><title>References User ( UpdatedUserId -&gt; UserId ) </title></a>
-  <use id='nn' x='47' y='987' xlink:href='#nn'/><a xlink:href='#SystemLog.TargetUserId'><text id='dbo.SystemLog.TargetUserId' x='63' y='996' onmouseover="hghl(['SystemLog_FK__SystemLog__Targe__534D60F1','dbo.User.UserId'])" onmouseout="uhghl(['SystemLog_FK__SystemLog__Targe__534D60F1','dbo.User.UserId'])">TargetUserId</text><title>TargetUserId
-* int</title></a>
-<a xlink:href='#SystemLog.TargetUserId'><use id='fk' x='154' y='986' xlink:href='#fk'/><title>References User ( TargetUserId -&gt; UserId ) </title></a>
-  <use id='nn' x='47' y='1002' xlink:href='#nn'/><a xlink:href='#SystemLog.ModifiedDate'><text id='dbo.SystemLog.ModifiedDate' x='63' y='1011'>ModifiedDate</text><title>ModifiedDate
-* datetime</title></a>
-<text x='162' y='1008' text-anchor='end' class='colType'>d</text>  <use id='nn' x='47' y='1017' xlink:href='#nn'/><a xlink:href='#SystemLog.IsActive'><text id='dbo.SystemLog.IsActive' x='63' y='1026'>IsActive</text><title>IsActive
-* bit</title></a>
-<text x='162' y='1023' text-anchor='end' class='colType'>b</text>
-<!-- == Table 'TeamGroup' == -->
-<rect class='entity' x='480' y='428' width='105' height='135' rx='7' ry='7' style='stroke:none'/>
-<path d='M 480 454 L 480 435 Q 480 428 487 428 L 578 428 Q 585 428 585 435 L 585 454 L480 454 ' style='fill:url(#tbg_f5ddbf);stroke:1;stroke-opacity:0.1;' />
-<rect class='entity' x='480' y='428' width='105' height='135' rx='7' ry='7' style='fill:none;stroke:#6e675f'/>
-<line class='delim' x1='480' y1='454' x2='585' y2='454' style='stroke:#6e675f'/>
-<line class='delim' x1='495' y1='454' x2='495' y2='563' style='stroke:#6e675f'/>
-<line class='delim' x1='574' y1='454' x2='574' y2='563' style='stroke:#6e675f'/>
-<a xlink:href='#TeamGroup'><text x='502' y='446'>TeamGroup</text><title>Table dbo.TeamGroup</title></a>
-  <use id='nn' x='482' y='462' xlink:href='#nn'/><a xlink:href='#TeamGroup.Id'><use id='pk' x='482' y='461' xlink:href='#pk'/><title>Pk PK__TeamGrou__3214EC07AD0B0A35 ( Id ) </title></a>
-<a xlink:href='#TeamGroup.Id'><text id='dbo.TeamGroup.Id' x='498' y='471'>Id</text><title>Id
-* int</title></a>
-<text x='582' y='468' text-anchor='end' class='colType'>#</text>  <use id='nn' x='482' y='477' xlink:href='#nn'/><a xlink:href='#TeamGroup.GroupId'><text id='dbo.TeamGroup.GroupId' x='498' y='486' onmouseover="hghl(['TeamGroup_FK__TeamGroup__Group__6383C8BA','dbo.Group.GroupId'])" onmouseout="uhghl(['TeamGroup_FK__TeamGroup__Group__6383C8BA','dbo.Group.GroupId'])">GroupId</text><title>GroupId
-* int</title></a>
-<a xlink:href='#TeamGroup.GroupId'><use id='fk' x='574' y='476' xlink:href='#fk'/><title>References Group ( GroupId ) </title></a>
-  <use id='nn' x='482' y='492' xlink:href='#nn'/><a xlink:href='#TeamGroup.TeamId'><text id='dbo.TeamGroup.TeamId' x='498' y='501' onmouseover="hghl(['TeamGroup_FK__TeamGroup__TeamI__6477ECF3','dbo.Team.TeamId'])" onmouseout="uhghl(['TeamGroup_FK__TeamGroup__TeamI__6477ECF3','dbo.Team.TeamId'])">TeamId</text><title>TeamId
-* int</title></a>
-<a xlink:href='#TeamGroup.TeamId'><use id='fk' x='574' y='491' xlink:href='#fk'/><title>References Team ( TeamId ) </title></a>
-  <use id='nn' x='482' y='507' xlink:href='#nn'/><a xlink:href='#TeamGroup.CreatedDate'><text id='dbo.TeamGroup.CreatedDate' x='498' y='516'>CreatedDate</text><title>CreatedDate
-* datetime</title></a>
-<text x='582' y='513' text-anchor='end' class='colType'>d</text>  <use id='nn' x='482' y='522' xlink:href='#nn'/><a xlink:href='#TeamGroup.ModifiedDate'><text id='dbo.TeamGroup.ModifiedDate' x='498' y='531'>ModifiedDate</text><title>ModifiedDate
-* datetime</title></a>
-<text x='582' y='528' text-anchor='end' class='colType'>d</text>  <use id='nn' x='482' y='537' xlink:href='#nn'/><a xlink:href='#TeamGroup.IsActive'><text id='dbo.TeamGroup.IsActive' x='498' y='546'>IsActive</text><title>IsActive
-* bit</title></a>
-<text x='582' y='543' text-anchor='end' class='colType'>b</text>
-<!-- == Table 'UserLogType' == -->
-<rect class='entity' x='60' y='68' width='105' height='90' rx='7' ry='7' style='stroke:none'/>
-<path d='M 60 94 L 60 75 Q 60 68 67 68 L 158 68 Q 165 68 165 75 L 165 94 L60 94 ' style='fill:url(#tbg_bfd4f5);stroke:1;stroke-opacity:0.1;' />
-<rect class='entity' x='60' y='68' width='105' height='90' rx='7' ry='7' style='fill:none;stroke:#5f656e'/>
-<line class='delim' x1='60' y1='94' x2='165' y2='94' style='stroke:#5f656e'/>
-<line class='delim' x1='75' y1='94' x2='75' y2='158' style='stroke:#5f656e'/>
-<line class='delim' x1='154' y1='94' x2='154' y2='158' style='stroke:#5f656e'/>
-<a xlink:href='#UserLogType'><text x='78' y='86'>UserLogType</text><title>Table dbo.UserLogType</title></a>
-  <use id='nn' x='62' y='102' xlink:href='#nn'/><a xlink:href='#UserLogType.UserLogTypeId'><use id='pk' x='62' y='101' xlink:href='#pk'/><title>Pk PK__UserLogT__E94CB7756B23345C ( UserLogTypeId ) </title></a>
-<a xlink:href='#UserLogType.UserLogTypeId'><text id='dbo.UserLogType.UserLogTypeId' x='78' y='111' onmouseover="hghl(['UserLog_Fk_UserLog_UserLogType','dbo.UserLog.UserLogTypeId'])" onmouseout="uhghl(['UserLog_Fk_UserLog_UserLogType','dbo.UserLog.UserLogTypeId'])">UserLogTypeId</text><title>UserLogTypeId
-* int</title></a>
-<a xlink:href='#UserLogType.UserLogTypeId'><use id='ref' x='154' y='101' xlink:href='#ref'/><title>Referred by UserLog ( UserLogTypeId ) </title></a>
-  <use id='nn' x='62' y='117' xlink:href='#nn'/><a xlink:href='#UserLogType.Name'><text id='dbo.UserLogType.Name' x='78' y='126'>Name</text><title>Name
-* nvarchar(100)</title></a>
-<text x='162' y='123' text-anchor='end' class='colType'>t</text>  <use id='nn' x='62' y='132' xlink:href='#nn'/><a xlink:href='#UserLogType.IsActive'><text id='dbo.UserLogType.IsActive' x='78' y='141'>IsActive</text><title>IsActive
-* bit</title></a>
-<text x='162' y='138' text-anchor='end' class='colType'>b</text>
-<!-- == Table 'UserLog' == -->
-<rect class='entity' x='45' y='203' width='105' height='180' rx='7' ry='7' style='stroke:none'/>
-<path d='M 45 229 L 45 210 Q 45 203 52 203 L 143 203 Q 150 203 150 210 L 150 229 L45 229 ' style='fill:url(#tbg_bfd4f5);stroke:1;stroke-opacity:0.1;' />
-<rect class='entity' x='45' y='203' width='105' height='180' rx='7' ry='7' style='fill:none;stroke:#5f656e'/>
-<line class='delim' x1='45' y1='229' x2='150' y2='229' style='stroke:#5f656e'/>
-<line class='delim' x1='60' y1='229' x2='60' y2='383' style='stroke:#5f656e'/>
-<line class='delim' x1='139' y1='229' x2='139' y2='383' style='stroke:#5f656e'/>
-<a xlink:href='#UserLog'><text x='75' y='221'>UserLog</text><title>Table dbo.UserLog</title></a>
-  <use id='nn' x='47' y='237' xlink:href='#nn'/><a xlink:href='#UserLog.Id'><use id='pk' x='47' y='236' xlink:href='#pk'/><title>Pk PK__UserLog__3214EC071A5984E8 ( Id ) </title></a>
-<a xlink:href='#UserLog.Id'><text id='dbo.UserLog.Id' x='63' y='246' onmouseover="hghl(['UserLog_Fk_UserLog_EntityFieldMapping','dbo.EntityFieldMapping.Id'])" onmouseout="uhghl(['UserLog_Fk_UserLog_EntityFieldMapping','dbo.EntityFieldMapping.Id'])">Id</text><title>Id
-* int</title></a>
-<a xlink:href='#UserLog.Id'><use id='fk' x='139' y='236' xlink:href='#fk'/><title>References EntityFieldMapping ( Id ) </title></a>
-  <use id='nn' x='47' y='252' xlink:href='#nn'/><a xlink:href='#UserLog.UserLogTypeId'><text id='dbo.UserLog.UserLogTypeId' x='63' y='261' onmouseover="hghl(['UserLog_Fk_UserLog_UserLogType','dbo.UserLogType.UserLogTypeId'])" onmouseout="uhghl(['UserLog_Fk_UserLog_UserLogType','dbo.UserLogType.UserLogTypeId'])">UserLogTypeId</text><title>UserLogTypeId
-* int</title></a>
-<a xlink:href='#UserLog.UserLogTypeId'><use id='fk' x='139' y='251' xlink:href='#fk'/><title>References UserLogType ( UserLogTypeId ) </title></a>
-  <a xlink:href='#UserLog.GroupId'><text id='dbo.UserLog.GroupId' x='63' y='276' onmouseover="hghl(['UserLog_FK__UserLog__GroupId__44FF419A','dbo.Group.GroupId'])" onmouseout="uhghl(['UserLog_FK__UserLog__GroupId__44FF419A','dbo.Group.GroupId'])">GroupId</text><title>GroupId
-int</title></a>
-<a xlink:href='#UserLog.GroupId'><use id='fk' x='139' y='266' xlink:href='#fk'/><title>References Group ( GroupId ) </title></a>
-  <a xlink:href='#UserLog.OldValue'><text id='dbo.UserLog.OldValue' x='63' y='291'>OldValue</text><title>OldValue
-int</title></a>
-<text x='147' y='288' text-anchor='end' class='colType'>#</text>  <a xlink:href='#UserLog.NewValue'><text id='dbo.UserLog.NewValue' x='63' y='306'>NewValue</text><title>NewValue
-int</title></a>
-<text x='147' y='303' text-anchor='end' class='colType'>#</text>  <use id='nn' x='47' y='312' xlink:href='#nn'/><a xlink:href='#UserLog.UpdatedUserId'><text id='dbo.UserLog.UpdatedUserId' x='63' y='321' onmouseover="hghl(['UserLog_FK__UserLog__Updated__46E78A0C','dbo.User.UserId'])" onmouseout="uhghl(['UserLog_FK__UserLog__Updated__46E78A0C','dbo.User.UserId'])">UpdatedUserId</text><title>UpdatedUserId
-* int</title></a>
-<a xlink:href='#UserLog.UpdatedUserId'><use id='fk' x='139' y='311' xlink:href='#fk'/><title>References User ( UpdatedUserId -&gt; UserId ) </title></a>
-  <use id='nn' x='47' y='327' xlink:href='#nn'/><a xlink:href='#UserLog.TargetUserId'><text id='dbo.UserLog.TargetUserId' x='63' y='336' onmouseover="hghl(['UserLog_FK__UserLog__TargetU__45F365D3','dbo.User.UserId'])" onmouseout="uhghl(['UserLog_FK__UserLog__TargetU__45F365D3','dbo.User.UserId'])">TargetUserId</text><title>TargetUserId
-* int</title></a>
-<a xlink:href='#UserLog.TargetUserId'><use id='fk' x='139' y='326' xlink:href='#fk'/><title>References User ( TargetUserId -&gt; UserId ) </title></a>
-  <use id='nn' x='47' y='342' xlink:href='#nn'/><a xlink:href='#UserLog.ModifiedDate'><text id='dbo.UserLog.ModifiedDate' x='63' y='351'>ModifiedDate</text><title>ModifiedDate
-* datetime</title></a>
-<text x='147' y='348' text-anchor='end' class='colType'>d</text>  <use id='nn' x='47' y='357' xlink:href='#nn'/><a xlink:href='#UserLog.IsActive'><text id='dbo.UserLog.IsActive' x='63' y='366'>IsActive</text><title>IsActive
-* bit</title></a>
-<text x='147' y='363' text-anchor='end' class='colType'>b</text>
-<!-- == Table 'UserPreference' == -->
-<rect class='entity' x='45' y='413' width='105' height='195' rx='7' ry='7' style='stroke:none'/>
-<path d='M 45 439 L 45 420 Q 45 413 52 413 L 143 413 Q 150 413 150 420 L 150 439 L45 439 ' style='fill:url(#tbg_bfd4f5);stroke:1;stroke-opacity:0.1;' />
-<rect class='entity' x='45' y='413' width='105' height='195' rx='7' ry='7' style='fill:none;stroke:#5f656e'/>
-<line class='delim' x1='45' y1='439' x2='150' y2='439' style='stroke:#5f656e'/>
-<line class='delim' x1='60' y1='439' x2='60' y2='608' style='stroke:#5f656e'/>
-<line class='delim' x1='139' y1='439' x2='139' y2='608' style='stroke:#5f656e'/>
-<a xlink:href='#UserPreference'><text x='57' y='431'>UserPreference</text><title>Table dbo.UserPreference</title></a>
-  <use id='nn' x='47' y='447' xlink:href='#nn'/><a xlink:href='#UserPreference.Id'><use id='pk' x='47' y='446' xlink:href='#pk'/><title>Pk PK__UserPref__3214EC073AFCD365 ( Id ) </title></a>
-<a xlink:href='#UserPreference.Id'><text id='dbo.UserPreference.Id' x='63' y='456' onmouseover="hghl(['UserPreference_Fk_UserPreference_EntityFieldMapping','dbo.EntityFieldMapping.Id'])" onmouseout="uhghl(['UserPreference_Fk_UserPreference_EntityFieldMapping','dbo.EntityFieldMapping.Id'])">Id</text><title>Id
-* int</title></a>
-<a xlink:href='#UserPreference.Id'><use id='fk' x='139' y='446' xlink:href='#fk'/><title>References EntityFieldMapping ( Id ) </title></a>
-  <use id='nn' x='47' y='462' xlink:href='#nn'/><a xlink:href='#UserPreference.UserId'><text id='dbo.UserPreference.UserId' x='63' y='471' onmouseover="hghl(['UserPreference_FK__UserPrefe__UserI__4CA06362','dbo.User.UserId'])" onmouseout="uhghl(['UserPreference_FK__UserPrefe__UserI__4CA06362','dbo.User.UserId'])">UserId</text><title>UserId
-* int</title></a>
-<a xlink:href='#UserPreference.UserId'><use id='fk' x='139' y='461' xlink:href='#fk'/><title>References User ( UserId ) </title></a>
-  <a xlink:href='#UserPreference.Language'><text id='dbo.UserPreference.Language' x='63' y='486'>Language</text><title>Language
-nvarchar(4000)</title></a>
-<text x='147' y='483' text-anchor='end' class='colType'>t</text>  <a xlink:href='#UserPreference.TimeZone'><text id='dbo.UserPreference.TimeZone' x='63' y='501'>TimeZone</text><title>TimeZone
-nvarchar(100)</title></a>
-<text x='147' y='498' text-anchor='end' class='colType'>t</text>  <a xlink:href='#UserPreference.RecordSize'><text id='dbo.UserPreference.RecordSize' x='63' y='516'>RecordSize</text><title>RecordSize
-int</title></a>
-<text x='147' y='513' text-anchor='end' class='colType'>#</text>  <a xlink:href='#UserPreference.ItemSort'><text id='dbo.UserPreference.ItemSort' x='63' y='531'>ItemSort</text><title>ItemSort
-nvarchar(4000)</title></a>
-<text x='147' y='528' text-anchor='end' class='colType'>t</text>  <a xlink:href='#UserPreference.ItemFilters'><text id='dbo.UserPreference.ItemFilters' x='63' y='546'>ItemFilters</text><title>ItemFilters
-nvarchar(4000)</title></a>
-<text x='147' y='543' text-anchor='end' class='colType'>t</text>  <a xlink:href='#UserPreference.Notifications'><text id='dbo.UserPreference.Notifications' x='63' y='561'>Notifications</text><title>Notifications
-nvarchar(4000)</title></a>
-<text x='147' y='558' text-anchor='end' class='colType'>t</text>  <use id='nn' x='47' y='567' xlink:href='#nn'/><a xlink:href='#UserPreference.ModifiedDate'><text id='dbo.UserPreference.ModifiedDate' x='63' y='576'>ModifiedDate</text><title>ModifiedDate
-* datetime</title></a>
-<text x='147' y='573' text-anchor='end' class='colType'>d</text>  <use id='nn' x='47' y='582' xlink:href='#nn'/><a xlink:href='#UserPreference.IsActive'><text id='dbo.UserPreference.IsActive' x='63' y='591'>IsActive</text><title>IsActive
-* bit</title></a>
-<text x='147' y='588' text-anchor='end' class='colType'>b</text>
-<!-- == Table 'UserLogin' == -->
-<rect class='entity' x='270' y='68' width='105' height='135' rx='7' ry='7' style='stroke:none'/>
-<path d='M 270 94 L 270 75 Q 270 68 277 68 L 368 68 Q 375 68 375 75 L 375 94 L270 94 ' style='fill:url(#tbg_bfd4f5);stroke:1;stroke-opacity:0.1;' />
-<rect class='entity' x='270' y='68' width='105' height='135' rx='7' ry='7' style='fill:none;stroke:#5f656e'/>
-<line class='delim' x1='270' y1='94' x2='375' y2='94' style='stroke:#5f656e'/>
-<line class='delim' x1='285' y1='94' x2='285' y2='203' style='stroke:#5f656e'/>
-<line class='delim' x1='364' y1='94' x2='364' y2='203' style='stroke:#5f656e'/>
-<a xlink:href='#UserLogin'><text x='296' y='86'>UserLogin</text><title>Table dbo.UserLogin</title></a>
-  <use id='nn' x='272' y='102' xlink:href='#nn'/><a xlink:href='#UserLogin.Id'><use id='pk' x='272' y='101' xlink:href='#pk'/><title>Pk PK__UserLogi__3214EC07E81E6AD6 ( Id ) </title></a>
-<a xlink:href='#UserLogin.Id'><text id='dbo.UserLogin.Id' x='288' y='111'>Id</text><title>Id
-* int</title></a>
-<text x='372' y='108' text-anchor='end' class='colType'>#</text>  <use id='nn' x='272' y='117' xlink:href='#nn'/><a xlink:href='#UserLogin.UserId'><text id='dbo.UserLogin.UserId' x='288' y='126' onmouseover="hghl(['UserLogin_FK__UserLogin__UserI__49C3F6B7','dbo.User.UserId'])" onmouseout="uhghl(['UserLogin_FK__UserLogin__UserI__49C3F6B7','dbo.User.UserId'])">UserId</text><title>UserId
-* int</title></a>
-<a xlink:href='#UserLogin.UserId'><use id='fk' x='364' y='116' xlink:href='#fk'/><title>References User ( UserId ) </title></a>
-  <use id='nn' x='272' y='132' xlink:href='#nn'/><a xlink:href='#UserLogin.ClientToken'><text id='dbo.UserLogin.ClientToken' x='288' y='141'>ClientToken</text><title>ClientToken
-* nvarchar(4000)</title></a>
-<text x='372' y='138' text-anchor='end' class='colType'>t</text>  <use id='nn' x='272' y='147' xlink:href='#nn'/><a xlink:href='#UserLogin.IpAddress'><text id='dbo.UserLogin.IpAddress' x='288' y='156'>IpAddress</text><title>IpAddress
-* nvarchar(50)</title></a>
-<text x='372' y='153' text-anchor='end' class='colType'>t</text>  <use id='nn' x='272' y='162' xlink:href='#nn'/><a xlink:href='#UserLogin.LoggedInTime'><text id='dbo.UserLogin.LoggedInTime' x='288' y='171'>LoggedInTime</text><title>LoggedInTime
-* datetime</title></a>
-<text x='372' y='168' text-anchor='end' class='colType'>d</text>  <use id='nn' x='272' y='177' xlink:href='#nn'/><a xlink:href='#UserLogin.IsActive'><text id='dbo.UserLogin.IsActive' x='288' y='186'>IsActive</text><title>IsActive
-* bit</title></a>
-<text x='372' y='183' text-anchor='end' class='colType'>b</text>
-<!-- == Table 'Group' == -->
-<rect class='entity' x='270' y='848' width='105' height='180' rx='7' ry='7' style='stroke:none'/>
-<path d='M 270 874 L 270 855 Q 270 848 277 848 L 368 848 Q 375 848 375 855 L 375 874 L270 874 ' style='fill:url(#tbg_c8f5bf);stroke:1;stroke-opacity:0.1;' />
-<rect class='entity' x='270' y='848' width='105' height='180' rx='7' ry='7' style='fill:none;stroke:#626e5f'/>
-<line class='delim' x1='270' y1='874' x2='375' y2='874' style='stroke:#626e5f'/>
-<line class='delim' x1='285' y1='874' x2='285' y2='1028' style='stroke:#626e5f'/>
-<line class='delim' x1='364' y1='874' x2='364' y2='1028' style='stroke:#626e5f'/>
-<a xlink:href='#Group'><text x='305' y='866'>Group</text><title>Table dbo.Group</title></a>
-  <use id='nn' x='272' y='882' xlink:href='#nn'/><a xlink:href='#Group.GroupId'><use id='pk' x='272' y='881' xlink:href='#pk'/><title>Pk PK__Group__149AF36AE4111745 ( GroupId ) </title></a>
-<a xlink:href='#Group.GroupId'><text id='dbo.Group.GroupId' x='288' y='891' onmouseover="hghl(['GroupRole_FK__GroupRole__Group__70DDC3D8','dbo.GroupRole.GroupId','TeamGroup_FK__TeamGroup__Group__6383C8BA','dbo.TeamGroup.GroupId','UserGroup_FK__UserGroup__Group__3E52440B','dbo.UserGroup.GroupId','UserLog_FK__UserLog__GroupId__44FF419A','dbo.UserLog.GroupId'])" onmouseout="uhghl(['GroupRole_FK__GroupRole__Group__70DDC3D8','dbo.GroupRole.GroupId','TeamGroup_FK__TeamGroup__Group__6383C8BA','dbo.TeamGroup.GroupId','UserGroup_FK__UserGroup__Group__3E52440B','dbo.UserGroup.GroupId','UserLog_FK__UserLog__GroupId__44FF419A','dbo.UserLog.GroupId'])">GroupId</text><title>GroupId
-* int</title></a>
-<a xlink:href='#Group.GroupId'><use id='ref' x='364' y='881' xlink:href='#ref'/><title>Referred by GroupRole ( GroupId ) 
-Referred by TeamGroup ( GroupId ) 
-Referred by UserGroup ( GroupId ) 
-Referred by UserLog ( GroupId ) </title></a>
-  <use id='nn' x='272' y='897' xlink:href='#nn'/><a xlink:href='#Group.Name'><text id='dbo.Group.Name' x='288' y='906'>Name</text><title>Name
-* nvarchar(255)</title></a>
-<text x='372' y='903' text-anchor='end' class='colType'>t</text>  <a xlink:href='#Group.Description'><text id='dbo.Group.Description' x='288' y='921'>Description</text><title>Description
-nvarchar(1026)</title></a>
-<text x='372' y='918' text-anchor='end' class='colType'>t</text>  <use id='nn' x='272' y='927' xlink:href='#nn'/><a xlink:href='#Group.Color'><text id='dbo.Group.Color' x='288' y='936'>Color</text><title>Color
-* nvarchar(255) default 'White'</title></a>
-<text x='372' y='933' text-anchor='end' class='colType'>t</text>  <use id='nn' x='272' y='942' xlink:href='#nn'/><a xlink:href='#Group.CreatedBy'><text id='dbo.Group.CreatedBy' x='288' y='951' onmouseover="hghl(['Group_FK__Group__CreatedBy__3A81B327','dbo.User.UserId'])" onmouseout="uhghl(['Group_FK__Group__CreatedBy__3A81B327','dbo.User.UserId'])">CreatedBy</text><title>CreatedBy
-* int</title></a>
-<a xlink:href='#Group.CreatedBy'><use id='fk' x='364' y='941' xlink:href='#fk'/><title>References User ( CreatedBy -&gt; UserId ) </title></a>
-  <use id='nn' x='272' y='957' xlink:href='#nn'/><a xlink:href='#Group.ModifiedBy'><text id='dbo.Group.ModifiedBy' x='288' y='966' onmouseover="hghl(['Group_FK__Group__ModifiedB__3B75D760','dbo.User.UserId'])" onmouseout="uhghl(['Group_FK__Group__ModifiedB__3B75D760','dbo.User.UserId'])">ModifiedBy</text><title>ModifiedBy
-* int</title></a>
-<a xlink:href='#Group.ModifiedBy'><use id='fk' x='364' y='956' xlink:href='#fk'/><title>References User ( ModifiedBy -&gt; UserId ) </title></a>
-  <use id='nn' x='272' y='972' xlink:href='#nn'/><a xlink:href='#Group.CreatedDate'><text id='dbo.Group.CreatedDate' x='288' y='981'>CreatedDate</text><title>CreatedDate
-* datetime</title></a>
-<text x='372' y='978' text-anchor='end' class='colType'>d</text>  <use id='nn' x='272' y='987' xlink:href='#nn'/><a xlink:href='#Group.ModifiedDate'><text id='dbo.Group.ModifiedDate' x='288' y='996'>ModifiedDate</text><title>ModifiedDate
-* datetime</title></a>
-<text x='372' y='993' text-anchor='end' class='colType'>d</text>  <use id='nn' x='272' y='1002' xlink:href='#nn'/><a xlink:href='#Group.IsActive'><text id='dbo.Group.IsActive' x='288' y='1011'>IsActive</text><title>IsActive
-* bit</title></a>
-<text x='372' y='1008' text-anchor='end' class='colType'>b</text>
-<!-- == Table 'ProjectTeam' == -->
-<rect class='entity' x='705' y='323' width='105' height='135' rx='7' ry='7' style='stroke:none'/>
-<path d='M 705 349 L 705 330 Q 705 323 712 323 L 803 323 Q 810 323 810 330 L 810 349 L705 349 ' style='fill:url(#tbg_f5ddbf);stroke:1;stroke-opacity:0.1;' />
-<rect class='entity' x='705' y='323' width='105' height='135' rx='7' ry='7' style='fill:none;stroke:#6e675f'/>
-<line class='delim' x1='705' y1='349' x2='810' y2='349' style='stroke:#6e675f'/>
-<line class='delim' x1='720' y1='349' x2='720' y2='458' style='stroke:#6e675f'/>
-<line class='delim' x1='799' y1='349' x2='799' y2='458' style='stroke:#6e675f'/>
-<a xlink:href='#ProjectTeam'><text x='724' y='341'>ProjectTeam</text><title>Table dbo.ProjectTeam</title></a>
-  <use id='nn' x='707' y='357' xlink:href='#nn'/><a xlink:href='#ProjectTeam.Id'><use id='pk' x='707' y='356' xlink:href='#pk'/><title>Pk PK__ProjectT__3214EC0702237118 ( Id ) </title></a>
-<a xlink:href='#ProjectTeam.Id'><text id='dbo.ProjectTeam.Id' x='723' y='366'>Id</text><title>Id
-* int</title></a>
-<text x='807' y='363' text-anchor='end' class='colType'>#</text>  <use id='nn' x='707' y='372' xlink:href='#nn'/><a xlink:href='#ProjectTeam.ProjectId'><text id='dbo.ProjectTeam.ProjectId' x='723' y='381' onmouseover="hghl(['ProjectTeam_FK__ProjectTe__Proje__6C190EBB','dbo.Project.ProjectId'])" onmouseout="uhghl(['ProjectTeam_FK__ProjectTe__Proje__6C190EBB','dbo.Project.ProjectId'])">ProjectId</text><title>ProjectId
-* int</title></a>
-<a xlink:href='#ProjectTeam.ProjectId'><use id='fk' x='799' y='371' xlink:href='#fk'/><title>References Project ( ProjectId ) </title></a>
-  <use id='nn' x='707' y='387' xlink:href='#nn'/><a xlink:href='#ProjectTeam.TeamId'><text id='dbo.ProjectTeam.TeamId' x='723' y='396' onmouseover="hghl(['ProjectTeam_Fk_ProjectTeam_Team','dbo.Team.TeamId'])" onmouseout="uhghl(['ProjectTeam_Fk_ProjectTeam_Team','dbo.Team.TeamId'])">TeamId</text><title>TeamId
-* int</title></a>
-<a xlink:href='#ProjectTeam.TeamId'><use id='fk' x='799' y='386' xlink:href='#fk'/><title>References Team ( TeamId ) </title></a>
-  <use id='nn' x='707' y='402' xlink:href='#nn'/><a xlink:href='#ProjectTeam.CreatedDate'><text id='dbo.ProjectTeam.CreatedDate' x='723' y='411'>CreatedDate</text><title>CreatedDate
-* datetime</title></a>
-<text x='807' y='408' text-anchor='end' class='colType'>d</text>  <use id='nn' x='707' y='417' xlink:href='#nn'/><a xlink:href='#ProjectTeam.ModifiedDate'><text id='dbo.ProjectTeam.ModifiedDate' x='723' y='426'>ModifiedDate</text><title>ModifiedDate
-* datetime</title></a>
-<text x='807' y='423' text-anchor='end' class='colType'>d</text>  <use id='nn' x='707' y='432' xlink:href='#nn'/><a xlink:href='#ProjectTeam.IsActive'><text id='dbo.ProjectTeam.IsActive' x='723' y='441'>IsActive</text><title>IsActive
-* bit</title></a>
-<text x='807' y='438' text-anchor='end' class='colType'>b</text>
-<!-- == Table 'UserRole' == -->
-<rect class='entity' x='495' y='848' width='105' height='150' rx='7' ry='7' style='stroke:none'/>
-<path d='M 495 874 L 495 855 Q 495 848 502 848 L 593 848 Q 600 848 600 855 L 600 874 L495 874 ' style='fill:url(#tbg_c8f5bf);stroke:1;stroke-opacity:0.1;' />
-<rect class='entity' x='495' y='848' width='105' height='150' rx='7' ry='7' style='fill:none;stroke:#626e5f'/>
-<line class='delim' x1='495' y1='874' x2='600' y2='874' style='stroke:#626e5f'/>
-<line class='delim' x1='510' y1='874' x2='510' y2='998' style='stroke:#626e5f'/>
-<line class='delim' x1='589' y1='874' x2='589' y2='998' style='stroke:#626e5f'/>
-<a xlink:href='#UserRole'><text x='523' y='866'>UserRole</text><title>Table dbo.UserRole</title></a>
-  <use id='nn' x='497' y='882' xlink:href='#nn'/><a xlink:href='#UserRole.Id'><use id='pk' x='497' y='881' xlink:href='#pk'/><title>Pk PK__UserRole__3214EC07BACCE215 ( Id ) </title></a>
-<a xlink:href='#UserRole.Id'><text id='dbo.UserRole.Id' x='513' y='891'>Id</text><title>Id
-* int</title></a>
-<text x='597' y='888' text-anchor='end' class='colType'>#</text>  <use id='nn' x='497' y='897' xlink:href='#nn'/><a xlink:href='#UserRole.UserId'><text id='dbo.UserRole.UserId' x='513' y='906' onmouseover="hghl(['UserRole_FK__UserRole__UserId__74AE54BC','dbo.User.UserId'])" onmouseout="uhghl(['UserRole_FK__UserRole__UserId__74AE54BC','dbo.User.UserId'])">UserId</text><title>UserId
-* int</title></a>
-<a xlink:href='#UserRole.UserId'><use id='fk' x='589' y='896' xlink:href='#fk'/><title>References User ( UserId ) </title></a>
-  <use id='nn' x='497' y='912' xlink:href='#nn'/><a xlink:href='#UserRole.RoleId'><text id='dbo.UserRole.RoleId' x='513' y='921' onmouseover="hghl(['UserRole_FK__UserRole__RoleId__75A278F5','dbo.Role.RoleId'])" onmouseout="uhghl(['UserRole_FK__UserRole__RoleId__75A278F5','dbo.Role.RoleId'])">RoleId</text><title>RoleId
-* int</title></a>
-<a xlink:href='#UserRole.RoleId'><use id='fk' x='589' y='911' xlink:href='#fk'/><title>References Role ( RoleId ) </title></a>
-  <a xlink:href='#UserRole.TeamId'><use id='idx' x='497' y='926' xlink:href='#idx'/><title>Idx_UserRole_TeamId ( TeamId ) </title></a>
-<a xlink:href='#UserRole.TeamId'><text id='dbo.UserRole.TeamId' x='513' y='936' onmouseover="hghl(['UserRole_fk_userrole_team','dbo.Team.TeamId'])" onmouseout="uhghl(['UserRole_fk_userrole_team','dbo.Team.TeamId'])">TeamId</text><title>TeamId
-int</title></a>
-<a xlink:href='#UserRole.TeamId'><use id='fk' x='589' y='926' xlink:href='#fk'/><title>References Team ( TeamId ) </title></a>
-  <use id='nn' x='497' y='942' xlink:href='#nn'/><a xlink:href='#UserRole.CreatedDate'><text id='dbo.UserRole.CreatedDate' x='513' y='951'>CreatedDate</text><title>CreatedDate
-* datetime</title></a>
-<text x='597' y='948' text-anchor='end' class='colType'>d</text>  <use id='nn' x='497' y='957' xlink:href='#nn'/><a xlink:href='#UserRole.ModifiedDate'><text id='dbo.UserRole.ModifiedDate' x='513' y='966'>ModifiedDate</text><title>ModifiedDate
-* datetime</title></a>
-<text x='597' y='963' text-anchor='end' class='colType'>d</text>  <use id='nn' x='497' y='972' xlink:href='#nn'/><a xlink:href='#UserRole.IsActive'><text id='dbo.UserRole.IsActive' x='513' y='981'>IsActive</text><title>IsActive
-* bit</title></a>
-<text x='597' y='978' text-anchor='end' class='colType'>b</text>
-<!-- == Table 'Role' == -->
-<rect class='entity' x='480' y='1013' width='105' height='135' rx='7' ry='7' style='stroke:none'/>
-<path d='M 480 1039 L 480 1020 Q 480 1013 487 1013 L 578 1013 Q 585 1013 585 1020 L 585 1039 L480 1039 ' style='fill:url(#tbg_c8f5bf);stroke:1;stroke-opacity:0.1;' />
-<rect class='entity' x='480' y='1013' width='105' height='135' rx='7' ry='7' style='fill:none;stroke:#626e5f'/>
-<line class='delim' x1='480' y1='1039' x2='585' y2='1039' style='stroke:#626e5f'/>
-<line class='delim' x1='495' y1='1039' x2='495' y2='1148' style='stroke:#626e5f'/>
-<line class='delim' x1='574' y1='1039' x2='574' y2='1148' style='stroke:#626e5f'/>
-<a xlink:href='#Role'><text x='519' y='1031'>Role</text><title>Table dbo.Role</title></a>
-  <use id='nn' x='482' y='1047' xlink:href='#nn'/><a xlink:href='#Role.RoleId'><use id='pk' x='482' y='1046' xlink:href='#pk'/><title>Pk PK__Role__8AFACE1A3655C4A1 ( RoleId ) </title></a>
-<a xlink:href='#Role.RoleId'><text id='dbo.Role.RoleId' x='498' y='1056' onmouseover="hghl(['UserRole_FK__UserRole__RoleId__75A278F5','dbo.UserRole.RoleId','GroupRole_Fk_GroupRole_Role','dbo.GroupRole.RoleId'])" onmouseout="uhghl(['UserRole_FK__UserRole__RoleId__75A278F5','dbo.UserRole.RoleId','GroupRole_Fk_GroupRole_Role','dbo.GroupRole.RoleId'])">RoleId</text><title>RoleId
-* int</title></a>
-<a xlink:href='#Role.RoleId'><use id='ref' x='574' y='1046' xlink:href='#ref'/><title>Referred by UserRole ( RoleId ) 
-Referred by GroupRole ( RoleId ) </title></a>
-  <use id='nn' x='482' y='1062' xlink:href='#nn'/><a xlink:href='#Role.Name'><text id='dbo.Role.Name' x='498' y='1071'>Name</text><title>Name
-* nvarchar(255)</title></a>
-<text x='582' y='1068' text-anchor='end' class='colType'>t</text>  <a xlink:href='#Role.Description'><text id='dbo.Role.Description' x='498' y='1086'>Description</text><title>Description
-nvarchar(1026)</title></a>
-<text x='582' y='1083' text-anchor='end' class='colType'>t</text>  <use id='nn' x='482' y='1092' xlink:href='#nn'/><a xlink:href='#Role.CreatedDate'><text id='dbo.Role.CreatedDate' x='498' y='1101'>CreatedDate</text><title>CreatedDate
-* datetime</title></a>
-<text x='582' y='1098' text-anchor='end' class='colType'>d</text>  <use id='nn' x='482' y='1107' xlink:href='#nn'/><a xlink:href='#Role.ModifiedDate'><text id='dbo.Role.ModifiedDate' x='498' y='1116'>ModifiedDate</text><title>ModifiedDate
-* datetime</title></a>
-<text x='582' y='1113' text-anchor='end' class='colType'>d</text>  <use id='nn' x='482' y='1122' xlink:href='#nn'/><a xlink:href='#Role.IsActive'><text id='dbo.Role.IsActive' x='498' y='1131'>IsActive</text><title>IsActive
-* bit</title></a>
-<text x='582' y='1128' text-anchor='end' class='colType'>b</text>
-<!-- == Table 'Project' == -->
-<rect class='entity' x='705' y='68' width='105' height='225' rx='7' ry='7' style='stroke:none'/>
-<path d='M 705 94 L 705 75 Q 705 68 712 68 L 803 68 Q 810 68 810 75 L 810 94 L705 94 ' style='fill:url(#tbg_f5ddbf);stroke:1;stroke-opacity:0.1;' />
-<rect class='entity' x='705' y='68' width='105' height='225' rx='7' ry='7' style='fill:none;stroke:#6e675f'/>
-<line class='delim' x1='705' y1='94' x2='810' y2='94' style='stroke:#6e675f'/>
-<line class='delim' x1='720' y1='94' x2='720' y2='293' style='stroke:#6e675f'/>
-<line class='delim' x1='799' y1='94' x2='799' y2='293' style='stroke:#6e675f'/>
-<a xlink:href='#Project'><text x='737' y='86'>Project</text><title>Table dbo.Project</title></a>
-  <use id='nn' x='707' y='102' xlink:href='#nn'/><a xlink:href='#Project.ProjectId'><use id='pk' x='707' y='101' xlink:href='#pk'/><title>Pk PK__Project__761ABEF02113E012 ( ProjectId ) </title></a>
-<a xlink:href='#Project.ProjectId'><text id='dbo.Project.ProjectId' x='723' y='111' onmouseover="hghl(['ProjectTeam_FK__ProjectTe__Proje__6C190EBB','dbo.ProjectTeam.ProjectId'])" onmouseout="uhghl(['ProjectTeam_FK__ProjectTe__Proje__6C190EBB','dbo.ProjectTeam.ProjectId'])">ProjectId</text><title>ProjectId
-* int</title></a>
-<a xlink:href='#Project.ProjectId'><use id='ref' x='799' y='101' xlink:href='#ref'/><title>Referred by ProjectTeam ( ProjectId ) </title></a>
-  <use id='nn' x='707' y='117' xlink:href='#nn'/><a xlink:href='#Project.ProjectTypeId'><text id='dbo.Project.ProjectTypeId' x='723' y='126' onmouseover="hghl(['Project_Fk_Project_ProjectType','dbo.ProjectType.ProjectTypeId'])" onmouseout="uhghl(['Project_Fk_Project_ProjectType','dbo.ProjectType.ProjectTypeId'])">ProjectTypeId</text><title>ProjectTypeId
-* int</title></a>
-<a xlink:href='#Project.ProjectTypeId'><use id='fk' x='799' y='116' xlink:href='#fk'/><title>References ProjectType ( ProjectTypeId ) </title></a>
-  <use id='nn' x='707' y='132' xlink:href='#nn'/><a xlink:href='#Project.Name'><text id='dbo.Project.Name' x='723' y='141'>Name</text><title>Name
-* nvarchar(255)</title></a>
-<text x='807' y='138' text-anchor='end' class='colType'>t</text>  <a xlink:href='#Project.Description'><text id='dbo.Project.Description' x='723' y='156'>Description</text><title>Description
-nvarchar(1026)</title></a>
-<text x='807' y='153' text-anchor='end' class='colType'>t</text>  <use id='nn' x='707' y='162' xlink:href='#nn'/><a xlink:href='#Project.Logo'><text id='dbo.Project.Logo' x='723' y='171'>Logo</text><title>Logo
-* nvarchar(255) default 'White'</title></a>
-<text x='807' y='168' text-anchor='end' class='colType'>t</text>  <use id='nn' x='707' y='177' xlink:href='#nn'/><a xlink:href='#Project.CreatedBy'><text id='dbo.Project.CreatedBy' x='723' y='186'>CreatedBy</text><title>CreatedBy
-* int</title></a>
-<text x='807' y='183' text-anchor='end' class='colType'>#</text>  <use id='nn' x='707' y='192' xlink:href='#nn'/><a xlink:href='#Project.ModifiedBy'><text id='dbo.Project.ModifiedBy' x='723' y='201'>ModifiedBy</text><title>ModifiedBy
-* int</title></a>
-<text x='807' y='198' text-anchor='end' class='colType'>#</text>  <use id='nn' x='707' y='207' xlink:href='#nn'/><a xlink:href='#Project.CreatedDate'><text id='dbo.Project.CreatedDate' x='723' y='216'>CreatedDate</text><title>CreatedDate
-* datetime</title></a>
-<text x='807' y='213' text-anchor='end' class='colType'>d</text>  <use id='nn' x='707' y='222' xlink:href='#nn'/><a xlink:href='#Project.ModifiedDate'><text id='dbo.Project.ModifiedDate' x='723' y='231'>ModifiedDate</text><title>ModifiedDate
-* datetime</title></a>
-<text x='807' y='228' text-anchor='end' class='colType'>d</text>  <a xlink:href='#Project.StartDate'><text id='dbo.Project.StartDate' x='723' y='246'>StartDate</text><title>StartDate
-datetime</title></a>
-<text x='807' y='243' text-anchor='end' class='colType'>d</text>  <a xlink:href='#Project.EndDate'><text id='dbo.Project.EndDate' x='723' y='261'>EndDate</text><title>EndDate
-datetime</title></a>
-<text x='807' y='258' text-anchor='end' class='colType'>d</text>  <use id='nn' x='707' y='267' xlink:href='#nn'/><a xlink:href='#Project.IsActive'><text id='dbo.Project.IsActive' x='723' y='276'>IsActive</text><title>IsActive
-* bit</title></a>
-<text x='807' y='273' text-anchor='end' class='colType'>b</text>
-<!-- == Table 'ProjectEntity' == -->
-<rect class='entity' x='870' y='278' width='105' height='165' rx='7' ry='7' style='stroke:none'/>
-<path d='M 870 304 L 870 285 Q 870 278 877 278 L 968 278 Q 975 278 975 285 L 975 304 L870 304 ' style='fill:url(#tbg_f5ddbf);stroke:1;stroke-opacity:0.1;' />
-<rect class='entity' x='870' y='278' width='105' height='165' rx='7' ry='7' style='fill:none;stroke:#6e675f'/>
-<line class='delim' x1='870' y1='304' x2='975' y2='304' style='stroke:#6e675f'/>
-<line class='delim' x1='885' y1='304' x2='885' y2='443' style='stroke:#6e675f'/>
-<line class='delim' x1='964' y1='304' x2='964' y2='443' style='stroke:#6e675f'/>
-<a xlink:href='#ProjectEntity'><text x='888' y='296'>ProjectEntity</text><title>Table dbo.ProjectEntity</title></a>
-  <use id='nn' x='872' y='312' xlink:href='#nn'/><a xlink:href='#ProjectEntity.Id'><use id='pk' x='872' y='311' xlink:href='#pk'/><title>Pk PK__ProjectE__3214EC0793228423 ( Id ) </title></a>
-<a xlink:href='#ProjectEntity.Id'><text id='dbo.ProjectEntity.Id' x='888' y='321'>Id</text><title>Id
-* int</title></a>
-<text x='972' y='318' text-anchor='end' class='colType'>#</text>  <use id='nn' x='872' y='327' xlink:href='#nn'/><a xlink:href='#ProjectEntity.EntityId'><text id='dbo.ProjectEntity.EntityId' x='888' y='336' onmouseover="hghl(['ProjectEntity_FK__ProjectEn__Entit__0B91BA14','dbo.Entity.EntityId'])" onmouseout="uhghl(['ProjectEntity_FK__ProjectEn__Entit__0B91BA14','dbo.Entity.EntityId'])">EntityId</text><title>EntityId
-* int</title></a>
-<a xlink:href='#ProjectEntity.EntityId'><use id='fk' x='964' y='326' xlink:href='#fk'/><title>References Entity ( EntityId ) </title></a>
-  <use id='nn' x='872' y='342' xlink:href='#nn'/><a xlink:href='#ProjectEntity.ProjectTypeId'><text id='dbo.ProjectEntity.ProjectTypeId' x='888' y='351' onmouseover="hghl(['ProjectEntity_Fk_ProjectEntity_ProjectType','dbo.ProjectType.ProjectTypeId'])" onmouseout="uhghl(['ProjectEntity_Fk_ProjectEntity_ProjectType','dbo.ProjectType.ProjectTypeId'])">ProjectTypeId</text><title>ProjectTypeId
-* int</title></a>
-<a xlink:href='#ProjectEntity.ProjectTypeId'><use id='fk' x='964' y='341' xlink:href='#fk'/><title>References ProjectType ( ProjectTypeId ) </title></a>
-  <use id='nn' x='872' y='357' xlink:href='#nn'/><a xlink:href='#ProjectEntity.CreatedBy'><text id='dbo.ProjectEntity.CreatedBy' x='888' y='366' onmouseover="hghl(['ProjectEntity_FK__ProjectEn__Creat__0D7A0286','dbo.User.UserId'])" onmouseout="uhghl(['ProjectEntity_FK__ProjectEn__Creat__0D7A0286','dbo.User.UserId'])">CreatedBy</text><title>CreatedBy
-* int</title></a>
-<a xlink:href='#ProjectEntity.CreatedBy'><use id='fk' x='964' y='356' xlink:href='#fk'/><title>References User ( CreatedBy -&gt; UserId ) </title></a>
-  <use id='nn' x='872' y='372' xlink:href='#nn'/><a xlink:href='#ProjectEntity.ModifiedBy'><text id='dbo.ProjectEntity.ModifiedBy' x='888' y='381' onmouseover="hghl(['ProjectEntity_FK__ProjectEn__Modif__0E6E26BF','dbo.User.UserId'])" onmouseout="uhghl(['ProjectEntity_FK__ProjectEn__Modif__0E6E26BF','dbo.User.UserId'])">ModifiedBy</text><title>ModifiedBy
-* int</title></a>
-<a xlink:href='#ProjectEntity.ModifiedBy'><use id='fk' x='964' y='371' xlink:href='#fk'/><title>References User ( ModifiedBy -&gt; UserId ) </title></a>
-  <use id='nn' x='872' y='387' xlink:href='#nn'/><a xlink:href='#ProjectEntity.CreatedDate'><text id='dbo.ProjectEntity.CreatedDate' x='888' y='396'>CreatedDate</text><title>CreatedDate
-* datetime</title></a>
-<text x='972' y='393' text-anchor='end' class='colType'>d</text>  <use id='nn' x='872' y='402' xlink:href='#nn'/><a xlink:href='#ProjectEntity.ModifiedDate'><text id='dbo.ProjectEntity.ModifiedDate' x='888' y='411'>ModifiedDate</text><title>ModifiedDate
-* datetime</title></a>
-<text x='972' y='408' text-anchor='end' class='colType'>d</text>  <use id='nn' x='872' y='417' xlink:href='#nn'/><a xlink:href='#ProjectEntity.IsActive'><text id='dbo.ProjectEntity.IsActive' x='888' y='426'>IsActive</text><title>IsActive
-* bit</title></a>
-<text x='972' y='423' text-anchor='end' class='colType'>b</text>
-<!-- == Table 'ProjectType' == -->
-<rect class='entity' x='855' y='68' width='105' height='165' rx='7' ry='7' style='stroke:none'/>
-<path d='M 855 94 L 855 75 Q 855 68 862 68 L 953 68 Q 960 68 960 75 L 960 94 L855 94 ' style='fill:url(#tbg_f5ddbf);stroke:1;stroke-opacity:0.1;' />
-<rect class='entity' x='855' y='68' width='105' height='165' rx='7' ry='7' style='fill:none;stroke:#6e675f'/>
-<line class='delim' x1='855' y1='94' x2='960' y2='94' style='stroke:#6e675f'/>
-<line class='delim' x1='870' y1='94' x2='870' y2='233' style='stroke:#6e675f'/>
-<line class='delim' x1='949' y1='94' x2='949' y2='233' style='stroke:#6e675f'/>
-<a xlink:href='#ProjectType'><text x='875' y='86'>ProjectType</text><title>Table dbo.ProjectType</title></a>
-  <use id='nn' x='857' y='102' xlink:href='#nn'/><a xlink:href='#ProjectType.ProjectTypeId'><use id='pk' x='857' y='101' xlink:href='#pk'/><title>Pk PK__ProjectT__6F245E6353170279 ( ProjectTypeId ) </title></a>
-<a xlink:href='#ProjectType.ProjectTypeId'><text id='dbo.ProjectType.ProjectTypeId' x='873' y='111' onmouseover="hghl(['Project_Fk_Project_ProjectType','dbo.Project.ProjectTypeId','ProjectEntity_Fk_ProjectEntity_ProjectType','dbo.ProjectEntity.ProjectTypeId'])" onmouseout="uhghl(['Project_Fk_Project_ProjectType','dbo.Project.ProjectTypeId','ProjectEntity_Fk_ProjectEntity_ProjectType','dbo.ProjectEntity.ProjectTypeId'])">ProjectTypeId</text><title>ProjectTypeId
-* int</title></a>
-<a xlink:href='#ProjectType.ProjectTypeId'><use id='ref' x='949' y='101' xlink:href='#ref'/><title>Referred by Project ( ProjectTypeId ) 
-Referred by ProjectEntity ( ProjectTypeId ) </title></a>
-  <use id='nn' x='857' y='117' xlink:href='#nn'/><a xlink:href='#ProjectType.Name'><text id='dbo.ProjectType.Name' x='873' y='126'>Name</text><title>Name
-* nvarchar(255)</title></a>
-<text x='957' y='123' text-anchor='end' class='colType'>t</text>  <a xlink:href='#ProjectType.Description'><text id='dbo.ProjectType.Description' x='873' y='141'>Description</text><title>Description
-nvarchar(1026)</title></a>
-<text x='957' y='138' text-anchor='end' class='colType'>t</text>  <use id='nn' x='857' y='147' xlink:href='#nn'/><a xlink:href='#ProjectType.CreatedBy'><text id='dbo.ProjectType.CreatedBy' x='873' y='156'>CreatedBy</text><title>CreatedBy
-* int</title></a>
-<text x='957' y='153' text-anchor='end' class='colType'>#</text>  <use id='nn' x='857' y='162' xlink:href='#nn'/><a xlink:href='#ProjectType.ModifiedBy'><text id='dbo.ProjectType.ModifiedBy' x='873' y='171'>ModifiedBy</text><title>ModifiedBy
-* int</title></a>
-<text x='957' y='168' text-anchor='end' class='colType'>#</text>  <use id='nn' x='857' y='177' xlink:href='#nn'/><a xlink:href='#ProjectType.CreatedDate'><text id='dbo.ProjectType.CreatedDate' x='873' y='186'>CreatedDate</text><title>CreatedDate
-* datetime</title></a>
-<text x='957' y='183' text-anchor='end' class='colType'>d</text>  <use id='nn' x='857' y='192' xlink:href='#nn'/><a xlink:href='#ProjectType.ModifiedDate'><text id='dbo.ProjectType.ModifiedDate' x='873' y='201'>ModifiedDate</text><title>ModifiedDate
-* datetime</title></a>
-<text x='957' y='198' text-anchor='end' class='colType'>d</text>  <use id='nn' x='857' y='207' xlink:href='#nn'/><a xlink:href='#ProjectType.IsActive'><text id='dbo.ProjectType.IsActive' x='873' y='216'>IsActive</text><title>IsActive
-* bit</title></a>
-<text x='957' y='213' text-anchor='end' class='colType'>b</text>
-<!-- == Table 'SystemLogType' == -->
-<rect class='entity' x='45' y='1073' width='120' height='90' rx='7' ry='7' style='stroke:none'/>
-<path d='M 45 1099 L 45 1080 Q 45 1073 52 1073 L 158 1073 Q 165 1073 165 1080 L 165 1099 L45 1099 ' style='fill:url(#tbg_bfbff5);stroke:1;stroke-opacity:0.1;' />
-<rect class='entity' x='45' y='1073' width='120' height='90' rx='7' ry='7' style='fill:none;stroke:#5f5f6e'/>
-<line class='delim' x1='45' y1='1099' x2='165' y2='1099' style='stroke:#5f5f6e'/>
-<line class='delim' x1='60' y1='1099' x2='60' y2='1163' style='stroke:#5f5f6e'/>
-<line class='delim' x1='154' y1='1099' x2='154' y2='1163' style='stroke:#5f5f6e'/>
-<a xlink:href='#SystemLogType'><text x='64' y='1091'>SystemLogType</text><title>Table dbo.SystemLogType</title></a>
-  <use id='nn' x='47' y='1107' xlink:href='#nn'/><a xlink:href='#SystemLogType.SystemLogTypeId'><use id='pk' x='47' y='1106' xlink:href='#pk'/><title>Pk PK__SystemLo__85BCD1E633F2225C ( SystemLogTypeId ) </title></a>
-<a xlink:href='#SystemLogType.SystemLogTypeId'><text id='dbo.SystemLogType.SystemLogTypeId' x='63' y='1116' onmouseover="hghl(['SystemLog_Fk_SystemLog_SystemLogType','dbo.SystemLog.SystemLogTypeId'])" onmouseout="uhghl(['SystemLog_Fk_SystemLog_SystemLogType','dbo.SystemLog.SystemLogTypeId'])">SystemLogTypeId</text><title>SystemLogTypeId
-* int</title></a>
-<a xlink:href='#SystemLogType.SystemLogTypeId'><use id='ref' x='154' y='1106' xlink:href='#ref'/><title>Referred by SystemLog ( SystemLogTypeId ) </title></a>
-  <use id='nn' x='47' y='1122' xlink:href='#nn'/><a xlink:href='#SystemLogType.Name'><text id='dbo.SystemLogType.Name' x='63' y='1131'>Name</text><title>Name
-* nvarchar(100)</title></a>
-<text x='162' y='1128' text-anchor='end' class='colType'>t</text>  <use id='nn' x='47' y='1137' xlink:href='#nn'/><a xlink:href='#SystemLogType.IsActive'><text id='dbo.SystemLogType.IsActive' x='63' y='1146'>IsActive</text><title>IsActive
-* bit</title></a>
-<text x='162' y='1143' text-anchor='end' class='colType'>b</text>
-<!-- == Table 'UserGroup' == -->
-<rect class='entity' x='270' y='668' width='105' height='135' rx='7' ry='7' style='stroke:none'/>
-<path d='M 270 694 L 270 675 Q 270 668 277 668 L 368 668 Q 375 668 375 675 L 375 694 L270 694 ' style='fill:url(#tbg_c8f5bf);stroke:1;stroke-opacity:0.1;' />
-<rect class='entity' x='270' y='668' width='105' height='135' rx='7' ry='7' style='fill:none;stroke:#626e5f'/>
-<line class='delim' x1='270' y1='694' x2='375' y2='694' style='stroke:#626e5f'/>
-<line class='delim' x1='285' y1='694' x2='285' y2='803' style='stroke:#626e5f'/>
-<line class='delim' x1='364' y1='694' x2='364' y2='803' style='stroke:#626e5f'/>
-<a xlink:href='#UserGroup'><text x='294' y='686'>UserGroup</text><title>Table dbo.UserGroup</title></a>
-  <use id='nn' x='272' y='702' xlink:href='#nn'/><a xlink:href='#UserGroup.Id'><use id='pk' x='272' y='701' xlink:href='#pk'/><title>Pk PK__UserGrou__3214EC0745BA353F ( Id ) </title></a>
-<a xlink:href='#UserGroup.Id'><text id='dbo.UserGroup.Id' x='288' y='711'>Id</text><title>Id
-* int</title></a>
-<text x='372' y='708' text-anchor='end' class='colType'>#</text>  <use id='nn' x='272' y='717' xlink:href='#nn'/><a xlink:href='#UserGroup.GroupId'><text id='dbo.UserGroup.GroupId' x='288' y='726' onmouseover="hghl(['UserGroup_FK__UserGroup__Group__3E52440B','dbo.Group.GroupId'])" onmouseout="uhghl(['UserGroup_FK__UserGroup__Group__3E52440B','dbo.Group.GroupId'])">GroupId</text><title>GroupId
-* int</title></a>
-<a xlink:href='#UserGroup.GroupId'><use id='fk' x='364' y='716' xlink:href='#fk'/><title>References Group ( GroupId ) </title></a>
-  <use id='nn' x='272' y='732' xlink:href='#nn'/><a xlink:href='#UserGroup.UserId'><text id='dbo.UserGroup.UserId' x='288' y='741' onmouseover="hghl(['UserGroup_FK__UserGroup__UserI__3F466844','dbo.User.UserId'])" onmouseout="uhghl(['UserGroup_FK__UserGroup__UserI__3F466844','dbo.User.UserId'])">UserId</text><title>UserId
-* int</title></a>
-<a xlink:href='#UserGroup.UserId'><use id='fk' x='364' y='731' xlink:href='#fk'/><title>References User ( UserId ) </title></a>
-  <use id='nn' x='272' y='747' xlink:href='#nn'/><a xlink:href='#UserGroup.CreatedDate'><text id='dbo.UserGroup.CreatedDate' x='288' y='756'>CreatedDate</text><title>CreatedDate
-* datetime</title></a>
-<text x='372' y='753' text-anchor='end' class='colType'>d</text>  <use id='nn' x='272' y='762' xlink:href='#nn'/><a xlink:href='#UserGroup.ModifiedDate'><text id='dbo.UserGroup.ModifiedDate' x='288' y='771'>ModifiedDate</text><title>ModifiedDate
-* datetime</title></a>
-<text x='372' y='768' text-anchor='end' class='colType'>d</text>  <use id='nn' x='272' y='777' xlink:href='#nn'/><a xlink:href='#UserGroup.IsActive'><text id='dbo.UserGroup.IsActive' x='288' y='786'>IsActive</text><title>IsActive
-* bit</title></a>
-<text x='372' y='783' text-anchor='end' class='colType'>b</text>
-<!-- == Table 'TeamUser' == -->
-<rect class='entity' x='480' y='68' width='105' height='135' rx='7' ry='7' style='stroke:none'/>
-<path d='M 480 94 L 480 75 Q 480 68 487 68 L 578 68 Q 585 68 585 75 L 585 94 L480 94 ' style='fill:url(#tbg_f5ddbf);stroke:1;stroke-opacity:0.1;' />
-<rect class='entity' x='480' y='68' width='105' height='135' rx='7' ry='7' style='fill:none;stroke:#6e675f'/>
-<line class='delim' x1='480' y1='94' x2='585' y2='94' style='stroke:#6e675f'/>
-<line class='delim' x1='495' y1='94' x2='495' y2='203' style='stroke:#6e675f'/>
-<line class='delim' x1='574' y1='94' x2='574' y2='203' style='stroke:#6e675f'/>
-<a xlink:href='#TeamUser'><text x='505' y='86'>TeamUser</text><title>Table dbo.TeamUser</title></a>
-  <use id='nn' x='482' y='102' xlink:href='#nn'/><a xlink:href='#TeamUser.Id'><use id='pk' x='482' y='101' xlink:href='#pk'/><title>Pk PK__TeamUser__3214EC072550C803 ( Id ) </title></a>
-<a xlink:href='#TeamUser.Id'><text id='dbo.TeamUser.Id' x='498' y='111'>Id</text><title>Id
-* int</title></a>
-<text x='582' y='108' text-anchor='end' class='colType'>#</text>  <use id='nn' x='482' y='117' xlink:href='#nn'/><a xlink:href='#TeamUser.UserId'><text id='dbo.TeamUser.UserId' x='498' y='126' onmouseover="hghl(['TeamUser_Fk_TeamUser_User','dbo.User.UserId'])" onmouseout="uhghl(['TeamUser_Fk_TeamUser_User','dbo.User.UserId'])">UserId</text><title>UserId
-* int</title></a>
-<a xlink:href='#TeamUser.UserId'><use id='fk' x='574' y='116' xlink:href='#fk'/><title>References User ( UserId ) </title></a>
-  <use id='nn' x='482' y='132' xlink:href='#nn'/><a xlink:href='#TeamUser.TeamId'><text id='dbo.TeamUser.TeamId' x='498' y='141' onmouseover="hghl(['TeamUser_FK__TeamUser__TeamId__68487DD7','dbo.Team.TeamId'])" onmouseout="uhghl(['TeamUser_FK__TeamUser__TeamId__68487DD7','dbo.Team.TeamId'])">TeamId</text><title>TeamId
-* int</title></a>
-<a xlink:href='#TeamUser.TeamId'><use id='fk' x='574' y='131' xlink:href='#fk'/><title>References Team ( TeamId ) </title></a>
-  <use id='nn' x='482' y='147' xlink:href='#nn'/><a xlink:href='#TeamUser.CreatedDate'><text id='dbo.TeamUser.CreatedDate' x='498' y='156'>CreatedDate</text><title>CreatedDate
-* datetime</title></a>
-<text x='582' y='153' text-anchor='end' class='colType'>d</text>  <use id='nn' x='482' y='162' xlink:href='#nn'/><a xlink:href='#TeamUser.ModifiedDate'><text id='dbo.TeamUser.ModifiedDate' x='498' y='171'>ModifiedDate</text><title>ModifiedDate
-* datetime</title></a>
-<text x='582' y='168' text-anchor='end' class='colType'>d</text>  <use id='nn' x='482' y='177' xlink:href='#nn'/><a xlink:href='#TeamUser.IsActive'><text id='dbo.TeamUser.IsActive' x='498' y='186'>IsActive</text><title>IsActive
-* bit</title></a>
-<text x='582' y='183' text-anchor='end' class='colType'>b</text>
-</g></svg></div>
-
+<object data='db schema.svg' width='960' height='1340' type='image/svg+xml' >
+<embed src='db schema.svg' width='960' height='1340' type='image/svg+xml' />
+<p>The <a href="http://www.adobe.com/svg/viewer/install/main.html">Adobe SVG Viewer</a> is required to view this image !</p></object>
+<br/><br/>
+<div class='card'><div class='card-block'><a name='Department' onclick='window.scrollTo(565, 75);return false;' style='cursor:pointer;'><h4 class='card-title'>Table Department</h4></a>
+<table class='table-sm table-bordered'>
+<thead>
+<tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
+<tbody>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg><svg width='14' height='14'><use xlink:href='#ref'/></svg></td>
+		<td><a name='Department.DepartmentId'>DepartmentId</a></td>
+		<td> int  AUTOINCREMENT  </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='Department.Name'>Name</a></td>
+		<td> nvarchar&#40; 255 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='Department.Prefix'>Prefix</a></td>
+		<td> varchar&#40; 20 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td><a name='Department.Description'>Description</a></td>
+		<td> nvarchar&#40; 1026 &#41;   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='Department.CreatedBy'>CreatedBy</a></td>
+		<td> int   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='Department.ModifiedBy'>ModifiedBy</a></td>
+		<td> int   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='Department.CreatedDate'>CreatedDate</a></td>
+		<td> datetime   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='Department.ModifiedDate'>ModifiedDate</a></td>
+		<td> datetime   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='Department.IsActive'>IsActive</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td><svg width='14' height='14'><use xlink:href='#pk'/></svg></td><td>PK&#95;&#95;ProjectT&#95;&#95;6F245E6353170279</td>
+		<td> ON DepartmentId</td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table></div></div>
 
 <br/><br/>
-<div class='card'><div class='card-block'><a name='Entity' onclick='window.scrollTo(700, 555);return false;' style='cursor:pointer;'><h4 class='card-title'>Table Entity</h4></a>
+<div class='card'><div class='card-block'><a name='DepartmentEntity' onclick='window.scrollTo(580, 285);return false;' style='cursor:pointer;'><h4 class='card-title'>Table DepartmentEntity</h4></a>
+<table class='table-sm table-bordered'>
+<thead>
+<tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
+<tbody>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg></td>
+		<td><a name='DepartmentEntity.DepartmentEntityId'>DepartmentEntityId</a></td>
+		<td> int  AUTOINCREMENT  </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#fk'/></svg></td>
+		<td><a name='DepartmentEntity.EntityId'>EntityId</a></td>
+		<td> int   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#fk'/></svg></td>
+		<td><a name='DepartmentEntity.DepartmentId'>DepartmentId</a></td>
+		<td> int   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#fk'/></svg></td>
+		<td><a name='DepartmentEntity.CreatedBy'>CreatedBy</a></td>
+		<td> int   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#fk'/></svg></td>
+		<td><a name='DepartmentEntity.ModifiedBy'>ModifiedBy</a></td>
+		<td> int   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='DepartmentEntity.CreatedDate'>CreatedDate</a></td>
+		<td> datetime   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='DepartmentEntity.ModifiedDate'>ModifiedDate</a></td>
+		<td> datetime   </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='DepartmentEntity.IsActive'>IsActive</a></td>
+		<td> bit   </td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td><svg width='14' height='14'><use xlink:href='#pk'/></svg></td><td>PK&#95;&#95;ProjectE&#95;&#95;3214EC0793228423</td>
+		<td> ON DepartmentEntityId</td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Foreign Keys</th></tr>
+	<tr>
+		<td><svg width='14' height='14'><use xlink:href='#fk'/></svg></td><td>FK__ProjectEn__Entit__0B91BA14</td>
+		<td > ( EntityId ) ref <a href='#Entity'>Entity</a> (EntityId) </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td><svg width='14' height='14'><use xlink:href='#fk'/></svg></td><td>Fk_ProjectEntity_ProjectType</td>
+		<td > ( DepartmentId ) ref <a href='#Department'>Department</a> (DepartmentId) </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td><svg width='14' height='14'><use xlink:href='#fk'/></svg></td><td>FK__ProjectEn__Creat__0D7A0286</td>
+		<td > ( CreatedBy ) ref <a href='#User'>User</a> (UserId) </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td><svg width='14' height='14'><use xlink:href='#fk'/></svg></td><td>FK__ProjectEn__Modif__0E6E26BF</td>
+		<td > ( ModifiedBy ) ref <a href='#User'>User</a> (UserId) </td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table></div></div>
+
+<br/><br/>
+<div class='card'><div class='card-block'><a name='DepartmentPrefix_Entity' onclick='window.scrollTo(475, 1035);return false;' style='cursor:pointer;'><h4 class='card-title'>Table DepartmentPrefix_Entity</h4></a>
+<p class="text-muted">story, task, defect, bug, feature - for development department
+sick leave, vacation leave, permission, comp off - leave system department
+
+total numner of these tables will be same as the number of records in entity table
+the columns of those tables are the entity fields mapped to them</p>
+<table class='table-sm table-bordered'>
+<thead>
+<tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
+<tbody>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg></td>
+		<td><a name='DepartmentPrefix_Entity.DepartmentPrefix_ItemTypeId'>DepartmentPrefix&#95;ItemTypeId</a></td>
+		<td> int  AUTOINCREMENT  </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*</td>
+		<td><a name='DepartmentPrefix_Entity.FieldsOfEntity'>FieldsOfEntity</a></td>
+		<td> nvarchar&#40; 255 &#41;   DEFAULT 'White' </td>
+		<td>  </td>
+	</tr>
+	<tr>
+		<td>*<svg width='14' height='14'><use xlink:href='#idx'/></svg><svg width='14' height='14'><use xlink:href='#fk'/></svg></td>
+		<td><a name='DepartmentPrefix_Entity.ProjectId'>ProjectId</a></td>
+		<td> int   </td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Indexes</th></tr>
+	<tr>		<td><svg width='14' height='14'><use xlink:href='#pk'/></svg></td><td>PK&#95;&#95;Entity&#95;&#95;9C892F9DDFEA8CC3&#95;1</td>
+		<td> ON DepartmentPrefix&#95;ItemTypeId</td>
+		<td>  </td>
+	</tr>
+	<tr>		<td><svg width='14' height='14'><use xlink:href='#idx'/></svg></td><td>Idx&#95;DepartmentPrefix&#95;ItemType&#95;0&#95;ProjectId</td>
+		<td> ON ProjectId</td>
+		<td>  </td>
+	</tr>
+<tr><th colspan='4'>Foreign Keys</th></tr>
+	<tr>
+		<td><svg width='14' height='14'><use xlink:href='#fk'/></svg></td><td>fk_departmentprefix_itemtype_0</td>
+		<td > ( ProjectId ) ref <a href='#Project'>Project</a> (ProjectId) </td>
+		<td>  </td>
+	</tr>
+</tbody>
+</table></div></div>
+
+<br/><br/>
+<div class='card'><div class='card-block'><a name='Entity' onclick='window.scrollTo(595, 555);return false;' style='cursor:pointer;'><h4 class='card-title'>Table Entity</h4></a>
 <table class='table-sm table-bordered'>
 <thead>
 <tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
@@ -1374,7 +302,7 @@ nvarchar(1026)</title></a>
 </table></div></div>
 
 <br/><br/>
-<div class='card'><div class='card-block'><a name='EntityField' onclick='window.scrollTo(520, 780);return false;' style='cursor:pointer;'><h4 class='card-title'>Table EntityField</h4></a>
+<div class='card'><div class='card-block'><a name='EntityField' onclick='window.scrollTo(415, 780);return false;' style='cursor:pointer;'><h4 class='card-title'>Table EntityField</h4></a>
 <table class='table-sm table-bordered'>
 <thead>
 <tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
@@ -1458,14 +386,14 @@ nvarchar(1026)</title></a>
 </table></div></div>
 
 <br/><br/>
-<div class='card'><div class='card-block'><a name='EntityFieldMapping' onclick='window.scrollTo(535, 555);return false;' style='cursor:pointer;'><h4 class='card-title'>Table EntityFieldMapping</h4></a>
+<div class='card'><div class='card-block'><a name='EntityFieldMapping' onclick='window.scrollTo(430, 555);return false;' style='cursor:pointer;'><h4 class='card-title'>Table EntityFieldMapping</h4></a>
 <table class='table-sm table-bordered'>
 <thead>
 <tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
 <tbody>
 	<tr>
-		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg><svg width='14' height='14'><use xlink:href='#ref'/></svg></td>
-		<td><a name='EntityFieldMapping.Id'>Id</a></td>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg></td>
+		<td><a name='EntityFieldMapping.EntityFieldMappingId'>EntityFieldMappingId</a></td>
 		<td> int  AUTOINCREMENT  </td>
 		<td>  </td>
 	</tr>
@@ -1513,7 +441,7 @@ nvarchar(1026)</title></a>
 	</tr>
 <tr><th colspan='4'>Indexes</th></tr>
 	<tr>		<td><svg width='14' height='14'><use xlink:href='#pk'/></svg></td><td>PK&#95;&#95;EntityFi&#95;&#95;3214EC077B4C9C16</td>
-		<td> ON Id</td>
+		<td> ON EntityFieldMappingId</td>
 		<td>  </td>
 	</tr>
 <tr><th colspan='4'>Foreign Keys</th></tr>
@@ -1541,7 +469,7 @@ nvarchar(1026)</title></a>
 </table></div></div>
 
 <br/><br/>
-<div class='card'><div class='card-block'><a name='EntityFieldType' onclick='window.scrollTo(700, 795);return false;' style='cursor:pointer;'><h4 class='card-title'>Table EntityFieldType</h4></a>
+<div class='card'><div class='card-block'><a name='EntityFieldType' onclick='window.scrollTo(595, 795);return false;' style='cursor:pointer;'><h4 class='card-title'>Table EntityFieldType</h4></a>
 <table class='table-sm table-bordered'>
 <thead>
 <tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
@@ -1614,7 +542,7 @@ nvarchar(1026)</title></a>
 </table></div></div>
 
 <br/><br/>
-<div class='card'><div class='card-block'><a name='Group' onclick='window.scrollTo(70, 855);return false;' style='cursor:pointer;'><h4 class='card-title'>Table Group</h4></a>
+<div class='card'><div class='card-block'><a name='Group' onclick='window.scrollTo(60, 855);return false;' style='cursor:pointer;'><h4 class='card-title'>Table Group</h4></a>
 <table class='table-sm table-bordered'>
 <thead>
 <tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
@@ -1693,14 +621,14 @@ nvarchar(1026)</title></a>
 </table></div></div>
 
 <br/><br/>
-<div class='card'><div class='card-block'><a name='GroupRole' onclick='window.scrollTo(280, 660);return false;' style='cursor:pointer;'><h4 class='card-title'>Table GroupRole</h4></a>
+<div class='card'><div class='card-block'><a name='GroupRole' onclick='window.scrollTo(250, 660);return false;' style='cursor:pointer;'><h4 class='card-title'>Table GroupRole</h4></a>
 <table class='table-sm table-bordered'>
 <thead>
 <tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
 <tbody>
 	<tr>
-		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg><svg width='14' height='14'><use xlink:href='#fk'/></svg></td>
-		<td><a name='GroupRole.Id'>Id</a></td>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg></td>
+		<td><a name='GroupRole.GroupRoleId'>GroupRoleId</a></td>
 		<td> int  AUTOINCREMENT  </td>
 		<td>  </td>
 	</tr>
@@ -1742,7 +670,7 @@ nvarchar(1026)</title></a>
 	</tr>
 <tr><th colspan='4'>Indexes</th></tr>
 	<tr>		<td><svg width='14' height='14'><use xlink:href='#pk'/></svg></td><td>PK&#95;&#95;GroupRol&#95;&#95;3214EC076842EBBF</td>
-		<td> ON Id</td>
+		<td> ON GroupRoleId</td>
 		<td>  </td>
 	</tr>
 	<tr>		<td><svg width='14' height='14'><use xlink:href='#idx'/></svg></td><td>GroupRole&#95;TeamId</td>
@@ -1753,11 +681,6 @@ nvarchar(1026)</title></a>
 	<tr>
 		<td><svg width='14' height='14'><use xlink:href='#fk'/></svg></td><td>FK__GroupRole__Group__70DDC3D8</td>
 		<td > ( GroupId ) ref <a href='#Group'>Group</a> (GroupId) </td>
-		<td>  </td>
-	</tr>
-	<tr>
-		<td><svg width='14' height='14'><use xlink:href='#fk'/></svg></td><td>Fk_GroupRole_EntityFieldMapping</td>
-		<td > ( Id ) ref <a href='#EntityFieldMapping'>EntityFieldMapping</a> (Id) </td>
 		<td>  </td>
 	</tr>
 	<tr>
@@ -1774,7 +697,7 @@ nvarchar(1026)</title></a>
 </table></div></div>
 
 <br/><br/>
-<div class='card'><div class='card-block'><a name='Project' onclick='window.scrollTo(505, 75);return false;' style='cursor:pointer;'><h4 class='card-title'>Table Project</h4></a>
+<div class='card'><div class='card-block'><a name='Project' onclick='window.scrollTo(415, 75);return false;' style='cursor:pointer;'><h4 class='card-title'>Table Project</h4></a>
 <table class='table-sm table-bordered'>
 <thead>
 <tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
@@ -1787,7 +710,7 @@ nvarchar(1026)</title></a>
 	</tr>
 	<tr>
 		<td>*<svg width='14' height='14'><use xlink:href='#fk'/></svg></td>
-		<td><a name='Project.ProjectTypeId'>ProjectTypeId</a></td>
+		<td><a name='Project.DepartmentId'>DepartmentId</a></td>
 		<td> int   </td>
 		<td>  </td>
 	</tr>
@@ -1859,104 +782,21 @@ nvarchar(1026)</title></a>
 <tr><th colspan='4'>Foreign Keys</th></tr>
 	<tr>
 		<td><svg width='14' height='14'><use xlink:href='#fk'/></svg></td><td>Fk_Project_ProjectType</td>
-		<td > ( ProjectTypeId ) ref <a href='#ProjectType'>ProjectType</a> (ProjectTypeId) </td>
+		<td > ( DepartmentId ) ref <a href='#Department'>Department</a> (DepartmentId) </td>
 		<td>  </td>
 	</tr>
 </tbody>
 </table></div></div>
 
 <br/><br/>
-<div class='card'><div class='card-block'><a name='ProjectEntity' onclick='window.scrollTo(670, 285);return false;' style='cursor:pointer;'><h4 class='card-title'>Table ProjectEntity</h4></a>
+<div class='card'><div class='card-block'><a name='ProjectTeam' onclick='window.scrollTo(415, 330);return false;' style='cursor:pointer;'><h4 class='card-title'>Table ProjectTeam</h4></a>
 <table class='table-sm table-bordered'>
 <thead>
 <tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
 <tbody>
 	<tr>
 		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg></td>
-		<td><a name='ProjectEntity.Id'>Id</a></td>
-		<td> int  AUTOINCREMENT  </td>
-		<td>  </td>
-	</tr>
-	<tr>
-		<td>*<svg width='14' height='14'><use xlink:href='#fk'/></svg></td>
-		<td><a name='ProjectEntity.EntityId'>EntityId</a></td>
-		<td> int   </td>
-		<td>  </td>
-	</tr>
-	<tr>
-		<td>*<svg width='14' height='14'><use xlink:href='#fk'/></svg></td>
-		<td><a name='ProjectEntity.ProjectTypeId'>ProjectTypeId</a></td>
-		<td> int   </td>
-		<td>  </td>
-	</tr>
-	<tr>
-		<td>*<svg width='14' height='14'><use xlink:href='#fk'/></svg></td>
-		<td><a name='ProjectEntity.CreatedBy'>CreatedBy</a></td>
-		<td> int   </td>
-		<td>  </td>
-	</tr>
-	<tr>
-		<td>*<svg width='14' height='14'><use xlink:href='#fk'/></svg></td>
-		<td><a name='ProjectEntity.ModifiedBy'>ModifiedBy</a></td>
-		<td> int   </td>
-		<td>  </td>
-	</tr>
-	<tr>
-		<td>*</td>
-		<td><a name='ProjectEntity.CreatedDate'>CreatedDate</a></td>
-		<td> datetime   </td>
-		<td>  </td>
-	</tr>
-	<tr>
-		<td>*</td>
-		<td><a name='ProjectEntity.ModifiedDate'>ModifiedDate</a></td>
-		<td> datetime   </td>
-		<td>  </td>
-	</tr>
-	<tr>
-		<td>*</td>
-		<td><a name='ProjectEntity.IsActive'>IsActive</a></td>
-		<td> bit   </td>
-		<td>  </td>
-	</tr>
-<tr><th colspan='4'>Indexes</th></tr>
-	<tr>		<td><svg width='14' height='14'><use xlink:href='#pk'/></svg></td><td>PK&#95;&#95;ProjectE&#95;&#95;3214EC0793228423</td>
-		<td> ON Id</td>
-		<td>  </td>
-	</tr>
-<tr><th colspan='4'>Foreign Keys</th></tr>
-	<tr>
-		<td><svg width='14' height='14'><use xlink:href='#fk'/></svg></td><td>FK__ProjectEn__Entit__0B91BA14</td>
-		<td > ( EntityId ) ref <a href='#Entity'>Entity</a> (EntityId) </td>
-		<td>  </td>
-	</tr>
-	<tr>
-		<td><svg width='14' height='14'><use xlink:href='#fk'/></svg></td><td>Fk_ProjectEntity_ProjectType</td>
-		<td > ( ProjectTypeId ) ref <a href='#ProjectType'>ProjectType</a> (ProjectTypeId) </td>
-		<td>  </td>
-	</tr>
-	<tr>
-		<td><svg width='14' height='14'><use xlink:href='#fk'/></svg></td><td>FK__ProjectEn__Creat__0D7A0286</td>
-		<td > ( CreatedBy ) ref <a href='#User'>User</a> (UserId) </td>
-		<td>  </td>
-	</tr>
-	<tr>
-		<td><svg width='14' height='14'><use xlink:href='#fk'/></svg></td><td>FK__ProjectEn__Modif__0E6E26BF</td>
-		<td > ( ModifiedBy ) ref <a href='#User'>User</a> (UserId) </td>
-		<td>  </td>
-	</tr>
-</tbody>
-</table></div></div>
-
-<br/><br/>
-<div class='card'><div class='card-block'><a name='ProjectTeam' onclick='window.scrollTo(505, 330);return false;' style='cursor:pointer;'><h4 class='card-title'>Table ProjectTeam</h4></a>
-<table class='table-sm table-bordered'>
-<thead>
-<tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
-<tbody>
-	<tr>
-		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg></td>
-		<td><a name='ProjectTeam.Id'>Id</a></td>
+		<td><a name='ProjectTeam.ProjectTeamId'>ProjectTeamId</a></td>
 		<td> int  AUTOINCREMENT  </td>
 		<td>  </td>
 	</tr>
@@ -1992,7 +832,7 @@ nvarchar(1026)</title></a>
 	</tr>
 <tr><th colspan='4'>Indexes</th></tr>
 	<tr>		<td><svg width='14' height='14'><use xlink:href='#pk'/></svg></td><td>PK&#95;&#95;ProjectT&#95;&#95;3214EC0702237118</td>
-		<td> ON Id</td>
+		<td> ON ProjectTeamId</td>
 		<td>  </td>
 	</tr>
 <tr><th colspan='4'>Foreign Keys</th></tr>
@@ -2010,69 +850,7 @@ nvarchar(1026)</title></a>
 </table></div></div>
 
 <br/><br/>
-<div class='card'><div class='card-block'><a name='ProjectType' onclick='window.scrollTo(655, 75);return false;' style='cursor:pointer;'><h4 class='card-title'>Table ProjectType</h4></a>
-<table class='table-sm table-bordered'>
-<thead>
-<tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
-<tbody>
-	<tr>
-		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg><svg width='14' height='14'><use xlink:href='#ref'/></svg></td>
-		<td><a name='ProjectType.ProjectTypeId'>ProjectTypeId</a></td>
-		<td> int  AUTOINCREMENT  </td>
-		<td>  </td>
-	</tr>
-	<tr>
-		<td>*</td>
-		<td><a name='ProjectType.Name'>Name</a></td>
-		<td> nvarchar&#40; 255 &#41;   </td>
-		<td>  </td>
-	</tr>
-	<tr>
-		<td>&nbsp;</td>
-		<td><a name='ProjectType.Description'>Description</a></td>
-		<td> nvarchar&#40; 1026 &#41;   </td>
-		<td>  </td>
-	</tr>
-	<tr>
-		<td>*</td>
-		<td><a name='ProjectType.CreatedBy'>CreatedBy</a></td>
-		<td> int   </td>
-		<td>  </td>
-	</tr>
-	<tr>
-		<td>*</td>
-		<td><a name='ProjectType.ModifiedBy'>ModifiedBy</a></td>
-		<td> int   </td>
-		<td>  </td>
-	</tr>
-	<tr>
-		<td>*</td>
-		<td><a name='ProjectType.CreatedDate'>CreatedDate</a></td>
-		<td> datetime   </td>
-		<td>  </td>
-	</tr>
-	<tr>
-		<td>*</td>
-		<td><a name='ProjectType.ModifiedDate'>ModifiedDate</a></td>
-		<td> datetime   </td>
-		<td>  </td>
-	</tr>
-	<tr>
-		<td>*</td>
-		<td><a name='ProjectType.IsActive'>IsActive</a></td>
-		<td> bit   </td>
-		<td>  </td>
-	</tr>
-<tr><th colspan='4'>Indexes</th></tr>
-	<tr>		<td><svg width='14' height='14'><use xlink:href='#pk'/></svg></td><td>PK&#95;&#95;ProjectT&#95;&#95;6F245E6353170279</td>
-		<td> ON ProjectTypeId</td>
-		<td>  </td>
-	</tr>
-</tbody>
-</table></div></div>
-
-<br/><br/>
-<div class='card'><div class='card-block'><a name='Role' onclick='window.scrollTo(280, 1020);return false;' style='cursor:pointer;'><h4 class='card-title'>Table Role</h4></a>
+<div class='card'><div class='card-block'><a name='Role' onclick='window.scrollTo(250, 1020);return false;' style='cursor:pointer;'><h4 class='card-title'>Table Role</h4></a>
 <table class='table-sm table-bordered'>
 <thead>
 <tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
@@ -2122,7 +900,7 @@ nvarchar(1026)</title></a>
 </table></div></div>
 
 <br/><br/>
-<div class='card'><div class='card-block'><a name='SystemLog' onclick='window.scrollTo(60, 915);return false;' style='cursor:pointer;'><h4 class='card-title'>Table SystemLog</h4></a>
+<div class='card'><div class='card-block'><a name='SystemLog' onclick='window.scrollTo(60, 870);return false;' style='cursor:pointer;'><h4 class='card-title'>Table SystemLog</h4></a>
 <table class='table-sm table-bordered'>
 <thead>
 <tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
@@ -2188,7 +966,7 @@ nvarchar(1026)</title></a>
 </table></div></div>
 
 <br/><br/>
-<div class='card'><div class='card-block'><a name='SystemLogType' onclick='window.scrollTo(60, 1080);return false;' style='cursor:pointer;'><h4 class='card-title'>Table SystemLogType</h4></a>
+<div class='card'><div class='card-block'><a name='SystemLogType' onclick='window.scrollTo(60, 1035);return false;' style='cursor:pointer;'><h4 class='card-title'>Table SystemLogType</h4></a>
 <table class='table-sm table-bordered'>
 <thead>
 <tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
@@ -2220,56 +998,56 @@ nvarchar(1026)</title></a>
 </table></div></div>
 
 <br/><br/>
-<div class='card'><div class='card-block'><a name='SystemSettings' onclick='window.scrollTo(60, 735);return false;' style='cursor:pointer;'><h4 class='card-title'>Table SystemSettings</h4></a>
+<div class='card'><div class='card-block'><a name='SystemSetting' onclick='window.scrollTo(60, 690);return false;' style='cursor:pointer;'><h4 class='card-title'>Table SystemSetting</h4></a>
 <table class='table-sm table-bordered'>
 <thead>
 <tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
 <tbody>
 	<tr>
 		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg></td>
-		<td><a name='SystemSettings.Id'>Id</a></td>
+		<td><a name='SystemSetting.SystemSettingId'>SystemSettingId</a></td>
 		<td> int  AUTOINCREMENT  </td>
 		<td>  </td>
 	</tr>
 	<tr>
 		<td>*</td>
-		<td><a name='SystemSettings.Key'>Key</a></td>
+		<td><a name='SystemSetting.Key'>Key</a></td>
 		<td> nvarchar&#40; 255 &#41;   </td>
 		<td>  </td>
 	</tr>
 	<tr>
 		<td>&nbsp;</td>
-		<td><a name='SystemSettings.Value'>Value</a></td>
+		<td><a name='SystemSetting.Value'>Value</a></td>
 		<td> nvarchar&#40; 4000 &#41;   </td>
 		<td>  </td>
 	</tr>
 	<tr>
 		<td>*<svg width='14' height='14'><use xlink:href='#fk'/></svg></td>
-		<td><a name='SystemSettings.CreatedBy'>CreatedBy</a></td>
+		<td><a name='SystemSetting.CreatedBy'>CreatedBy</a></td>
 		<td> int   </td>
 		<td>  </td>
 	</tr>
 	<tr>
 		<td>*<svg width='14' height='14'><use xlink:href='#fk'/></svg></td>
-		<td><a name='SystemSettings.ModifiedBy'>ModifiedBy</a></td>
+		<td><a name='SystemSetting.ModifiedBy'>ModifiedBy</a></td>
 		<td> int   </td>
 		<td>  </td>
 	</tr>
 	<tr>
 		<td>*</td>
-		<td><a name='SystemSettings.ModifiedDate'>ModifiedDate</a></td>
+		<td><a name='SystemSetting.ModifiedDate'>ModifiedDate</a></td>
 		<td> datetime   </td>
 		<td>  </td>
 	</tr>
 	<tr>
 		<td>*</td>
-		<td><a name='SystemSettings.IsActive'>IsActive</a></td>
+		<td><a name='SystemSetting.IsActive'>IsActive</a></td>
 		<td> bit   </td>
 		<td>  </td>
 	</tr>
 <tr><th colspan='4'>Indexes</th></tr>
 	<tr>		<td><svg width='14' height='14'><use xlink:href='#pk'/></svg></td><td>PK&#95;&#95;SystemSe&#95;&#95;3214EC0790BDC8BB</td>
-		<td> ON Id</td>
+		<td> ON SystemSettingId</td>
 		<td>  </td>
 	</tr>
 <tr><th colspan='4'>Foreign Keys</th></tr>
@@ -2287,7 +1065,7 @@ nvarchar(1026)</title></a>
 </table></div></div>
 
 <br/><br/>
-<div class='card'><div class='card-block'><a name='Team' onclick='window.scrollTo(280, 240);return false;' style='cursor:pointer;'><h4 class='card-title'>Table Team</h4></a>
+<div class='card'><div class='card-block'><a name='Team' onclick='window.scrollTo(250, 240);return false;' style='cursor:pointer;'><h4 class='card-title'>Table Team</h4></a>
 <table class='table-sm table-bordered'>
 <thead>
 <tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
@@ -2349,14 +1127,14 @@ nvarchar(1026)</title></a>
 </table></div></div>
 
 <br/><br/>
-<div class='card'><div class='card-block'><a name='TeamGroup' onclick='window.scrollTo(280, 435);return false;' style='cursor:pointer;'><h4 class='card-title'>Table TeamGroup</h4></a>
+<div class='card'><div class='card-block'><a name='TeamGroup' onclick='window.scrollTo(250, 435);return false;' style='cursor:pointer;'><h4 class='card-title'>Table TeamGroup</h4></a>
 <table class='table-sm table-bordered'>
 <thead>
 <tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
 <tbody>
 	<tr>
 		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg></td>
-		<td><a name='TeamGroup.Id'>Id</a></td>
+		<td><a name='TeamGroup.TeamGroupId'>TeamGroupId</a></td>
 		<td> int  AUTOINCREMENT  </td>
 		<td>  </td>
 	</tr>
@@ -2392,7 +1170,7 @@ nvarchar(1026)</title></a>
 	</tr>
 <tr><th colspan='4'>Indexes</th></tr>
 	<tr>		<td><svg width='14' height='14'><use xlink:href='#pk'/></svg></td><td>PK&#95;&#95;TeamGrou&#95;&#95;3214EC07AD0B0A35</td>
-		<td> ON Id</td>
+		<td> ON TeamGroupId</td>
 		<td>  </td>
 	</tr>
 <tr><th colspan='4'>Foreign Keys</th></tr>
@@ -2410,14 +1188,14 @@ nvarchar(1026)</title></a>
 </table></div></div>
 
 <br/><br/>
-<div class='card'><div class='card-block'><a name='TeamUser' onclick='window.scrollTo(280, 75);return false;' style='cursor:pointer;'><h4 class='card-title'>Table TeamUser</h4></a>
+<div class='card'><div class='card-block'><a name='TeamUser' onclick='window.scrollTo(250, 75);return false;' style='cursor:pointer;'><h4 class='card-title'>Table TeamUser</h4></a>
 <table class='table-sm table-bordered'>
 <thead>
 <tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
 <tbody>
 	<tr>
 		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg></td>
-		<td><a name='TeamUser.Id'>Id</a></td>
+		<td><a name='TeamUser.TeamUserId'>TeamUserId</a></td>
 		<td> int  AUTOINCREMENT  </td>
 		<td>  </td>
 	</tr>
@@ -2453,7 +1231,7 @@ nvarchar(1026)</title></a>
 	</tr>
 <tr><th colspan='4'>Indexes</th></tr>
 	<tr>		<td><svg width='14' height='14'><use xlink:href='#pk'/></svg></td><td>PK&#95;&#95;TeamUser&#95;&#95;3214EC072550C803</td>
-		<td> ON Id</td>
+		<td> ON TeamUserId</td>
 		<td>  </td>
 	</tr>
 <tr><th colspan='4'>Foreign Keys</th></tr>
@@ -2599,14 +1377,14 @@ nvarchar(1026)</title></a>
 </table></div></div>
 
 <br/><br/>
-<div class='card'><div class='card-block'><a name='UserGroup' onclick='window.scrollTo(70, 675);return false;' style='cursor:pointer;'><h4 class='card-title'>Table UserGroup</h4></a>
+<div class='card'><div class='card-block'><a name='UserGroup' onclick='window.scrollTo(60, 675);return false;' style='cursor:pointer;'><h4 class='card-title'>Table UserGroup</h4></a>
 <table class='table-sm table-bordered'>
 <thead>
 <tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
 <tbody>
 	<tr>
 		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg></td>
-		<td><a name='UserGroup.Id'>Id</a></td>
+		<td><a name='UserGroup.UserGroupId'>UserGroupId</a></td>
 		<td> int  AUTOINCREMENT  </td>
 		<td>  </td>
 	</tr>
@@ -2642,7 +1420,7 @@ nvarchar(1026)</title></a>
 	</tr>
 <tr><th colspan='4'>Indexes</th></tr>
 	<tr>		<td><svg width='14' height='14'><use xlink:href='#pk'/></svg></td><td>PK&#95;&#95;UserGrou&#95;&#95;3214EC0745BA353F</td>
-		<td> ON Id</td>
+		<td> ON UserGroupId</td>
 		<td>  </td>
 	</tr>
 <tr><th colspan='4'>Foreign Keys</th></tr>
@@ -2666,8 +1444,8 @@ nvarchar(1026)</title></a>
 <tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
 <tbody>
 	<tr>
-		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg><svg width='14' height='14'><use xlink:href='#fk'/></svg></td>
-		<td><a name='UserLog.Id'>Id</a></td>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg></td>
+		<td><a name='UserLog.UserLogId'>UserLogId</a></td>
 		<td> int  AUTOINCREMENT  </td>
 		<td>  </td>
 	</tr>
@@ -2721,7 +1499,7 @@ nvarchar(1026)</title></a>
 	</tr>
 <tr><th colspan='4'>Indexes</th></tr>
 	<tr>		<td><svg width='14' height='14'><use xlink:href='#pk'/></svg></td><td>PK&#95;&#95;UserLog&#95;&#95;3214EC071A5984E8</td>
-		<td> ON Id</td>
+		<td> ON UserLogId</td>
 		<td>  </td>
 	</tr>
 <tr><th colspan='4'>Foreign Keys</th></tr>
@@ -2738,11 +1516,6 @@ nvarchar(1026)</title></a>
 	<tr>
 		<td><svg width='14' height='14'><use xlink:href='#fk'/></svg></td><td>FK__UserLog__Updated__46E78A0C</td>
 		<td > ( UpdatedUserId ) ref <a href='#User'>User</a> (UserId) </td>
-		<td>  </td>
-	</tr>
-	<tr>
-		<td><svg width='14' height='14'><use xlink:href='#fk'/></svg></td><td>Fk_UserLog_EntityFieldMapping</td>
-		<td > ( Id ) ref <a href='#EntityFieldMapping'>EntityFieldMapping</a> (Id) </td>
 		<td>  </td>
 	</tr>
 	<tr>
@@ -2786,14 +1559,14 @@ nvarchar(1026)</title></a>
 </table></div></div>
 
 <br/><br/>
-<div class='card'><div class='card-block'><a name='UserLogin' onclick='window.scrollTo(70, 75);return false;' style='cursor:pointer;'><h4 class='card-title'>Table UserLogin</h4></a>
+<div class='card'><div class='card-block'><a name='UserLogin' onclick='window.scrollTo(60, 75);return false;' style='cursor:pointer;'><h4 class='card-title'>Table UserLogin</h4></a>
 <table class='table-sm table-bordered'>
 <thead>
 <tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
 <tbody>
 	<tr>
 		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg></td>
-		<td><a name='UserLogin.Id'>Id</a></td>
+		<td><a name='UserLogin.UserLoginId'>UserLoginId</a></td>
 		<td> int  AUTOINCREMENT  </td>
 		<td>  </td>
 	</tr>
@@ -2829,7 +1602,7 @@ nvarchar(1026)</title></a>
 	</tr>
 <tr><th colspan='4'>Indexes</th></tr>
 	<tr>		<td><svg width='14' height='14'><use xlink:href='#pk'/></svg></td><td>PK&#95;&#95;UserLogi&#95;&#95;3214EC07E81E6AD6</td>
-		<td> ON Id</td>
+		<td> ON UserLoginId</td>
 		<td>  </td>
 	</tr>
 <tr><th colspan='4'>Foreign Keys</th></tr>
@@ -2848,8 +1621,8 @@ nvarchar(1026)</title></a>
 <tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
 <tbody>
 	<tr>
-		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg><svg width='14' height='14'><use xlink:href='#fk'/></svg></td>
-		<td><a name='UserPreference.Id'>Id</a></td>
+		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg></td>
+		<td><a name='UserPreference.UserPreferenceId'>UserPreferenceId</a></td>
 		<td> int  AUTOINCREMENT  </td>
 		<td>  </td>
 	</tr>
@@ -2909,7 +1682,7 @@ nvarchar(1026)</title></a>
 	</tr>
 <tr><th colspan='4'>Indexes</th></tr>
 	<tr>		<td><svg width='14' height='14'><use xlink:href='#pk'/></svg></td><td>PK&#95;&#95;UserPref&#95;&#95;3214EC073AFCD365</td>
-		<td> ON Id</td>
+		<td> ON UserPreferenceId</td>
 		<td>  </td>
 	</tr>
 <tr><th colspan='4'>Foreign Keys</th></tr>
@@ -2918,23 +1691,18 @@ nvarchar(1026)</title></a>
 		<td > ( UserId ) ref <a href='#User'>User</a> (UserId) </td>
 		<td>  </td>
 	</tr>
-	<tr>
-		<td><svg width='14' height='14'><use xlink:href='#fk'/></svg></td><td>Fk_UserPreference_EntityFieldMapping</td>
-		<td > ( Id ) ref <a href='#EntityFieldMapping'>EntityFieldMapping</a> (Id) </td>
-		<td>  </td>
-	</tr>
 </tbody>
 </table></div></div>
 
 <br/><br/>
-<div class='card'><div class='card-block'><a name='UserRole' onclick='window.scrollTo(295, 855);return false;' style='cursor:pointer;'><h4 class='card-title'>Table UserRole</h4></a>
+<div class='card'><div class='card-block'><a name='UserRole' onclick='window.scrollTo(250, 840);return false;' style='cursor:pointer;'><h4 class='card-title'>Table UserRole</h4></a>
 <table class='table-sm table-bordered'>
 <thead>
 <tr><th>Indexes</th><th>Field Name</th><th>Data Type</th><th>Description</th></tr></thead>
 <tbody>
 	<tr>
 		<td>*<svg width='14' height='14'><use xlink:href='#pk'/></svg></td>
-		<td><a name='UserRole.Id'>Id</a></td>
+		<td><a name='UserRole.UserRoleId'>UserRoleId</a></td>
 		<td> int  AUTOINCREMENT  </td>
 		<td>  </td>
 	</tr>
@@ -2976,7 +1744,7 @@ nvarchar(1026)</title></a>
 	</tr>
 <tr><th colspan='4'>Indexes</th></tr>
 	<tr>		<td><svg width='14' height='14'><use xlink:href='#pk'/></svg></td><td>PK&#95;&#95;UserRole&#95;&#95;3214EC07BACCE215</td>
-		<td> ON Id</td>
+		<td> ON UserRoleId</td>
 		<td>  </td>
 	</tr>
 	<tr>		<td><svg width='14' height='14'><use xlink:href='#idx'/></svg></td><td>Idx&#95;UserRole&#95;TeamId</td>

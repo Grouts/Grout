@@ -1,66 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <project name="SqlServer" id="Project_1de97b1" template="Default" database="SqlServer" >
 	<schema name="dbo" catalogname="Grout" schemaname="dbo" >
-		<table name="Department" generator_rows="100" >
-			<column name="DepartmentId" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
-			<column name="Name" type="nvarchar" length="255" decimal="0" jt="12" mandatory="y" />
-			<column name="Prefix" type="varchar" length="20" jt="12" />
-			<column name="Description" type="nvarchar" length="1026" decimal="0" jt="12" />
-			<column name="CreatedBy" type="int" length="10" decimal="0" jt="4" mandatory="y" />
-			<column name="ModifiedBy" type="int" length="10" decimal="0" jt="4" mandatory="y" />
-			<column name="CreatedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
-			<column name="ModifiedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
-			<column name="IsActive" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
-			<index name="PK__ProjectT__6F245E6353170279" unique="PRIMARY_KEY" >
-				<column name="DepartmentId" />
-			</index>
-		</table>
-		<table name="DepartmentEntity" generator_rows="505" >
-			<column name="DepartmentEntityId" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
-			<column name="EntityId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
-			<column name="DepartmentId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
-			<column name="CreatedBy" type="int" length="10" decimal="0" jt="4" mandatory="y" />
-			<column name="ModifiedBy" type="int" length="10" decimal="0" jt="4" mandatory="y" />
-			<column name="CreatedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
-			<column name="ModifiedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
-			<column name="IsActive" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
-			<index name="PK__ProjectE__3214EC0793228423" unique="PRIMARY_KEY" >
-				<column name="DepartmentEntityId" />
-			</index>
-			<fk name="FK__ProjectEn__Entit__0B91BA14" to_schema="dbo" to_table="Entity" delete_action="restrict" update_action="restrict" >
-				<fk_column name="EntityId" pk="EntityId" />
-			</fk>
-			<fk name="Fk_ProjectEntity_ProjectType" virtual="y" to_schema="dbo" to_table="Department" >
-				<fk_column name="DepartmentId" pk="DepartmentId" />
-			</fk>
-			<fk name="FK__ProjectEn__Creat__0D7A0286" to_schema="dbo" to_table="User" delete_action="restrict" update_action="restrict" >
-				<fk_column name="CreatedBy" pk="UserId" />
-			</fk>
-			<fk name="FK__ProjectEn__Modif__0E6E26BF" to_schema="dbo" to_table="User" delete_action="restrict" update_action="restrict" >
-				<fk_column name="ModifiedBy" pk="UserId" />
-			</fk>
-		</table>
-		<table name="DepartmentPrefix_Entity" >
-			<comment><![CDATA[story, task, defect, bug, feature - for development department
-sick leave, vacation leave, permission, comp off - leave system department
-
-total numner of these tables will be same as the number of records in entity table
-the columns of those tables are the entity fields mapped to them]]></comment>
-			<column name="DepartmentPrefix_ItemTypeId" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
-			<column name="FieldsOfEntity" type="nvarchar" length="255" decimal="0" jt="12" mandatory="y" >
-				<defo>&#039;White&#039;</defo>
-			</column>
-			<column name="ProjectId" type="int" jt="4" mandatory="y" />
-			<index name="PK__Entity__9C892F9DDFEA8CC3_1" unique="PRIMARY_KEY" >
-				<column name="DepartmentPrefix_ItemTypeId" />
-			</index>
-			<index name="Idx_DepartmentPrefix_ItemType_0_ProjectId" unique="NORMAL" >
-				<column name="ProjectId" />
-			</index>
-			<fk name="fk_departmentprefix_itemtype_0" to_schema="dbo" to_table="Project" >
-				<fk_column name="ProjectId" pk="ProjectId" />
-			</fk>
-		</table>
 		<table name="Entity" generator_rows="100" >
 			<column name="EntityId" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
 			<column name="Name" type="nvarchar" length="255" decimal="0" jt="12" mandatory="y" />
@@ -107,7 +47,7 @@ the columns of those tables are the entity fields mapped to them]]></comment>
 			</fk>
 		</table>
 		<table name="EntityFieldMapping" generator_rows="337" >
-			<column name="EntityFieldMappingId" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="Id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
 			<column name="EntityId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
 			<column name="EntityFieldId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
 			<column name="CreatedBy" type="int" length="10" decimal="0" jt="4" mandatory="y" />
@@ -116,7 +56,7 @@ the columns of those tables are the entity fields mapped to them]]></comment>
 			<column name="ModifiedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
 			<column name="IsActive" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
 			<index name="PK__EntityFi__3214EC077B4C9C16" unique="PRIMARY_KEY" >
-				<column name="EntityFieldMappingId" />
+				<column name="Id" />
 			</index>
 			<fk name="FK__EntityFie__Entit__05D8E0BE" to_schema="dbo" to_table="Entity" delete_action="restrict" update_action="restrict" >
 				<fk_column name="EntityId" pk="EntityId" />
@@ -173,7 +113,7 @@ the columns of those tables are the entity fields mapped to them]]></comment>
 			</fk>
 		</table>
 		<table name="GroupRole" generator_rows="505" >
-			<column name="GroupRoleId" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="Id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
 			<column name="GroupId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
 			<column name="RoleId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
 			<column name="TeamId" type="int" jt="4" />
@@ -181,13 +121,16 @@ the columns of those tables are the entity fields mapped to them]]></comment>
 			<column name="ModifiedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
 			<column name="IsActive" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
 			<index name="PK__GroupRol__3214EC076842EBBF" unique="PRIMARY_KEY" >
-				<column name="GroupRoleId" />
+				<column name="Id" />
 			</index>
 			<index name="GroupRole_TeamId" unique="NORMAL" >
 				<column name="TeamId" />
 			</index>
 			<fk name="FK__GroupRole__Group__70DDC3D8" to_schema="dbo" to_table="Group" delete_action="restrict" update_action="restrict" >
 				<fk_column name="GroupId" pk="GroupId" />
+			</fk>
+			<fk name="Fk_GroupRole_EntityFieldMapping" virtual="y" to_schema="dbo" to_table="EntityFieldMapping" >
+				<fk_column name="Id" pk="Id" />
 			</fk>
 			<fk name="Fk_GroupRole_Role" virtual="y" to_schema="dbo" to_table="Role" >
 				<fk_column name="RoleId" pk="RoleId" />
@@ -198,7 +141,7 @@ the columns of those tables are the entity fields mapped to them]]></comment>
 		</table>
 		<table name="Project" generator_rows="150" >
 			<column name="ProjectId" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
-			<column name="DepartmentId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="ProjectTypeId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
 			<column name="Name" type="nvarchar" length="255" decimal="0" jt="12" mandatory="y" />
 			<column name="Description" type="nvarchar" length="1026" decimal="0" jt="12" />
 			<column name="Logo" type="nvarchar" length="255" decimal="0" jt="12" mandatory="y" >
@@ -214,19 +157,44 @@ the columns of those tables are the entity fields mapped to them]]></comment>
 			<index name="PK__Project__761ABEF02113E012" unique="PRIMARY_KEY" >
 				<column name="ProjectId" />
 			</index>
-			<fk name="Fk_Project_ProjectType" virtual="y" to_schema="dbo" to_table="Department" >
-				<fk_column name="DepartmentId" pk="DepartmentId" />
+			<fk name="Fk_Project_ProjectType" virtual="y" to_schema="dbo" to_table="ProjectType" >
+				<fk_column name="ProjectTypeId" pk="ProjectTypeId" />
+			</fk>
+		</table>
+		<table name="ProjectEntity" generator_rows="505" >
+			<column name="Id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="EntityId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="ProjectTypeId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="CreatedBy" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="ModifiedBy" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="CreatedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
+			<column name="ModifiedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
+			<column name="IsActive" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<index name="PK__ProjectE__3214EC0793228423" unique="PRIMARY_KEY" >
+				<column name="Id" />
+			</index>
+			<fk name="FK__ProjectEn__Entit__0B91BA14" to_schema="dbo" to_table="Entity" delete_action="restrict" update_action="restrict" >
+				<fk_column name="EntityId" pk="EntityId" />
+			</fk>
+			<fk name="Fk_ProjectEntity_ProjectType" virtual="y" to_schema="dbo" to_table="ProjectType" >
+				<fk_column name="ProjectTypeId" pk="ProjectTypeId" />
+			</fk>
+			<fk name="FK__ProjectEn__Creat__0D7A0286" to_schema="dbo" to_table="User" delete_action="restrict" update_action="restrict" >
+				<fk_column name="CreatedBy" pk="UserId" />
+			</fk>
+			<fk name="FK__ProjectEn__Modif__0E6E26BF" to_schema="dbo" to_table="User" delete_action="restrict" update_action="restrict" >
+				<fk_column name="ModifiedBy" pk="UserId" />
 			</fk>
 		</table>
 		<table name="ProjectTeam" generator_rows="505" >
-			<column name="ProjectTeamId" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="Id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
 			<column name="ProjectId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
 			<column name="TeamId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
 			<column name="CreatedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
 			<column name="ModifiedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
 			<column name="IsActive" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
 			<index name="PK__ProjectT__3214EC0702237118" unique="PRIMARY_KEY" >
-				<column name="ProjectTeamId" />
+				<column name="Id" />
 			</index>
 			<fk name="FK__ProjectTe__Proje__6C190EBB" to_schema="dbo" to_table="Project" delete_action="restrict" update_action="restrict" >
 				<fk_column name="ProjectId" pk="ProjectId" />
@@ -234,6 +202,19 @@ the columns of those tables are the entity fields mapped to them]]></comment>
 			<fk name="Fk_ProjectTeam_Team" virtual="y" to_schema="dbo" to_table="Team" >
 				<fk_column name="TeamId" pk="TeamId" />
 			</fk>
+		</table>
+		<table name="ProjectType" generator_rows="100" >
+			<column name="ProjectTypeId" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="Name" type="nvarchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="Description" type="nvarchar" length="1026" decimal="0" jt="12" />
+			<column name="CreatedBy" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="ModifiedBy" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="CreatedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
+			<column name="ModifiedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
+			<column name="IsActive" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<index name="PK__ProjectT__6F245E6353170279" unique="PRIMARY_KEY" >
+				<column name="ProjectTypeId" />
+			</index>
 		</table>
 		<table name="Role" generator_rows="100" >
 			<column name="RoleId" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
@@ -274,8 +255,8 @@ the columns of those tables are the entity fields mapped to them]]></comment>
 				<column name="SystemLogTypeId" />
 			</index>
 		</table>
-		<table name="SystemSetting" generator_rows="505" >
-			<column name="SystemSettingId" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+		<table name="SystemSettings" generator_rows="505" >
+			<column name="Id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
 			<column name="Key" type="nvarchar" length="255" decimal="0" jt="12" mandatory="y" />
 			<column name="Value" type="nvarchar" length="4000" decimal="0" jt="12" />
 			<column name="CreatedBy" type="int" length="10" decimal="0" jt="4" mandatory="y" />
@@ -283,7 +264,7 @@ the columns of those tables are the entity fields mapped to them]]></comment>
 			<column name="ModifiedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
 			<column name="IsActive" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
 			<index name="PK__SystemSe__3214EC0790BDC8BB" unique="PRIMARY_KEY" >
-				<column name="SystemSettingId" />
+				<column name="Id" />
 			</index>
 			<fk name="FK__SystemSet__Creat__5629CD9C" to_schema="dbo" to_table="User" delete_action="restrict" update_action="restrict" >
 				<fk_column name="CreatedBy" pk="UserId" />
@@ -310,14 +291,14 @@ the columns of those tables are the entity fields mapped to them]]></comment>
 			</index>
 		</table>
 		<table name="TeamGroup" generator_rows="505" >
-			<column name="TeamGroupId" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="Id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
 			<column name="GroupId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
 			<column name="TeamId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
 			<column name="CreatedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
 			<column name="ModifiedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
 			<column name="IsActive" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
 			<index name="PK__TeamGrou__3214EC07AD0B0A35" unique="PRIMARY_KEY" >
-				<column name="TeamGroupId" />
+				<column name="Id" />
 			</index>
 			<fk name="FK__TeamGroup__Group__6383C8BA" to_schema="dbo" to_table="Group" delete_action="restrict" update_action="restrict" >
 				<fk_column name="GroupId" pk="GroupId" />
@@ -327,14 +308,14 @@ the columns of those tables are the entity fields mapped to them]]></comment>
 			</fk>
 		</table>
 		<table name="TeamUser" generator_rows="505" >
-			<column name="TeamUserId" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="Id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
 			<column name="UserId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
 			<column name="TeamId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
 			<column name="CreatedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
 			<column name="ModifiedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
 			<column name="IsActive" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
 			<index name="PK__TeamUser__3214EC072550C803" unique="PRIMARY_KEY" >
-				<column name="TeamUserId" />
+				<column name="Id" />
 			</index>
 			<fk name="FK__TeamUser__TeamId__68487DD7" to_schema="dbo" to_table="Team" delete_action="restrict" update_action="restrict" >
 				<fk_column name="TeamId" pk="TeamId" />
@@ -368,14 +349,14 @@ the columns of those tables are the entity fields mapped to them]]></comment>
 			</index>
 		</table>
 		<table name="UserGroup" generator_rows="505" >
-			<column name="UserGroupId" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="Id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
 			<column name="GroupId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
 			<column name="UserId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
 			<column name="CreatedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
 			<column name="ModifiedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
 			<column name="IsActive" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
 			<index name="PK__UserGrou__3214EC0745BA353F" unique="PRIMARY_KEY" >
-				<column name="UserGroupId" />
+				<column name="Id" />
 			</index>
 			<fk name="FK__UserGroup__Group__3E52440B" to_schema="dbo" to_table="Group" delete_action="restrict" update_action="restrict" >
 				<fk_column name="GroupId" pk="GroupId" />
@@ -385,7 +366,7 @@ the columns of those tables are the entity fields mapped to them]]></comment>
 			</fk>
 		</table>
 		<table name="UserLog" generator_rows="505" >
-			<column name="UserLogId" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="Id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
 			<column name="UserLogTypeId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
 			<column name="GroupId" type="int" length="10" decimal="0" jt="4" />
 			<column name="OldValue" type="int" length="10" decimal="0" jt="4" />
@@ -395,7 +376,7 @@ the columns of those tables are the entity fields mapped to them]]></comment>
 			<column name="ModifiedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
 			<column name="IsActive" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
 			<index name="PK__UserLog__3214EC071A5984E8" unique="PRIMARY_KEY" >
-				<column name="UserLogId" />
+				<column name="Id" />
 			</index>
 			<fk name="FK__UserLog__GroupId__44FF419A" to_schema="dbo" to_table="Group" delete_action="restrict" update_action="restrict" >
 				<fk_column name="GroupId" pk="GroupId" />
@@ -405,6 +386,9 @@ the columns of those tables are the entity fields mapped to them]]></comment>
 			</fk>
 			<fk name="FK__UserLog__Updated__46E78A0C" to_schema="dbo" to_table="User" delete_action="restrict" update_action="restrict" >
 				<fk_column name="UpdatedUserId" pk="UserId" />
+			</fk>
+			<fk name="Fk_UserLog_EntityFieldMapping" virtual="y" to_schema="dbo" to_table="EntityFieldMapping" >
+				<fk_column name="Id" pk="Id" />
 			</fk>
 			<fk name="Fk_UserLog_UserLogType" virtual="y" to_schema="dbo" to_table="UserLogType" >
 				<fk_column name="UserLogTypeId" pk="UserLogTypeId" />
@@ -419,21 +403,21 @@ the columns of those tables are the entity fields mapped to them]]></comment>
 			</index>
 		</table>
 		<table name="UserLogin" generator_rows="505" >
-			<column name="UserLoginId" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="Id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
 			<column name="UserId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
 			<column name="ClientToken" type="nvarchar" length="4000" decimal="0" jt="12" mandatory="y" />
 			<column name="IpAddress" type="nvarchar" length="50" decimal="0" jt="12" mandatory="y" />
 			<column name="LoggedInTime" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
 			<column name="IsActive" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
 			<index name="PK__UserLogi__3214EC07E81E6AD6" unique="PRIMARY_KEY" >
-				<column name="UserLoginId" />
+				<column name="Id" />
 			</index>
 			<fk name="FK__UserLogin__UserI__49C3F6B7" to_schema="dbo" to_table="User" delete_action="restrict" update_action="restrict" >
 				<fk_column name="UserId" pk="UserId" />
 			</fk>
 		</table>
 		<table name="UserPreference" generator_rows="505" >
-			<column name="UserPreferenceId" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="Id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
 			<column name="UserId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
 			<column name="Language" type="nvarchar" length="4000" decimal="0" jt="12" />
 			<column name="TimeZone" type="nvarchar" length="100" decimal="0" jt="12" />
@@ -444,14 +428,17 @@ the columns of those tables are the entity fields mapped to them]]></comment>
 			<column name="ModifiedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
 			<column name="IsActive" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
 			<index name="PK__UserPref__3214EC073AFCD365" unique="PRIMARY_KEY" >
-				<column name="UserPreferenceId" />
+				<column name="Id" />
 			</index>
 			<fk name="FK__UserPrefe__UserI__4CA06362" to_schema="dbo" to_table="User" delete_action="restrict" update_action="restrict" >
 				<fk_column name="UserId" pk="UserId" />
 			</fk>
+			<fk name="Fk_UserPreference_EntityFieldMapping" virtual="y" to_schema="dbo" to_table="EntityFieldMapping" >
+				<fk_column name="Id" pk="Id" />
+			</fk>
 		</table>
 		<table name="UserRole" generator_rows="505" >
-			<column name="UserRoleId" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="Id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
 			<column name="UserId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
 			<column name="RoleId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
 			<column name="TeamId" type="int" jt="4" />
@@ -459,7 +446,7 @@ the columns of those tables are the entity fields mapped to them]]></comment>
 			<column name="ModifiedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
 			<column name="IsActive" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
 			<index name="PK__UserRole__3214EC07BACCE215" unique="PRIMARY_KEY" >
-				<column name="UserRoleId" />
+				<column name="Id" />
 			</index>
 			<index name="Idx_UserRole_TeamId" unique="NORMAL" >
 				<column name="TeamId" />
@@ -478,31 +465,30 @@ the columns of those tables are the entity fields mapped to them]]></comment>
 	<connector name="SqlServer" database="SqlServer" driver_class="com.microsoft.sqlserver.jdbc.SQLServerDriver" driver_jar="sqljdbc42.jar" driver_desc="Native Driver - Database Authentication" host="localhost" port="1433" instance="Grout" user="sa" passwd="QWRtaW5AMTIz" />
 	<layout name="DB Layout" id="Layout_1e9c2ea" show_page_borders="y" show_relation="no_text" >
 		<comment><![CDATA[DB Layout]]></comment>
-		<entity schema="dbo" name="EntityField" color="bfd4f5" x="615" y="780" />
-		<entity schema="dbo" name="EntityFieldType" color="bfd4f5" x="795" y="795" />
-		<entity schema="dbo" name="Team" color="f5ddbf" x="450" y="240" />
-		<entity schema="dbo" name="User" color="ff3399" x="225" y="225" />
-		<entity schema="dbo" name="SystemLog" color="bfbff5" x="45" y="870" />
-		<entity schema="dbo" name="Role" color="c8f5bf" x="450" y="1020" />
-		<entity schema="dbo" name="SystemLogType" color="bfbff5" x="45" y="1035" />
-		<entity schema="dbo" name="Project" color="f5ddbf" x="615" y="75" />
-		<entity schema="dbo" name="SystemSetting" color="bfbff5" x="45" y="690" />
-		<entity schema="dbo" name="UserGroup" color="c8f5bf" x="240" y="675" />
-		<entity schema="dbo" name="UserLogin" color="bfd4f5" x="240" y="75" />
-		<entity schema="dbo" name="TeamUser" color="f5ddbf" x="450" y="75" />
-		<entity schema="dbo" name="TeamGroup" color="f5ddbf" x="450" y="435" />
-		<entity schema="dbo" name="GroupRole" color="c8f5bf" x="450" y="660" />
-		<entity schema="dbo" name="EntityFieldMapping" color="bfd4f5" x="630" y="555" />
-		<entity schema="dbo" name="ProjectTeam" color="f5ddbf" x="615" y="330" />
-		<entity schema="dbo" name="DepartmentEntity" color="f5ddbf" x="780" y="285" />
-		<entity schema="dbo" name="UserRole" color="c8f5bf" x="450" y="840" />
-		<entity schema="dbo" name="Group" color="c8f5bf" x="240" y="855" />
-		<entity schema="dbo" name="Entity" color="00ff33" x="795" y="555" />
-		<entity schema="dbo" name="Department" color="f5ddbf" x="765" y="75" />
-		<entity schema="dbo" name="DepartmentPrefix_Entity" color="990000" x="675" y="1035" />
+		<entity schema="dbo" name="Entity" color="bfd4f5" x="900" y="555" />
+		<entity schema="dbo" name="EntityField" color="bfd4f5" x="720" y="780" />
+		<entity schema="dbo" name="EntityFieldType" color="bfd4f5" x="900" y="795" />
+		<entity schema="dbo" name="EntityFieldMapping" color="bfd4f5" x="735" y="555" />
+		<entity schema="dbo" name="Team" color="f5ddbf" x="480" y="240" />
+		<entity schema="dbo" name="GroupRole" color="c8f5bf" x="480" y="660" />
+		<entity schema="dbo" name="User" color="ff3399" x="255" y="225" />
+		<entity schema="dbo" name="SystemSettings" color="bfbff5" x="45" y="735" />
+		<entity schema="dbo" name="SystemLog" color="bfbff5" x="45" y="915" />
+		<entity schema="dbo" name="TeamGroup" color="f5ddbf" x="480" y="435" />
+		<entity schema="dbo" name="UserLogType" color="bfd4f5" x="60" y="75" />
 		<entity schema="dbo" name="UserLog" color="bfd4f5" x="45" y="210" />
-		<entity schema="dbo" name="UserLogType" color="bfd4f5" x="45" y="75" />
 		<entity schema="dbo" name="UserPreference" color="bfd4f5" x="45" y="420" />
+		<entity schema="dbo" name="UserLogin" color="bfd4f5" x="270" y="75" />
+		<entity schema="dbo" name="Group" color="c8f5bf" x="270" y="855" />
+		<entity schema="dbo" name="ProjectTeam" color="f5ddbf" x="705" y="330" />
+		<entity schema="dbo" name="UserRole" color="c8f5bf" x="495" y="855" />
+		<entity schema="dbo" name="Role" color="c8f5bf" x="480" y="1020" />
+		<entity schema="dbo" name="Project" color="f5ddbf" x="705" y="75" />
+		<entity schema="dbo" name="ProjectEntity" color="f5ddbf" x="870" y="285" />
+		<entity schema="dbo" name="ProjectType" color="f5ddbf" x="855" y="75" />
+		<entity schema="dbo" name="SystemLogType" color="bfbff5" x="45" y="1080" />
+		<entity schema="dbo" name="UserGroup" color="c8f5bf" x="270" y="675" />
+		<entity schema="dbo" name="TeamUser" color="f5ddbf" x="480" y="75" />
 		<group name="User" color="ffff00" >
 			<entity schema="dbo" name="User" />
 			<entity schema="dbo" name="UserLogin" />
@@ -515,9 +501,9 @@ the columns of those tables are the entity fields mapped to them]]></comment>
 		</group>
 		<group name="Project" color="660066" >
 			<entity schema="dbo" name="ProjectTeam" />
-			<entity schema="dbo" name="Department" />
+			<entity schema="dbo" name="ProjectType" />
 			<entity schema="dbo" name="Project" />
-			<entity schema="dbo" name="DepartmentEntity" />
+			<entity schema="dbo" name="ProjectEntity" />
 		</group>
 		<group name="Group" color="33ff33" >
 			<entity schema="dbo" name="Group" />
@@ -534,7 +520,7 @@ the columns of those tables are the entity fields mapped to them]]></comment>
 			<entity schema="dbo" name="UserRole" />
 		</group>
 		<group name="SystemSettings" color="ffffff" >
-			<entity schema="dbo" name="SystemSetting" />
+			<entity schema="dbo" name="SystemSettings" />
 			<entity schema="dbo" name="SystemLog" />
 			<entity schema="dbo" name="SystemLogType" />
 		</group>
@@ -542,9 +528,6 @@ the columns of those tables are the entity fields mapped to them]]></comment>
 			<entity schema="dbo" name="UserLog" />
 			<entity schema="dbo" name="UserLogType" />
 			<entity schema="dbo" name="UserPreference" />
-		</group>
-		<group name="WorkItems" color="ffcccc" >
-			<entity schema="dbo" name="DepartmentPrefix_Entity" />
 		</group>
 	</layout>
 	<layout name="Default Layout" id="Layout_a710f0" show_relation="columns" >
@@ -554,13 +537,13 @@ the columns of those tables are the entity fields mapped to them]]></comment>
 		<entity schema="dbo" name="Group" color="bfd4f5" x="375" y="90" />
 		<entity schema="dbo" name="GroupRole" color="bfd4f5" x="540" y="90" />
 		<entity schema="dbo" name="Project" color="f5ddbf" x="375" y="825" />
-		<entity schema="dbo" name="DepartmentEntity" color="f5ddbf" x="45" y="825" />
+		<entity schema="dbo" name="ProjectEntity" color="f5ddbf" x="45" y="825" />
 		<entity schema="dbo" name="ProjectTeam" color="f5ddbf" x="210" y="825" />
-		<entity schema="dbo" name="Department" color="f5ddbf" x="210" y="1050" />
+		<entity schema="dbo" name="ProjectType" color="f5ddbf" x="210" y="1050" />
 		<entity schema="dbo" name="Role" color="c8f5bf" x="1395" y="660" />
 		<entity schema="dbo" name="SystemLog" color="bfbff5" x="1800" y="75" />
 		<entity schema="dbo" name="SystemLogType" color="bfbff5" x="1800" y="270" />
-		<entity schema="dbo" name="SystemSetting" color="bfbff5" x="1980" y="75" />
+		<entity schema="dbo" name="SystemSettings" color="bfbff5" x="1980" y="75" />
 		<entity schema="dbo" name="Team" color="bfd4f5" x="705" y="330" />
 		<entity schema="dbo" name="TeamGroup" color="bfd4f5" x="540" y="330" />
 		<entity schema="dbo" name="TeamUser" color="bfd4f5" x="870" y="330" />
@@ -594,15 +577,15 @@ the columns of those tables are the entity fields mapped to them]]></comment>
 			<entity schema="dbo" name="UserLogType" />
 		</group>
 		<group name="ProjectEntity" color="f7f3ec" >
-			<entity schema="dbo" name="DepartmentEntity" />
+			<entity schema="dbo" name="ProjectEntity" />
 			<entity schema="dbo" name="ProjectTeam" />
-			<entity schema="dbo" name="Department" />
+			<entity schema="dbo" name="ProjectType" />
 			<entity schema="dbo" name="Project" />
 		</group>
 		<group name="SystemLogType" color="ececf7" >
 			<entity schema="dbo" name="SystemLogType" />
 			<entity schema="dbo" name="SystemLog" />
-			<entity schema="dbo" name="SystemSetting" />
+			<entity schema="dbo" name="SystemSettings" />
 		</group>
 		<script name="Sql_Editor" id="Editor_316721c" language="SQL" >
 			<string><![CDATA[CREATE SCHEMA dbo;
@@ -1375,13 +1358,13 @@ ALTER TABLE Grout_UserRole ADD CONSTRAINT FK__Grout_Use__UserI__74AE54BC FOREIGN
 		<entity schema="dbo" name="Group" color="c8f5bf" x="780" y="75" />
 		<entity schema="dbo" name="GroupRole" color="c8f5bf" x="1005" y="315" />
 		<entity schema="dbo" name="Project" color="f5ddbf" x="1215" y="1560" />
-		<entity schema="dbo" name="DepartmentEntity" color="f5ddbf" x="780" y="1110" />
+		<entity schema="dbo" name="ProjectEntity" color="f5ddbf" x="780" y="1110" />
 		<entity schema="dbo" name="ProjectTeam" color="f5ddbf" x="1215" y="1335" />
-		<entity schema="dbo" name="Department" color="f5ddbf" x="990" y="1335" />
+		<entity schema="dbo" name="ProjectType" color="f5ddbf" x="990" y="1335" />
 		<entity schema="dbo" name="Role" color="c8f5bf" x="1215" y="315" />
 		<entity schema="dbo" name="SystemLog" color="f5ddbf" x="990" y="1110" />
 		<entity schema="dbo" name="SystemLogType" color="f5ddbf" x="795" y="960" />
-		<entity schema="dbo" name="SystemSetting" color="bfd4f5" x="60" y="75" />
+		<entity schema="dbo" name="SystemSettings" color="bfd4f5" x="60" y="75" />
 		<entity schema="dbo" name="Team" color="c8f5bf" x="1005" y="75" />
 		<entity schema="dbo" name="TeamGroup" color="f5ddbf" x="1200" y="1110" />
 		<entity schema="dbo" name="TeamUser" color="c8f5bf" x="1230" y="75" />
@@ -1404,7 +1387,7 @@ All tools will be saved to project file and can be reopen.]]></comment>
 			<entity schema="dbo" name="EntityField" />
 			<entity schema="dbo" name="Entity" />
 			<entity schema="dbo" name="EntityFieldType" />
-			<entity schema="dbo" name="SystemSetting" />
+			<entity schema="dbo" name="SystemSettings" />
 		</group>
 		<group name="Grout_Group" color="eef7ec" >
 			<entity schema="dbo" name="Group" />
@@ -1416,9 +1399,9 @@ All tools will be saved to project file and can be reopen.]]></comment>
 			<entity schema="dbo" name="UserRole" />
 		</group>
 		<group name="Grout_ProjectEntity" color="f7f3ec" >
-			<entity schema="dbo" name="DepartmentEntity" />
+			<entity schema="dbo" name="ProjectEntity" />
 			<entity schema="dbo" name="SystemLog" />
-			<entity schema="dbo" name="Department" />
+			<entity schema="dbo" name="ProjectType" />
 			<entity schema="dbo" name="ProjectTeam" />
 			<entity schema="dbo" name="Project" />
 			<entity schema="dbo" name="TeamGroup" />
