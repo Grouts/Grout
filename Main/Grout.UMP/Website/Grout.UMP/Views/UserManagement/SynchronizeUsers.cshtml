@@ -1,0 +1,157 @@
+﻿@{
+    ViewBag.Title = GlobalAppSettings.SystemSettings.OrganizationName + " - Synchronize Users";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section styles{
+    @Styles.Render("~/Styles/synchronize-users")
+}
+
+
+@section scripts{
+
+    @Scripts.Render("~/Scripts/synchronize-users")
+
+
+    <script type="text/x-jsrender" id="UserProfileTemplate">
+        <a class="user-name" title="{{:DisplayName}}" href="/administration/user-management/users/edit?username={{:UserName}}">{{:TrimmedDisplayName}}</a>
+    </script>
+
+    <script type="text/x-jsrender" id="checkboxRowTemplate">
+        <input type="checkbox" class="checkboxRow" data-checked-id="{{:UserId}}" id="rowCheck{{:UserId}}" />
+    </script>
+
+    <script type="text/x-jsrender" id="checkboxHeaderTemplate">
+        <input type="checkbox" id="checkboxHeader" />
+    </script>
+
+    <script type="text/javascript">
+        $(function () {
+            //$("#searchUsers").val("");
+            var data = ej.DataManager({
+                url: "/UserManagement/GetAllActiveDirectoryUsersList", adaptor: new ej.UrlAdaptor()
+            });
+
+            $("#user_grid").ejGrid({
+                dataSource: data,
+                gridLines: ej.Grid.GridLines.Horizontal,
+                allowPaging: true,
+                allowSorting: true,
+                allowSearching: true,
+                allowSelection: true,
+                allowFiltering: true,
+                pageSettings: { pageSize: 20 },
+                templateRefresh: "refreshTemplate",
+                filterSettings: { filterType: "menu" },
+                selectionType: ej.Grid.SelectionType.Multiple,
+                selectionSettings: { selectionMode: ["row"] },
+                enableRowHover: true,
+				rowDataBound: function(){
+					var height=$(".e-gridcontent").height();
+					if(height!=null){
+						rowBound(height);
+					}
+				},
+				dataBound: function (args) {
+
+				    $("#user_grid .checkboxRow").ejCheckBox({ "change": checkboxOnChange });
+				    $("#checkboxHeader").ejCheckBox({ "change": headCheckboxOnChange });
+				    refreshFooterPosition($(".e-gridcontent").height());
+				    this.model.indexes = {}; /* Additional property*/
+				    var selecteduserIdValues = [];
+				},
+                rowSelecting: function (e) {
+                    this.multiSelectCtrlRequest = true;
+
+                },
+                recordClick: "fnRecordClick",
+                create: "fnOnUserGridCreate",
+                actionBegin: "fnOnUserGridActionBegin",
+                actionComplete: "fnOnUserGridActionComplete",
+                columns: [
+                        {
+                            headerTemplateID: "#checkboxHeaderTemplate",
+                            template: true,
+                            templateID: "#checkboxRowTemplate",
+                            textAlign: ej.TextAlign.Center,
+                            allowFiltering: false,
+                            width: 20
+                        },
+                        {
+                            field: "UserName",
+                            headerText: "User Name",
+                            type: "string",
+                            allowFiltering: true,
+                            width: 100
+                        },
+                        {
+                            field: "FirstName",
+                            headerText: "First Name",
+                            type: "string",
+                            allowFiltering: true,
+                            width: 100
+                        },
+                        {
+                            field: "UserId",
+                            headerText: "User id",
+                            type: "string",
+                            cssClass: "user-id",
+                            allowFiltering: true,
+                            width: 100,
+                            visible: false
+                        },
+                        {
+                            field: "LastName",
+                            headerText: "Last Name",
+                            type: "string",
+                            allowFiltering: true,
+                            width: 100
+                        },
+                        {
+                            template: true,
+                            allowSorting: true,
+                            templateID: "#UserProfileTemplate",
+                            headerText: "Full Name",
+                            width: 115,
+                            field: "DisplayName",
+                            allowFiltering: true,
+                            type: "string"
+                        }
+                ]
+
+            });
+        });
+    </script>
+}
+
+<div class="col-md-12 no-padding no-margin">
+    <div class="col-md-12 no-padding no-margin">
+        <div class="col-md-12" id="userTitle">
+            <a href="/administration/user-management/users" title="Users" class="back-button">
+                <div class="report-security-head">
+                    <i class="su su-back back-navigaion"> </i>
+                </div>
+            </a>
+            <span class="pull-left" id="userTitleWithCount">
+                Active Directory Synchronization - USERS (<span id="total_record_count"></span>)
+                @*<input type="hidden" id="user_count" value="@ViewBag.userCount">*@
+            </span>
+            <div id="searchArea">
+                <input type="text" id="searchUsers" placeholder="Search users"/>
+                <span class="su su-search search-user" title="Search"></span>
+            </div>
+            <div class="hide" id="synchronize-users">
+                <span class="btn btn-success" title="Synchronize Users with Active Directory" onclick="SynchronizeUsers()">Synchronize Users</span>
+            </div>
+            <div class="col-lg-12 tag-area">Select Users to synchronize with Active Directory</div>
+        </div>
+        <div id="userList_container" class="list col-md-12">
+            <div class="col-md-12 container-fluid page-inner-padding no-padding ">
+                <div id="user_grid">
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

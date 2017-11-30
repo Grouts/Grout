@@ -1,0 +1,108 @@
+﻿<script>
+    window.fulldata=  @Html.Raw(Json.Encode(Model));
+    function SortableTableCtrl($scope) {
+        // data
+        $scope.userList=window.fulldata.AllUserDetails;
+        $scope.groupList=window.fulldata.AllGroupDetails;
+        $scope.sort = {
+            descending: false
+        };
+
+        $scope.selectedCls = function(column) {
+            return column == scope.sort.column && 'sort-' + scope.sort.descending;
+        };
+
+        $scope.changeSorting = function() {
+            var sort = $scope.sort;
+            sort.descending = !sort.descending;
+        };
+    }
+</script>
+<script type="text/javascript" src="~/Scripts/AngularJS/angular.min.js"></script>
+<script src="@Url.Content("~/Scripts/jQuery/jquery-1.10.2.min.js")"></script>
+
+<div id="userprofile_group_left_tab" ng-app="" ng:controller="SortableTableCtrl" class="col-xs-3 no-margin" style="padding:0px; background-color:#E4E4E4;">
+    <ul id="user-group-tab" style="padding: 0px; border-bottom: 1px solid #d8D8D8; border-right: 1px solid #d8D8D8; background-color: white; position: relative; color: #8D778D"> <li id="user-tab" class="tab-heading tab-active">Users</li><li id="group-tab" class="tab-heading" style="margin-left: 23px;">Groups</li><div class="down-arrow-people"></div><li><i ng-click="reverse=!reverse" id="sort-list" class="su su-sort" style=" width: 25px; height: 25px; margin-left: 33px;" ></i></li></ul>
+    <div id="Userlist-search" style="position:relative; padding-bottom: 10px;">
+        <input ng-model="searchText.FullName" type="text" id="user-search" placeholder="Search Users..." class="form-control UserSearchText" />
+        <span class="search-icon"><i class="su su-search"></i></span>
+        <span class="Cancel-icon">x</span>
+    </div>
+    <div id="UserList" style="height:580px; outline:0;">
+        <div class="sampleContent">
+            <ul id="usersnamelist" class="no-top-padding" style="list-style-type: none; padding: 0px; padding: 11px;">
+                <li class="active">
+                    <div class="left-list-profile-picture" style="background-image: url('~/Content/images/ProfilePictures/@ViewBag.cookieVal/32/@ViewBag.Avatar'); background-size:contain; background-position:center; background-repeat:no-repeat;"></div>
+                    <label class="Userlist-userlabel NotoficationHeading" float="left" data-username="@ViewBag.Cookieval">Me</label>
+                </li>
+                <div style="border-bottom:1px solid #a2a1a2; height:8px;">&nbsp;</div>
+                <li ng-repeat="i in userList | orderBy : 'FullName' : reverse | filter:searchText">
+                    <div class="left-list-profile-picture" style="background-image: url('~/Content/images/ProfilePictures/{{i.UserName}}/32/{{i.Avatar}}'); background-size: contain; background-position: center; background-repeat: no-repeat;"></div>
+                    <label class="Userlist-userlabel NotoficationHeading" float="left" data-username="{{i.UserName}}">{{i.FullName}}</label>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+
+    <div id="Grouplist-search" style="position:relative; padding-bottom: 10px;display:none;">
+        <input ng-model="searchGroup.GroupName" type="text" id="group-search" placeholder="Search Groups..." class="form-control" /><span class="search-icon"><i class="su su-search"></i></span>
+    </div>
+    <div id="GroupList" style="height: 580px; outline: none; display: none; ">
+        <div class="sampleContent">
+            <ul id="groupnamelist" class="no-top-padding" style="list-style-type: none; padding: 0px; padding: 11px;">
+                <div style="border-bottom:1px solid #a2a1a2; height:8px;">&nbsp;</div>
+                <li ng-repeat="i in groupList | orderBy : 'GroupName': reverse | filter:searchGroup">
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="group-color-outer" ng-style="{'border-color': i.GroupColor}" style="background-color:white;">
+                                    <div class="group-color-inner" ng-style="{'background-color': i.GroupColor}"></div>
+                                </div>
+                            </td>
+                            <td><label class="Grouplist-grouplabel LightHeading" data-groupid="{{i.GroupId}}">{{i.GroupName}}</label></td>
+                        </tr>
+                    </table>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+</div>
+<script>
+
+    $(document).ready(function () {
+        var selectedUser="@ViewBag.UserName"
+        $("#usersnamelist").children("li").removeClass("active");
+        $("#usersnamelist").children("li").find('label').filter("[data-username='"+selectedUser+"']").parent().addClass("active");
+        $("#user-group-tab").on("click","#group-tab",function(){
+            $("#user-tab").removeClass("tab-active");
+            $(this).addClass("tab-active");
+            $(".down-arrow-people").css("left","140px");
+            $("#Userlist-search").hide();
+            $("#UserProfileMaster").hide();
+            $("#UserList").hide();
+            $("#GroupList").show();
+            $("#Grouplist-search").show();
+            $("#group_details_right_content").show();
+            if($("#groupnamelist").find(".active").length==0){
+                $("#groupnamelist").children("li:first").addClass("active");
+                getGroupDetails($("#groupnamelist").children("li:first").find(".Grouplist-grouplabel").attr("data-groupid"));
+            }
+        });
+        $("#user-group-tab").on("click","#user-tab",function(){
+            $("#group-tab").removeClass("tab-active");
+            $(this).addClass("tab-active");
+            $(".down-arrow-people").css("left","40px");
+            $("#GroupList").hide();
+            $("#Grouplist-search").hide();
+            $("#group_details_right_content").hide();
+            $("#Userlist-search").show();
+            $("#UserList").show();
+            $("#UserProfileMaster").show();
+
+        });
+    });
+</script>

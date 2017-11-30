@@ -1,0 +1,178 @@
+﻿@{
+    ViewBag.Title = GlobalAppSettings.SystemSettings.OrganizationName + " - Active Directory Groups import";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@section styles{
+    @Styles.Render("~/Styles/group-active-directory")
+}
+
+@section scripts{
+    @Scripts.Render("~/Scripts/group-active-directory")
+
+    <script type="text/x-jsrender" id="user-detail-validation">
+        <span class="su su-login-error user-import-validation"></span>
+    </script>
+    <script type="text/x-jsrender" id="checkboxRowTemplate">
+        <input type="checkbox" class="checkboxRow" />
+    </script>
+
+    <script type="text/x-jsrender" id="checkboxHeaderTemplate">
+        <input type="checkbox" id="checkboxHeader" />
+    </script>
+    <script type="text/javascript">
+        var data1 = @Html.Raw(ViewBag.groupList);
+
+        $(function () {
+            var data = data1.Data.Data;
+
+            $("#Grid").ejGrid({
+                dataSource: data,
+                allowPaging: false,
+                allowSorting: false,
+                allowSelection: true,
+                allowScrolling: false,
+                selectionType: ej.Grid.SelectionType.Multiple,
+                selectionSettings: { selectionMode: ["row"] },
+                actionComplete:"fnActionComplete",
+                create:fnCreate,
+                recordClick: "recordClick",
+                dataBound: function(args) {
+                    refreshFooterPosition($(".e-gridcontent").height());
+                },
+                columns: [
+                    { headerTemplateID: "#checkboxHeaderTemplate", template: true, templateID: "#checkboxRowTemplate", textAlign:ej.TextAlign.Center,width: 5 },
+                    { field: "GroupName", cssClass: "group-name", headerText: "Username", width: 30 },
+                    { field: "GroupDescription", cssClass: "desc", headerText: "Description", width: 50 },
+                    { field: "GroupId", cssClass: "group-id", headerText: "group id", width: 10, visible: false },
+                    { field: "", headerText: "Error", width: 10, templateID: "#user-detail-validation", visible: false }
+                ]
+            });
+        });
+
+    </script>
+}
+
+@if(ViewBag.ActiveDirectory!=null)
+{ 
+<div class="container-fluid">
+    <form action="/administration/user-management/groups/import-active-directory" method="post" onsubmit="return ActiveDirectoryFormValidate();" enctype="multipart/form-data">
+        <div class="col-md-12 import-area">
+            <a href="/administration/user-management/groups" title="Groups" class="back-button">
+                <div class="report-security-head">
+                    <i class="su su-back back-navigaion"> </i>
+                </div>
+            </a>
+            <div class="import-label">
+                IMPORT GROUPS
+            </div>
+            <span class="seperator">—</span>
+            <div class="template-link">
+                Active Directory
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-8 no-padding">
+                <div class="col-xs-2 no-padding" style="padding-top: 8px !important;">Directory Path :<input type="hidden" name="url" value="@ViewBag.ActiveDirectory.LdapURL"></div>
+                <div class="col-xs-3 no-padding" style="padding-top: 8px !important;">@ViewBag.ActiveDirectory.LdapURL</div>
+                <div class="col-xs-3 no-padding"><a href="/administration" title="Update Active Directory Configuration settings" class="btn btn-link">Change Active Directory</a></div>
+                <div class="col-xs-3 no-padding"><input type="submit" title="Import groups from Active Directory" class="btn btn-primary" value="Connect and import groups" /></div>
+            </div>
+        </div>
+
+    </form>
+    <div class="col-xs-12 no-padding Userdatagrid">
+        <div class="col-xs-5 no-padding">
+            @if (!String.IsNullOrEmpty(Request["url"]))
+            {
+                <span class="importMessage">* Please select groups from the below list to import into Report Server</span>
+            }
+            else
+            {
+                <span class="importMessage"></span>
+            }
+        </div>
+        <div class="col-xs-7 no-padding">
+        <div class="list" id="grid_validation_messages">
+                <div class="col-xs-9">
+                    <span id="grid_nodata_validation" class="grid_nodata_validation">There is no data in the uploaded file. Please check and try uploading again.</span>
+                    <span id="grid_validation" class="grid_validation"><span id="groupcount" class="groupcount">@ViewBag.UserCount</span> group(s) has been imported successfully.</span>
+                    <span id="grid_error_validation" class="grid_error_validation">Duplicate or Invalid data is found. Please change the data accordingly and re-upload the file. </span>
+                    <span id="empty_validation" class="validation-message empty_validation">Please select groups(s) to import</span>
+        </div>
+                <div class="col-xs-3">
+                    @if (String.IsNullOrEmpty(Request["url"]))
+                    {
+                        <input type="button" disabled="" value="Import groups" title="Import the selected groups from the list" onclick="SaveActiveDirectoryGroups()" id="SaveButtonClick" class="btn btn-success pull-right">
+                    }
+                    else
+                    {
+                        <input type="button" value="Import groups" title="Import the selected groups from the list" onclick="SaveActiveDirectoryGroups()" id="SaveButtonClick" class="btn btn-success pull-right">
+                    }
+                </div>
+            </div>
+        </div>
+        
+        <div id="grid-container" class="col-md-12 no-top-margin no-left-padding">
+            <div class="col-md-12 container-fluid page-inner-padding no-padding ">
+                <div id="Grid">
+
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-5 no-padding"></div>
+        <div class="col-xs-7 no-padding">
+            <div class="list" id="grid_validation_messages">
+                <div class="col-xs-9">
+                    <span id="grid_nodata_validation" class="grid_nodata_validation">There is no data in the uploaded file. Please check and try uploading again.</span>
+                    <span id="grid_validation" class="grid_validation"><span id="groupcount" class="groupcount">@ViewBag.UserCount</span> groups(s) has been imported successfully.</span>
+                    <span id="grid_error_validation" class="grid_error_validation">Duplicate or Invalid data is found. Please change the data accordingly and re-upload the file. </span>
+                    <span id="empty_validation" class="validation-message empty_validation">Please select groups(s) to import</span>
+    </div>
+                <div class="col-xs-3">
+                    @if (String.IsNullOrEmpty(Request["url"]))
+                    {
+                        <input type="button" value="Import groups" disabled="" title="Import the selected groups from the list" onclick="SaveActiveDirectoryGroups()" id="SaveButtonClick" class="btn btn-success pull-right">
+                    }
+                    else
+                    {
+                        <input type="button" value="Import groups" title="Import the selected groups from the list" onclick="SaveActiveDirectoryGroups()" id="SaveButtonClick" class="btn btn-success pull-right">
+                    }
+                </div>
+            </div>
+        </div>
+        </div>
+    <input type="hidden" name="AllUserList" id="AllUserList" value="@ViewBag.Pathname" />
+    <input type="hidden" id="UserCount" data-value="@ViewBag.UserExists" />
+    <input type="hidden" id="csvFileError" data-value="@ViewBag.result" />
+</div>
+}
+else
+{
+
+   
+    <form action="/administration/user-management/groups/import-active-directory" method="post" onsubmit="return ActiveDirectoryFormValidate();" enctype="multipart/form-data">
+        <div class="col-md-12 import-area">
+            <a href="/administration/user-management/groups" title="Groups" class="back-button">
+                <div class="report-security-head">
+                    <i class="su su-back back-navigaion"> </i>
+                </div>
+            </a>
+            <div class="import-label">
+                IMPORT GROUPS
+            </div>
+            <span class="seperator">—</span>
+            <div class="template-link">
+                Active Directory
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="">
+                <a href="/administration" class="btn btn-link">Please click here to configure the Active Directory settings</a>
+            </div>
+        </div>
+
+    </form>
+    
+}

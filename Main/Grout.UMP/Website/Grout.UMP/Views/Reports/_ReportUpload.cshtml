@@ -1,0 +1,93 @@
+﻿@model ReportUploadResponse
+@{
+    var isUploaded = ViewData["IsUploaded"] != null ? Convert.ToBoolean(ViewData["IsUploaded"]) : false;
+}
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>
+        New RDL popup
+    </title>
+    @Styles.Render("~/styles/upload-report")
+    @Scripts.Render("~/scripts/upload-report")
+    <script>
+        $(function () {
+            if (window.parent.$("#rdl_filename").val() != "" && window.parent.$("#rdl_filename").val()!=undefined) {
+                $("#upload_browse_file").val(window.parent.$("#rdl_filename").val());
+            }
+            window.parent.parent.$('#report_popup_wrapper').ejWaitingPopup("hide");
+            $(document).on("change", "#browse_file", function () {
+                parent.$("#uploadValidation").html("");
+                parent.$("#publish_report").attr("disabled", true);
+                var filename = $("#browse_file").val();
+                if (filename.substring(filename.lastIndexOf('.') + 1) == "rdl") {
+                    filename = filename.substring(filename.lastIndexOf('\\') + 1);
+                    $("#upload_browse_file").css("color", "#555555");
+                    $("#upload_browse_file").closest("span").removeClass("has-error");
+                    $(".fileUpload").removeClass("error-file-upload");
+                    parent.$("#rdl_filename").val(filename);
+                    $("#upload_browse_file").val(filename);
+                    window.parent.$("#rdl_filename").val(filename);
+                    parent.$("#datasource_list_table").html("");
+                    $("#rdl_file_upload_btn").removeAttr("disabled");
+                    $("#rdl_file_upload_btn").focus();
+                    parent.$("#uploadValidation").html("Please upload the report");
+                    if (parent.isEditPopup) {
+                        parent.$("#comment").removeAttr("readonly");
+                    }
+                } else {
+                    $("#upload_browse_file").closest("span").addClass("has-error");
+                    $("#upload_browse_file").css("color", "red");
+                    $("#browse_file").closest('div').addClass("error-file-upload");
+                    $("#upload_browse_file").val("Please choose valid file to upload");
+                    $("#rdl_file_upload_btn").attr("disabled", "disabled");
+                    $("#publish_report").attr("disabled", "disabled");
+                }
+            });
+        });
+        $(document).on("click", "#browse_file", function () {
+            $("#upload_browse_file").trigger("focus");
+        });
+        $(document).on("click", "#upload_browse_file", function () {
+            $("#browse_file").trigger("click");
+        });
+    </script>
+</head>
+<body style="background-color:white">
+    <form name="uploadReportForm" method="post" onsubmit="return onUploadReport();" action="~/reports/uploadreport" enctype="multipart/form-data">
+        <span>
+            <input id='upload_browse_file' class='form-control input-fields' readonly name='uploadedFileName' type='text' value="@ViewBag.FileName" tabindex="-1">
+        </span>
+        <div class='fileUpload btn btn-default'>
+            <span>...</span><input id='browse_file' class='browse-button upload-btn' type='file' accept='.rdl' name="file">
+        </div>
+        @if (isUploaded)
+        {
+            <input type="hidden" name="previousFileName" value="@Model.UploadedReportName" />
+        }
+        else
+        {
+            <input type="hidden" name="previousFileName" value="none" />
+        }
+        <input id="rdl_file_upload_btn" type="submit" value="Upload" class="btn btn-primary" disabled data-previous-filename="none" />
+    </form>
+</body>
+</html>
+<script>
+    function onUploadReport() {
+        if (window.parent.isEditPopup) {
+            window.parent.editReportData.IsFileChanged = true;
+            window.parent.editReportData.IsDataSourceChanged = false;
+        }
+        window.parent.parent.$("#report_popup_wrapper").ejWaitingPopup("show");
+    }
+
+</script>
+@if (isUploaded)
+{
+    <script>
+        $(function () {
+            window.parent.reportUploadComplete(@Html.Raw(Json.Encode(Model)));
+        });
+    </script>
+}

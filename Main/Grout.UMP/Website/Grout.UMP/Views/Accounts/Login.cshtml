@@ -1,0 +1,59 @@
+﻿
+<head>
+    <meta name="viewport" content="width=100%">
+    @Styles.Render("~/Styles/login")
+    <link rel="icon" href="~/Content/Images/Application/@GlobalAppSettings.SystemSettings.FavIcon" onerror="if (this.href != '~/Content/Images/Application/Grout_Favicon.png') this.href = '~/Content/Images/Application/Grout_Favicon.png';" />
+    <title>
+        @{
+            var organizationName = Grout.Base.GlobalAppSettings.SystemSettings.OrganizationName ?? "Grout";
+        }
+    @organizationName - Login
+    </title>
+</head>
+
+<body style="background-image: url('/Content/Images/waitingpopup.gif');background-color: #ccc; background-repeat: no-repeat; background-position: 50% 150px;">
+    @{
+        var isInvalidUser = !String.IsNullOrWhiteSpace((string)TempData["errorUserName"])? "has-error" :!String.IsNullOrWhiteSpace((string) @TempData["User"]) ? "has-error" : "";
+        var isInvalidPassword = !String.IsNullOrWhiteSpace((string)TempData["errorPassword"]) ? "has-error" : "";
+    }
+    <div id="alert-notification"></div>
+    <div class="login-main" style="display:none;">
+        <div class="login-container">
+            <div class="login-inner-container">
+                <div class="login-logo">
+                    <div>
+                        <img src="~/Content/Images/Application/@GlobalAppSettings.SystemSettings.LoginLogo" onerror="if (this.src != '/Content/Images/Application/Grout_Login_Logo.png') this.src = '/Content/Images/Application/Grout_Login_Logo.png';" />
+                    </div>
+                </div>
+                <div class="login-description">
+                    @GlobalAppSettings.SystemSettings.WelcomeNoteText
+                </div>
+                <div class="login-message-container"><span>@TempData["Message"]</span></div>
+                <form method="post" id="login-form" class="no-margin" action="" onsubmit="return FormValidate();">
+                    <div class="login-elements" style="clear: both;">                        
+                        <div class="login-fields @isInvalidUser">
+                            <input type="text" id="login_username" tabindex="1" placeholder="Username" autofocus class="form-control auto-margin generic-textbox" name="username" value="@TempData["currentValue"]" />
+                            <span id="InvalidUsername" class="su su-login-error login-validation-icon" title="@TempData["errorUserName"] @TempData["User"]" data-content="@TempData["errorUserName"] @TempData["User"]" style="display:@TempData["errorUserStatus"]"></span>
+                        </div>
+                        <div class="login-fields @isInvalidPassword">
+                            <input type="password" id="login_password" tabindex="2" placeholder="Password" class="form-control auto-margin generic-textbox" name="password" />
+                            <span id="InvalidPassword" class="su su-login-error login-validation-icon" title="@TempData["errorPassword"]" data-content="@TempData["errorPassword"]" style="display:@TempData["errorPasswordStatus"]"></span>
+                        </div>
+                        <div class="login-fields text-left-alignment">
+                            <input type="checkbox" tabindex="3" name="remember" id="remember" class="Remember checkbx" />&nbsp
+                            <label for="remember" class="disable-text-select"><span></span>Remember me</label>
+                        </div>
+                        <div class="login-fields" style="margin-bottom: 10px;">
+                            <input type="submit" tabindex="4" name="Submit" value="LOG IN" id="loginbutton" />
+                        </div>
+                        <div class="forgot-password">
+                            <a href="/accounts/forgot-password" class="btn btn-link" tabindex="5">Forgot your password?</a>
+                        </div>
+                        <input type="hidden" value="@ViewBag.ReturnURL" id="ReturnURL" name="ReturnURL" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    @Scripts.Render("~/scripts/login")
+</body>

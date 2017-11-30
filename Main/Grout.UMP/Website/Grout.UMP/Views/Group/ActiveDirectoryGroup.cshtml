@@ -1,0 +1,184 @@
+﻿@{
+    ViewBag.Title = GlobalAppSettings.SystemSettings.OrganizationName + " -  Active Directory Synchronization";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section styles{
+    @Styles.Render("~/styles/groups")
+}
+
+@section scripts{
+    @Scripts.Render("~/scripts/groups")
+    <script type="text/x-jsrender" id="GroupProfileTemplate">
+        {{if IsActiveDirectoryGroup}}
+            <a class="item-name" href="/administration/permissions/groups/edit?groupId={{:GroupId}}" data-groupid="{{:GroupId}}">{{:GroupName}}</a>
+        {{else}}
+            <a class="item-name" href="/administration/user-management/groups/edit?groupId={{:GroupId}}">{{:GroupName}}</a>
+        {{/if}}
+    </script>
+    <script type="text/x-jsrender" id="itemNameHeader">
+        <div class="item-name">Name</div>
+    </script>
+    <script type="text/x-jsrender" id="checkboxRowTemplate">
+        <input type="checkbox" id="rowCheck{{:GroupId}}" data-checked-id="{{:GroupId}}" class="checkboxRow" />
+</script>
+
+    <script type="text/x-jsrender" id="checkboxHeaderTemplate">
+    <input type="checkbox" id="checkboxHeader" />
+</script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#searchGroups").val("");
+            addPlacehoder("#searchArea");
+            $("#Grid").ejGrid({
+                dataSource: ej.DataManager({ url: "/Group/RefreshActiveDirectoryGroup", adaptor: "UrlAdaptor" }),
+                gridLines: ej.Grid.GridLines.Horizontal,
+                allowPaging: true,
+                allowSorting: true,
+                allowSearching: true,
+                allowSelection: true,
+                allowFiltering: true,
+                dataBound: function(args) {
+                    $("#Grid .checkboxRow").ejCheckBox({ "change": checkboxOnChange });
+                    $("#checkboxHeader").ejCheckBox({ "change": headCheckboxOnChange });
+                    this.model.indexes = {}; /* Additional property*/
+                    var selectedgroupIdValues = [];
+                    var selectedActivedirectorygroupIdValues = [];
+                },
+                rowSelecting: function(e) {
+                    this.multiSelectCtrlRequest = true;
+
+                },
+                create: fnCreateGrid,
+                pageSettings: { pageSize: 20 },
+                recordClick: "recordClick",
+                selectionType: ej.Grid.SelectionType.Multiple,
+                selectionSettings: { selectionMode: ["row"] },
+                filterSettings: { filterType: "menu" },
+                actionBegin: "fnOnGroupGridActionBegin",
+                templateRefresh: "refreshTemplate",
+                actionComplete: "fnActionComplete",
+                columns: [
+                    { headerTemplateID: "#checkboxHeaderTemplate", template: true, templateID: "#checkboxRowTemplate", textAlign: ej.TextAlign.Center, width: 20, allowFiltering: false, },
+                    {
+                        allowSorting: true,
+                        headerText: "Name",
+                        width: 110,
+                        headerTemplateID: "#itemNameHeader",
+                        templateID: "#GroupProfileTemplate",
+                        field: "GroupName",
+                        type: "string"
+                    },
+                    {
+                        allowSorting: true,
+                        headerText: "ADGroupId",
+                        width: 10,
+                        cssClass: "activedirectory-group-id",
+                        field: "ActiveDirectoryGroupId",
+                        type: "string",
+                        visible: false
+                    },
+                    {
+                        allowSorting: true,
+                        headerText: "GroupId",
+                        width: 10,
+                        cssClass: "group-id",
+                        field: "GroupId",
+                        type: "string",
+                        visible: false
+                    },
+                    {
+                        field: "GroupDescription",
+                        headerText: "Description",
+                        allowSorting: true,
+                        type: "string",
+                        width: 300
+                    },
+                    {
+                        allowFiltering: false,
+                        field: "UsersCount",
+                        headerText: "Users",
+                        allowSorting: true,
+                        type: "string",
+                        width: 60
+                    }
+                ]
+
+            });
+
+            $("#NewGroupArea").ejDialog({
+                width: "500px",
+                showOnInit: false,
+                allowDraggable: true,
+                enableResize: false,
+                showHeader: false,
+                height: "290px",
+                title: "Add New Group",
+                enableModal: true,
+                closeOnEscape: true,
+                close: ''
+            });
+            $("#DeleteGroupArea").ejDialog({
+                width: "400px",
+                showOnInit: false,
+                allowDraggable: true,
+                enableResize: false,
+                showHeader: false,
+                height: "203px",
+                title: "Add New Group",
+                enableModal: true,
+                closeOnEscape: true,
+                close: ''
+            });
+            $("#DeleteGroupArea_wrapper").ejWaitingPopup();
+            $("#NewGroupArea_wrapper").ejWaitingPopup();
+
+        });
+    </script>
+
+}
+
+    
+    <div id="base_container" style="width:100%;left:0;">
+
+        <div id="partialPlaceHolder">
+            <div class="GroupHeaderContainer col-lg-12 no-left-padding no-right-padding padding15">
+                <a href="/administration/user-management/groups" title="Goto Groups" class="back-button">
+                    <div class="report-security-head">
+                        <i class="su su-back back-navigaion"> </i>
+                    </div>
+                </a>
+                <div class="col-xs-6 GroupHead no-left-padding">
+                    <div>Active Directory Synchronization - GROUPS (<span id="GroupCount">@ViewBag.groupCount</span>)</div>
+                    <div class="subhead-menu col-xs-12 no-padding">
+                        Select the groups and Synchronize with Active Directory
+                    </div>
+                </div>
+
+                <div id="searchArea">
+                    <input type="text" id="searchGroups" placeholder="Search groups"/>
+                    <span class="su su-search search-group" title="Search"></span>
+                </div>
+                <ul class="pull-right">
+                    <li style="list-style: none" id="Syncbutton" class="TabInvisible">
+                        <input type="button" name="SyncGroups" value="Synchronize" title="Synchronize groups with Active Directory" id="SyncronizeGroup" class="btn btn-success" />
+
+                    </li>
+                </ul>
+                <input type="hidden" name="GroupCount" id="GroupCountText" value="@ViewBag.groupCount" />
+            
+            </div>
+
+            <div id="grid-container" class="small-margin no-top-padding">
+                <div id="Grid" data-gridName="Group">
+                
+                </div>
+            </div>
+            <div id="NewGroupArea" class="no-padding">
+                <iframe src="" style="border: 0;" id="newGroupIframe" border="0" width="100%" height="100%"></iframe>
+            </div>
+            <div id="DeleteGroupArea" class="no-padding">
+                <iframe src="" style="border: 0;" id="DeleteGroupIframe" border="0" width="100%" height="100%"></iframe>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,43 @@
+﻿@model MvcSiteMapProvider.Web.Html.Models.SiteMapPathHelperModel
+@using System.Web.Mvc.Html
+@using System.Linq
+@using MvcSiteMapProvider.Web.Html.Models
+
+<ol class="breadcrumb">
+
+    @{
+        if (Model.Count() == 1 && Model.FirstOrDefault().Title.ToLower() == "home")
+        {
+            <li>
+                Reports
+            </li>
+        }
+        else
+        {
+            foreach (var node in Model)
+            {
+
+                if (node.IsCurrentNode)
+                {
+                    if (node.Attributes.ContainsKey("isEditPermissionPage"))
+                    {
+                        <li>
+                            @node.Title
+                        </li>
+                    }
+                    <li class="active">
+                        @Html.DisplayFor(m => node)
+                    </li>
+                }
+                else
+                {
+                    <li>
+                        @Html.DisplayFor(m => node)
+                    </li>
+                }
+                
+            }
+        }
+    }
+
+</ol>

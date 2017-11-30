@@ -1,0 +1,369 @@
+﻿
+
+#base_Div {
+
+    #base_content_Div {
+        #page_content_Div {
+            padding-top: 10px;
+
+            #FixedLeftSection {
+                display: none;
+                background-color: white;
+                position: fixed;
+                float: left;
+                top: 60px;
+                height: 100%;
+                width: 19%;
+                left: 0;
+                z-index: 997;
+
+                #categoryLising {
+                    float: left;
+                    width: 100%;
+                    border: 0;
+                    border-right: 1px solid #e4e4e4;
+                    height: 100%;
+
+                    #CatergoryHeading {
+                        float: left;
+                        width: 100%;
+                        padding: 13px 15px;
+                        background-color: #f4f4f4;
+
+                        .placeholder {
+                            position: absolute;
+                            top: 40px;
+                            padding-left: 5px;
+                            height: 35px;
+                            line-height: 35px;
+                            color: #a7a9ac;
+                        }
+
+                        h4 {
+                            float: left;
+                            clear: inherit;
+                            margin: 0;
+                            font-size: 16px;
+                        }
+
+                        .su-search {
+                            cursor: pointer;
+                            margin-right: 10px;
+                        }
+
+                        .su-sort {
+                            cursor: pointer;
+                        }
+
+                        #SearchCategoryParent {
+                            display: none;
+                        }
+
+                        #SearchCategory::-ms-clear {
+                            display: none;
+                        }
+
+                        #SearchCategory {
+                            width: 140px;
+                            width: 100%;
+                            border: 1px solid #e4e4e4;
+                            -moz-border-radius: 4px;
+                            -webkit-border-radius: 4px;
+                            border-radius: 4px;
+                            margin: 10px 0 0;
+                            height: 35px;
+                            border-right: 0;
+                            float: left;
+                            padding-left: 5px;
+
+                            &:focus {
+                                outline: none;
+                            }
+                        }
+                    }
+
+                    #ParentScrollElement {
+                        float: left;
+                        width: 100%;
+
+                        .e-vup, .e-vdown {
+                            display: none !important;
+                        }
+
+                        .e-vhandlespace {
+                            .e-vhandle {
+                                -moz-border-radius: 4px;
+                                -webkit-border-radius: 4px;
+                                border-radius: 4px;
+                            }
+                        }
+
+                        #listing {
+                            float: left;
+                            width: 100%;
+                            list-style: none;
+                            padding-left: 0;
+                            margin-bottom: 0;
+                            border-bottom: 1px solid #EDEDED;
+
+                            .category-name.last {
+                                .CategorySettings {
+                                    .dropdown {
+                                        .dropdown-menu {
+                                            position: absolute;
+                                            top: -45px;
+                                        }
+                                    }
+                                }
+                            }
+
+                            .all-categories, .category-name {
+                                border-top: 1px solid #EDEDED;
+                                padding: 13px 15px 13px 10px;
+                                border-left: 0;
+                                border-right: 0;
+                                cursor: pointer;
+                                border-left: 5px solid #ffffff;
+                                font-size: 14px;
+                                float: left;
+                                clear: both;
+                                width: 100%;
+
+                                &:hover {
+                                    background-color: #F8F8F8;
+                                    border-left: 5px solid #F8F8F8;
+
+                                    .CategorySettings {
+                                        display: block;
+                                    }
+                                }
+
+                                a.category-link {
+                                    width: 73%;
+                                    float: left;
+                                    overflow: hidden;
+                                    text-overflow: ellipsis;
+                                    white-space: nowrap;
+                                }
+
+                                .count {
+                                    float: right;
+                                    color: #216BB4;
+                                }
+
+                                .CategorySettings {
+                                    list-style: none;
+                                    display: none;
+                                    border: 0;
+                                    float: right;
+                                    margin-right: 10px;
+                                    padding: 0;
+
+                                    .dropdown {
+                                        border: 0;
+                                        padding: 0;
+                                        margin: 0;
+
+                                        .dropdown-backdrop {
+                                            display: none;
+                                        }
+
+                                        .dropdown-menu {
+                                            border: 0;
+                                            margin-left: -105px;
+                                            margin-right: 0;
+                                            min-width: 120px;
+
+                                            li {
+                                                margin: 0;
+                                                padding: 0;
+                                                border: 0;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                                .category-name.activeCategorySetting {
+                                    background-color: #f8f8f8;
+
+                                    .CategorySettings {
+                                        display: block;
+                                    }
+                                }
+
+                                .all-categories.active, .category-name.active {
+                                    border-left: 5px solid #356db5;
+                                }
+                        }
+                    }
+                }
+
+                div.collapseIcon {
+                    border-bottom: 1px solid #ededed;
+                    cursor: pointer;
+                    float: left;
+                    font-size: 16px;
+                    padding-right: 5px;
+                    text-align: right;
+                    width: 100%;
+                }
+            }
+
+                #FixedLeftSection.collapsed {
+                    width: 5%;
+
+                    div {
+                        display: none;
+                    }
+                }
+
+                #FixedLeftSection.expanded {
+                    width: 5%;
+
+                    div {
+                        display: block;
+                    }
+                }
+
+            .item-listing {
+                float: left;
+                padding: 0 20px;
+                width: 81%;
+                left: 19%;
+                position: relative;
+                padding-right: 0;
+
+                #searchArea {
+                    position: absolute;
+                    right: 0px;
+                    margin-top: 10px;
+
+                    input[type="text"] {
+                        width: 185px;
+                        height: 35px;
+                        margin: 0px;
+
+                        &:focus {
+                            outline: none;
+                        }
+                    }
+
+                    .su-search {
+                        height: 35px;
+                        padding-top: 9px;
+                        margin: 0px;
+                    }
+                }
+
+                #itemGridContainer {
+                    padding: 0px;
+                }
+            }
+
+                .item-listing.expandedGrid {
+                    width: 97%;
+                    left: 3%;
+                }
+
+                .item-listing.collapsedGrid {
+                    width: 81%;
+                    left: 19%;
+                }
+        }
+    }
+
+
+    #base_footer_Div {
+        width: 81%;
+        position: relative;
+        left: 19%;
+        padding: 20px 30px 20px 40px;
+    }
+    #base_footer_Div.expandedGrid {
+            width: 97%;
+            left: 3%;
+        }
+}
+
+@media (max-width: 1199px) and (min-width: 1092px ) {
+    #base_Div {
+        #base_content_Div {
+            #page_content_Div {
+                #FixedLeftSection {
+                    #categoryLising {
+                        #ParentScrollElement {
+                            #listing {
+                                .all-categories, .category-name {
+                                    a.category-link {
+                                        width: 73%;
+                                    }
+
+                                    .CategorySettings {
+                                        display: block;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media (max-width: 815px) and (min-width: 728px ) {
+    #base_Div {
+        #base_content_Div {
+            #page_content_Div {
+                #FixedLeftSection {
+                    #categoryLising {
+                        #ParentScrollElement {
+                            #listing {
+								#CatergoryHeading {
+										h4 {
+											font-size: 15px;
+										}
+									}
+                                .all-categories, .category-name {
+                                    a.category-link {
+                                        width: 53%;
+                                    }
+
+                                    .CategorySettings {
+                                        display: block;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media (max-width: 1092px) and (min-width: 815px ) {
+    #base_Div {
+        #base_content_Div {
+            #page_content_Div {
+                #FixedLeftSection {
+                    #categoryLising {
+                        #ParentScrollElement {
+                            #listing {
+                                .all-categories, .category-name {
+                                    a.category-link {
+                                        width: 60%;
+                                    }
+
+                                    .CategorySettings {
+                                        display: block;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+

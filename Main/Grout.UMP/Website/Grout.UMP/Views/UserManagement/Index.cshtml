@@ -1,0 +1,316 @@
+﻿@{
+    ViewBag.Title = GlobalAppSettings.SystemSettings.OrganizationName + " - Users List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var groupList = ViewBag.Groups as List<Group>;
+}
+
+@section styles{
+    @Styles.Render("~/Styles/user-management-module")
+}
+
+@section scripts{
+
+    @Scripts.Render("~/Scripts/user-management")
+
+    <script>
+        window.data = JSON.parse(@Html.Raw(Json.Encode(ViewBag.users)));
+    </script>
+
+    <script type="text/javascript">
+
+        function selectItems(e) {
+            var parentRow = $(e.event.currentTarget.parentNode).parents(".user-row-details");
+            $(parentRow).hasClass('user-table-row-selected') ? $(parentRow).removeClass('user-table-row-selected') : $(parentRow).addClass("user-table-row-selected");
+            ($(".grid-view-table").find(".user-table-row-selected").length > 0) ? $("#AddUserInGroup").fadeIn("slow") : $("#AddUserInGroup").fadeOut("slow");
+        }
+    </script>
+
+    <script type="text/x-jsrender" id="UserProfileTemplate">
+        
+        <a class="item-name" title="{{:DisplayName}}" href="/administration/user-management/users/edit?username={{:UserName}}">{{:DisplayName}}</a>
+        
+    
+    </script>
+    <script type="text/x-jsrender" id="itemNameHeader">
+        <div class="item-name">Name</div>
+    </script>
+    <script type="text/x-jsrender" id="options">
+        <div class="dropdown">
+            <span class="dropdown-toggle option-icon" data-toggle="dropdown" data-content="{{:UserName}}">
+                <span class="su su-options"> </span>
+            </span>
+            <ul class="dropdown-menu" role="menu">
+                <li>
+                    <a href="/administration/permissions/users/edit?userId={{:UserId}}" title="">
+                        <span class="su su-settings-2"></span>
+                        Manage Permissions
+                    </a>
+                </li>
+				<hr>
+                
+                <li>
+                    <a href="/administration/user-management/users/edit?username={{:UserName}}" title="">
+                        <span class="su su-edit"></span>
+                        Edit
+                    </a>
+                </li>
+               
+                <li data-content="{{:UserId}}">
+                    <a class="delete_class" href="javascript:void(0);" title="">
+                        <span class="su su-delete"></span>
+                        Delete
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </script>
+
+    <script type="text/javascript">
+        $(function() {
+            $("#searchUsers").val("");
+            var data = ej.DataManager({
+                url: "/UserManagement/GetAllUserList",
+                adaptor: new ej.UrlAdaptor()
+            });
+
+            $("#user_grid").ejGrid({
+                dataSource: data,
+                gridLines: ej.Grid.GridLines.Horizontal,
+                allowPaging: true,
+                allowSorting: true,
+                allowSearching: true,
+                allowSelection: true,
+                allowFiltering: true,
+                pageSettings: { pageSize: 20 },
+                filterSettings: { filterType: "menu" },
+                selectionType: ej.Grid.SelectionType.Multiple,
+                selectionSettings: { selectionMode: ["row"] },
+                enableRowHover: true,
+                rowDataBound: function() {
+                    var height = $(".e-gridcontent").height();
+                    if (height != null) {
+                        rowBound(height);
+                    }
+                },
+                dataBound: function(args) {
+                    refreshFooterPosition($(".e-gridcontent").height());
+                },
+                rowSelecting: function(e) {
+                    this.multiSelectCtrlRequest = true;
+
+                },
+                rowSelected: "fnUserRowSelected",
+                recordClick: "fnUserRecordClick",
+                load: "fnOnUserGridLoad",
+                actionBegin: "fnOnUserGridActionBegin",
+                actionComplete: "fnOnUserGridActionComplete",
+                columns: [
+                    {
+                        template: true,
+                        allowSorting: true,
+                        templateID: "#UserProfileTemplate",
+                        headerText: "Name",
+                        width: 115,
+                        headerTemplateID: "#itemNameHeader",
+                        field: "DisplayName",
+                        type: "string"
+                    },
+                    {
+                        field: "Email",
+                        headerText: "Email Address",
+                        type: "string",
+                        width: 155
+                    },
+                    {
+                        field: "StatusDescription",
+                        headerText: "Status",
+                        width: 110,
+                        allowFiltering: false
+                    },
+                    {
+                        template: true,
+                        allowSorting: false,
+                        templateID: "#options",
+                        width: 75,
+                        allowFiltering: false
+                    }
+                ]
+
+            });
+        });
+    </script>
+}
+
+    @Html.Partial("../Shared/_FixedLeftSection", new ViewDataDictionary {{"IsCategoryLising", "false"}})
+
+    <div id="base_container">
+        <div>
+            <input type="hidden" id="HiddenGroupId" value="@String.Join(",", groupList.Select(s => s.GroupId))" />
+            <input type="hidden" id="HiddenGroupName" value="@String.Join(",", groupList.Select(s => s.GroupName))" />
+        </div>
+        <div class="col-md-12 no-padding">
+            <div class="col-md-12" id="userTitle">
+                <span class="pull-left" id="userTitleWithCount">
+                    USERS (<span id="total_record_count"></span>)
+                    <input type="hidden" id="user_count" value="@ViewBag.userCount">
+                </span>
+                <div id="searchArea">
+                    <input type="text" id="searchUsers" placeholder="Search users"/>
+                    <span class="su su-search search-user" title="Search"></span>
+                </div>
+                <ul class="pull-right">
+                    <li class="dropdown" style="list-style: none">
+                        <span class="dropdown-toggle btn btn-success" data-toggle="dropdown" id="new_user_dropdown" title="Add new user">
+                            <span>New User </span>
+                            <span class="caret" style="color: white"></span>
+                        </span>
+                        <ul class="dropdown-menu multi-level" role="menu" id="dropdown_options">
+
+                            <li id="AddUserDash" title="Add new user" onclick=" onUserAddDialogOpen() ">
+                                <a href="javascript:void(0)" title="Add new user">
+                                    <span class="su su-user-add"> </span>
+                                    Create User
+                                </a>
+                            </li>
+
+                            <li title="Add new user">
+                                <a href="/administration/user-management/users/import-csv" title="Import users from csv">
+                                    <span class="su su-download"> </span>
+                                    Import from csv
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+@if (ViewBag.ActiveDirectory!=null)
+{
+    <a href="/administration/user-management/users/active-directory/synchronize" class="btn btn-primary synchronize-users" title="Synchronize users with Active Directory">Active Directory Synchronization</a>
+}
+            <div class="flying-add hide" id="AddUserInGroup">
+                <span class="btn btn-danger MakeFlyDeleteUsers" title="Delete selected users" data-value="@ViewBag.LoggedUser">Delete User</span>
+                <span class="btn btn-default MakeFlyNewGroup" title="Assign a group to selected users" onclick="MakeFlyAddInGroup()">Assign Group</span>
+            </div>
+            <div id="userList_container" class="list col-md-12">
+                <div class="col-md-12 container-fluid page-inner-padding no-padding ">
+                    <div id="user_grid">
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="user_add_dialog" class="no-padding">
+        <form class="col-lg-12 no-padding add-user-dialog-form" id="PopupContainer" autocomplete="off">
+            <div class="col-md-12 header-menu">
+                <div class="col-xs-6 no-padding">
+                    <span class="su su-user-add Head-icon"></span>
+                    <span class="PopupTitle">Add User</span>
+                </div>
+                <div class="col-xs-6 no-padding">
+                    <a class="PopupClose" title="Close" href="javascript:void(0);" onclick=" onUserAddDialogClose() ">
+                        <span class="su su-close"></span>
+                    </a>
+                </div>
+            </div>
+            <div class="dialogBody col-xs-12 no-padding form">
+                <div class="col-xs-12 no-left-padding padding20 no-bottom-padding no-right-padding">
+                    <div class="col-xs-4">Username<span class="Mandatory">*</span></div>
+                    <div class="col-xs-8 no-left-padding">
+                        <input type="text" id="username" class="form-control UsermgmtInputtext validation" placeholder="Username" name="username" data-name="username">
+                        <span class="useradd_validation_messages" id="invalid_username"></span>
+                    </div>
+                </div>
+                <div class="col-xs-12 no-left-padding padding20 no-bottom-padding no-right-padding">
+                    <div class="col-xs-4">Email address<span class="Mandatory">*</span></div>
+                    <div class="col-xs-8 no-left-padding">
+                        <input type="text" id="mailid" placeholder="Email address" class="form-control UsermgmtInputtext validation" name="email-address" data-name="email address" />
+                        <span class="useradd_validation_messages" id="invalid_email"></span>
+                    </div>
+                </div>
+                <div class="col-xs-12 no-left-padding padding20 no-bottom-padding no-right-padding">
+                    <div class="col-xs-4">First name<span class="Mandatory">*</span></div>
+                    <div class="col-xs-8 no-left-padding">
+                        <input type="text" id="firstname" class="form-control UsermgmtInputtext validation" placeholder="First name" name="first-name" data-name="first name">
+                        <span class="useradd_validation_messages" id="invalid_firstname"></span>
+                    </div>
+                </div>
+                <div class="col-xs-12 no-left-padding padding20 no-bottom-padding no-right-padding">
+                    <div class="col-xs-4">Last name</div>
+                    <div class="col-xs-8 no-left-padding">
+                        <input type="text" id="lastname" class="form-control UsermgmtInputtext" placeholder="Last name" name="last-name" data-name="last name">
+                        <span class="useradd_validation_messages" id="invalid_lastname"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 dialogFooter rightAlign no-right-padding no-left-padding">
+                <div class="col-xs-4"></div>
+                <div class="col-xs-8 no-padding rightAlign">
+                    <input type="button" id="ADDUSER" class="btn btn-primary rightAlign" value="Add" />
+                    <input type="button" id="CANCELUSER" class="btn btn-link rightAlign PopupClose" value="Cancel" onclick=" onUserAddDialogClose() " />
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div id="user_delete_confirmation" class="no-padding">
+        <div class="col-lg-12 no-padding" id="PopupContainer">
+            <div class="col-md-12 header-menu">
+                <div class="col-xs-6 no-padding">
+                    <span class="su su-delete Head-icon"></span>
+                    <span class="PopupTitle">Delete User</span>
+                </div>
+                <div class="col-xs-6 no-padding">
+                    <a href="javascript:void(0);" onclick=" onDeleteDialogClose() " class="PopupClose"><span class="su su-close"></span></a>
+                    <div id="folder-setting-arrow" class="downArrow" style="left: 37px;"></div>
+                </div>
+            </div>
+            <div class="dialogBody col-xs-12 no-padding">
+                <div class="col-xs-12 no-left-padding padding20 no-bottom-padding no-right-padding">
+                    <div class="deleteMsg">Are you sure you want to delete the User(s)?</div>
+                </div>
+                <div class="col-xs-12 dialogFooter rightAlign no-right-padding no-left-padding">
+                    <div class="col-xs-4"><input type="hidden" id="hiddenId" value="@ViewBag.id" /></div>
+                    <div class="col-xs-8 no-padding rightAlign">
+                        <input type="hidden" value="" id="delete_user_id">
+                        <input type="button" onclick=" MakeFlyDeleteUsers() " class="btn btn-danger rightAlign" value="Yes" />
+                        <input type="button" onclick=" onDeleteDialogClose() " class="btn btn-link rightAlign PopupClose" value="No" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="singleuser_delete_confirmation" class="no-padding">
+        <div class="col-lg-12 no-padding" id="PopupContainer">
+            <div class="col-md-12 header-menu">
+                <div class="col-xs-6 no-padding">
+                    <span class="su su-delete Head-icon"></span>
+                    <span class="PopupTitle">Delete User</span>
+                </div>
+                <div class="col-xs-6 no-padding">
+                    <a href="javascript:void(0);" onclick=" onSingleDeleteDialogClose() " class="PopupClose"><span class="su su-close"></span></a>
+                    <div id="folder-setting-arrow" class="downArrow" style="left: 37px;"></div>
+                </div>
+            </div>
+            <div class="dialogBody col-xs-12 no-padding">
+                <div class="col-xs-12 no-left-padding padding20 no-bottom-padding no-right-padding">
+                    <div class="deleteMsg">Are you sure you want to delete the User?</div>
+                </div>
+                <div class="col-xs-12 dialogFooter rightAlign no-right-padding no-left-padding">
+                    <div class="col-xs-4"><input type="hidden" id="hiddenId" value="@ViewBag.id" /></div>
+                    <div class="col-xs-8 no-padding rightAlign">
+                        <input type="hidden" value="" id="delete_user_id">
+                        <input type="button" onclick=" deleteSingleUser() " class="btn btn-danger rightAlign" value="Yes" />
+                        <input type="button" onclick=" onSingleDeleteDialogClose() " class="btn btn-link rightAlign PopupClose" value="No" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+
+
+

@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>
+        Update Report
+    </title>
+    @Scripts.Render("~/scripts/add-report")
+    @Styles.Render("~/styles/add-report")
+    <script>
+        $(function () {
+            createEditRdlPopup(@Html.Raw(Json.Encode(ViewData["reportInfo"])));
+            window.focus();
+        });
+    </script>
+</head>
+<body style="background-color: white">
+    <form name="addReportForm" id="editReportForm" method="post" enctype="multipart/form-data" autocomplete="off">
+        <div id="createReportPopupHolder">
+            <input type="hidden" name="selectedFolderId" id="selectedFolderId" value="" />
+            <input type="hidden" id="publishedFileName" value="none">
+            <div class="col-md-12 header-menu">
+                <span class="su su-report Head-icon"></span>
+                <span class="PopupTitle">Update Report</span>
+                <a href="javascript:void(0);" title="Close" class="PopupClose" onclick="closeNewRDLAddPopup()"><span class="su su-close"></span></a>
+            </div>
+            <div id='new_rdl_tab_content' class='col-md-12 no-top-margin'>
+                <div class='col-md-12  new-rdl-content-holder' id='new_rdl_content_holder'>
+                    <table cellspacing='10' cellpadding='0' border='0' width='100%'>
+                        <tr>
+                            <td width='20%'>
+                                <div class="bottom-margin30">Select category</div>
+                            </td>
+                            <td width='80%'>
+                                <div class="bottom-margin30">
+                                    <select id="selected_category" data-live-search="true" title='Select category' name="categoryId" class="selectpicker form-control" data-size="5" style="width: 100%; margin-bottom: 15px;" tabindex="1" autofocus>
+                                        @for (var item = 0; item < Model.Count; item++)
+                                        {
+                                            <option value="@Model[item].Id">@Model[item].Name</option>
+                                        }
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width='20%'><div class="bottom-margin30">Name<span class="Mandatory">*</span></div></td>
+                            <td width='80%'>
+                                <input type='text' class='form-control edit-text-fields bottom-margin30' name='file_name' id='file_name' maxlength="100" tabindex="2" />
+                                <span id='report_name_validation_error' class='validation-messages' ></span>
+                                <span id="fileNameMessage" class="ErrorMessage hide">Please enter report name</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><div class="bottom-margin30">Description</div></td>
+                            <td>
+                                <textarea id='file_description' class='form-control edit-text-fields bottom-margin30' maxlength="1024" tabindex="3"></textarea>
+                                <span class="notification">
+                                    *1024 characters maximum
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><div>RDL file<span class="Mandatory">*</span></div></td>
+                            <td>
+                                <input type="hidden" name="rdl_filename" id="rdl_filename" />
+                                <iframe id="report_upload_iframe" style="height:35px" src="@Url.Action("UploadReportView", "Reports")" scrolling="no" tabindex="-1"></iframe>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><span id="uploadValidation" class="ErrorMessage"></span></td>
+                        </tr>
+                        <tr id="version_comment" class="DisplayNone">
+                            <td>Version comments</td>
+                            <td>
+                                <input id='comment' class='form-control' type='text' readonly='' value='' tabindex="4">
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="col-md-12 DisplayNone no-padding" id="datasource_list">
+                        <h4>Select Data Source(s)</h4>
+                        <table id="datasource_list_table"></table>
+                    </div>
+                </div>
+            </div>
+            <div class='col-md-12 new-report-button-holder'>
+                <div class='create-rdl-btns'>
+                    <input type='button' title="" value='Update' id='publish_report' onclick="addRDLReport()" class='btn btn-primary small-right-margin' disabled tabindex="5">
+                    <input type='button' title="" value='Cancel' class='btn btn-link NoStyleCloseClick' onclick="    closeNewRDLAddPopup()" tabindex="6">
+                </div>
+            </div>
+        </div>
+    </form>
+
+</body>
+</html>

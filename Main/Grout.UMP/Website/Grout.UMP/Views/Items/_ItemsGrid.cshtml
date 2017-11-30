@@ -1,0 +1,241 @@
+﻿@{
+    var gridName = ViewBag.gridName;
+}
+<div id="itemsGrid" class="item-grid">
+</div>
+<script type="text/x-jsrender" id="itemNameHeader">
+    <div class="item-name">Name</div>
+</script>
+<script type="text/x-jsrender" id="Description">
+    <div title="{{:Description}}">
+        {{:Description}}
+    </div>
+</script>
+
+<script type="text/x-jsrender" id="Category">
+    <div title="{{:CategoryName}}">
+        {{:CategoryName}}
+    </div>
+</script>
+
+<script type="text/x-jsrender" id="CreatedByDisplayName">
+    <div title="{{:CreatedByDisplayName}}">
+        {{:CreatedByDisplayName}}
+    </div>
+</script>
+
+<script type="text/x-jsrender" id="Category">
+    <div title="{{:CategoryName}}">
+        {{:CategoryName}}
+    </div>
+</script>
+
+<script type="text/x-jsrender" id="modifiedDate">
+    <div title="{{:ModifiedDate}}">
+        {{:ModifiedDate}}
+    </div>
+</script>
+
+<script type="text/x-jsrender" id="itemName">
+    <div class="item-name">
+        {{if ItemType=="3"}}
+        <div><a href="/reports/view?id={{:Id}}" title="{{:Name}}" target="_blank">{{:Name}}</a></div>
+        {{else}}
+        <div><a href="/items/download?id={{:Id}}" title="{{:Name}}">{{:Name}}</a></div>
+        {{/if}}
+    </div>
+</script>
+
+<script type="text/x-jsrender" id="options">
+    <div class="dropdown">
+        <span class="dropdown-toggle option-icon" title="Actions" data-toggle="dropdown">
+            <span class="su su-options"></span>
+        </span>
+        <ul class="dropdown-menu" role="menu">
+            {{if ItemType=="3"}}
+            <li>
+                <a href="/reports/view?id={{:Id}}" title="" target="_blank">
+                    <span class="su su-open"><span class="path1"></span><span class="path2"></span></span>
+                    Open
+                </a>
+            </li>
+            {{/if}}
+            <li>
+                <a href="/items/download?id={{:Id}}" title="">
+                    <span class="su su-download"></span>
+                    {{if ItemType=="3"}}
+                    Download Report
+                    {{else}}
+                    Download
+                    {{/if}}
+                </a>
+            </li>
+            <hr />
+            {{if ItemType=="3"}}
+            <li>
+                <a href="javascript:void(0);" title="" class="moveItem" data-itemid="{{:Id}}" data-action="Move">
+                    <span class="su su-move"></span>
+                    Move
+                </a>
+            </li>
+            <li>
+                <a href="javascript:void(0);" title="" class="copyItem" data-itemid="{{:Id}}" data-action="Copy">
+                    <span class="su su-copy"></span>
+                    Copy
+                </a>
+            </li>
+
+            <li>
+                <a href="javascript:void(0);" title="" class="copyItem" data-itemid="{{:Id}}" data-action="Clone">
+                    <span class="su su-clone"></span>
+                    Clone
+                </a>
+            </li>
+            <hr />
+            {{/if}}
+            {{if ItemType=="3" && CanSchedule}}
+            <li>
+                <a href="javascript:void(0);" class="ScheduleReports" title="" data-itemname="{{:Name}}" data-itemid="{{:Id}}">
+                    <span class="su su-calendar-1"></span>
+                    Schedule
+                </a>
+            </li>
+            <hr />
+            {{/if}}
+            <li>
+                <a href="javascript:void(0);" class="versionButton" title="" data-itemname="{{:Name}}" data-itemid="{{:Id}}">
+                    <span class="su su-versions"></span>
+                    Version history
+                </a>
+            </li>
+
+            {{if CanWrite || CanDelete || ItemType=="3"}}
+            <hr />
+            {{/if}}
+            {{if ItemType=="3"}}
+            <li class="hidden-xs hidden-sm hidden-md">
+                <a href="/reportdesigner/Groutreportdesigner.exe" title="">
+                    <span class="su su-download"></span>
+                    Download Report Designer
+                </a>
+            </li>
+            {{/if}}
+            {{if CanWrite}}
+            <li class="hidden-xs hidden-sm hidden-md">
+                <a href="javascript:void(0);" title="" class="item-edit" data-item-id="{{:Id}}">
+                    <span class="su su-edit"></span>
+                    Update
+                </a>
+            </li>
+            {{/if}}
+            {{if CanDelete}}
+            <li>
+                <a href="javascript:void(0);" title="" class="item-delete" data-itemtype="{{:ItemType}}" data-item-id="{{:Id}}" data-name="{{:Name}}">
+                    <span class="su su-delete"></span>
+                    Delete
+                </a>
+            </li>
+            {{/if}}
+        </ul>
+    </div>
+
+</script>
+
+
+
+<div id="ItemAction" title="Item Actions" class="no-padding"><iframe style="border: 0;" width="100%" height="100%"></iframe></div>
+<script type="text/javascript" language="javascript">
+    var gridName = $('#itemGridContainer').attr("data-grid-name");
+    var toolbarItems = [{ templateID: "#OpenTemplate" }, { templateID: "#DownloadTemplate" }, { templateID: "#Separator1" }, { templateID: "#CanEditTemplate" }, { templateID: "#CanDeleteTemplate" }, { templateID: "#Separator2" }, { templateID: "#MoveTemplate" }, { templateID: "#CopyTemplate" }, { templateID: "#CloneTemplate" }, { templateID: "#Separator3" }, { templateID: "#ScheduleTemplate" }, { templateID: "#Separator4" }, { templateID: "#VersionTemplate" }];
+    var categoryName = "@HttpContext.Current.Request.QueryString["categoryName"]";
+    var filters = { filterType: "menu" };
+    if (gridName == "reports" && categoryName != "") {
+        var filters = { filterType: "menu", "filteredColumns": [{ field: "CategoryName", operator: "equal", value: categoryName }] };
+    }
+
+    $(document).ready(function () {
+        ej.support.enableLocalizedSort = true;
+        $("#itemsGrid").ejGrid({
+            dataSource: ej.DataManager({ url: "/@gridName/GetItems", adaptor: "UrlAdaptor" }),
+            gridLines: ej.Grid.GridLines.Horizontal,
+            allowPaging: true,
+            pageSettings: { pageSize: 20 },
+            allowSorting: true,
+            allowSearching: true,
+            allowFiltering: true,
+            allowSelection: true,
+            filterSettings: filters,
+            actionBegin: "fnActionBegin",
+            actionComplete: "fnActionComplete",
+            rowDataBound: function(){
+				var height=$(".e-gridcontent").height();
+				if(height!=null){
+					rowBound(height);
+				}
+			},
+			dataBound: function (args) {
+                if (location.pathname.toLowerCase() === "/" || location.pathname.toLowerCase() === "/reports") {
+                    refreshScroller();
+                }
+                refreshFooterPosition($(".e-gridcontent").height());
+            },
+            enableRowHover: true,
+            columns: [
+                {
+                    headerText: "Name",
+                    template: true,
+                    headerTemplateID: "#itemNameHeader",
+                    templateID: "#itemName",
+                    field: "Name",
+                    width: 70,
+                    type: "string",
+                    allowFiltering: true
+                },
+                {
+                    headerText: "Description",
+                    width: 120,
+                    template: true,
+                    field: "Description",
+                    templateID: "#Description",
+                    type: "string",
+                    allowFiltering: true
+                },
+                {
+                    headerText: "Category",
+                    width: 70,
+                    field: "CategoryName",
+                    visible: gridName == "reports",
+                    allowFiltering: true,
+                    template: true,
+                    templateID: "#Category",
+                    type: "string"
+                },
+                {
+                    headerText: "Owner",
+                    width: 80,
+                    field: "CreatedByDisplayName",
+                    visible: !(window.innerWidth < 1200),
+                    allowFiltering: true,
+                    template: true,
+                    templateID: "#CreatedByDisplayName",
+                    type: "string"
+                },
+                {
+                    headerText: "Last Modified",
+                    width: 70,
+                    field: "ModifiedDate",
+                    template: true,
+                    templateID: "#modifiedDate",
+                    allowFiltering: false
+                },
+                {
+                    template: true,
+                    templateID: "#options",
+                    width: (window.innerWidth > 1200) ? 15 : 25,
+                    allowFiltering: false,
+                    allowSorting: false
+                }
+            ]
+        });
+    });
+</script>

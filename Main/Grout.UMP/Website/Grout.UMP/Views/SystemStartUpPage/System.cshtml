@@ -1,0 +1,145 @@
+﻿
+<html>
+<head>
+    <title>Welcome to Grout</title>
+    <link rel="icon" href="~/Content/Images/Application/Startup/Grout_Favicon.png"  />
+
+    @Styles.Render("~/styles/system-configuration")
+        @Scripts.Render("~/scripts/system-configuration")
+
+</head>
+<body class="System-StartUp-Settings-bg">
+    <div class="col-lg-12 startupPageConatiner" id="startupPageConatiner" style="height:100%;">
+        <div id="system_settings_general" class="col-md-12">
+            <div class="system-settings-startup-logo">
+                <img src="~/Content/Images/Application/Grout_Login_Logo.png"/>
+            </div>
+            <div class="title">Welcome to Grout</div>
+            <div class="col-md-12 system-settings-page-container" id="system-settings-container-page1">
+                <div class="system-settings-page1-field-container">
+                    <div class="content content-value">
+                        Application needs a database to proceed further. So choose a database to proceed.
+                    </div>
+                    <div id="connection_validation" class="txt-holder">
+                        <div class="validation-errors"></div>
+                    </div>
+                    <div class="col-md-12 databasetypes">
+                        <div class=" col-md-6 center-db-types">
+                            <div>
+                                <div>
+                                    <input type="radio" id="SQLCE" class="sqlceclass dbselect" name="DatabaseType" value="MSSQLCE" checked='checked' />
+                                    <label for="SQLCE" class="SqlceLabel">Embedded SQL CE <br/>(For testing purpose only)</label>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="col-md-6">
+                                    <input type="radio" id="MSSQL" class="dbselect" name="DatabaseType" value="MSSQL" />
+                                    <label for="MSSQL" class="MssqlLabel">SQL Server</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form id="db_content_holder" class="col-md-12 no-padding DisplayNone" autocomplete="off">
+                        <div class="txt-holder centerAlign">
+                            <input type="text" id="txt_servername" name="servername" autofocus="autofocus" class="form-control system-settings-startup-page-fields db-fields" placeholder="Server name" />
+                            <span class="su su-login-error validation-txt-errors"></span>
+                        </div>
+                        <div class="txt-holder centerAlign">
+                            <div id="auth_type_dropdown" class="system-settings-startup-page-fields">
+                                <select id="Checkwindows" class="selectpicker system-settings-startup-page-fields db-fields">
+                                    <option value="sql">SQL Authentication</option>
+                                    <option value="windows">Windows Authentication</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="txt-holder centerAlign">
+                            <input type="text" id="txt_login" name="username" class="form-control system-settings-startup-page-fields db-fields" placeholder="Username" />
+                            <span class="su su-login-error validation-txt-errors"></span>
+                        </div>
+                        <div class="txt-holder centerAlign">
+                            <input type="text" style="display:none;">
+                            <input type="password" id="txt_password_db" name="password" class="form-control system-settings-startup-page-fields db-fields" placeholder="Password" />
+                            <span class="su su-login-error validation-txt-errors"></span>
+                            <div class="show-hide-password"></div>
+                        </div>
+                        <div class="txt-holder DatabaseName centerAlign">
+                            <input type="text" id="txt_dbname" name="dbname" class="form-control system-settings-startup-page-fields dbname-fields db-fields" placeholder="Database name" />
+                            <span class="su su-login-error validation-txt-errors"></span>
+                            <div class="show-hide-password"></div>
+                        </div>
+
+                    </form>
+                    <div class="txt-holder btn-holder centerAlign">
+                        <button type="button" id="db_config_submit" class="btn btn-primary DisplayNone">Proceed</button>
+                        <button type="button" id="MovetoNext" class="btn btn-primary">Proceed</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 system-settings-page-container" id="system-settings-container-page2">
+                <div class="content">
+                    Enter your details to create a system administrator account.
+                </div>
+                <form class="admin-account-fields-container" autocomplete="off">
+                    <div class="admin-avatar">
+                        <img src="~/Content/images/ProfilePictures/default.png" width="120" height="120" />
+                    </div>
+                    <div class="form-div form-group">
+                        <input type="text" tabindex="1" id="txt_username" name="username" class="form-control" placeholder="Username" required />
+                        <span class="su su-login-error txtusername"></span>
+                    </div>
+                    <div class="form-div form-group">
+                        <input type="text" tabindex="2" id="txt_firstname" name="firstname" class="form-control" placeholder="First name" />
+                        <span class="su su-login-error txt_firstname"></span>
+                    </div>
+                    <div class="form-div form-group">
+                        <input type="text" tabindex="2" id="txt_lastname" class="form-control" placeholder="Last name" name="lastname" />
+                        <span class="su su-login-error txt_lastname"></span>
+                    </div>
+                    <div class="form-div form-group">
+                        <input type="text" tabindex="3" id="txt_emailid" class="form-control" placeholder="Email address" name="email" />
+                        <span class="su su-login-error txtemailid"></span>
+                    </div>
+                    <div class="form-div form-group">
+                        <input type="text" style="display:none;">
+                        <input type="password" tabindex="4" id="txt_password" class="form-control" placeholder="Password" name="password" />
+                        <span class="su su-eye show-hide-password"></span>
+                        <span class="su su-login-error" id="newpassword"></span>
+                    </div>
+                    <div class="form-div form-group">
+                        <input type="password" tabindex="5" id="txt_confirm_password" class="form-control" placeholder="Confirm password" name="confirm" />
+                        <span class="su su-eye show-hide-password"></span>
+                        <span class="su su-login-error" id="confirmpassword"></span>
+                    </div>
+                    <div class="">
+                        <input type="button" tabindex="5" id="btn_proceed_page2" class="btn btn-primary" value="Proceed" />
+                    </div>
+                </form>
+             </div>
+        </div>
+
+        <div id="system_settings_footer" class="col-md-12 system-sttings-footer">
+            <div class="splitter"></div>
+            <div class="col-md-7"><p class="pull-left copy-right-info">Powered by <img width="100" height="25" src="~/Content/Images/Application/Grout_Footer_Logo.png" alt="Grout" /> | Copyright &copy; 2001 - @DateTime.Now.Year Grout Inc | All Rights Reserved</p></div>
+            <div class="col-md-5">
+                @*<div class="start-footer-content pull-right">
+                    <ul>
+                        <li class="right">
+                            <a href="javascript:void(0);">Documentation</a>
+                        </li>
+                        <li class="right">
+                            <a href="javascript:void(0);">Sales</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);">Support</a>
+                        </li>
+                    </ul>
+                </div>*@
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
+

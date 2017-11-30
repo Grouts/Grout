@@ -1,0 +1,51 @@
+﻿@using Newtonsoft.Json
+@{
+    ViewBag.Title = GlobalAppSettings.SystemSettings.OrganizationName + " - Reports";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var categories = String.Empty;
+}
+
+@section styles{
+    @Styles.Render("~/styles/reports-page")
+
+}
+
+@section scripts{
+    @Scripts.Render("~/scripts/reports-page")
+
+}
+@if (Model != null)
+{
+    categories = JsonConvert.SerializeObject(Model);
+}
+
+<div id="verionWindowContainer" class="no-padding">
+    <iframe width="100%" height="100%" style="height:100%"></iframe>
+</div>
+
+@Html.Partial("../Shared/_FixedLeftSection", new ViewDataDictionary { { "IsCategoryLising", "true" }, { "Categories", categories } })
+
+<div class="item-listing" style="height: 100%">
+    <div id="searchArea">
+        <input type="text" id="searchItems" placeholder="Search reports" />
+        <span class="su su-search search-item" title="Search reports"></span>
+    </div>
+    <div id="categoryArea">
+        <div id="categoryName" title="" style="color: #1b1c1c; font-size: 30px; font-family: Calibri;">
+            All Reports
+        </div>
+        <div id="categoryDescription" style="color: #4c4c4c; font-size: 14px; margin-top: 5px; font-family: Calibri;">
+        </div>
+    </div>
+    <div id="itemGridContainer" data-grid-name="reports">
+        @Html.Partial("../Items/_ItemsGrid", new ViewDataDictionary { { "gridName", "reports" } })
+    </div>
+</div>
+<div id="EditCategoryPopup">
+    <iframe id="EditCategoryPopup_iframe" class="categoryDialog"></iframe>
+</div>
+<div id="PopupContainer" style="display:none">
+
+    <iframe width="875" height="600" id="scheduler_popup_iframe" class="datasource-popup-frame"></iframe>
+</div>
+@Html.Partial("../Items/_AddItems")

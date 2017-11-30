@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4A6C982F-AC63-4465-A13D-B8859F6D6B2D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Syncfusion.UMP.InstantSearch.Base</RootNamespace>
+    <AssemblyName>Syncfusion.UMP.InstantSearch.Base</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Syncfusion.UMP.Base">
+      <HintPath>..\Syncfusion.UMP.Base\bin\Debug\Syncfusion.UMP.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.UMP.Item.Base">
+      <HintPath>..\Syncfusion.UMP.Item.Base\bin\Debug\Syncfusion.UMP.Item.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Core">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Drawing.Design">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Extensions">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Exceptions\SearchException.cs" />
+    <Compile Include="Handler\ISearchProcessor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Handler\Processors\AllProcesser.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Handler\Processors\GroupsProcessor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Handler\Processors\ProjectProcessor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Handler\Processors\ReportsProcessor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Handler\Processors\UserProcessor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Handler\SearchFactory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Handler\SearchHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="InstantSearch.cs" />
+    <Compile Include="Model\SearchArgs.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

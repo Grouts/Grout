@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = GlobalAppSettings.SystemSettings.OrganizationName + " - Categories";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model List<ItemDetail>
+
+@section styles{
+
+    @Styles.Render("~/styles/category-page")
+}
+
+@section scripts{
+    @Scripts.Render("~/scripts/category-page")
+}
+<div id="itemGridHeading">
+    Categories
+    <div class="pull-right">
+        <span class="su su-add items-add" onclick="openAddOptions()"></span>
+    </div>
+</div>
+<div id="itemGridContainer">
+    @Html.Partial("../Items/_ItemsGrid", new ViewDataDictionary { { "gridName", "category" } })
+</div>
+<div id="EditCategoryPopup">
+    <iframe id="EditCategoryPopup_iframe" class="categoryDialog"></iframe>
+</div>
+@Html.Partial("../Items/_AddItems")

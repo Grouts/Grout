@@ -1,0 +1,117 @@
+﻿@{
+    ViewBag.Title = GlobalAppSettings.SystemSettings.OrganizationName + " - Users - CSV import";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@section styles{
+    @Styles.Render("~/Styles/user-management-module")
+	<style>
+		#base_Div #base_footer_Div{
+			left:0 !important;
+			width:100% !important;
+		}
+	</style>
+}
+
+@section scripts{
+    @Scripts.Render("~/Scripts/user-management")
+
+    <script type="text/x-jsrender" id="user-detail-validation">
+        <span class="su su-login-error user-import-validation"></span>
+    </script>
+
+    <script type="text/javascript">
+        var data1 = @Html.Raw(ViewBag.ser);
+
+        $(function () {
+            var data = data1.Data.Data;
+
+            $("#Grid").ejGrid({
+                dataSource: data,
+                allowPaging: false,
+                allowSorting: false,
+                allowSelection: false,
+                allowScrolling: false,
+                actionComplete: function (args) {
+                    if ($(".e-gridcontent").find("td").html() == "No records to display") {
+                        $("#SaveButtonClick").attr("disabled", "disabled");
+                    }
+                    else {
+                        $("#SaveButtonClick").removeAttr("disabled");
+                    }
+                },
+                dataBound: function (args) {
+                    refreshFooterPosition($(".e-gridcontent").height());
+                },
+                columns: [
+                    { field: "Username", cssClass: "user-name", headerText: "Username", width: 30 },
+                    { field: "Email", cssClass: "email-id", headerText: "Email Address", width: 50 },
+                        { field: "Fullname", headerText: "Name", width: 50 },
+                        { field: "Password", headerText: "Password", width: 50 },
+                        { field: "", headerText: "Error", width: 10, templateID: "#user-detail-validation", visible: false }
+                ]
+            });
+        });
+
+    </script>
+}
+
+<div class="container-fluid">
+    <form action="/administration/user-management/users/import-csv" method="post" onsubmit="" enctype="multipart/form-data">
+        <div class="col-md-12 import-area">
+            <a href="/administration/user-management/users" title="Users" class="back-button">
+                <div class="report-security-head">
+                    <i class="su su-back back-navigaion"> </i>
+                </div>
+            </a>
+            <div class="import-label">
+                IMPORT USERS 
+            </div>
+            <span class="seperator">—</span>
+            <div class="template-link">
+                <a href="/administration/user-management/users/download/csvtemplate" id="download_template" title="Download sample template" class="btn btn-warning">Download Template</a>
+            </div>
+            <div class="import-users">
+                <input type="button" value="Import Users" title="Import users from the list below" onclick="SaveUserListFromCSV();" id="SaveButtonClick" class="btn btn-success pull-right" disabled>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-6 no-padding">
+                <div class="import-label col-md-2">.csv file</div>
+                <div class="col-md-8">
+                <input type="text" class="form-control col-md-6 no-margin" id="filename" readonly value="Browse file path"/> 
+                <span id="triggerFile" class="input-group-addon btn popup">
+                    ...
+                </span>
+                    <input type="file" accept=".csv" name="csvfile" id="csvfile" class="btn popup upload-btn">
+                @if (ViewBag.result == "Error")
+                {
+                    <span id="user_import_validation">Please upload a valid csv file.</span>
+                }
+                </div>
+                <div class="col-md-2">
+                    <input type="submit" class="btn btn-default" title="Upload CSV File here" id="csv_upload" value="Upload" />
+                </div>
+            </div>
+
+        </div>
+    </form>
+    <div class="col-xs-12 no-padding">
+        <div class="list" id="grid_validation_messages">
+            <span id="grid_nodata_validation">There is no data in the uploaded file. Please check and try uploading again.</span>
+            <span id="grid_validation"><span id="userCount">@ViewBag.UserCount</span> User(s) has been added successfully.</span>
+            <span id="grid_error_validation">Duplicate or Invalid data is found. Please change the data accordingly and re-upload the file. </span>
+        </div>
+        <div id="grid-container" class="col-md-12">
+            <div class="col-md-12 container-fluid page-inner-padding no-padding ">
+                <div id="Grid">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" name="AllUserList" id="AllUserList" value="@ViewBag.Pathname" />
+    <input type="hidden" id="UserCount" data-value="@ViewBag.UserExists" />
+    <input type="hidden" id="csvFileError" data-value="@ViewBag.result" />
+</div>

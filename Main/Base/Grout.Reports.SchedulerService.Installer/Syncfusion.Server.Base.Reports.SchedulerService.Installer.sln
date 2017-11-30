@@ -1,0 +1,75 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Syncfusion.Server.Base.Reports.SchedulerService.Installer", "Syncfusion.Server.Base.Reports.SchedulerService.Installer.csproj", "{76B9F38B-6B91-4CBF-B771-BB2F17C3A95D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Syncfusion.Server.Base", "..\Syncfusion.Server.Base\Syncfusion.Server.Base.csproj", "{BBB2C80A-5CCA-408F-8526-F4FFDA93C556}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Syncfusion.Server.Base.Data", "..\Syncfusion.Server.Base.Data\Syncfusion.Server.Base.Data.csproj", "{7C8C0247-0794-43C1-A356-577BE43E31F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Syncfusion.Server.Base.DataClasses", "..\Syncfusion.Server.Base.DataClasses\Syncfusion.Server.Base.DataClasses.csproj", "{449786A6-2C04-4B49-B164-045A69A0400D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Syncfusion.Server.Base.Encryption", "..\Syncfusion.Server.Base.Encryption\Syncfusion.Server.Base.Encryption.csproj", "{386412A5-E588-4A2C-8DE9-EF8697340FE2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{03CF984E-9C4B-4A2F-B629-C75AA276FBB4}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Syncfusion.Server.Base.Logger", "..\Syncfusion.Server.Base.Logger\Syncfusion.Server.Base.Logger.csproj", "{9F894D1F-ACB0-41AD-900E-B747C3F17A89}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Syncfusion.Server.Base.Item", "..\Syncfusion.Server.Base.Item\Syncfusion.Server.Base.Item.csproj", "{4F319D68-2A0D-4C94-AC4B-76E29718E144}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Syncfusion.Server.Base.Reports.Scheduler", "..\Syncfusion.Server.Base.Reports.Scheduler\Syncfusion.Server.Base.Reports.Scheduler.csproj", "{80D01EDE-29EE-4C18-9C7A-FAC7563B742D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Syncfusion.Server.Base.Reports.SchedulerService", "..\Syncfusion.Server.Base.Reports.SchedulerService\Syncfusion.Server.Base.Reports.SchedulerService.csproj", "{05A00DFA-0909-4FD1-9BF7-78892B23F226}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{76B9F38B-6B91-4CBF-B771-BB2F17C3A95D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76B9F38B-6B91-4CBF-B771-BB2F17C3A95D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76B9F38B-6B91-4CBF-B771-BB2F17C3A95D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76B9F38B-6B91-4CBF-B771-BB2F17C3A95D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBB2C80A-5CCA-408F-8526-F4FFDA93C556}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBB2C80A-5CCA-408F-8526-F4FFDA93C556}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBB2C80A-5CCA-408F-8526-F4FFDA93C556}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBB2C80A-5CCA-408F-8526-F4FFDA93C556}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C8C0247-0794-43C1-A356-577BE43E31F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C8C0247-0794-43C1-A356-577BE43E31F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C8C0247-0794-43C1-A356-577BE43E31F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C8C0247-0794-43C1-A356-577BE43E31F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{449786A6-2C04-4B49-B164-045A69A0400D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{449786A6-2C04-4B49-B164-045A69A0400D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{449786A6-2C04-4B49-B164-045A69A0400D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{449786A6-2C04-4B49-B164-045A69A0400D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{386412A5-E588-4A2C-8DE9-EF8697340FE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{386412A5-E588-4A2C-8DE9-EF8697340FE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{386412A5-E588-4A2C-8DE9-EF8697340FE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{386412A5-E588-4A2C-8DE9-EF8697340FE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F894D1F-ACB0-41AD-900E-B747C3F17A89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F894D1F-ACB0-41AD-900E-B747C3F17A89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F894D1F-ACB0-41AD-900E-B747C3F17A89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F894D1F-ACB0-41AD-900E-B747C3F17A89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F319D68-2A0D-4C94-AC4B-76E29718E144}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F319D68-2A0D-4C94-AC4B-76E29718E144}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F319D68-2A0D-4C94-AC4B-76E29718E144}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F319D68-2A0D-4C94-AC4B-76E29718E144}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80D01EDE-29EE-4C18-9C7A-FAC7563B742D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80D01EDE-29EE-4C18-9C7A-FAC7563B742D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80D01EDE-29EE-4C18-9C7A-FAC7563B742D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80D01EDE-29EE-4C18-9C7A-FAC7563B742D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05A00DFA-0909-4FD1-9BF7-78892B23F226}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05A00DFA-0909-4FD1-9BF7-78892B23F226}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05A00DFA-0909-4FD1-9BF7-78892B23F226}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05A00DFA-0909-4FD1-9BF7-78892B23F226}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

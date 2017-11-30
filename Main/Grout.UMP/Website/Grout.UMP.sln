@@ -1,0 +1,91 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2010
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{49FB887C-0249-41A2-9E30-74D58CA12DED}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grout.Base", "..\..\Base\Grout.Base\Grout.Base.csproj", "{BBB2C80A-5CCA-408F-8526-F4FFDA93C556}"
+	ProjectSection(ProjectDependencies) = postProject
+		{449786A6-2C04-4B49-B164-045A69A0400D} = {449786A6-2C04-4B49-B164-045A69A0400D}
+		{7C8C0247-0794-43C1-A356-577BE43E31F7} = {7C8C0247-0794-43C1-A356-577BE43E31F7}
+		{386412A5-E588-4A2C-8DE9-EF8697340FE2} = {386412A5-E588-4A2C-8DE9-EF8697340FE2}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grout.Base.Encryption", "..\..\Base\Grout.Base.Encryption\Grout.Base.Encryption.csproj", "{386412A5-E588-4A2C-8DE9-EF8697340FE2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grout.Base.Item", "..\..\Base\Grout.Base.Item\Grout.Base.Item.csproj", "{4F319D68-2A0D-4C94-AC4B-76E29718E144}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7C8C0247-0794-43C1-A356-577BE43E31F7} = {7C8C0247-0794-43C1-A356-577BE43E31F7}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grout.UMP", "Grout.UMP\Grout.UMP.csproj", "{811D2ECC-F0A0-496C-B9DC-36B967CAA30F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BBB2C80A-5CCA-408F-8526-F4FFDA93C556} = {BBB2C80A-5CCA-408F-8526-F4FFDA93C556}
+		{7C8C0247-0794-43C1-A356-577BE43E31F7} = {7C8C0247-0794-43C1-A356-577BE43E31F7}
+		{4F319D68-2A0D-4C94-AC4B-76E29718E144} = {4F319D68-2A0D-4C94-AC4B-76E29718E144}
+		{80D01EDE-29EE-4C18-9C7A-FAC7563B742D} = {80D01EDE-29EE-4C18-9C7A-FAC7563B742D}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grout.Base.DataClasses", "..\..\Base\Grout.Base.DataClasses\Grout.Base.DataClasses.csproj", "{449786A6-2C04-4B49-B164-045A69A0400D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grout.Base.Data", "..\..\Base\Grout.Base.Data\Grout.Base.Data.csproj", "{7C8C0247-0794-43C1-A356-577BE43E31F7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{449786A6-2C04-4B49-B164-045A69A0400D} = {449786A6-2C04-4B49-B164-045A69A0400D}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grout.Base.Logger", "..\..\Base\Grout.Base.Logger\Grout.Base.Logger.csproj", "{9F894D1F-ACB0-41AD-900E-B747C3F17A89}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grout.Base.Reports.Scheduler", "..\..\Base\Grout.Base.Reports.Scheduler\Grout.Base.Reports.Scheduler.csproj", "{80D01EDE-29EE-4C18-9C7A-FAC7563B742D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BBB2C80A-5CCA-408F-8526-F4FFDA93C556}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBB2C80A-5CCA-408F-8526-F4FFDA93C556}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBB2C80A-5CCA-408F-8526-F4FFDA93C556}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBB2C80A-5CCA-408F-8526-F4FFDA93C556}.Release|Any CPU.Build.0 = Release|Any CPU
+		{386412A5-E588-4A2C-8DE9-EF8697340FE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{386412A5-E588-4A2C-8DE9-EF8697340FE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{386412A5-E588-4A2C-8DE9-EF8697340FE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{386412A5-E588-4A2C-8DE9-EF8697340FE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F319D68-2A0D-4C94-AC4B-76E29718E144}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F319D68-2A0D-4C94-AC4B-76E29718E144}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F319D68-2A0D-4C94-AC4B-76E29718E144}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F319D68-2A0D-4C94-AC4B-76E29718E144}.Release|Any CPU.Build.0 = Release|Any CPU
+		{811D2ECC-F0A0-496C-B9DC-36B967CAA30F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{811D2ECC-F0A0-496C-B9DC-36B967CAA30F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{811D2ECC-F0A0-496C-B9DC-36B967CAA30F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{811D2ECC-F0A0-496C-B9DC-36B967CAA30F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{449786A6-2C04-4B49-B164-045A69A0400D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{449786A6-2C04-4B49-B164-045A69A0400D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{449786A6-2C04-4B49-B164-045A69A0400D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{449786A6-2C04-4B49-B164-045A69A0400D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C8C0247-0794-43C1-A356-577BE43E31F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C8C0247-0794-43C1-A356-577BE43E31F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C8C0247-0794-43C1-A356-577BE43E31F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C8C0247-0794-43C1-A356-577BE43E31F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F894D1F-ACB0-41AD-900E-B747C3F17A89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F894D1F-ACB0-41AD-900E-B747C3F17A89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F894D1F-ACB0-41AD-900E-B747C3F17A89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F894D1F-ACB0-41AD-900E-B747C3F17A89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80D01EDE-29EE-4C18-9C7A-FAC7563B742D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80D01EDE-29EE-4C18-9C7A-FAC7563B742D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80D01EDE-29EE-4C18-9C7A-FAC7563B742D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80D01EDE-29EE-4C18-9C7A-FAC7563B742D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D01008CB-A44E-4BF8-817E-DA9C09F20205}
+	EndGlobalSection
+EndGlobal

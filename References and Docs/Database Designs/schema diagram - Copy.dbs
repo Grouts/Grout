@@ -1,0 +1,1447 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="SqlServer" id="Project_1de97b1" template="Default" database="SqlServer" >
+	<schema name="dbo" catalogname="Grout" schemaname="dbo" >
+		<table name="Entity" generator_rows="100" >
+			<column name="EntityId" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="Name" type="nvarchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="Description" type="nvarchar" length="1026" decimal="0" jt="12" />
+			<column name="Logo" type="nvarchar" length="255" decimal="0" jt="12" mandatory="y" >
+				<defo>&#039;White&#039;</defo>
+			</column>
+			<column name="CreatedBy" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="ModifiedBy" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="CreatedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
+			<column name="ModifiedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
+			<column name="IsActive" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<index name="PK__Entity__9C892F9DDFEA8CC3" unique="PRIMARY_KEY" >
+				<column name="EntityId" />
+			</index>
+			<fk name="FK__Entity__CreatedB__797309D9" to_schema="dbo" to_table="User" delete_action="restrict" update_action="restrict" >
+				<fk_column name="CreatedBy" pk="UserId" />
+			</fk>
+			<fk name="FK__Entity__Modified__7A672E12" to_schema="dbo" to_table="User" delete_action="restrict" update_action="restrict" >
+				<fk_column name="ModifiedBy" pk="UserId" />
+			</fk>
+		</table>
+		<table name="EntityField" generator_rows="225" >
+			<column name="EntityFieldId" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="EntityFieldTypeId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="Name" type="nvarchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="Description" type="nvarchar" length="1026" decimal="0" jt="12" />
+			<column name="CreatedBy" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="ModifiedBy" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="CreatedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
+			<column name="ModifiedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
+			<column name="IsActive" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<index name="PK__EntityFi__DCD2AA017CE1E9DD" unique="PRIMARY_KEY" >
+				<column name="EntityFieldId" />
+			</index>
+			<fk name="Fk_EntityField_EntityFieldType" virtual="y" to_schema="dbo" to_table="EntityFieldType" >
+				<fk_column name="EntityFieldTypeId" pk="EntityFieldTypeId" />
+			</fk>
+			<fk name="FK__EntityFie__Creat__02084FDA" to_schema="dbo" to_table="User" delete_action="restrict" update_action="restrict" >
+				<fk_column name="CreatedBy" pk="UserId" />
+			</fk>
+			<fk name="FK__EntityFie__Modif__02FC7413" to_schema="dbo" to_table="User" delete_action="restrict" update_action="restrict" >
+				<fk_column name="ModifiedBy" pk="UserId" />
+			</fk>
+		</table>
+		<table name="EntityFieldMapping" generator_rows="337" >
+			<column name="Id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="EntityId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="EntityFieldId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="CreatedBy" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="ModifiedBy" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="CreatedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
+			<column name="ModifiedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
+			<column name="IsActive" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<index name="PK__EntityFi__3214EC077B4C9C16" unique="PRIMARY_KEY" >
+				<column name="Id" />
+			</index>
+			<fk name="FK__EntityFie__Entit__05D8E0BE" to_schema="dbo" to_table="Entity" delete_action="restrict" update_action="restrict" >
+				<fk_column name="EntityId" pk="EntityId" />
+			</fk>
+			<fk name="FK__EntityFie__Entit__06CD04F7" to_schema="dbo" to_table="EntityField" delete_action="restrict" update_action="restrict" >
+				<fk_column name="EntityFieldId" pk="EntityFieldId" />
+			</fk>
+			<fk name="FK__EntityFie__Creat__07C12930" to_schema="dbo" to_table="User" delete_action="restrict" update_action="restrict" >
+				<fk_column name="CreatedBy" pk="UserId" />
+			</fk>
+			<fk name="FK__EntityFie__Modif__08B54D69" to_schema="dbo" to_table="User" delete_action="restrict" update_action="restrict" >
+				<fk_column name="ModifiedBy" pk="UserId" />
+			</fk>
+		</table>
+		<table name="EntityFieldType" generator_rows="150" >
+			<column name="EntityFieldTypeId" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="Name" type="nvarchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="Description" type="nvarchar" length="1026" decimal="0" jt="12" />
+			<column name="CreatedBy" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="ModifiedBy" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="CreatedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
+			<column name="ModifiedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
+			<column name="IsActive" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<index name="PK__EntityFi__56CDDBA325B83144" unique="PRIMARY_KEY" >
+				<column name="EntityFieldTypeId" />
+			</index>
+			<fk name="FK__EntityFie__Creat__7D439ABD" to_schema="dbo" to_table="User" delete_action="restrict" update_action="restrict" >
+				<fk_column name="CreatedBy" pk="UserId" />
+			</fk>
+			<fk name="FK__EntityFie__Modif__7E37BEF6" to_schema="dbo" to_table="User" delete_action="restrict" update_action="restrict" >
+				<fk_column name="ModifiedBy" pk="UserId" />
+			</fk>
+		</table>
+		<table name="Group" generator_rows="150" >
+			<column name="GroupId" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="Name" type="nvarchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="Description" type="nvarchar" length="1026" decimal="0" jt="12" />
+			<column name="Color" type="nvarchar" length="255" decimal="0" jt="12" mandatory="y" >
+				<defo>&#039;White&#039;</defo>
+			</column>
+			<column name="CreatedBy" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="ModifiedBy" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="CreatedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
+			<column name="ModifiedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
+			<column name="IsActive" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<index name="PK__Group__149AF36AE4111745" unique="PRIMARY_KEY" >
+				<column name="GroupId" />
+			</index>
+			<fk name="FK__Group__CreatedBy__3A81B327" to_schema="dbo" to_table="User" delete_action="restrict" update_action="restrict" >
+				<fk_column name="CreatedBy" pk="UserId" />
+			</fk>
+			<fk name="FK__Group__ModifiedB__3B75D760" to_schema="dbo" to_table="User" delete_action="restrict" update_action="restrict" >
+				<fk_column name="ModifiedBy" pk="UserId" />
+			</fk>
+		</table>
+		<table name="GroupRole" generator_rows="505" >
+			<column name="Id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="GroupId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="RoleId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="TeamId" type="int" jt="4" />
+			<column name="CreatedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
+			<column name="ModifiedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
+			<column name="IsActive" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<index name="PK__GroupRol__3214EC076842EBBF" unique="PRIMARY_KEY" >
+				<column name="Id" />
+			</index>
+			<index name="GroupRole_TeamId" unique="NORMAL" >
+				<column name="TeamId" />
+			</index>
+			<fk name="FK__GroupRole__Group__70DDC3D8" to_schema="dbo" to_table="Group" delete_action="restrict" update_action="restrict" >
+				<fk_column name="GroupId" pk="GroupId" />
+			</fk>
+			<fk name="Fk_GroupRole_EntityFieldMapping" virtual="y" to_schema="dbo" to_table="EntityFieldMapping" >
+				<fk_column name="Id" pk="Id" />
+			</fk>
+			<fk name="Fk_GroupRole_Role" virtual="y" to_schema="dbo" to_table="Role" >
+				<fk_column name="RoleId" pk="RoleId" />
+			</fk>
+			<fk name="fk_grouprole_team" to_schema="dbo" to_table="Team" >
+				<fk_column name="TeamId" pk="TeamId" />
+			</fk>
+		</table>
+		<table name="Project" generator_rows="150" >
+			<column name="ProjectId" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="ProjectTypeId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="Name" type="nvarchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="Description" type="nvarchar" length="1026" decimal="0" jt="12" />
+			<column name="Logo" type="nvarchar" length="255" decimal="0" jt="12" mandatory="y" >
+				<defo>&#039;White&#039;</defo>
+			</column>
+			<column name="CreatedBy" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="ModifiedBy" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="CreatedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
+			<column name="ModifiedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
+			<column name="StartDate" type="datetime" length="23" decimal="3" jt="93" />
+			<column name="EndDate" type="datetime" length="23" decimal="3" jt="93" />
+			<column name="IsActive" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<index name="PK__Project__761ABEF02113E012" unique="PRIMARY_KEY" >
+				<column name="ProjectId" />
+			</index>
+			<fk name="Fk_Project_ProjectType" virtual="y" to_schema="dbo" to_table="ProjectType" >
+				<fk_column name="ProjectTypeId" pk="ProjectTypeId" />
+			</fk>
+		</table>
+		<table name="ProjectEntity" generator_rows="505" >
+			<column name="Id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="EntityId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="ProjectTypeId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="CreatedBy" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="ModifiedBy" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="CreatedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
+			<column name="ModifiedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
+			<column name="IsActive" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<index name="PK__ProjectE__3214EC0793228423" unique="PRIMARY_KEY" >
+				<column name="Id" />
+			</index>
+			<fk name="FK__ProjectEn__Entit__0B91BA14" to_schema="dbo" to_table="Entity" delete_action="restrict" update_action="restrict" >
+				<fk_column name="EntityId" pk="EntityId" />
+			</fk>
+			<fk name="Fk_ProjectEntity_ProjectType" virtual="y" to_schema="dbo" to_table="ProjectType" >
+				<fk_column name="ProjectTypeId" pk="ProjectTypeId" />
+			</fk>
+			<fk name="FK__ProjectEn__Creat__0D7A0286" to_schema="dbo" to_table="User" delete_action="restrict" update_action="restrict" >
+				<fk_column name="CreatedBy" pk="UserId" />
+			</fk>
+			<fk name="FK__ProjectEn__Modif__0E6E26BF" to_schema="dbo" to_table="User" delete_action="restrict" update_action="restrict" >
+				<fk_column name="ModifiedBy" pk="UserId" />
+			</fk>
+		</table>
+		<table name="ProjectTeam" generator_rows="505" >
+			<column name="Id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="ProjectId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="TeamId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="CreatedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
+			<column name="ModifiedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
+			<column name="IsActive" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<index name="PK__ProjectT__3214EC0702237118" unique="PRIMARY_KEY" >
+				<column name="Id" />
+			</index>
+			<fk name="FK__ProjectTe__Proje__6C190EBB" to_schema="dbo" to_table="Project" delete_action="restrict" update_action="restrict" >
+				<fk_column name="ProjectId" pk="ProjectId" />
+			</fk>
+			<fk name="Fk_ProjectTeam_Team" virtual="y" to_schema="dbo" to_table="Team" >
+				<fk_column name="TeamId" pk="TeamId" />
+			</fk>
+		</table>
+		<table name="ProjectType" generator_rows="100" >
+			<column name="ProjectTypeId" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="Name" type="nvarchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="Description" type="nvarchar" length="1026" decimal="0" jt="12" />
+			<column name="CreatedBy" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="ModifiedBy" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="CreatedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
+			<column name="ModifiedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
+			<column name="IsActive" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<index name="PK__ProjectT__6F245E6353170279" unique="PRIMARY_KEY" >
+				<column name="ProjectTypeId" />
+			</index>
+		</table>
+		<table name="Role" generator_rows="100" >
+			<column name="RoleId" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="Name" type="nvarchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="Description" type="nvarchar" length="1026" decimal="0" jt="12" />
+			<column name="CreatedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
+			<column name="ModifiedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
+			<column name="IsActive" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<index name="PK__Role__8AFACE1A3655C4A1" unique="PRIMARY_KEY" >
+				<column name="RoleId" />
+			</index>
+		</table>
+		<table name="SystemLog" generator_rows="150" >
+			<column name="LogId" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="SystemLogTypeId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="UpdatedUserId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="TargetUserId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="ModifiedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
+			<column name="IsActive" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<index name="PK__SystemLo__5E5486481A98DCBB" unique="PRIMARY_KEY" >
+				<column name="LogId" />
+			</index>
+			<fk name="Fk_SystemLog_SystemLogType" virtual="y" to_schema="dbo" to_table="SystemLogType" >
+				<fk_column name="SystemLogTypeId" pk="SystemLogTypeId" />
+			</fk>
+			<fk name="FK__SystemLog__Targe__534D60F1" to_schema="dbo" to_table="User" delete_action="restrict" update_action="restrict" >
+				<fk_column name="TargetUserId" pk="UserId" />
+			</fk>
+			<fk name="FK__SystemLog__Updat__52593CB8" to_schema="dbo" to_table="User" delete_action="restrict" update_action="restrict" >
+				<fk_column name="UpdatedUserId" pk="UserId" />
+			</fk>
+		</table>
+		<table name="SystemLogType" generator_rows="100" >
+			<column name="SystemLogTypeId" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="Name" type="nvarchar" length="100" decimal="0" jt="12" mandatory="y" />
+			<column name="IsActive" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<index name="PK__SystemLo__85BCD1E633F2225C" unique="PRIMARY_KEY" >
+				<column name="SystemLogTypeId" />
+			</index>
+		</table>
+		<table name="SystemSettings" generator_rows="505" >
+			<column name="Id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="Key" type="nvarchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="Value" type="nvarchar" length="4000" decimal="0" jt="12" />
+			<column name="CreatedBy" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="ModifiedBy" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="ModifiedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
+			<column name="IsActive" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<index name="PK__SystemSe__3214EC0790BDC8BB" unique="PRIMARY_KEY" >
+				<column name="Id" />
+			</index>
+			<fk name="FK__SystemSet__Creat__5629CD9C" to_schema="dbo" to_table="User" delete_action="restrict" update_action="restrict" >
+				<fk_column name="CreatedBy" pk="UserId" />
+			</fk>
+			<fk name="FK__SystemSet__Modif__571DF1D5" to_schema="dbo" to_table="User" delete_action="restrict" update_action="restrict" >
+				<fk_column name="ModifiedBy" pk="UserId" />
+			</fk>
+		</table>
+		<table name="Team" generator_rows="100" >
+			<column name="TeamId" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="Name" type="nvarchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="Description" type="nvarchar" length="1026" decimal="0" jt="12" />
+			<column name="Color" type="nvarchar" length="255" decimal="0" jt="12" mandatory="y" >
+				<defo>&#039;White&#039;</defo>
+			</column>
+			<column name="Logo" type="nvarchar" length="255" decimal="0" jt="12" mandatory="y" >
+				<defo>&#039;White&#039;</defo>
+			</column>
+			<column name="CreatedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
+			<column name="ModifiedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
+			<column name="IsActive" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<index name="PK__Team__123AE799EB025450" unique="PRIMARY_KEY" >
+				<column name="TeamId" />
+			</index>
+		</table>
+		<table name="TeamGroup" generator_rows="505" >
+			<column name="Id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="GroupId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="TeamId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="CreatedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
+			<column name="ModifiedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
+			<column name="IsActive" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<index name="PK__TeamGrou__3214EC07AD0B0A35" unique="PRIMARY_KEY" >
+				<column name="Id" />
+			</index>
+			<fk name="FK__TeamGroup__Group__6383C8BA" to_schema="dbo" to_table="Group" delete_action="restrict" update_action="restrict" >
+				<fk_column name="GroupId" pk="GroupId" />
+			</fk>
+			<fk name="FK__TeamGroup__TeamI__6477ECF3" to_schema="dbo" to_table="Team" delete_action="restrict" update_action="restrict" >
+				<fk_column name="TeamId" pk="TeamId" />
+			</fk>
+		</table>
+		<table name="TeamUser" generator_rows="505" >
+			<column name="Id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="UserId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="TeamId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="CreatedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
+			<column name="ModifiedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
+			<column name="IsActive" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<index name="PK__TeamUser__3214EC072550C803" unique="PRIMARY_KEY" >
+				<column name="Id" />
+			</index>
+			<fk name="FK__TeamUser__TeamId__68487DD7" to_schema="dbo" to_table="Team" delete_action="restrict" update_action="restrict" >
+				<fk_column name="TeamId" pk="TeamId" />
+			</fk>
+			<fk name="Fk_TeamUser_User" virtual="y" to_schema="dbo" to_table="User" >
+				<fk_column name="UserId" pk="UserId" />
+			</fk>
+		</table>
+		<table name="User" generator_rows="100" >
+			<column name="UserId" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="UserName" type="nvarchar" length="100" decimal="0" jt="12" mandatory="y" />
+			<column name="FirstName" type="nvarchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="LastName" type="nvarchar" length="255" decimal="0" jt="12" />
+			<column name="DisplayName" type="nvarchar" length="512" decimal="0" jt="12" />
+			<column name="Email" type="nvarchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="Password" type="nvarchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="Contact" type="nvarchar" length="20" decimal="0" jt="12" />
+			<column name="Picture" type="nvarchar" length="100" decimal="0" jt="12" mandatory="y" />
+			<column name="CreatedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
+			<column name="ModifiedDate" type="datetime" length="23" decimal="3" jt="93" />
+			<column name="LastLogin" type="datetime" length="23" decimal="3" jt="93" />
+			<column name="ActivationExpirationDate" type="datetime" length="23" decimal="3" jt="93" />
+			<column name="ActivationCode" type="nvarchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="ResetPasswordCode" type="nvarchar" length="255" decimal="0" jt="12" />
+			<column name="LastResetAttempt" type="datetime" length="23" decimal="3" jt="93" />
+			<column name="IsActivated" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<column name="IsActive" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<column name="IsDeleted" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<index name="PK__User__1788CC4C9993DA56" unique="PRIMARY_KEY" >
+				<column name="UserId" />
+			</index>
+		</table>
+		<table name="UserGroup" generator_rows="505" >
+			<column name="Id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="GroupId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="UserId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="CreatedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
+			<column name="ModifiedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
+			<column name="IsActive" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<index name="PK__UserGrou__3214EC0745BA353F" unique="PRIMARY_KEY" >
+				<column name="Id" />
+			</index>
+			<fk name="FK__UserGroup__Group__3E52440B" to_schema="dbo" to_table="Group" delete_action="restrict" update_action="restrict" >
+				<fk_column name="GroupId" pk="GroupId" />
+			</fk>
+			<fk name="FK__UserGroup__UserI__3F466844" to_schema="dbo" to_table="User" delete_action="restrict" update_action="restrict" >
+				<fk_column name="UserId" pk="UserId" />
+			</fk>
+		</table>
+		<table name="UserLog" generator_rows="505" >
+			<column name="Id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="UserLogTypeId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="GroupId" type="int" length="10" decimal="0" jt="4" />
+			<column name="OldValue" type="int" length="10" decimal="0" jt="4" />
+			<column name="NewValue" type="int" length="10" decimal="0" jt="4" />
+			<column name="UpdatedUserId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="TargetUserId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="ModifiedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
+			<column name="IsActive" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<index name="PK__UserLog__3214EC071A5984E8" unique="PRIMARY_KEY" >
+				<column name="Id" />
+			</index>
+			<fk name="FK__UserLog__GroupId__44FF419A" to_schema="dbo" to_table="Group" delete_action="restrict" update_action="restrict" >
+				<fk_column name="GroupId" pk="GroupId" />
+			</fk>
+			<fk name="FK__UserLog__TargetU__45F365D3" to_schema="dbo" to_table="User" delete_action="restrict" update_action="restrict" >
+				<fk_column name="TargetUserId" pk="UserId" />
+			</fk>
+			<fk name="FK__UserLog__Updated__46E78A0C" to_schema="dbo" to_table="User" delete_action="restrict" update_action="restrict" >
+				<fk_column name="UpdatedUserId" pk="UserId" />
+			</fk>
+			<fk name="Fk_UserLog_EntityFieldMapping" virtual="y" to_schema="dbo" to_table="EntityFieldMapping" >
+				<fk_column name="Id" pk="Id" />
+			</fk>
+			<fk name="Fk_UserLog_UserLogType" virtual="y" to_schema="dbo" to_table="UserLogType" >
+				<fk_column name="UserLogTypeId" pk="UserLogTypeId" />
+			</fk>
+		</table>
+		<table name="UserLogType" generator_rows="100" >
+			<column name="UserLogTypeId" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="Name" type="nvarchar" length="100" decimal="0" jt="12" mandatory="y" />
+			<column name="IsActive" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<index name="PK__UserLogT__E94CB7756B23345C" unique="PRIMARY_KEY" >
+				<column name="UserLogTypeId" />
+			</index>
+		</table>
+		<table name="UserLogin" generator_rows="505" >
+			<column name="Id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="UserId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="ClientToken" type="nvarchar" length="4000" decimal="0" jt="12" mandatory="y" />
+			<column name="IpAddress" type="nvarchar" length="50" decimal="0" jt="12" mandatory="y" />
+			<column name="LoggedInTime" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
+			<column name="IsActive" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<index name="PK__UserLogi__3214EC07E81E6AD6" unique="PRIMARY_KEY" >
+				<column name="Id" />
+			</index>
+			<fk name="FK__UserLogin__UserI__49C3F6B7" to_schema="dbo" to_table="User" delete_action="restrict" update_action="restrict" >
+				<fk_column name="UserId" pk="UserId" />
+			</fk>
+		</table>
+		<table name="UserPreference" generator_rows="505" >
+			<column name="Id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="UserId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="Language" type="nvarchar" length="4000" decimal="0" jt="12" />
+			<column name="TimeZone" type="nvarchar" length="100" decimal="0" jt="12" />
+			<column name="RecordSize" type="int" length="10" decimal="0" jt="4" />
+			<column name="ItemSort" type="nvarchar" length="4000" decimal="0" jt="12" />
+			<column name="ItemFilters" type="nvarchar" length="4000" decimal="0" jt="12" />
+			<column name="Notifications" type="nvarchar" length="4000" decimal="0" jt="12" />
+			<column name="ModifiedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
+			<column name="IsActive" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<index name="PK__UserPref__3214EC073AFCD365" unique="PRIMARY_KEY" >
+				<column name="Id" />
+			</index>
+			<fk name="FK__UserPrefe__UserI__4CA06362" to_schema="dbo" to_table="User" delete_action="restrict" update_action="restrict" >
+				<fk_column name="UserId" pk="UserId" />
+			</fk>
+			<fk name="Fk_UserPreference_EntityFieldMapping" virtual="y" to_schema="dbo" to_table="EntityFieldMapping" >
+				<fk_column name="Id" pk="Id" />
+			</fk>
+		</table>
+		<table name="UserRole" generator_rows="505" >
+			<column name="Id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="UserId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="RoleId" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="TeamId" type="int" jt="4" />
+			<column name="CreatedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
+			<column name="ModifiedDate" type="datetime" length="23" decimal="3" jt="93" mandatory="y" />
+			<column name="IsActive" type="bit" length="1" decimal="0" jt="-7" mandatory="y" />
+			<index name="PK__UserRole__3214EC07BACCE215" unique="PRIMARY_KEY" >
+				<column name="Id" />
+			</index>
+			<index name="Idx_UserRole_TeamId" unique="NORMAL" >
+				<column name="TeamId" />
+			</index>
+			<fk name="FK__UserRole__RoleId__75A278F5" to_schema="dbo" to_table="Role" delete_action="restrict" update_action="restrict" >
+				<fk_column name="RoleId" pk="RoleId" />
+			</fk>
+			<fk name="FK__UserRole__UserId__74AE54BC" to_schema="dbo" to_table="User" delete_action="restrict" update_action="restrict" >
+				<fk_column name="UserId" pk="UserId" />
+			</fk>
+			<fk name="fk_userrole_team" to_schema="dbo" to_table="Team" >
+				<fk_column name="TeamId" pk="TeamId" />
+			</fk>
+		</table>
+	</schema>
+	<connector name="SqlServer" database="SqlServer" driver_class="com.microsoft.sqlserver.jdbc.SQLServerDriver" driver_jar="sqljdbc42.jar" driver_desc="Native Driver - Database Authentication" host="localhost" port="1433" instance="Grout" user="sa" passwd="QWRtaW5AMTIz" />
+	<layout name="DB Layout" id="Layout_1e9c2ea" show_page_borders="y" show_relation="no_text" >
+		<comment><![CDATA[DB Layout]]></comment>
+		<entity schema="dbo" name="Entity" color="bfd4f5" x="900" y="555" />
+		<entity schema="dbo" name="EntityField" color="bfd4f5" x="720" y="780" />
+		<entity schema="dbo" name="EntityFieldType" color="bfd4f5" x="900" y="795" />
+		<entity schema="dbo" name="EntityFieldMapping" color="bfd4f5" x="735" y="555" />
+		<entity schema="dbo" name="Team" color="f5ddbf" x="480" y="240" />
+		<entity schema="dbo" name="GroupRole" color="c8f5bf" x="480" y="660" />
+		<entity schema="dbo" name="User" color="ff3399" x="255" y="225" />
+		<entity schema="dbo" name="SystemSettings" color="bfbff5" x="45" y="735" />
+		<entity schema="dbo" name="SystemLog" color="bfbff5" x="45" y="915" />
+		<entity schema="dbo" name="TeamGroup" color="f5ddbf" x="480" y="435" />
+		<entity schema="dbo" name="UserLogType" color="bfd4f5" x="60" y="75" />
+		<entity schema="dbo" name="UserLog" color="bfd4f5" x="45" y="210" />
+		<entity schema="dbo" name="UserPreference" color="bfd4f5" x="45" y="420" />
+		<entity schema="dbo" name="UserLogin" color="bfd4f5" x="270" y="75" />
+		<entity schema="dbo" name="Group" color="c8f5bf" x="270" y="855" />
+		<entity schema="dbo" name="ProjectTeam" color="f5ddbf" x="705" y="330" />
+		<entity schema="dbo" name="UserRole" color="c8f5bf" x="495" y="855" />
+		<entity schema="dbo" name="Role" color="c8f5bf" x="480" y="1020" />
+		<entity schema="dbo" name="Project" color="f5ddbf" x="705" y="75" />
+		<entity schema="dbo" name="ProjectEntity" color="f5ddbf" x="870" y="285" />
+		<entity schema="dbo" name="ProjectType" color="f5ddbf" x="855" y="75" />
+		<entity schema="dbo" name="SystemLogType" color="bfbff5" x="45" y="1080" />
+		<entity schema="dbo" name="UserGroup" color="c8f5bf" x="270" y="675" />
+		<entity schema="dbo" name="TeamUser" color="f5ddbf" x="480" y="75" />
+		<group name="User" color="ffff00" >
+			<entity schema="dbo" name="User" />
+			<entity schema="dbo" name="UserLogin" />
+		</group>
+		<group name="Entity" color="0000ff" >
+			<entity schema="dbo" name="Entity" />
+			<entity schema="dbo" name="EntityField" />
+			<entity schema="dbo" name="EntityFieldType" />
+			<entity schema="dbo" name="EntityFieldMapping" />
+		</group>
+		<group name="Project" color="660066" >
+			<entity schema="dbo" name="ProjectTeam" />
+			<entity schema="dbo" name="ProjectType" />
+			<entity schema="dbo" name="Project" />
+			<entity schema="dbo" name="ProjectEntity" />
+		</group>
+		<group name="Group" color="33ff33" >
+			<entity schema="dbo" name="Group" />
+			<entity schema="dbo" name="UserGroup" />
+		</group>
+		<group name="Team" color="33ffff" >
+			<entity schema="dbo" name="Team" />
+			<entity schema="dbo" name="TeamUser" />
+			<entity schema="dbo" name="TeamGroup" />
+		</group>
+		<group name="Role" color="ff6666" >
+			<entity schema="dbo" name="Role" />
+			<entity schema="dbo" name="GroupRole" />
+			<entity schema="dbo" name="UserRole" />
+		</group>
+		<group name="SystemSettings" color="ffffff" >
+			<entity schema="dbo" name="SystemSettings" />
+			<entity schema="dbo" name="SystemLog" />
+			<entity schema="dbo" name="SystemLogType" />
+		</group>
+		<group name="UserLogging" color="ffffff" >
+			<entity schema="dbo" name="UserLog" />
+			<entity schema="dbo" name="UserLogType" />
+			<entity schema="dbo" name="UserPreference" />
+		</group>
+	</layout>
+	<layout name="Default Layout" id="Layout_a710f0" show_relation="columns" >
+		<entity schema="dbo" name="Entity" color="bfd4f5" x="45" y="75" />
+		<entity schema="dbo" name="EntityField" color="bfd4f5" x="195" y="315" />
+		<entity schema="dbo" name="EntityFieldMapping" color="bfd4f5" x="210" y="90" />
+		<entity schema="dbo" name="Group" color="bfd4f5" x="375" y="90" />
+		<entity schema="dbo" name="GroupRole" color="bfd4f5" x="540" y="90" />
+		<entity schema="dbo" name="Project" color="f5ddbf" x="375" y="825" />
+		<entity schema="dbo" name="ProjectEntity" color="f5ddbf" x="45" y="825" />
+		<entity schema="dbo" name="ProjectTeam" color="f5ddbf" x="210" y="825" />
+		<entity schema="dbo" name="ProjectType" color="f5ddbf" x="210" y="1050" />
+		<entity schema="dbo" name="Role" color="c8f5bf" x="1395" y="660" />
+		<entity schema="dbo" name="SystemLog" color="bfbff5" x="1800" y="75" />
+		<entity schema="dbo" name="SystemLogType" color="bfbff5" x="1800" y="270" />
+		<entity schema="dbo" name="SystemSettings" color="bfbff5" x="1980" y="75" />
+		<entity schema="dbo" name="Team" color="bfd4f5" x="705" y="330" />
+		<entity schema="dbo" name="TeamGroup" color="bfd4f5" x="540" y="330" />
+		<entity schema="dbo" name="TeamUser" color="bfd4f5" x="870" y="330" />
+		<entity schema="dbo" name="User" color="c8f5bf" x="1230" y="75" />
+		<entity schema="dbo" name="UserGroup" color="c8f5bf" x="1440" y="465" />
+		<entity schema="dbo" name="UserLog" color="c8f5bf" x="1440" y="75" />
+		<entity schema="dbo" name="UserLogType" color="c8f5bf" x="1605" y="75" />
+		<entity schema="dbo" name="UserLogin" color="c8f5bf" x="1065" y="465" />
+		<entity schema="dbo" name="UserPreference" color="c8f5bf" x="1065" y="210" />
+		<entity schema="dbo" name="UserRole" color="c8f5bf" x="1230" y="465" />
+		<entity schema="dbo" name="EntityFieldType" color="bfd4f5" x="465" y="555" />
+		<group name="EntityFieldMapping" color="ecf0f7" >
+			<entity schema="dbo" name="EntityFieldMapping" />
+			<entity schema="dbo" name="Group" />
+			<entity schema="dbo" name="GroupRole" />
+			<entity schema="dbo" name="TeamGroup" />
+			<entity schema="dbo" name="Team" />
+			<entity schema="dbo" name="TeamUser" />
+			<entity schema="dbo" name="EntityField" />
+			<entity schema="dbo" name="Entity" />
+			<entity schema="dbo" name="EntityFieldType" />
+		</group>
+		<group name="User" color="eef7ec" >
+			<entity schema="dbo" name="User" />
+			<entity schema="dbo" name="UserLog" />
+			<entity schema="dbo" name="UserGroup" />
+			<entity schema="dbo" name="UserRole" />
+			<entity schema="dbo" name="UserLogin" />
+			<entity schema="dbo" name="UserPreference" />
+			<entity schema="dbo" name="Role" />
+			<entity schema="dbo" name="UserLogType" />
+		</group>
+		<group name="ProjectEntity" color="f7f3ec" >
+			<entity schema="dbo" name="ProjectEntity" />
+			<entity schema="dbo" name="ProjectTeam" />
+			<entity schema="dbo" name="ProjectType" />
+			<entity schema="dbo" name="Project" />
+		</group>
+		<group name="SystemLogType" color="ececf7" >
+			<entity schema="dbo" name="SystemLogType" />
+			<entity schema="dbo" name="SystemLog" />
+			<entity schema="dbo" name="SystemSettings" />
+		</group>
+		<script name="Sql_Editor" id="Editor_316721c" language="SQL" >
+			<string><![CDATA[CREATE SCHEMA dbo;
+
+CREATE TABLE Grout_ProjectType ( 
+	ProjectTypeId        int NOT NULL   IDENTITY,
+	Name                 nvarchar(255) NOT NULL   ,
+	Description          nvarchar(1026)    ,
+	CreatedBy            int NOT NULL   ,
+	ModifiedBy           int NOT NULL   ,
+	CreatedDate          datetime NOT NULL   ,
+	ModifiedDate         datetime NOT NULL   ,
+	IsActive             bit NOT NULL   ,
+	CONSTRAINT PK__Grout_Pr__6F245E63AF4ABE21 PRIMARY KEY  ( ProjectTypeId )
+ );
+
+CREATE TABLE Grout_Role ( 
+	RoleId               int NOT NULL   IDENTITY,
+	Name                 nvarchar(255) NOT NULL   ,
+	Description          nvarchar(1026)    ,
+	CreatedDate          datetime NOT NULL   ,
+	ModifiedDate         datetime NOT NULL   ,
+	IsActive             bit NOT NULL   ,
+	CONSTRAINT PK__Grout_Ro__8AFACE1ADB017884 PRIMARY KEY  ( RoleId )
+ );
+
+CREATE TABLE Grout_SystemLogType ( 
+	SystemLogTypeId      int NOT NULL   IDENTITY,
+	Name                 nvarchar(100) NOT NULL   ,
+	IsActive             bit NOT NULL   ,
+	CONSTRAINT PK__Grout_Sy__85BCD1E6DD4C2086 PRIMARY KEY  ( SystemLogTypeId )
+ );
+
+CREATE TABLE Grout_Team ( 
+	TeamId               int NOT NULL   IDENTITY,
+	Name                 nvarchar(255) NOT NULL   ,
+	Description          nvarchar(1026)    ,
+	Color                nvarchar(255) NOT NULL CONSTRAINT defo_Grout_Team_Color DEFAULT 'White'  ,
+	Logo                 nvarchar(255) NOT NULL CONSTRAINT defo_Grout_Team_Logo DEFAULT 'White'  ,
+	CreatedDate          datetime NOT NULL   ,
+	ModifiedDate         datetime NOT NULL   ,
+	IsActive             bit NOT NULL   ,
+	CONSTRAINT PK__Grout_Te__123AE799F7AA62F7 PRIMARY KEY  ( TeamId )
+ );
+
+CREATE TABLE Grout_User ( 
+	UserId               int NOT NULL   IDENTITY,
+	UserName             nvarchar(100) NOT NULL   ,
+	FirstName            nvarchar(255) NOT NULL   ,
+	LastName             nvarchar(255)    ,
+	DisplayName          nvarchar(512)    ,
+	Email                nvarchar(255) NOT NULL   ,
+	Password             nvarchar(255) NOT NULL   ,
+	Contact              nvarchar(20)    ,
+	Picture              nvarchar(100) NOT NULL   ,
+	CreatedDate          datetime NOT NULL   ,
+	ModifiedDate         datetime    ,
+	LastLogin            datetime    ,
+	ActivationExpirationDate datetime    ,
+	ActivationCode       nvarchar(255) NOT NULL   ,
+	ResetPasswordCode    nvarchar(255)    ,
+	LastResetAttempt     datetime    ,
+	IsActivated          bit NOT NULL   ,
+	IsActive             bit NOT NULL   ,
+	IsDeleted            bit NOT NULL   ,
+	CONSTRAINT PK__Grout_Us__1788CC4CDAF083B2 PRIMARY KEY  ( UserId )
+ );
+
+CREATE TABLE Grout_UserLogType ( 
+	UserLogTypeId        int NOT NULL   IDENTITY,
+	Name                 nvarchar(100) NOT NULL   ,
+	IsActive             bit NOT NULL   ,
+	CONSTRAINT PK__Grout_Us__E94CB7750B0562CC PRIMARY KEY  ( UserLogTypeId )
+ );
+
+CREATE TABLE Grout_UserLogin ( 
+	Id                   int NOT NULL   IDENTITY,
+	UserId               int NOT NULL   ,
+	ClientToken          nvarchar(4000) NOT NULL   ,
+	IpAddress            nvarchar(50) NOT NULL   ,
+	LoggedInTime         datetime NOT NULL   ,
+	IsActive             bit NOT NULL   ,
+	CONSTRAINT PK__Grout_Us__3214EC0723EE04C1 PRIMARY KEY  ( Id )
+ );
+
+CREATE TABLE Grout_UserPreference ( 
+	Id                   int NOT NULL   IDENTITY,
+	UserId               int NOT NULL   ,
+	Language             nvarchar(4000)    ,
+	TimeZone             nvarchar(100)    ,
+	RecordSize           int    ,
+	ItemSort             nvarchar(4000)    ,
+	ItemFilters          nvarchar(4000)    ,
+	Notifications        nvarchar(4000)    ,
+	ModifiedDate         datetime NOT NULL   ,
+	IsActive             bit NOT NULL   ,
+	CONSTRAINT PK__Grout_Us__3214EC07C06C51D4 PRIMARY KEY  ( Id )
+ );
+
+CREATE TABLE Grout_UserRole ( 
+	Id                   int NOT NULL   IDENTITY,
+	UserId               int NOT NULL   ,
+	RoleId               int NOT NULL   ,
+	CreatedDate          datetime NOT NULL   ,
+	ModifiedDate         datetime NOT NULL   ,
+	IsActive             bit NOT NULL   ,
+	CONSTRAINT PK__Grout_Us__3214EC0747AF71DA PRIMARY KEY  ( Id )
+ );
+
+CREATE TABLE sysdiagrams ( 
+	diagram_id           int NOT NULL   IDENTITY,
+	name                 sysname NOT NULL   ,
+	principal_id         int NOT NULL   ,
+	version              int    ,
+	definition           varbinary(max)    ,
+	CONSTRAINT PK__sysdiagr__C2B05B613B662DB0 PRIMARY KEY  ( diagram_id ),
+	CONSTRAINT UK_principal_name UNIQUE ( principal_id, name ) 
+ );
+
+CREATE TABLE Grout_Entity ( 
+	EntityId             int NOT NULL   IDENTITY,
+	Name                 nvarchar(255) NOT NULL   ,
+	Description          nvarchar(1026)    ,
+	Logo                 nvarchar(255) NOT NULL CONSTRAINT defo_Grout_Entity_Logo DEFAULT 'White'  ,
+	CreatedBy            int NOT NULL   ,
+	ModifiedBy           int NOT NULL   ,
+	CreatedDate          datetime NOT NULL   ,
+	ModifiedDate         datetime NOT NULL   ,
+	IsActive             bit NOT NULL   ,
+	CONSTRAINT PK__Grout_En__9C892F9DF25CA45A PRIMARY KEY  ( EntityId )
+ );
+
+CREATE TABLE Grout_EntityFieldType ( 
+	EntityFieldTypeId    int NOT NULL   IDENTITY,
+	Name                 nvarchar(255) NOT NULL   ,
+	Description          nvarchar(1026)    ,
+	CreatedBy            int NOT NULL   ,
+	ModifiedBy           int NOT NULL   ,
+	CreatedDate          datetime NOT NULL   ,
+	ModifiedDate         datetime NOT NULL   ,
+	IsActive             bit NOT NULL   ,
+	CONSTRAINT PK__Grout_En__56CDDBA3007D6C13 PRIMARY KEY  ( EntityFieldTypeId )
+ );
+
+CREATE TABLE Grout_Group ( 
+	GroupId              int NOT NULL   IDENTITY,
+	Name                 nvarchar(255) NOT NULL   ,
+	Description          nvarchar(1026)    ,
+	Color                nvarchar(255) NOT NULL CONSTRAINT defo_Grout_Group_Color DEFAULT 'White'  ,
+	CreatedBy            int NOT NULL   ,
+	ModifiedBy           int NOT NULL   ,
+	CreatedDate          datetime NOT NULL   ,
+	ModifiedDate         datetime NOT NULL   ,
+	IsActive             bit NOT NULL   ,
+	CONSTRAINT PK__Grout_Gr__149AF36AB858FCC3 PRIMARY KEY  ( GroupId )
+ );
+
+CREATE TABLE Grout_GroupRole ( 
+	Id                   int NOT NULL   IDENTITY,
+	GroupId              int NOT NULL   ,
+	RoleId               int NOT NULL   ,
+	CreatedDate          datetime NOT NULL   ,
+	ModifiedDate         datetime NOT NULL   ,
+	IsActive             bit NOT NULL   ,
+	CONSTRAINT PK__Grout_Gr__3214EC0744C08A43 PRIMARY KEY  ( Id )
+ );
+
+CREATE TABLE Grout_Project ( 
+	ProjectId            int NOT NULL   IDENTITY,
+	ProjectTypeId        int NOT NULL   ,
+	Name                 nvarchar(255) NOT NULL   ,
+	Description          nvarchar(1026)    ,
+	Logo                 nvarchar(255) NOT NULL CONSTRAINT defo_Grout_Project_Logo DEFAULT 'White'  ,
+	CreatedBy            int NOT NULL   ,
+	ModifiedBy           int NOT NULL   ,
+	CreatedDate          datetime NOT NULL   ,
+	ModifiedDate         datetime NOT NULL   ,
+	StartDate            datetime    ,
+	EndDate              datetime    ,
+	IsActive             bit NOT NULL   ,
+	CONSTRAINT PK__Grout_Pr__761ABEF045DA3635 PRIMARY KEY  ( ProjectId )
+ );
+
+CREATE TABLE Grout_ProjectEntity ( 
+	Id                   int NOT NULL   IDENTITY,
+	EntityId             int NOT NULL   ,
+	ProjectTypeId        int NOT NULL   ,
+	CreatedBy            int NOT NULL   ,
+	ModifiedBy           int NOT NULL   ,
+	CreatedDate          datetime NOT NULL   ,
+	ModifiedDate         datetime NOT NULL   ,
+	IsActive             bit NOT NULL   ,
+	CONSTRAINT PK__Grout_Pr__3214EC077A443B2C PRIMARY KEY  ( Id )
+ );
+
+CREATE TABLE Grout_ProjectTeam ( 
+	Id                   int NOT NULL   IDENTITY,
+	ProjectId            int NOT NULL   ,
+	TeamId               int NOT NULL   ,
+	CreatedDate          datetime NOT NULL   ,
+	ModifiedDate         datetime NOT NULL   ,
+	IsActive             bit NOT NULL   ,
+	CONSTRAINT PK__Grout_Pr__3214EC077D6145E5 PRIMARY KEY  ( Id )
+ );
+
+CREATE TABLE Grout_SystemLog ( 
+	LogId                int NOT NULL   IDENTITY,
+	SystemLogTypeId      int NOT NULL   ,
+	UpdatedUserId        int NOT NULL   ,
+	TargetUserId         int NOT NULL   ,
+	ModifiedDate         datetime NOT NULL   ,
+	IsActive             bit NOT NULL   ,
+	CONSTRAINT PK__Grout_Sy__5E548648702C9572 PRIMARY KEY  ( LogId )
+ );
+
+CREATE TABLE Grout_SystemSettings ( 
+	Id                   int NOT NULL   IDENTITY,
+	[Key]                nvarchar(255) NOT NULL   ,
+	Value                nvarchar(4000)    ,
+	CreatedBy            int NOT NULL   ,
+	ModifiedBy           int NOT NULL   ,
+	ModifiedDate         datetime NOT NULL   ,
+	IsActive             bit NOT NULL   ,
+	CONSTRAINT PK__Grout_Sy__3214EC07E84105AE PRIMARY KEY  ( Id )
+ );
+
+CREATE TABLE Grout_TeamGroup ( 
+	Id                   int NOT NULL   IDENTITY,
+	GroupId              int NOT NULL   ,
+	TeamId               int NOT NULL   ,
+	CreatedDate          datetime NOT NULL   ,
+	ModifiedDate         datetime NOT NULL   ,
+	IsActive             bit NOT NULL   ,
+	CONSTRAINT PK__Grout_Te__3214EC071ABB70B1 PRIMARY KEY  ( Id )
+ );
+
+CREATE TABLE Grout_TeamUser ( 
+	Id                   int NOT NULL   IDENTITY,
+	UserId               int NOT NULL   ,
+	TeamId               int NOT NULL   ,
+	CreatedDate          datetime NOT NULL   ,
+	ModifiedDate         datetime NOT NULL   ,
+	IsActive             bit NOT NULL   ,
+	CONSTRAINT PK__Grout_Te__3214EC0719A2E173 PRIMARY KEY  ( Id )
+ );
+
+CREATE TABLE Grout_UserGroup ( 
+	Id                   int NOT NULL   IDENTITY,
+	GroupId              int NOT NULL   ,
+	UserId               int NOT NULL   ,
+	CreatedDate          datetime NOT NULL   ,
+	ModifiedDate         datetime NOT NULL   ,
+	IsActive             bit NOT NULL   ,
+	CONSTRAINT PK__Grout_Us__3214EC0796A3C589 PRIMARY KEY  ( Id )
+ );
+
+CREATE TABLE Grout_UserLog ( 
+	Id                   int NOT NULL   IDENTITY,
+	UserLogTypeId        int NOT NULL   ,
+	GroupId              int    ,
+	OldValue             int    ,
+	NewValue             int    ,
+	UpdatedUserId        int NOT NULL   ,
+	TargetUserId         int NOT NULL   ,
+	ModifiedDate         datetime NOT NULL   ,
+	IsActive             bit NOT NULL   ,
+	CONSTRAINT PK__Grout_Us__3214EC078CB7B767 PRIMARY KEY  ( Id )
+ );
+
+CREATE TABLE Grout_EntityField ( 
+	EntityFieldId        int NOT NULL   IDENTITY,
+	EntityFieldTypeId    int NOT NULL   ,
+	Name                 nvarchar(255) NOT NULL   ,
+	Description          nvarchar(1026)    ,
+	CreatedBy            int NOT NULL   ,
+	ModifiedBy           int NOT NULL   ,
+	CreatedDate          datetime NOT NULL   ,
+	ModifiedDate         datetime NOT NULL   ,
+	IsActive             bit NOT NULL   ,
+	CONSTRAINT PK__Grout_En__DCD2AA01B1E2C06F PRIMARY KEY  ( EntityFieldId )
+ );
+
+CREATE TABLE Grout_EntityFieldMapping ( 
+	Id                   int NOT NULL   IDENTITY,
+	EntityId             int NOT NULL   ,
+	EntityFieldId        int NOT NULL   ,
+	CreatedBy            int NOT NULL   ,
+	ModifiedBy           int NOT NULL   ,
+	CreatedDate          datetime NOT NULL   ,
+	ModifiedDate         datetime NOT NULL   ,
+	IsActive             bit NOT NULL   ,
+	CONSTRAINT PK__Grout_En__3214EC074BD5BD40 PRIMARY KEY  ( Id )
+ );
+
+CREATE FUNCTION dbo.fn_diagramobjects() 
+	RETURNS int
+	WITH EXECUTE AS N'dbo'
+	AS
+	BEGIN
+		declare @id_upgraddiagrams		int
+		declare @id_sysdiagrams			int
+		declare @id_helpdiagrams		int
+		declare @id_helpdiagramdefinition	int
+		declare @id_creatediagram	int
+		declare @id_renamediagram	int
+		declare @id_alterdiagram 	int 
+		declare @id_dropdiagram		int
+		declare @InstalledObjects	int
+		select @InstalledObjects = 0
+		select 	@id_upgraddiagrams = object_id(N'dbo.sp_upgraddiagrams'),
+			@id_sysdiagrams = object_id(N'dbo.sysdiagrams'),
+			@id_helpdiagrams = object_id(N'dbo.sp_helpdiagrams'),
+			@id_helpdiagramdefinition = object_id(N'dbo.sp_helpdiagramdefinition'),
+			@id_creatediagram = object_id(N'dbo.sp_creatediagram'),
+			@id_renamediagram = object_id(N'dbo.sp_renamediagram'),
+			@id_alterdiagram = object_id(N'dbo.sp_alterdiagram'), 
+			@id_dropdiagram = object_id(N'dbo.sp_dropdiagram')
+		if @id_upgraddiagrams is not null
+			select @InstalledObjects = @InstalledObjects + 1
+		if @id_sysdiagrams is not null
+			select @InstalledObjects = @InstalledObjects + 2
+		if @id_helpdiagrams is not null
+			select @InstalledObjects = @InstalledObjects + 4
+		if @id_helpdiagramdefinition is not null
+			select @InstalledObjects = @InstalledObjects + 8
+		if @id_creatediagram is not null
+			select @InstalledObjects = @InstalledObjects + 16
+		if @id_renamediagram is not null
+			select @InstalledObjects = @InstalledObjects + 32
+		if @id_alterdiagram  is not null
+			select @InstalledObjects = @InstalledObjects + 64
+		if @id_dropdiagram is not null
+			select @InstalledObjects = @InstalledObjects + 128
+		
+		return @InstalledObjects 
+	END
+
+CREATE PROCEDURE dbo.sp_alterdiagram
+	(
+		@diagramname 	sysname,
+		@owner_id	int	= null,
+		@version 	int,
+		@definition 	varbinary(max)
+	)
+	WITH EXECUTE AS 'dbo'
+	AS
+	BEGIN
+		set nocount on
+	
+		declare @theId 			int
+		declare @retval 		int
+		declare @IsDbo 			int
+		
+		declare @UIDFound 		int
+		declare @DiagId			int
+		declare @ShouldChangeUID	int
+	
+		if(@diagramname is null)
+		begin
+			RAISERROR ('Invalid ARG', 16, 1)
+			return -1
+		end
+	
+		execute as caller;
+		select @theId = DATABASE_PRINCIPAL_ID();	 
+		select @IsDbo = IS_MEMBER(N'db_owner'); 
+		if(@owner_id is null)
+			select @owner_id = @theId;
+		revert;
+	
+		select @ShouldChangeUID = 0
+		select @DiagId = diagram_id, @UIDFound = principal_id from dbo.sysdiagrams where principal_id = @owner_id and name = @diagramname 
+		
+		if(@DiagId IS NULL or (@IsDbo = 0 and @theId <> @UIDFound))
+		begin
+			RAISERROR ('Diagram does not exist or you do not have permission.', 16, 1);
+			return -3
+		end
+	
+		if(@IsDbo <> 0)
+		begin
+			if(@UIDFound is null or USER_NAME(@UIDFound) is null) -- invalid principal_id
+			begin
+				select @ShouldChangeUID = 1 ;
+			end
+		end
+		-- update dds data			
+		update dbo.sysdiagrams set definition = @definition where diagram_id = @DiagId ;
+		-- change owner
+		if(@ShouldChangeUID = 1)
+			update dbo.sysdiagrams set principal_id = @theId where diagram_id = @DiagId ;
+		-- update dds version
+		if(@version is not null)
+			update dbo.sysdiagrams set version = @version where diagram_id = @DiagId ;
+		return 0
+	END
+
+CREATE PROCEDURE dbo.sp_creatediagram
+	(
+		@diagramname 	sysname,
+		@owner_id		int	= null, 	
+		@version 		int,
+		@definition 	varbinary(max)
+	)
+	WITH EXECUTE AS 'dbo'
+	AS
+	BEGIN
+		set nocount on
+	
+		declare @theId int
+		declare @retval int
+		declare @IsDbo	int
+		declare @userName sysname
+		if(@version is null or @diagramname is null)
+		begin
+			RAISERROR (N'E_INVALIDARG', 16, 1);
+			return -1
+		end
+	
+		execute as caller;
+		select @theId = DATABASE_PRINCIPAL_ID(); 
+		select @IsDbo = IS_MEMBER(N'db_owner');
+		revert; 
+		
+		if @owner_id is null
+		begin
+			select @owner_id = @theId;
+		end
+		else
+		begin
+			if @theId <> @owner_id
+			begin
+				if @IsDbo = 0
+				begin
+					RAISERROR (N'E_INVALIDARG', 16, 1);
+					return -1
+				end
+				select @theId = @owner_id
+			end
+		end
+		-- next 2 line only for test, will be removed after define name unique
+		if EXISTS(select diagram_id from dbo.sysdiagrams where principal_id = @theId and name = @diagramname)
+		begin
+			RAISERROR ('The name is already used.', 16, 1);
+			return -2
+		end
+	
+		insert into dbo.sysdiagrams(name, principal_id , version, definition)
+				VALUES(@diagramname, @theId, @version, @definition) ;
+		
+		select @retval = @@IDENTITY 
+		return @retval
+	END
+
+CREATE PROCEDURE dbo.sp_dropdiagram
+	(
+		@diagramname 	sysname,
+		@owner_id	int	= null
+	)
+	WITH EXECUTE AS 'dbo'
+	AS
+	BEGIN
+		set nocount on
+		declare @theId 			int
+		declare @IsDbo 			int
+		
+		declare @UIDFound 		int
+		declare @DiagId			int
+	
+		if(@diagramname is null)
+		begin
+			RAISERROR ('Invalid value', 16, 1);
+			return -1
+		end
+	
+		EXECUTE AS CALLER;
+		select @theId = DATABASE_PRINCIPAL_ID();
+		select @IsDbo = IS_MEMBER(N'db_owner'); 
+		if(@owner_id is null)
+			select @owner_id = @theId;
+		REVERT; 
+		
+		select @DiagId = diagram_id, @UIDFound = principal_id from dbo.sysdiagrams where principal_id = @owner_id and name = @diagramname 
+		if(@DiagId IS NULL or (@IsDbo = 0 and @UIDFound <> @theId))
+		begin
+			RAISERROR ('Diagram does not exist or you do not have permission.', 16, 1)
+			return -3
+		end
+	
+		delete from dbo.sysdiagrams where diagram_id = @DiagId;
+	
+		return 0;
+	END
+
+CREATE PROCEDURE dbo.sp_helpdiagramdefinition
+	(
+		@diagramname 	sysname,
+		@owner_id	int	= null 		
+	)
+	WITH EXECUTE AS N'dbo'
+	AS
+	BEGIN
+		set nocount on
+		declare @theId 		int
+		declare @IsDbo 		int
+		declare @DiagId		int
+		declare @UIDFound	int
+	
+		if(@diagramname is null)
+		begin
+			RAISERROR (N'E_INVALIDARG', 16, 1);
+			return -1
+		end
+	
+		execute as caller;
+		select @theId = DATABASE_PRINCIPAL_ID();
+		select @IsDbo = IS_MEMBER(N'db_owner');
+		if(@owner_id is null)
+			select @owner_id = @theId;
+		revert; 
+	
+		select @DiagId = diagram_id, @UIDFound = principal_id from dbo.sysdiagrams where principal_id = @owner_id and name = @diagramname;
+		if(@DiagId IS NULL or (@IsDbo = 0 and @UIDFound <> @theId ))
+		begin
+			RAISERROR ('Diagram does not exist or you do not have permission.', 16, 1);
+			return -3
+		end
+		select version, definition FROM dbo.sysdiagrams where diagram_id = @DiagId ; 
+		return 0
+	END
+
+CREATE PROCEDURE dbo.sp_helpdiagrams
+	(
+		@diagramname sysname = NULL,
+		@owner_id int = NULL
+	)
+	WITH EXECUTE AS N'dbo'
+	AS
+	BEGIN
+		DECLARE @user sysname
+		DECLARE @dboLogin bit
+		EXECUTE AS CALLER;
+			SET @user = USER_NAME();
+			SET @dboLogin = CONVERT(bit,IS_MEMBER('db_owner'));
+		REVERT;
+		SELECT
+			[Database] = DB_NAME(),
+			[Name] = name,
+			[ID] = diagram_id,
+			[Owner] = USER_NAME(principal_id),
+			[OwnerID] = principal_id
+		FROM
+			sysdiagrams
+		WHERE
+			(@dboLogin = 1 OR USER_NAME(principal_id) = @user) AND
+			(@diagramname IS NULL OR name = @diagramname) AND
+			(@owner_id IS NULL OR principal_id = @owner_id)
+		ORDER BY
+			4, 5, 1
+	END
+
+CREATE PROCEDURE dbo.sp_renamediagram
+	(
+		@diagramname 		sysname,
+		@owner_id		int	= null,
+		@new_diagramname	sysname
+	
+	)
+	WITH EXECUTE AS 'dbo'
+	AS
+	BEGIN
+		set nocount on
+		declare @theId 			int
+		declare @IsDbo 			int
+		
+		declare @UIDFound 		int
+		declare @DiagId			int
+		declare @DiagIdTarg		int
+		declare @u_name			sysname
+		if((@diagramname is null) or (@new_diagramname is null))
+		begin
+			RAISERROR ('Invalid value', 16, 1);
+			return -1
+		end
+	
+		EXECUTE AS CALLER;
+		select @theId = DATABASE_PRINCIPAL_ID();
+		select @IsDbo = IS_MEMBER(N'db_owner'); 
+		if(@owner_id is null)
+			select @owner_id = @theId;
+		REVERT;
+	
+		select @u_name = USER_NAME(@owner_id)
+	
+		select @DiagId = diagram_id, @UIDFound = principal_id from dbo.sysdiagrams where principal_id = @owner_id and name = @diagramname 
+		if(@DiagId IS NULL or (@IsDbo = 0 and @UIDFound <> @theId))
+		begin
+			RAISERROR ('Diagram does not exist or you do not have permission.', 16, 1)
+			return -3
+		end
+	
+		-- if((@u_name is not null) and (@new_diagramname = @diagramname))	-- nothing will change
+		--	return 0;
+	
+		if(@u_name is null)
+			select @DiagIdTarg = diagram_id from dbo.sysdiagrams where principal_id = @theId and name = @new_diagramname
+		else
+			select @DiagIdTarg = diagram_id from dbo.sysdiagrams where principal_id = @owner_id and name = @new_diagramname
+	
+		if((@DiagIdTarg is not null) and  @DiagId <> @DiagIdTarg)
+		begin
+			RAISERROR ('The name is already used.', 16, 1);
+			return -2
+		end		
+	
+		if(@u_name is null)
+			update dbo.sysdiagrams set [name] = @new_diagramname, principal_id = @theId where diagram_id = @DiagId
+		else
+			update dbo.sysdiagrams set [name] = @new_diagramname where diagram_id = @DiagId
+		return 0
+	END
+
+CREATE PROCEDURE dbo.sp_upgraddiagrams
+	AS
+	BEGIN
+		IF OBJECT_ID(N'dbo.sysdiagrams') IS NOT NULL
+			return 0;
+	
+		CREATE TABLE dbo.sysdiagrams
+		(
+			name sysname NOT NULL,
+			principal_id int NOT NULL,	-- we may change it to varbinary(85)
+			diagram_id int PRIMARY KEY IDENTITY,
+			version int,
+	
+			definition varbinary(max)
+			CONSTRAINT UK_principal_name UNIQUE
+			(
+				principal_id,
+				name
+			)
+		);
+
+		/* Add this if we need to have some form of extended properties for diagrams */
+		/*
+		IF OBJECT_ID(N'dbo.sysdiagram_properties') IS NULL
+		BEGIN
+			CREATE TABLE dbo.sysdiagram_properties
+			(
+				diagram_id int,
+				name sysname,
+				value varbinary(max) NOT NULL
+			)
+		END
+		*/
+		IF OBJECT_ID(N'dbo.dtproperties') IS NOT NULL
+		begin
+			insert into dbo.sysdiagrams
+			(
+				[name],
+				[principal_id],
+				[version],
+				[definition]
+			)
+			select	 
+				convert(sysname, dgnm.[uvalue]),
+				DATABASE_PRINCIPAL_ID(N'dbo'),			-- will change to the sid of sa
+				0,							-- zero for old format, dgdef.[version],
+				dgdef.[lvalue]
+			from dbo.[dtproperties] dgnm
+				inner join dbo.[dtproperties] dggd on dggd.[property] = 'DtgSchemaGUID' and dggd.[objectid] = dgnm.[objectid]	
+				inner join dbo.[dtproperties] dgdef on dgdef.[property] = 'DtgSchemaDATA' and dgdef.[objectid] = dgnm.[objectid]
+				
+			where dgnm.[property] = 'DtgSchemaNAME' and dggd.[uvalue] like N'_EA3E6268-D998-11CE-9454-00AA00A3F36E_' 
+			return 2;
+		end
+		return 1;
+	END
+
+ALTER TABLE Grout_Entity ADD CONSTRAINT FK__Grout_Ent__Creat__797309D9 FOREIGN KEY ( CreatedBy ) REFERENCES Grout_User( UserId );
+
+ALTER TABLE Grout_Entity ADD CONSTRAINT FK__Grout_Ent__Modif__7A672E12 FOREIGN KEY ( ModifiedBy ) REFERENCES Grout_User( UserId );
+
+ALTER TABLE Grout_EntityField ADD CONSTRAINT FK__Grout_Ent__Entit__01142BA1 FOREIGN KEY ( EntityFieldTypeId ) REFERENCES Grout_EntityFieldType( EntityFieldTypeId );
+
+ALTER TABLE Grout_EntityField ADD CONSTRAINT FK__Grout_Ent__Creat__02084FDA FOREIGN KEY ( CreatedBy ) REFERENCES Grout_User( UserId );
+
+ALTER TABLE Grout_EntityField ADD CONSTRAINT FK__Grout_Ent__Modif__02FC7413 FOREIGN KEY ( ModifiedBy ) REFERENCES Grout_User( UserId );
+
+ALTER TABLE Grout_EntityFieldMapping ADD CONSTRAINT FK__Grout_Ent__Entit__05D8E0BE FOREIGN KEY ( EntityId ) REFERENCES Grout_Entity( EntityId );
+
+ALTER TABLE Grout_EntityFieldMapping ADD CONSTRAINT FK__Grout_Ent__Entit__06CD04F7 FOREIGN KEY ( EntityFieldId ) REFERENCES Grout_EntityField( EntityFieldId );
+
+ALTER TABLE Grout_EntityFieldMapping ADD CONSTRAINT FK__Grout_Ent__Creat__07C12930 FOREIGN KEY ( CreatedBy ) REFERENCES Grout_User( UserId );
+
+ALTER TABLE Grout_EntityFieldMapping ADD CONSTRAINT FK__Grout_Ent__Modif__08B54D69 FOREIGN KEY ( ModifiedBy ) REFERENCES Grout_User( UserId );
+
+ALTER TABLE Grout_EntityFieldType ADD CONSTRAINT FK__Grout_Ent__Creat__7D439ABD FOREIGN KEY ( CreatedBy ) REFERENCES Grout_User( UserId );
+
+ALTER TABLE Grout_EntityFieldType ADD CONSTRAINT FK__Grout_Ent__Modif__7E37BEF6 FOREIGN KEY ( ModifiedBy ) REFERENCES Grout_User( UserId );
+
+ALTER TABLE Grout_Group ADD CONSTRAINT FK__Grout_Gro__Creat__3A81B327 FOREIGN KEY ( CreatedBy ) REFERENCES Grout_User( UserId );
+
+ALTER TABLE Grout_Group ADD CONSTRAINT FK__Grout_Gro__Modif__3B75D760 FOREIGN KEY ( ModifiedBy ) REFERENCES Grout_User( UserId );
+
+ALTER TABLE Grout_GroupRole ADD CONSTRAINT FK__Grout_Gro__Group__70DDC3D8 FOREIGN KEY ( GroupId ) REFERENCES Grout_Group( GroupId );
+
+ALTER TABLE Grout_GroupRole ADD CONSTRAINT FK__Grout_Gro__RoleI__71D1E811 FOREIGN KEY ( RoleId ) REFERENCES Grout_Role( RoleId );
+
+ALTER TABLE Grout_Project ADD CONSTRAINT FK__Grout_Pro__Proje__5CD6CB2B FOREIGN KEY ( ProjectTypeId ) REFERENCES Grout_ProjectType( ProjectTypeId );
+
+ALTER TABLE Grout_ProjectEntity ADD CONSTRAINT FK__Grout_Pro__Entit__0B91BA14 FOREIGN KEY ( EntityId ) REFERENCES Grout_Entity( EntityId );
+
+ALTER TABLE Grout_ProjectEntity ADD CONSTRAINT FK__Grout_Pro__Proje__0C85DE4D FOREIGN KEY ( ProjectTypeId ) REFERENCES Grout_ProjectType( ProjectTypeId );
+
+ALTER TABLE Grout_ProjectEntity ADD CONSTRAINT FK__Grout_Pro__Creat__0D7A0286 FOREIGN KEY ( CreatedBy ) REFERENCES Grout_User( UserId );
+
+ALTER TABLE Grout_ProjectEntity ADD CONSTRAINT FK__Grout_Pro__Modif__0E6E26BF FOREIGN KEY ( ModifiedBy ) REFERENCES Grout_User( UserId );
+
+ALTER TABLE Grout_ProjectTeam ADD CONSTRAINT FK__Grout_Pro__Proje__6C190EBB FOREIGN KEY ( ProjectId ) REFERENCES Grout_Project( ProjectId );
+
+ALTER TABLE Grout_ProjectTeam ADD CONSTRAINT FK__Grout_Pro__TeamI__6B24EA82 FOREIGN KEY ( TeamId ) REFERENCES Grout_Team( TeamId );
+
+ALTER TABLE Grout_SystemLog ADD CONSTRAINT FK__Grout_Sys__Syste__5165187F FOREIGN KEY ( SystemLogTypeId ) REFERENCES Grout_SystemLogType( SystemLogTypeId );
+
+ALTER TABLE Grout_SystemLog ADD CONSTRAINT FK__Grout_Sys__Targe__534D60F1 FOREIGN KEY ( TargetUserId ) REFERENCES Grout_User( UserId );
+
+ALTER TABLE Grout_SystemLog ADD CONSTRAINT FK__Grout_Sys__Updat__52593CB8 FOREIGN KEY ( UpdatedUserId ) REFERENCES Grout_User( UserId );
+
+ALTER TABLE Grout_SystemSettings ADD CONSTRAINT FK__Grout_Sys__Creat__5629CD9C FOREIGN KEY ( CreatedBy ) REFERENCES Grout_User( UserId );
+
+ALTER TABLE Grout_SystemSettings ADD CONSTRAINT FK__Grout_Sys__Modif__571DF1D5 FOREIGN KEY ( ModifiedBy ) REFERENCES Grout_User( UserId );
+
+ALTER TABLE Grout_TeamGroup ADD CONSTRAINT FK__Grout_Tea__Group__6383C8BA FOREIGN KEY ( GroupId ) REFERENCES Grout_Group( GroupId );
+
+ALTER TABLE Grout_TeamGroup ADD CONSTRAINT FK__Grout_Tea__TeamI__6477ECF3 FOREIGN KEY ( TeamId ) REFERENCES Grout_Team( TeamId );
+
+ALTER TABLE Grout_TeamUser ADD CONSTRAINT FK__Grout_Tea__TeamI__68487DD7 FOREIGN KEY ( TeamId ) REFERENCES Grout_Team( TeamId );
+
+ALTER TABLE Grout_TeamUser ADD CONSTRAINT FK__Grout_Tea__UserI__6754599E FOREIGN KEY ( UserId ) REFERENCES Grout_User( UserId );
+
+ALTER TABLE Grout_UserGroup ADD CONSTRAINT FK__Grout_Use__Group__3E52440B FOREIGN KEY ( GroupId ) REFERENCES Grout_Group( GroupId );
+
+ALTER TABLE Grout_UserGroup ADD CONSTRAINT FK__Grout_Use__UserI__3F466844 FOREIGN KEY ( UserId ) REFERENCES Grout_User( UserId );
+
+ALTER TABLE Grout_UserLog ADD CONSTRAINT FK__Grout_Use__Group__44FF419A FOREIGN KEY ( GroupId ) REFERENCES Grout_Group( GroupId );
+
+ALTER TABLE Grout_UserLog ADD CONSTRAINT FK__Grout_Use__Targe__45F365D3 FOREIGN KEY ( TargetUserId ) REFERENCES Grout_User( UserId );
+
+ALTER TABLE Grout_UserLog ADD CONSTRAINT FK__Grout_Use__Updat__46E78A0C FOREIGN KEY ( UpdatedUserId ) REFERENCES Grout_User( UserId );
+
+ALTER TABLE Grout_UserLog ADD CONSTRAINT FK__Grout_Use__UserL__440B1D61 FOREIGN KEY ( UserLogTypeId ) REFERENCES Grout_UserLogType( UserLogTypeId );
+
+ALTER TABLE Grout_UserLogin ADD CONSTRAINT FK__Grout_Use__UserI__49C3F6B7 FOREIGN KEY ( UserId ) REFERENCES Grout_User( UserId );
+
+ALTER TABLE Grout_UserPreference ADD CONSTRAINT FK__Grout_Use__UserI__4CA06362 FOREIGN KEY ( UserId ) REFERENCES Grout_User( UserId );
+
+ALTER TABLE Grout_UserRole ADD CONSTRAINT FK__Grout_Use__RoleI__75A278F5 FOREIGN KEY ( RoleId ) REFERENCES Grout_Role( RoleId );
+
+ALTER TABLE Grout_UserRole ADD CONSTRAINT FK__Grout_Use__UserI__74AE54BC FOREIGN KEY ( UserId ) REFERENCES Grout_User( UserId );
+
+]]></string>
+		</script>
+	</layout>
+	<layout name="Sample Layout with Tools" id="Layout_4be82fa" show_column_type="y" show_relation="columns" >
+		<entity schema="dbo" name="Entity" color="bfd4f5" x="45" y="675" />
+		<entity schema="dbo" name="EntityField" color="bfd4f5" x="270" y="675" />
+		<entity schema="dbo" name="EntityFieldMapping" color="bfd4f5" x="540" y="675" />
+		<entity schema="dbo" name="EntityFieldType" color="bfd4f5" x="45" y="450" />
+		<entity schema="dbo" name="Group" color="c8f5bf" x="780" y="75" />
+		<entity schema="dbo" name="GroupRole" color="c8f5bf" x="1005" y="315" />
+		<entity schema="dbo" name="Project" color="f5ddbf" x="1215" y="1560" />
+		<entity schema="dbo" name="ProjectEntity" color="f5ddbf" x="780" y="1110" />
+		<entity schema="dbo" name="ProjectTeam" color="f5ddbf" x="1215" y="1335" />
+		<entity schema="dbo" name="ProjectType" color="f5ddbf" x="990" y="1335" />
+		<entity schema="dbo" name="Role" color="c8f5bf" x="1215" y="315" />
+		<entity schema="dbo" name="SystemLog" color="f5ddbf" x="990" y="1110" />
+		<entity schema="dbo" name="SystemLogType" color="f5ddbf" x="795" y="960" />
+		<entity schema="dbo" name="SystemSettings" color="bfd4f5" x="60" y="75" />
+		<entity schema="dbo" name="Team" color="c8f5bf" x="1005" y="75" />
+		<entity schema="dbo" name="TeamGroup" color="f5ddbf" x="1200" y="1110" />
+		<entity schema="dbo" name="TeamUser" color="c8f5bf" x="1230" y="75" />
+		<entity schema="dbo" name="User" color="bfd4f5" x="270" y="285" />
+		<entity schema="dbo" name="UserGroup" color="c8f5bf" x="780" y="315" />
+		<entity schema="dbo" name="UserLog" color="bfd4f5" x="540" y="285" />
+		<entity schema="dbo" name="UserLogType" color="bfbff5" x="285" y="960" />
+		<entity schema="dbo" name="UserLogin" color="bfbff5" x="45" y="960" />
+		<entity schema="dbo" name="UserPreference" color="bfbff5" x="285" y="1155" />
+		<entity schema="dbo" name="UserRole" color="c8f5bf" x="1440" y="315" />
+		<callout x="270" y="210" pointer="NO" >
+			<comment><![CDATA[Double-click any table, column or foreign key to edit, right-click to start one of the tools below.
+Use the Relational Data Browse for simultaneously exploring data from multiple tables.
+All tools will be saved to project file and can be reopen.]]></comment>
+		</callout>
+		<group name="Grout_User" color="ecf0f7" >
+			<entity schema="dbo" name="User" />
+			<entity schema="dbo" name="UserLog" />
+			<entity schema="dbo" name="EntityFieldMapping" />
+			<entity schema="dbo" name="EntityField" />
+			<entity schema="dbo" name="Entity" />
+			<entity schema="dbo" name="EntityFieldType" />
+			<entity schema="dbo" name="SystemSettings" />
+		</group>
+		<group name="Grout_Group" color="eef7ec" >
+			<entity schema="dbo" name="Group" />
+			<entity schema="dbo" name="Team" />
+			<entity schema="dbo" name="GroupRole" />
+			<entity schema="dbo" name="Role" />
+			<entity schema="dbo" name="TeamUser" />
+			<entity schema="dbo" name="UserGroup" />
+			<entity schema="dbo" name="UserRole" />
+		</group>
+		<group name="Grout_ProjectEntity" color="f7f3ec" >
+			<entity schema="dbo" name="ProjectEntity" />
+			<entity schema="dbo" name="SystemLog" />
+			<entity schema="dbo" name="ProjectType" />
+			<entity schema="dbo" name="ProjectTeam" />
+			<entity schema="dbo" name="Project" />
+			<entity schema="dbo" name="TeamGroup" />
+			<entity schema="dbo" name="SystemLogType" />
+		</group>
+		<group name="Grout_UserLogin" color="ececf7" >
+			<entity schema="dbo" name="UserLogin" />
+			<entity schema="dbo" name="UserLogType" />
+			<entity schema="dbo" name="UserPreference" />
+		</group>
+		<script name="Sample SQL Editor" id="Editor_31f21f4" language="SQL" >
+			<string><![CDATA[SELECT * 
+FROM
+	dbo.Grout_User r;]]></string>
+		</script>
+		<browser id="Browse_2614927" name="Sample Relational Data Browse" confirm_updates="y" >
+			<browse_table schema="dbo" entity="User" x="20" y="20" width="400" height="300" />
+		</browser>
+		<query id="Query_377f0ba" name="Sample Query Builder" >
+			<query_table schema="dbo" name="User" alias="gu" x="45" y="45" >
+				<column name="UserId" />
+				<column name="UserName" />
+				<column name="FirstName" />
+				<column name="LastName" />
+				<column name="DisplayName" />
+				<column name="Email" />
+				<column name="Password" />
+				<column name="Contact" />
+				<column name="Picture" />
+				<column name="CreatedDate" />
+				<column name="ModifiedDate" />
+				<column name="LastLogin" />
+				<column name="ActivationExpirationDate" />
+				<column name="ActivationCode" />
+				<column name="ResetPasswordCode" />
+				<column name="LastResetAttempt" />
+				<column name="IsActivated" />
+				<column name="IsActive" />
+				<column name="IsDeleted" />
+			</query_table>
+		</query>
+	</layout>
+</project>

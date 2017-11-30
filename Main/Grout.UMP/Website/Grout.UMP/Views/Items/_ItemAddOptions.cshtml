@@ -1,0 +1,52 @@
+﻿@{ var model = Model as Dictionary<ItemType, bool>; }
+
+@if (model[ItemType.Report] || model[ItemType.Datasource] || model[ItemType.File] || model[ItemType.Category])
+{
+    <li class="hidden-xs hidden-sm hidden-md visible-lg">
+        <div id="createOptions" class="dropdown">
+            <button id="createButton" type="button" class="btn btn-default btn-sm dropdown-toggle" style="" data-toggle="dropdown" title="Create">
+                <span>CREATE</span>
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" id="createButtonOptions">
+                @if (model[ItemType.Report])
+                {
+                    <li id='CreateReport' onclick="openNewReportPopup()">
+                        <a href="javascript:void(0)" title="">
+                            <span class="su su-report"> </span>
+                            Report
+                        </a>
+                    </li>
+                }
+                @if (model[ItemType.Datasource])
+                {
+                    <li id='create_datasource' onclick="openNewDataSourcePopup()">
+                        <a href="javascript:void(0)" title="">
+                            <span class="su su-datasource"> </span>
+                            Data Source
+                        </a>
+                    </li>
+                }
+                @if (Model[ItemType.File])
+                {
+                    <li id='CreateFile' onclick="openNewFilePopup()">
+                        <a href="javascript:void(0)" title="">
+                            <span class="su su-document"> </span>
+                            File
+                        </a>
+                    </li>
+                }
+                @if (model[ItemType.Category])
+                {
+                    <li id='CreateCategory' onclick="openNewCategoryPopup()">
+                        <a href="javascript:void(0)" title="">
+                            <span class="su su-folder"> </span>
+                            Category
+                        </a>
+                    </li>
+                }
+            </ul>
+       </div>
+    </li>
+
+}

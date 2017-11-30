@@ -1,0 +1,57 @@
+﻿@model MvcSiteMapProvider.Web.Html.Models.SiteMapNodeModel
+@using System.Web.Mvc.Html
+@using MvcSiteMapProvider.Web.Html.Models
+@using Grout.Base;
+
+@{
+    if (Model.IsCurrentNode && Model.SourceMetadata["HtmlHelper"].ToString() != "MvcSiteMapProvider.Web.Html.MenuHelper")
+    {
+        if (Model.Attributes.ContainsKey("isEditInfoPage"))
+        {
+            if (Model.Attributes["type"] == "user")
+            {
+                var user = new UserManagement().FindUserByUserName(Model.RouteValues["username"].ToString());
+                <text> @user.DisplayName</text>
+            }
+            else
+            {
+                var group = new GroupManagement().GetGroupById(int.Parse(Model.RouteValues["groupId"].ToString()));
+                <text> @group.GroupName</text>
+            }
+        }
+        else if (Model.Attributes.ContainsKey("isEditPermissionPage"))
+        {
+            if (Model.Attributes["type"] == "user")
+            {
+                var user = new UserManagement().FindUserByUserId(int.Parse(Model.RouteValues["userid"].ToString()));
+               
+                <text> @user.DisplayName</text>
+            }
+            else
+            {
+                var group = new GroupManagement().GetGroupById(int.Parse(Model.RouteValues["groupid"].ToString()));
+                
+                <text> @group.GroupName</text>
+            }
+        }
+        else
+        {
+            <text>@Model.Title</text>
+        }
+    }
+    else if (Model.IsClickable)
+    {
+        if (string.IsNullOrEmpty(Model.Description))
+        {
+            <a href="@Model.Url">@Model.Title</a>
+        }
+        else
+        {
+            <a href="@Model.Url" title="@Model.Description">@Model.Title</a>
+        }
+    }
+    else
+    {
+        <text>@Model.Title</text>
+    }
+}

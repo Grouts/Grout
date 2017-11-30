@@ -1,0 +1,71 @@
+﻿@model User
+@{
+    ViewBag.Title = GlobalAppSettings.SystemSettings.OrganizationName + " - User Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section styles{
+    @Styles.Render("~/Styles/user-profile")
+}
+@section scripts{
+    @Scripts.Render("~/Scripts/user-profile")
+}
+
+<div id="edit_Profile_base_div" class="col-md-12 no-margin">
+    <div class="col-xs-12 profile-edit no-padding" id="UserProfileMaster">
+        <div id="edit_Profile_heading_div">
+            <label class="section-heading" id="UserHead">@Model.FirstName @Model.LastName</label>
+            <a href="/profile/edit" class="btn btn-success pull-right" title="">Edit Profile</a>
+        </div>
+        <div class="col-xs-12" id="edit_profile_form_div">
+            <div class="col-xs-8">
+                <table class="user-profile-table" cellpadding="20" style="margin-bottom: 10px;">
+                    <tr>
+                        <td valign="top" class="NotificationContent">
+                            Profile Picture<br />
+                        </td>
+                        <td>
+                            <div class="img-view-holder">
+                                <img id="profile-picture1" src="/User/Avatar?Username=@HttpContext.Current.User.Identity.Name&ImageSize=150" />
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="">Username</td>
+                        <td>@Model.UserName</td>
+                    </tr>
+                    <tr>
+                        <td class="">First name</td>
+                        <td>@Model.FirstName</td>
+                    </tr>
+                    <tr>
+                        <td class="">Last name</td>
+                        <td>@Model.LastName</td>
+                    </tr>
+                    <tr>
+                        <td class="">Email address</td>
+                        <td>@Model.Email</td>
+                    </tr>
+                    <tr>
+                        <td class="">
+                            Phone number
+                        </td>
+                        <td>@Model.ContactNumber</td>
+                    </tr>
+                    <tr>
+                        <td class="">
+                            Groups
+                        </td>
+                        <td>@ViewBag.GroupList</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-xs-4 no-padding change_password">
+                <span class="userprofie section-light-sub-content pull-right">
+                    Last Modified : <span id="LastModified">@Model.ModifiedDate.ToString(GlobalAppSettings.SystemSettings.DateFormat) @Model.ModifiedDate.ToString("hh:mm:ss tt")</span>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<span id="baseurl" data-url="/"></span>

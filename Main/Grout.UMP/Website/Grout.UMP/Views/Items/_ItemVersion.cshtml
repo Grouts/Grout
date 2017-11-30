@@ -1,0 +1,207 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Version history</title>
+    @Styles.Render("~/styles/ItemVersion")
+    @Scripts.Render("~/scripts/ItemVersion")
+</head>
+<body class="overflow-none versions-popup">
+    <div class="no-padding">
+
+        <div class="col-md-12 popup-header no-padding">
+            <div id="PopupContainer">
+
+                <div class="col-md-12 header-menu">
+                    <div class="col-xs-11 no-padding">
+                        <span class="su su-open Head-icon"></span>
+                        <span class="PopupTitle SchedulePopupTitle" title="@ViewBag.FullItemName">@ViewBag.FullItemName</span>
+                    </div>
+                    <div class="col-xs-1 no-padding">
+                        <a href="javascript:void(0);" title="Close" class="PopupClose"><span class="su su-close"></span></a>
+                    </div>
+                </div>
+                <div class="dialogBody col-xs-12 no-padding">
+
+                    <div class="col-md-12 header-menu no-padding">
+                        <div class="col-md-4 header-tab version">
+                            <a id="VersionTab" class="no-style active-content" href="javascript:void(0);" data-report-id="" data-created-by="" data-report-name="@ViewBag.FullItemName" class="folder-manage-tab folder-tab-color activeTab" data-purpose="View">Versions</a>
+                        </div>
+                        <div class="col-md-4 header-tab log">
+                            <a id="ItemLogTab" class="no-style inactive-content" href="javascript:void(0);" data-report-id="" data-created-by="" data-report-name="@ViewBag.FullItemName" class="folder-manage-tab SectionGrayHeading" data-isrightpane="false">File Logs</a>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="horizontal-splitline"></div>
+                        <div class="downArrow"></div>
+                    </div>
+                    <input id="ReportAction" type="hidden" value="">
+                    <input id="curItemId" type="hidden" ng-model="CurrentItemId" value="">
+                    <span style="display: none;">
+                        <input id="CurrentFolder" type="text" ng-model="CurrentFolderId" value="" />
+                    </span>
+                    <div class="TotalMoveContainer col-xs-12 version-container-padding">
+                        <div id="ItemVersionContainer" class="visible-content col-xs-12 no-padding VersionArea" data-previous-parent-id="none" data-parent-id="home" data-type="self">
+                            <div class="col-xs-12 no-padding" style="display:block; padding-top:20px; float:left; overflow:auto;">
+                                <div id="Grid">
+                                </div>
+                            </div>
+                        </div>
+                        <div id="ItemLogContainer" class="hide-content col-xs-12 no-padding VersionArea " data-previous-parent-id="none" data-parent-id="home" data-type="self">
+                            <div class="col-xs-12 no-padding" style="display:block; padding-top:20px; float:left; overflow:auto;">
+                                <div id="LogGrid">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 dialogFooter rightAlign no-right-padding no-left-padding">
+
+                        <div class="col-xs-12 no-padding rightAlign">
+                            <input type="button" id="CloseButton" title="Close" class="btn btn-default rightAlign PopupClose" value="Close" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script type="text/x-jsrender" id="Options">
+        <div class="dropdown">
+            <span class="dropdown-toggle option-icon" title="Actions" data-toggle="dropdown">
+                <span class="su su-options"></span>
+            </span>
+            <ul class="dropdown-menu" role="menu">
+                {{if ItemTypeId==3}}
+                <li>
+                    <a title="" href="/reports/view?id={{:ItemId}}&version={{:VersionNumber}}" target="_blank"><span class="su su-open"><span class="path1"></span><span class="path2"></span></span>Open</a>
+                </li>
+                {{/if}}
+                {{if ItemTypeId!=3}}
+                <li>
+                    <a title="" href="/items/download?id={{:ItemId}}&version={{:VersionNumber}}" target="_blank"><span class="su su-download"> </span>Download</a>
+                </li>
+                {{/if}}
+                {{if !IsCurrentVersion && CanWrite}}
+                <li>
+                    <a data-item-id="{{:ItemId}}" title="Restore" data-item-version="{{:VersionNumber}}" class="ItemRollback" href="javascript:void(0);"><span class="su su-roll-back"> </span>Restore</a>
+                </li>
+                {{/if}}
+            </ul>
+        </div>
+    </script>
+    <script>
+        $(document).ready(function () {
+            window.parent.$('#verionWindowContainer_wrapper').ejWaitingPopup("hide");
+        });
+
+
+        $(document).ready(function () {
+            var itemId = '@Request["ItemId"]';
+            $("#Grid").ejGrid({
+                dataSource: ej.DataManager({ url: "/items/VersionItems?ItemId=" + itemId, adaptor: "UrlAdaptor" }),
+                gridLines: ej.Grid.GridLines.Horizontal,
+                allowPaging: true,
+                pageSettings: { pageSize: 8 },
+                allowSorting: false,
+                allowSearching: false,
+                allowFiltering: false,
+                allowSelection: true,
+                enableRowHover: true,
+                columns: [
+                    {
+                        headerText: "Version",
+                        field: "VersionNumber",
+                        width: 30,
+                        allowFiltering: false
+                    },
+                    {
+                        headerText: "User",
+                        width: 50,
+                        field: "CreatedByName",
+                        allowFiltering: false
+                    },
+                    {
+                        headerText: "Comments",
+                        width: 70,
+                        field: "Comment",
+                        allowFiltering: false,
+                    },
+                    {
+                        headerText: "Date",
+                        width: 60,
+                        visible: false,
+                        field: "CreatedDate",
+                        allowFiltering: false,
+                    },
+                    {
+                        headerText: "Date",
+                        width: 70,
+                        field: "CreatedDateString",
+                        allowFiltering: false
+                    },
+                    {
+                        template: true,
+                        templateID: "#Options",
+                        width: 15,
+                        allowFiltering: false,
+                        allowSorting: false
+                    }
+                ]
+            });
+
+
+            $("#LogGrid").ejGrid({
+                dataSource: ej.DataManager({ url: "/items/ItemLogs?ItemId=" + itemId, adaptor: "UrlAdaptor" }),
+                gridLines: ej.Grid.GridLines.Horizontal,
+                allowPaging: true,
+                pageSettings: { pageSize: 8 },
+                allowSorting: false,
+                allowSearching: false,
+                allowFiltering: false,
+                allowSelection: true,
+                enableRowHover: true,
+                columns: [
+                    {
+                        headerText: "Event",
+                        field: "DisplayText",
+                        width: 50,
+                        allowFiltering: false
+                    },
+                    {
+                        headerText: "User",
+                        width: 25,
+                        field: "DisplayName",
+                        allowFiltering: false
+                    },
+                    {
+                        headerText: "Date",
+                        width: 25,
+                        visible: false,
+                        field: "UpdatedDate",
+                        allowFiltering: false,
+                    },
+                    {
+                        headerText: "Date",
+                        width: 25,
+                        field: "UpdatedDateString",
+                        allowFiltering: false,
+                    }
+                ]
+            });
+
+
+        });
+    </script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+

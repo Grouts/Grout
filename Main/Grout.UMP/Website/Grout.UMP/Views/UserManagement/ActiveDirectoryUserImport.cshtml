@@ -1,0 +1,184 @@
+﻿@{
+    ViewBag.Title = GlobalAppSettings.SystemSettings.OrganizationName + " - Active Directory users import";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@section styles{
+    @Styles.Render("~/Styles/user-active-directory")
+}
+
+@section scripts{
+    @Scripts.Render("~/Scripts/user-active-directory")
+
+    <script type="text/x-jsrender" id="user-detail-validation">
+        <span class="su su-login-error user-import-validation"></span>
+    </script>
+    <script type="text/x-jsrender" id="checkboxRowTemplate">
+        <input type="checkbox" class="checkboxRow" />
+    </script>
+
+    <script type="text/x-jsrender" id="checkboxHeaderTemplate">
+        <input type="checkbox" id="checkboxHeader" />
+    </script>
+    <script type="text/javascript">
+        var data1 = @Html.Raw(ViewBag.ser);
+
+        $(function () {
+            var data = data1.Data.Data;
+
+            $("#Grid").ejGrid({
+                dataSource: data,
+                allowPaging: false,
+                allowSorting: false,
+                allowSelection: true,
+                allowScrolling: false,
+                selectionType: ej.Grid.SelectionType.Multiple,
+                selectionSettings: { selectionMode: ["row"] },
+                actionComplete:fnActionComplete,
+                create:fnCreate,
+                recordClick: "recordClick",
+                dataBound: function(args) {
+                    refreshFooterPosition($(".e-gridcontent").height());
+                },
+                columns: [
+                     { headerTemplateID: "#checkboxHeaderTemplate", template: true, templateID: "#checkboxRowTemplate", textAlign:ej.TextAlign.Center,width: 5 },
+                    { field: "UserName", cssClass: "user-name", headerText: "Username", width: 30 },
+                    { field: "FullName", cssClass: "full-name", headerText: "Name", width: 50 },
+                    { field: "LastName", cssClass: "last-name", headerText: "Last Name", width: 10, visible: false },
+                    { field: "FirstName", cssClass: "first-name", headerText: "First Name", width: 10, visible: false },
+                    { field: "EmailId", cssClass: "email-id", headerText: "Email Id", width: 10, visible: false },
+                    { field: "ContactNumber", cssClass: "mobile-no", headerText: "Mobile No", width: 10, visible: false },
+                    { field: "UserId", cssClass: "user-id", headerText: "user id", width: 10, visible: false },
+                    { field: "", headerText: "Error", width: 10, templateID: "#user-detail-validation", visible: false }
+                ]
+            });
+        });
+
+    </script>
+}
+@if(ViewBag.ActiveDirectory!=null)
+{
+<div class="container-fluid">
+    <form action="/administration/user-management/users/import-active-directory" method="post" enctype="multipart/form-data">
+        <div class="col-md-12 import-area">
+            <a href="/administration/user-management/users" title="Users" class="back-button">
+                <div class="report-security-head">
+                    <i class="su su-back back-navigaion"> </i>
+                </div>
+            </a>
+            <div class="import-label">
+                IMPORT USERS
+            </div>
+            <span class="seperator">—</span>
+            <div class="template-link">
+                Active Directory
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-8 no-padding">
+                <div class="col-xs-2 no-padding" style="padding-top: 8px !important;">Directory Path :<input type="hidden" name="url" value="@ViewBag.ActiveDirectory.LdapURL"></div>
+                <div class="col-xs-3 no-padding" style="padding-top: 8px !important;">@ViewBag.ActiveDirectory.LdapURL</div>
+                <div class="col-xs-3 no-padding"><a href="/administration" title="Update Active Directory Configuration settings" class="btn btn-link">Change Active Directory</a></div>
+                <div class="col-xs-3 no-padding"><input type="submit" title="Import users from Active Directory" class="btn btn-primary" value="Connect and import users" /></div>
+            </div>
+        </div>
+
+
+    </form>
+<div class="col-xs-12 no-padding Userdatagrid">
+    <div class="col-xs-12 no-padding">
+        <div class="col-xs-4 no-padding">
+            @if (!String.IsNullOrEmpty(Request["url"]))
+            {
+                <span class="importMessage">* Please select users from the below list to import into Report Server </span>
+            }
+            else
+            {
+                <span class="importMessage"></span>
+            }
+        </div>
+        <div class="col-xs-8 no-padding">
+            <div class="list" id="grid_validation_messages" class="grid_error_validation">
+                <div class="col-xs-9">
+                    <span id="grid_nodata_validation" class="grid_nodata_validation">There is no data in the uploaded file. Please check and try uploading again.</span>
+                    <span id="grid_validation" class="grid_validation"><span id="userCount" class="userCount">@ViewBag.UserCount</span> User(s) has been imported successfully.</span>
+                    <span id="grid_error_validation" class="grid_error_validation">Duplicate or Invalid data is found. Please change the data accordingly and re-upload the file. </span>
+                    <span id="empty_validation" class="validation-message empty_validation">Please select user(s) to import</span>
+                </div>
+                <div class="col-xs-3">
+                    @if (String.IsNullOrEmpty(Request["url"]))
+                    {
+                        <input type="button" value="Import and Activate" disabled="" title="Import the selected users and activate their accounts" onclick="SaveActiveDirectoryUsers()" id="SaveButtonClick" class="btn btn-success pull-right SaveButtonClick">
+                    }
+                    else
+                    {
+                        <input type="button" value="Import and Activate" title="Import the selected users and activate their accounts" onclick="SaveActiveDirectoryUsers()" id="SaveButtonClick" class="btn btn-success pull-right SaveButtonClick">
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="grid-container" class="col-md-12 no-top-margin no-left-padding">
+            <div class="col-md-12 container-fluid page-inner-padding no-padding ">
+                <div id="Grid">
+
+                </div>
+            </div>
+        </div>
+    <div class="col-xs-4 no-padding"></div>
+    <div class="col-xs-8 no-padding">
+        <div class="list" id="grid_validation_messages" class="grid_error_validation">
+            <div class="col-xs-9">
+                <span id="grid_nodata_validation" class="grid_nodata_validation">There is no data in the uploaded file. Please check and try uploading again.</span>
+                <span id="grid_validation" class="grid_validation"><span id="userCount" class="userCount">@ViewBag.UserCount</span> User(s) has been imported successfully.</span>
+                <span id="grid_error_validation" class="grid_error_validation">Duplicate or Invalid data is found. Please change the data accordingly and re-upload the file. </span>
+                <span id="empty_validation" class="validation-message empty_validation">Please select user(s) to import</span>
+    </div>
+            <div class="col-xs-3">
+                @if (String.IsNullOrEmpty(Request["url"]))
+                {
+                    <input type="button" disabled="" value="Import and Activate" title="Import the selected users and activate their accounts" onclick="SaveActiveDirectoryUsers()" id="SaveButtonClick" class="btn btn-success pull-right SaveButtonClick">
+                }
+                else
+                {
+                    <input type="button" value="Import and Activate" title="Import the selected users and activate their accounts" onclick="SaveActiveDirectoryUsers()" id="SaveButtonClick" class="btn btn-success pull-right SaveButtonClick">
+                }
+            </div>
+        </div>
+    </div>
+
+        </div>
+    <input type="hidden" name="AllUserList" id="AllUserList" value="@ViewBag.Pathname" />
+    <input type="hidden" id="UserCount" data-value="@ViewBag.UserExists" />
+    <input type="hidden" id="csvFileError" data-value="@ViewBag.result" />
+</div>
+
+}
+else
+{
+    <form action="/administration/user-management/users/import-active-directory" method="post" enctype="multipart/form-data">
+        <div class="col-md-12 import-area">
+            <a href="/administration/user-management/users" title="Users" class="back-button">
+                <div class="report-security-head">
+                    <i class="su su-back back-navigaion"> </i>
+                </div>
+            </a>
+            <div class="import-label">
+                IMPORT USERS
+            </div>
+            <span class="seperator">—</span>
+            <div class="template-link">
+                Active Directory
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="">
+                <a href="/administration" class="btn btn-link">Please click here to configure the Active Directory settings</a>
+            </div>
+        </div>
+
+
+    </form>
+
+}

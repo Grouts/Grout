@@ -1,0 +1,366 @@
+﻿.System-StartUp-Settings-bg {
+    background-color: #F8F8F8;
+
+    .system-settings-startup-page-fields {
+        border-width: 1px;
+        width: 300px;
+        margin: 0 auto;
+    }
+
+    .startupPageConatiner {
+        padding: 0;
+
+        .title {
+            font-size: 20px;
+            font-weight: 400;
+            padding: 5px;
+            text-align: center;
+        }
+
+        .content {
+            color: #686868;
+            font-size: 14px;
+            font-weight: 300;
+            margin-bottom: 10px;
+            max-width: 50%;
+            margin: auto;
+        }
+
+        .system-settings-startup-logo {
+            margin: 50px auto 0;
+            width: 255px;
+            text-align: center;
+        }
+
+        .su {
+            color: #a94442;
+            cursor: pointer;
+            display: none;
+            position: absolute;
+            right: 10px;
+            top: 10px;
+        }
+
+        #system-settings-container-page1 {
+            display: block;
+
+
+
+            .system-settings-page1-field-container {
+                text-align: center;
+
+                label {
+                    font-weight: 600;
+                    cursor: pointer;
+                }
+
+                .e-spanicon {
+                    z-index: 1 !important;
+                }
+
+                #connection_validation {
+                    margin: 0 auto;
+                    padding: 5px 0 0;
+                    width: 50%;
+
+                    .validation-errors {
+                        color: #a94442;
+                        font-size: 13px;
+                        margin: 0 auto;
+                        min-height: 10px;
+                        text-align: center;
+                        width: 100%;
+                    }
+                }
+
+                .databasetypes {
+                    margin-bottom: 15px;
+
+                    .center-db-types {
+                        float: none;
+                        margin: 0 auto;
+                        width: 450px;
+
+                        >div {
+                            float: left;
+                            width: 50%;
+
+                            >div {
+                                float: none;
+                                margin: auto;
+                                width: 180px;
+                            }
+
+                            #ejSQLCE {
+                                float: left;
+                            }
+
+                            .SqlceLabel {
+                                float: left;
+                                margin-left: -13px;
+                                color: #686868;
+                            }
+
+                            #ejMSSQL {
+                                float: left;
+                            }
+
+                            .MssqlLabel {
+                                float: left;
+                                margin-left: 10px;
+                                color: #686868;
+                            }
+                        }
+                    }
+                }
+
+                #auth_type_dropdown {
+                    margin-bottom: 10px;
+
+                    >div.bootstrap-select {
+                        width: 300px !important;
+                    }
+
+                    #Checkwindows {
+                        width: 300px;
+                    }
+                }
+
+                #db_content_holder {
+                    .CredentialContainer {
+                        margin: 0 auto 5px;
+                        text-align: left;
+                        width: 300px;
+
+                        .windowCheckboxLabel {
+                            color: #656565;
+                            margin-top: 5px;
+                        }
+
+
+
+                        #ejCheckwindows {
+                            float: left;
+                            margin-right: 10px;
+
+                            .e-chk-inact, .e-chk-act {
+                                z-index: 1;
+                            }
+                        }
+                    }
+
+                    .placeholder {
+                        position: absolute;
+                        left: 50%;
+                        margin-left: -136px;
+                        margin-top: -28px;
+                        color: #a7a9ac;
+                    }
+                }
+            }
+        }
+
+        #system-settings-container-page2 {
+            .admin-account-fields-container {
+                height: 490px;
+                width: 280px;
+                margin: auto;
+
+                .form-div {
+                    position: relative;
+                }
+            }
+
+            .admin-avatar {
+                border-radius: 70px;
+                height: 120px;
+                margin: 10px auto;
+                overflow: hidden;
+                width: 120px;
+            }
+
+            input[type="text"], input[type="password"] {
+                margin: 10px auto 0px;
+                width: 270px;
+            }
+
+            input[type="button"] {
+                margin: 30px auto 0px;
+                width: 150px;
+            }
+
+            .placeholder {
+                position: absolute;
+                left: 50%;
+                margin-left: -122px;
+                margin-top: -28px;
+                color: #a7a9ac;
+            }
+
+
+
+            .show-hide-password {
+                color: black;
+                display: block;
+            }
+
+            #newpassword, #confirmpassword {
+                right: 30px;
+            }
+        }
+
+        #system_settings_footer {
+            bottom: 0;
+            float: left;
+            padding-bottom: 10px;
+            width: 100%;
+
+            .splitter {
+                border-top: 1px solid #7f7f7f;
+                margin: auto;
+                width: 99%;
+            }
+
+            .copy-right-info {
+                margin-bottom: 0;
+                color: #7f7f7f;
+                font-size: 12;
+                margin-top: 5;
+
+                img {
+                    margin-left: 5px;
+                    margin-top: -10px;
+                }
+            }
+
+            .start-footer-content {
+                margin-top: 5px;
+
+                ul {
+                    list-style-type: none;
+
+                    li {
+                        float: left;
+                        padding-left: 30px;
+
+                        a {
+                            color: #7F7F7F;
+                            font-size: 12px;
+                        }
+                    }
+
+                        li.right {
+                            border-right: 1px solid #7f7f7f;
+                            padding-right: 30px;
+                        }
+                }
+            }
+        }
+    }
+    /* don't show the eye for password inputs */
+    ::-ms-reveal {
+        width: 0;
+        height: 0;
+    }
+
+    ::-ms-clear {
+        width: 0;
+        height: 0;
+    }
+
+    .txt-holder {
+        position: relative;
+        width: 300px;
+        margin: auto auto 15px;
+    }
+
+    .btn-holder {
+        #MovetoNext {
+            margin-top: 20px;
+        }
+    }
+
+    .centerAlign {
+        text-align: center;
+        clear: both;
+    }
+
+    .footer-fixed {
+        position: fixed;
+    }
+
+    .RightAlignment {
+        padding-right: 44px;
+        text-align: right;
+    }
+
+    .LeftAlignment {
+        text-align: left;
+    }
+
+    .reports-waitingPopup > .reports-waitingPopup-center {
+        background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+        display: table-cell;
+        left: 40%;
+        margin: auto;
+        position: absolute;
+        text-align: center;
+        top: 40%;
+        vertical-align: middle;
+    }
+
+    .reports-waitingPopup {
+        text-align: center;
+    }
+
+        .reports-waitingPopup > .reports-waitingPopup-center {
+            text-align: center;
+        }
+
+    .reports-waitingPopup {
+        background-color: #383838;
+        display: table;
+        height: 100%;
+        opacity: 0.5;
+        position: fixed;
+        text-align: center;
+        width: 100%;
+        z-index: 100;
+    }
+
+    #system-settings-container-page1 {
+        display: block;
+    }
+
+    #system-settings-container-page2 {
+        display: none;
+        text-align: center;
+    }
+
+    .DisplayNone {
+        display: none;
+    }
+
+    .validation-messages {
+        color: #a94442;
+        height: 20px;
+    }
+
+    .relative-position {
+        position: relative;
+    }
+}
+
+.bs-searchbox {
+    input[type="text"] {
+        color: #000;
+    }
+}
+
+* {
+    outline: none !important;
+}
+
+    *:focus {
+        outline: none !important;
+    }

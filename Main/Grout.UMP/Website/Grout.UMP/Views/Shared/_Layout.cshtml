@@ -1,0 +1,199 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title id="site_Name">
+        @ViewBag.Title
+    </title>
+    <script type="text/javascript">
+        var rootUrl = "";
+        var baseurl = "";
+    </script>
+    @Styles.Render("~/styles/layout")
+
+    @RenderSection("styles", false)
+
+    @Scripts.Render("~/scripts/layout")
+    @RenderSection("scripts", false)
+
+    <link rel="icon" href="~/Content/Images/Application/@GlobalAppSettings.SystemSettings.FavIcon" onerror="if (this.href != '~/Content/Images/Application/Grout_Favicon.png') this.href = '~/Content/Images/Application/Grout_Favicon.png';" />
+</head>
+<body id="body" style="background-image: url('/Content/Images/waitingpopup.gif');background-color: #f4f4f4; background-repeat: no-repeat; background-position: 50% 150px;">
+    <div class="page-additional-navigation">
+        <input type="hidden" id="userName" value="@HttpContext.Current.User.Identity.Name" />
+        <input type="hidden" id="BaseUrlHidden" value="/" />
+        <input type="hidden" name="baseurl" id="baseurl" value="" />
+        <input type="hidden" name="DateFormat" id="DateFormat" value="@GlobalAppSettings.SystemSettings.DateFormat" />
+    </div>
+    <div id="alert-notification">
+    </div>
+
+    <div id="base_Div" style="display:none;">
+        <div id="base_menu_Div">
+            <div id="base_menu_container_Div">
+                <div id="main_screen_logo">
+                    <a href="/" title="@GlobalAppSettings.SystemSettings.OrganizationName">
+                        <img width="40" height="40" src='~/Content/Images/Application/@GlobalAppSettings.SystemSettings.MainScreenLogo' onerror="if (this.src != '/Content/Images/Application/Grout_Main_Logo.png') this.src = '/Content/Images/Application/Grout_Main_Logo.png';" />
+                    </a>
+                </div>
+                <div id="menu_items">
+                    <ul id="menu_page_links">
+                        <li>
+                            <span data-type="shared" data-url="/reports" class="@(HttpContext.Current.Request.Url.AbsolutePath.ToString().ToLower()=="/reports" ? "active": HttpContext.Current.Request.Url.AbsolutePath == "/" ? "active" : String.Empty) ">
+                                <a class="" href="/reports" title="">
+                                    REPORTS
+                                </a>
+                            </span>
+                        </li>
+                        <li>
+                            <span data-type="public" data-url="/data-sources" class="@(HttpContext.Current.Request.Url.ToString().ToLower().IndexOf("/data-sources") > 0 ? "active" : String.Empty) ">
+                                <a class="" href="/data-sources" title="">
+                                    DATA SOURCES
+                                </a>
+                            </span>
+                        </li>
+                        <li>
+                            <span data-type="favorites" data-url="/files" class="@(HttpContext.Current.Request.Url.ToString().ToLower().IndexOf("/files") > 0 ? "active" : String.Empty) ">
+                                <a class="" href="/files" title="">
+                                    FILES
+                                </a>
+                            </span>
+                        </li>
+                        <li>
+                            <span data-type="favorites" data-url="/schedules" class="@(HttpContext.Current.Request.Url.ToString().ToLower().IndexOf("/schedules") > 0 ? "active" : String.Empty) ">
+                                <a class="" href="/schedules" title="">
+                                    SCHEDULES
+                                </a>
+                            </span>
+                        </li>
+                        @{
+                            var isImageRequest = HttpContext.Current.Request.Url.ToString().ToLower().IndexOf(".png") > 0 ||
+                                                 HttpContext.Current.Request.Url.ToString().ToLower().IndexOf(".jpg") > 0 ||
+                                                 HttpContext.Current.Request.Url.ToString().ToLower().IndexOf(".gif") > 0;
+                            var displayname = String.Empty;
+                            if (isImageRequest == false && HttpContext.Current.Session["displayname"] == null)
+                            {
+                                AccountModel.UpdateSession();
+                            }
+                            displayname = HttpContext.Current.Session["displayname"] != null ? HttpContext.Current.Session["displayname"].ToString() : String.Empty;
+                        }
+                        @if (isImageRequest == false &&
+                            HttpContext.Current.Session["IsAdmin"] != null &&
+                            Convert.ToBoolean(HttpContext.Current.Session["IsAdmin"]))
+                        {
+                            <li class="dropdown">
+                                <span data-toggle="dropdown" title="" id="admin" class="dropdown-toggle @(HttpContext.Current.Request.Url.ToString().ToLower().IndexOf("/administration") > 0 ? "active-tab" : String.Empty) ">
+                                    <span>ADMIN </span>
+                                    <span class="caret"></span>
+                                </span>
+                                <ul class="dropdown-menu" role="menu">
+
+                                    <li>
+                                        <a href="/administration" title="">
+                                            <span class="su su-settings-1"> </span>
+                                            General
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="/administration/user-management" title="">
+                                            <span class="su su-user-block"> </span>
+                                            User Management
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        }                        @if (HttpContext.Current.Request.Url.AbsolutePath == "/" ||
+                                                      HttpContext.Current.Request.Url.ToString().ToLower().IndexOf("/reports") > 0 ||
+                                                      HttpContext.Current.Request.Url.ToString().ToLower().IndexOf("/data-sources") > 0 ||
+                                                      HttpContext.Current.Request.Url.ToString().ToLower().IndexOf("/files") > 0
+                                                     )
+                        {
+                            if (ViewBag.ItemAddOptions != null)
+                            {
+                                Html.RenderPartial("~/Views/Items/_ItemAddOptions.cshtml", ViewBag.ItemAddOptions as Dictionary<ItemType, bool>);
+                            }
+                        }
+                    </ul>
+                </div>
+                <div id="user_options">
+                    <ul id="menu_icons">
+
+                        <li class="dropdown">
+                            <span class="dropdown-toggle" data-toggle="dropdown">
+                                <span id="profile-picture-menu"><img src="/User/Avatar?Username=@HttpContext.Current.User.Identity.Name&ImageSize=32" width="32" height="32" /></span>
+                                <span id="profile_display_name" class="hidden-xs hidden-sm hidden-md">  @displayname </span>
+                                <span class="caret"></span>
+                            </span>
+                            <ul class="dropdown-menu" role="menu">
+                                <li class="">
+                                    <a href="/profile" title="View my profile" class="@(HttpContext.Current.Request.Url.ToString().ToLower().IndexOf("profile") > 0 ? "active":String.Empty) ">
+                                        <span class="su su-edit"> </span>
+                                        Profile
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a href="/accounts/logout" class="menu_action_icons" title="">
+                                        <span class="su su-logout LogoutRed">
+                                        </span>
+                                        Log Out
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="base_content_Div">
+            <div id="page_content_Div">
+                @RenderBody()
+            </div>
+        </div>
+        <div id="messageBox">
+            <div class="message-header"></div>
+            <div class="message-box-close"></div>
+            <div class="message-content text-center"></div>
+            <div class="message-box-btn-holder"></div>
+        </div>
+        <div id="base_footer_Div">
+            <hr class="bottom-hr-line" />
+            <footer>
+
+                <p class="pull-left">Powered by <img src="~/Content/Images/Application/Grout_Footer_Logo.png" alt="Grout" width="102px" height="22px" /> | Copyright &copy; 2001 - @DateTime.Now.Year Grout Inc | All Rights Reserved</p>
+                @*<p class="pull-right">
+                    <a href="javascript:void(0);" target="_blank">Documentation</a> |
+                    <a href="javascript:void(0);" target="_blank">Sales</a> |
+                    <a href="javascript:void(0);" target="_blank">Support</a>
+                </p>*@
+            </footer>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    window.rootUrl = "";
+
+    $(document).ready(function () {
+
+        var docHeight = $(window).height();
+        var footerHeight = $('#base_footer_Div').height();
+        var footerTop = $('#base_footer_Div').position().top + footerHeight;
+
+        if (footerTop < docHeight) {
+            $('#base_footer_Div').css('margin-top', (docHeight - footerTop - 40) + 'px');
+        }
+        $("#messageBox").ejDialog({
+            width: "450px",
+            showOnInit: false,
+            allowDraggable: true,
+            enableResize: false,
+            height: "170px",
+            showHeader: false,
+            enableModal: true,
+            close: "onMessageDialogClose"
+        });
+    });
+</script>

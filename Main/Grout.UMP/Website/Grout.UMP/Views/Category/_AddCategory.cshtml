@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+@{
+    var isSuccess = ViewData["IsSuccess"] != null && Convert.ToBoolean(ViewData["IsSuccess"]);
+    var categoryName = ViewData["CategoryName"];
+}
+
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>
+        @ViewBag.Title
+    </title>
+    @Styles.Render("~/styles/add-category")
+    @Scripts.Render("~/scripts/add-category")
+</head>
+<body style="background:white;">
+    <div class="col-md-12 header-menu">
+        <span class="su su-folder Head-icon"></span>
+        <span class="PopupTitle">Add Category</span>
+        <a href="javascript:void(0);" class="PopupClose" title="Close" onclick="closeAddItemPopup()"><span class="su su-close"></span></a>
+    </div>
+    @if (isSuccess == false)
+    {
+        <form id="addCategoryForm" name="addCategoryForm" method="post" action="~/category/addcategory" onsubmit="return addItemValidate()" autocomplete="off">
+            <div id="create_category_content" class="col-md-12">
+                <table>
+                    <tbody>
+                        <tr class="bottomPadding5">
+                            <td><div class="bottom-margin30">Category Name<span class="Mandatory">*</span></div></td>
+                            <td>
+                                <input type="text" id="category_name" autofocus class="popup form-control bottom-margin30" name="categoryName" maxlength="100" tabindex="1">
+                                <span id="validate-name" class="validation-message"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><div class="bottom-margin30">Description</div></td>
+                            <td>
+                                <textarea name="description" class="form-control bottom-margin30" maxlength="1024" id="category_description" tabindex="2"></textarea>
+                                <span class="notification">
+                                    *1024 characters maximum
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="category-btns">
+                <div class="pull-right">
+                    <input type="submit" title="" class="btn btn-primary" value="Add" tabindex="3">
+                    <input type="button" title="" class="btn btn-link" onclick="closeAddItemPopup()" value="Cancel" tabindex="4" >
+                </div>
+            </div>
+        </form>
+    }
+    else
+    {
+        <script>
+            $(document).ready(function () {
+                parent.onCategoryDialogBoxClose();
+                parent.messageBox("su-folder", "Add Category", "Category has been added successfully.", "success", function () {
+                    var gridName = window.parent.$('#itemGridContainer').attr("data-grid-name");
+                    if (gridName == "reports") {
+                        parent.window.location.href = "/reports?categoryName=@categoryName";
+                    }
+                    parent.onCloseMessageBox();
+                });
+            });
+        </script>
+    }
+</body>
+</html>

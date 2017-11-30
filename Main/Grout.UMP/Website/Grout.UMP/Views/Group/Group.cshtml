@@ -1,0 +1,179 @@
+﻿@{
+    ViewBag.Title = GlobalAppSettings.SystemSettings.OrganizationName + " - Groups";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section styles{
+    @Styles.Render("~/styles/groups")
+}
+
+@section scripts{
+    @Scripts.Render("~/scripts/groups")
+    <script type="text/x-jsrender" id="GroupProfileTemplate">
+        {{if IsActiveDirectoryGroup}}
+        <a class="item-name" href="/administration/permissions/groups/edit?groupId={{:GroupId}}" data-groupid="{{:GroupId}}">{{:GroupName}}</a>
+        {{else}}
+            <a class="item-name" href="/administration/user-management/groups/edit?groupId={{:GroupId}}">{{:GroupName}}</a>
+        {{/if}}
+
+
+    </script>
+    <script type="text/x-jsrender" id="itemNameHeader">
+    <div class="item-name">Name</div>
+</script>
+    <script type="text/x-jsrender" id="ActionsTemplate">
+        <div class="dropdown">
+            <span class="dropdown-toggle option-icon" data-toggle="dropdown">
+                <span class="su su-options"> </span>
+            </span>
+            <ul class="dropdown-menu" role="menu">
+
+                <li>
+                    <a href="/administration/permissions/groups/edit?groupId={{:GroupId}}" data-groupid="{{:GroupId}}">
+                        <span class="su su-settings-2">
+                        </span>
+                        Manage Permissions
+                    </a>
+                </li>
+				
+                {{if !IsActiveDirectoryGroup}}
+                <hr />
+                <li>
+                    <a href="/administration/user-management/groups/edit?groupId={{:GroupId}}" data-groupid="{{:GroupId}}">
+                                <span class="su su-user-add"> </span>
+                        Add Users
+                    </a>
+                </li>
+				<hr/>
+               
+                <li>
+                    <a href="/administration/user-management/groups/edit?groupId={{:GroupId}}" data-groupid="{{:GroupId}}">
+                        <span class="su su-edit"> </span>
+                        Edit
+                    </a>
+                </li>
+                {{/if}}
+                {{if CanDelete && !IsActiveDirectoryGroup}}
+                <li>
+                    <a href="javascript:void(0);" class="delete" data-groupid="{{:GroupId}}" data-groupname="{{:GroupName}}">
+                        <span class="su su-delete"> </span>
+                        Delete
+                    </a>
+                </li>
+                {{/if}}
+            </ul>
+        </div>
+</script>
+    <script type="text/javascript">
+        var groups = @Html.Raw(@ViewBag.groups)
+        $(document).ready(function() {
+            $("#searchGroups").val("");
+            addPlacehoder("#searchArea");
+            $("#Grid").ejGrid({
+                dataSource: ej.DataManager({ url: "/Group/RefreshGroup", adaptor: "UrlAdaptor" }),
+                gridLines: ej.Grid.GridLines.Horizontal,
+                allowPaging: true,
+                allowSorting: true,
+                allowSearching: true,
+                allowFiltering: true,
+                allowSelection: true,
+                dataBound: function(args) {
+                    refreshFooterPosition($(".e-gridcontent").height());
+                },
+                rowDataBound: function () {
+                    var height = $(".e-gridcontent").height();
+                    if (height != null) {
+                        rowBound(height);
+                    }
+                },
+                pageSettings: { pageSize: 20 },
+                filterSettings: { filterType: "menu" },
+                actionBegin: "fnOnGroupGridActionBegin",
+                columns: [
+                    {
+                        allowSorting: true,
+                        headerText: "Name",
+                        width: 115,
+                        headerTemplateID: "#itemNameHeader",
+                        templateID: "#GroupProfileTemplate",
+                        field: "GroupName",
+                        type: "string"
+                    },
+                    {
+                        field: "GroupDescription",
+                        headerText: "Description",
+                        allowSorting: true,
+                        type: "string",
+                        width: 300
+                    },
+                    {
+                        template: true,
+                        allowSorting: false,
+                        allowFiltering: false,
+                        templateID: "#ActionsTemplate",
+                        width: 20
+                    }
+                ]
+
+            });
+
+            $("#NewGroupArea").ejDialog({
+                width: "500px",
+                showOnInit: false,
+                allowDraggable: true,
+                enableResize: false,
+                showHeader: false,
+                height: "290px",
+                title: "Add New Group",
+                enableModal: true,
+                closeOnEscape: true,
+                close: ''
+            });
+            $("#DeleteGroupArea").ejDialog({
+                width: "400px",
+                showOnInit: false,
+                allowDraggable: true,
+                enableResize: false,
+                showHeader: false,
+                height: "203px",
+                title: "Add New Group",
+                enableModal: true,
+                closeOnEscape: true,
+                close: ''
+            });
+            $("#DeleteGroupArea_wrapper").ejWaitingPopup();
+            $("#NewGroupArea_wrapper").ejWaitingPopup();
+
+        });
+    </script>
+
+}
+
+    @Html.Partial("../Shared/_FixedLeftSection", new ViewDataDictionary {{"IsCategoryLising", "false"}})
+    <div id="base_container">
+
+        <div id="partialPlaceHolder">
+            <div class="GroupHeaderContainer col-lg-12 no-left-padding no-right-padding padding15">
+                <div class="col-xs-5 GroupHead no-left-padding">GROUPS (<span id="GroupCount">@ViewBag.groupCount</span>)</div>
+                <div id="searchArea">
+                    <input type="text" id="searchGroups" placeholder="Search groups"/>
+                    <span class="su su-search search-group" title="Search"></span>
+                </div>
+            <div class="GroupButtons no-right-padding">
+                <input type="button" id="NewGroupButton" class="btn btn-success" title="Add new group" value="New Group" />
+                <input type="hidden" name="GroupCount" id="GroupCountText" value="@ViewBag.groupCount" />
+            </div>       
+
+        </div>
+        <div id="grid-container" class="small-margin no-top-padding">
+            <div id="Grid" data-gridname="Group">
+
+            </div>
+            <div id="NewGroupArea" class="no-padding">
+                <iframe src="" style="border: 0;" id="newGroupIframe" border="0" width="100%" height="100%"></iframe>
+            </div>
+            <div id="DeleteGroupArea" class="no-padding">
+                <iframe src="" style="border: 0;" id="DeleteGroupIframe" border="0" width="100%" height="100%"></iframe>
+            </div>
+        </div>
+    </div>

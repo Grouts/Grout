@@ -1,0 +1,138 @@
+﻿@{
+    ViewBag.Title = GlobalAppSettings.SystemSettings.OrganizationName + " - Categories";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model List<ItemDetail>
+
+    @section styles{
+        @Styles.Render("~/Styles/GroupPermission")
+    }
+
+    @section scripts{
+        @Scripts.Render("~/scripts/GroupPermission")
+    }
+
+    @Html.Partial("../Shared/_FixedLeftSection", new ViewDataDictionary { { "IsCategoryLising", "false" } })
+
+    <div id="base_container" class="group-permission col-md-12">
+        <div id="partialPlaceHolder">
+
+            <div class="PageHeaderContainer col-lg-12 no-left-padding no-right-padding padding15">
+
+                <div class="col-xs-6 GroupHead no-left-padding" title="@ViewBag.groupName">
+                    <a href="/administration/user-management/groups" title="Groups">
+                        <span class="report-security-head">
+                            <i class="su su-back"> </i>
+                        </span>
+                    </a>
+                    Manage Permissions - @ViewBag.groupName
+                </div>
+                <div class="col-xs-6 GroupButtons no-right-padding">
+                    
+                        <a type="button" class="btn btn-default" title="" href="/administration/user-management/groups/edit?groupId=@Request["groupid"]">Edit Group</a>
+                       <input type="button" title="Add Permission to the group" id="AddPermissionButtonTop" value="Add Permission" class="btn btn-success rightAlign" />
+                </div>
+            </div>
+
+            <div class="col-md-12 permission-grid">@Html.Partial("_GroupPermissionGrid", Model)</div>
+            <div class="col-md-3">
+                <div id="AddPermission" class="no-padding">
+                    <iframe src="" id="AddPermissionIframe" width="100%" height="100%" style="border:0;"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" id="groupIdHidden" value="@Request["groupid"]" />
+
+    @Html.Partial("../Permission/_DeletePermission")
+
+    <script type="text/x-jsrender" id="CommandsTemplate">
+        <div>
+            <span><a href="javascript:void(0);" class="deletePermission" data-permission-id="{{:PermissionId}}"><i class="su su-close"></i> Remove</a></span>
+        </div>
+    </script>
+    <script type="text/x-jsrender" id="AccessModeTemplate">
+        <div class="item-name">{{:PermissionAccessDescription}}</div>
+    </script>
+    <script type="text/x-jsrender" id="AccessModeHeader">
+        <div class="item-name">Access Mode</div>
+    </script>
+    <script>
+
+        var groupId = @Request["groupid"]
+
+        $(document).ready(function () {
+            $("#AddPermission").ejDialog({
+                width: "600px",
+                showOnInit: false,
+                allowDraggable: true,
+                enableResize: false,
+                showHeader: false,
+                height: "300px",
+                title: "Add New Permission",
+                enableModal: true,
+                closeOnEscape: true,
+                close: ''
+            });
+            $("#AddPermission_wrapper").ejWaitingPopup();
+            $("#Grid").ejGrid({
+                dataSource: ej.DataManager({ url: "/permission/GetAllGroupPermission?groupId=" + groupId, adaptor: "UrlAdaptor" }),
+                gridLines: ej.Grid.GridLines.Horizontal,
+                allowPaging: true,
+                allowSorting: true,
+                allowSearching: true,
+                allowSelection: true,
+                rowHover: "HoverEf",
+                pageSettings: { pageSize: 10 },
+                actionBegin: "fnOnGroupPermissionActionBegin",
+                actionComplete: function (args) {
+                    if (args.model.currentViewData.length == 0) {
+                        rowBound(38);
+                    }
+                },
+                rowDataBound: function () {
+                    var height = $(".e-gridcontent").height();
+                    if (height != null) {
+                        rowBound(height);
+                    }
+                },
+                dataBound: function (args) {
+                    refreshFooterPosition($(".e-gridcontent").height());
+                },
+                columns: [
+                    {
+                        allowSorting: true,
+                        headerText: "Access Mode",
+                        width: 80,
+                        field: "PermissionAccessDescription",
+                        templateID: "#AccessModeTemplate",
+                        headerTemplateID: "#AccessModeHeader"
+                    },
+                    {
+                        field: "PermissionEntityDescription",
+                        allowSorting: true,
+                        headerText: "Entity",
+                        width: 80
+                    },
+
+                    {
+                        field: "ItemName",
+                        allowSorting: true,
+                        headerText: "Scope",
+                        width: 80
+                    },
+                    {
+
+                        template: true,
+                        allowSorting: false,
+                        headerText: "Actions",
+                        templateID: "#CommandsTemplate",
+                        width: 40
+                    }
+                ]
+
+            });
+        });
+
+    </script>

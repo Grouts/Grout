@@ -1,0 +1,316 @@
+﻿<div id="FixedLeftSection">
+    @if (bool.Parse(ViewBag.IsCategoryLising))
+    {
+        <div class="collapseIcon hide-content collapse-category"><span>>></span></div>
+        <div ng-app="" ng-controller="categoryListing" id="categoryLising">
+
+            <div></div>
+            <div id="CatergoryHeading">
+                <div>
+                    <h4>
+                        CATEGORIES
+                    </h4>
+
+                    <span id="caegory-sort-icon" ng-click="changeSort('Name')" title="Sort" class="su  su-sort pull-right"><span class="path1"></span><span class="path2"></span></span>
+                    <span class="pull-right su su-search" title="Search categories"></span>
+                </div>
+                <div id="SearchCategoryParent">
+                    <input id="SearchCategory" type="text" ng-model="search.Name" placeholder="Search categories" class="ng-pristine ng-valid">
+                </div>
+            </div>
+            <div id="ParentScrollElement">
+                <div id="ScrollElement">
+                    <div>
+                        <ul id="listing">
+                            <li class="all-categories" data-name="All Category" title="">
+                                All <span class="badge pull-right total-count"></span>
+                            </li>
+                            <li class="category-name" data-id="{{category.Id}}" title="{{category.Name}}" data-description="{{category.Description}}" data-name="{{category.Name}}" ng-repeat="category in Categories | filter:search | orderBy:categoryName:reverse" ng-class="{'first': $first, 'dropup': $last}">
+                                <a class="category-link" href="/reports?categoryName={{category.Name}}">{{category.Name}}</a> <span class="badge pull-right">{{category.ReportsCount}}</span>
+                                <ul class="CategorySettings pull-right" ng-if="category.CanWrite || category.CanDelete">
+                                    <li class="dropdown">
+                                        <span class="dropdown-toggle su su-settings-1" title="Actions" data-toggle="dropdown">
+
+                                        </span>
+                                        <ul class="dropdown-menu" role="menu">
+
+                                            <li ng-if="category.CanWrite">
+                                                <a class="EditCategory" href="javascript:void(0)" title="" data-item-id="{{category.Id}}">
+                                                    <span class="su su-edit"> </span>
+                                                    Update
+                                                </a>
+                                            </li>
+                                            <li ng-if="category.CanDelete">
+                                                <a class="DeleteCategory" data-item-id="{{category.Id}}" title="" data-itemtype="{{category.ItemType}}" data-name="{{category.Name}}" href="javascript:void(0)">
+                                                    <span class="su  su-delete"> </span>
+                                                    Delete
+                                                </a>
+                                            </li>
+                                        </ul>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    }
+    else
+    {
+        <div class="col-md-12 system-settings-sidebar">
+            <div>
+                <ul>
+                    <li id="expand-tool">
+                        <span title="Expand" class="expand-button">
+                            >>
+                        </span>
+                        <span title="Collapse" class="collapse-button">
+                            <<
+                        </span>
+                    </li>
+                    <li class="" data-url="/administration/site" data-current-content="general">
+                        <a href="/administration/site">
+                            <span class="expanded-span">
+                                <span class="su su-url" title="Site Settings"> </span>
+                                SITE SETTINGS
+                            </span>
+                        </a>
+                    </li>
+                    <li class="" data-url="/administration/e-mail-settings" data-current-content="emailsettings">
+                        <a href="/administration/e-mail-settings">
+                            <span class="expanded-span">
+                                <span class="su su-e-mail" title="Email Settings"> </span>
+                                EMAIL SETTINGS
+                            </span>
+                        </a>
+                    </li>
+                    <li class="" data-url="/administration/user-management/users" data-current-content="users">
+                        <a href="/administration/user-management/users">
+                            <span class="expanded-span">
+                                <span class="su su-user-1" title="Users"> </span>
+                                USERS
+                            </span>
+                        </a>
+                    </li>
+                    <li class="" data-url="/administration/user-management/groups" data-current-content="groups">
+                        <a href="/administration/user-management/groups">
+                            <span class="expanded-span">
+                                <span class="su su-group-1" title="Groups"> </span>
+                                GROUPS
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    }
+</div>
+@{
+    if (HttpContext.Current.Request.Url.ToString().ToLower().IndexOf("/administration") > 0)
+    {
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+
+                var section = window.location.href;
+                $("#expand-tool").click(function(){
+                    $("#FixedLeftSection,#base_container,#base_footer_Div,#expand-tool").toggleClass("Expanded");
+                });
+                $(".system-settings-sidebar li").hide();
+
+                $("#expand-tool").show();
+                if (section.toLowerCase().indexOf("groups") > 0 || section.toLowerCase().indexOf("users") > 0 || section.toLowerCase().indexOf("user-management") > 0) {
+                    $("li[data-current-content='groups'],li[data-current-content='users']").show();
+                }
+                else {
+                    $("li[data-current-content='emailsettings'],li[data-current-content='general'],li[data-current-content='activedirectorysettings']").show();
+                }
+                if (section.toLowerCase().indexOf("groups") > 0) {
+                    $("li[data-current-content='groups'] a").addClass('active');
+                } else if (section.toLowerCase().indexOf("users") > 0 || section.toLowerCase().indexOf("user-management") > 0) {
+                    $("li[data-current-content='users'] a").addClass('active');
+                } else if (section.toLowerCase().indexOf("e-mail-settings") > 0) {
+
+                    $("li[data-current-content='emailsettings'] a").addClass('active');
+                    $("#look-and-feel-container, #active-directory-container").hide();
+                    $("#mail-settings-container").show();
+                } else if (section.toLowerCase().indexOf("active-directory-settings") > 0) {
+
+                    $("li[data-current-content='activedirectorysettings'] a").addClass('active');
+                    $("#look-and-feel-container, #mail-settings-container").hide();
+                    $("#active-directory-container").show();
+                } else {
+                    $("li[data-current-content='general'] a").addClass('active');
+                    $("#look-and-feel-container").show();
+                    $("#mail-settings-container, #active-directory-container").hide();
+                }
+                $(".system-settings-sidebar").show();
+
+            });
+        </script>
+    }
+}
+
+@{
+    if (HttpContext.Current.Request.Url.ToString().ToLower().IndexOf("/reports") > 0 || HttpContext.Current.Request.Url.AbsolutePath == "/")
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                initLayoutRender();
+                $("#FixedLeftSection").show();
+                addPlacehoder("#CatergoryHeading");
+                $("#CatergoryHeading .placeholder").hide();
+                $("#CatergoryHeading .su-search").click(function () {
+                    $("#SearchCategoryParent").toggle();
+                    $("#SearchCategory").siblings(".placeholder").toggle();
+                    $("#SearchCategory").focus();
+
+                });
+
+                $('#listing').on('show.bs.dropdown', function () {
+                    $(".category-name").each(function () {
+                        $(this).removeClass("activeCategorySetting");
+                        if ($(this).find(".open").length > 0) {
+                            $(this).addClass("activeCategorySetting");
+                        }
+                    });
+                });
+
+                $('#listing').on('hide.bs.dropdown', function () {
+                    $(".category-name").removeClass("activeCategorySetting");
+                });
+
+                $(".category-name").hover(function () {
+
+
+                    $(".category-name").each(function () {
+                        $(this).removeClass("activeCategorySetting");
+                        if ($(this).find(".open").length > 0) {
+                            $(this).addClass("activeCategorySetting");
+                        }
+                    });
+                });
+                $(".all-categories").click(function () {
+                    $(".category-name").removeClass("active");
+                    $(this).addClass("active");
+                    $("#categoryName").html("All Reports");
+                    $("#categoryDescription").html("");
+                    ResetGrid();
+
+                });
+                $("#SearchCategory").keyup(function (e) {
+
+                    if ($(window).height() - ($("#CatergoryHeading").outerHeight() + $("#base_menu_container_Div").outerHeight() + $("#listing").outerHeight()) > 0) {
+                        $("#ScrollElement").children('div').width("100%");
+                    } else {
+                        if(!$("#ScrollElement .e-content").length){
+                            refreshScroller();
+
+                        }else{
+                            var scrollercontrol = $("#ScrollElement").ejScroller("instance");
+                            scrollercontrol.model.height = $(window).height() - ($("#CatergoryHeading").outerHeight() + $("#base_menu_container_Div").outerHeight());
+                            scrollercontrol.refresh();
+                        }
+                    }
+
+                });
+            });
+
+
+            function categoryListing($scope) {
+                var categoryName = "@HttpContext.Current.Request.QueryString["categoryName"]";
+
+                $scope.Categories = @Html.Raw(ViewBag.Categories);
+
+
+                $scope.changeSort = function (categoryName) {
+                    $scope.reverse = ($scope.categoryName === categoryName) ? !$scope.reverse : false;
+                    $scope.categoryName = categoryName;
+                }
+                $scope.$watch('rows', function () {
+                    $scope.total = 0
+                    angular.forEach($scope.Categories, function(row){
+                        $scope.total += row.ReportsCount;
+                    })
+                    $(".total-count").html($scope.total);
+                }, true);
+                setTimeout(function() {
+                    if(categoryName != null && categoryName != ""){
+                        $(".category-name").removeClass("active");
+                        $("#listing li[data-name='" + categoryName + "']").addClass("active");
+                        $("#categoryName").html(categoryName);
+                        var categoryDescription = $("#listing li[data-name='" + categoryName + "']").attr("data-description");
+                        $("#categoryDescription").html(categoryDescription);
+                        $("#categoryDescription").attr("title",  $("#listing li[data-name='" + categoryName + "']").attr("data-description"));
+                    }
+                    else{
+                        $(".category-name").removeClass("active");
+                        $("#listing li.all-categories").addClass("active");
+                        $("#categoryName").html("All Reports");
+                        $("#categoryDescription").html("");
+                    }
+                }, 100);
+
+            }
+
+            function RefreshCategoryList() {
+                $("#FixedLeftSection").ejWaitingPopup("show");
+                $.ajax({
+                    type: "POST",
+                    url: "/reports/refreshcategorylist",
+                    success: function (data) {
+                        var categoryScope = angular.element(document.getElementById("categoryLising")).scope();
+                        $("#FixedLeftSection").ejWaitingPopup("hide");
+                        categoryScope.$apply(function () {
+                            categoryScope.Categories = data;
+                        });
+                        categoryScope.total = 0
+                        angular.forEach(categoryScope.Categories, function (row) {
+                            categoryScope.total += row.ReportsCount;
+                        })
+                        $(".total-count").html(categoryScope.total);
+                        if(!$("#categoryLising li.all-categories").hasClass("active")){
+                            $("#categoryLising li").removeClass("active");
+                            $("#categoryLising li.all-categories").addClass("active");
+                            ResetGrid();
+                        }
+                        $("#categoryName").html("All Reports");
+                        $("#categoryDescription").html("");
+                    },
+                    error: function () {
+                        $("#FixedLeftSection").ejWaitingPopup("hide");
+                    }
+                });
+            }
+
+            function RefreshCategoryListAfterAction(toCategory) {
+                $("#FixedLeftSection").ejWaitingPopup("show");
+                $.ajax({
+                    type: "POST",
+                    url: "/reports/refreshcategorylist",
+                    success: function (data) {
+                        var categoryScope = angular.element(document.getElementById("categoryLising")).scope();
+                        $("#FixedLeftSection").ejWaitingPopup("hide");
+                        categoryScope.$apply(function () {
+                            categoryScope.Categories = data;
+                        });
+                        categoryScope.total = 0
+                        angular.forEach(categoryScope.Categories, function (row) {
+                            categoryScope.total += row.ReportsCount;
+                        })
+                        $(".total-count").html(categoryScope.total);
+                        $(".category-name[data-id='" + toCategory + "']").trigger("click");
+                    },
+                    error: function () {
+                        $("#FixedLeftSection").ejWaitingPopup("hide");
+                    }
+                });
+            }
+
+        </script>
+    }
+}
+

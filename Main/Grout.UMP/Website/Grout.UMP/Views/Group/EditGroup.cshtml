@@ -1,0 +1,177 @@
+@{
+    ViewBag.Title = GlobalAppSettings.SystemSettings.OrganizationName + " - Groups";
+    Layout = "~/Views/Shared/_Layout.cshtml";      
+}
+
+@section styles{
+    @Styles.Render("~/styles/groups")
+}
+
+@section scripts{
+    @Scripts.Render("~/scripts/EditGroup")
+
+    <script type="text/javascript">
+
+        var groupDetails=@Html.Raw(@ViewBag.groupDetails)
+        var allUsers=@Html.Raw(@ViewBag.allUser)
+        var groupId=@Request["groupId"]
+        var app = angular.module('GroupEditApp', ['ejangular']);
+        app.controller('GroupEditController', function ($scope) {
+            $scope.selectedRow = 1;
+            $scope.page = 0;
+            $scope.allGroupDetails = groupDetails;
+            $scope.allUsers = allUsers;
+        });
+        $(document).ready(function() {
+            $("#Grid").ejGrid({
+                dataSource: ej.DataManager({ url: "/Group/RefreshGroupUsers?groupId="+groupId, adaptor: "UrlAdaptor" }),
+                gridLines: ej.Grid.GridLines.Horizontal,
+                allowPaging: true,
+                pageSettings: { pageSize: 20 },
+                allowSorting: true,
+                allowSearching: true,
+                allowFiltering: true,
+                allowSelection: true,
+                filterSettings: { filterType: "menu" },
+                actionBegin: "fnOnEditGroupActionBegin",
+                //actionComplete: "fnActionComplete",
+                dataBound: function (args) {
+                    if (location.pathname.toLowerCase() === "/" || location.pathname.toLowerCase() === "/reports") {
+                        refreshScroller();
+                    }
+                },
+                enableRowHover: true,
+                columns: [
+                    {
+                        allowSorting: true,
+                        headerText: "Name",
+                        width: 100,
+                        field: "DisplayName",
+                        templateID: "#NameTemplate",
+                        headerTemplateID: "#NameHeader",
+                        type: "string",
+                        allowFiltering: true
+                    },
+                    {
+                        field: "Email",
+                        headerText: "Email",
+                        width: 180,
+                        type: "string",
+                        allowFiltering: true
+                    },
+
+                    {
+
+                        template: true,
+                        allowSorting: false,
+                        templateID: "#ActionsTemplate",
+                        width: 40,
+                        allowFiltering: false
+                    }
+                ]
+            });
+
+            $("#DeleteGroupArea").ejDialog({
+                width: "420px",
+                showOnInit: false,
+                allowDraggable: true,
+                enableResize: false,
+                showHeader: false,
+                height: "203px",
+                title: "Add New Group",
+                enableModal: true,
+                closeOnEscape: true,
+                close: ''
+            });
+            $("#DeleteGroupArea_wrapper").ejWaitingPopup();
+        });
+        $("#userList").selectpicker("refresh");
+    </script>
+}
+
+@Html.Partial("../Shared/_FixedLeftSection", new ViewDataDictionary { { "IsCategoryLising", "false" } })
+
+<script type="text/x-jsrender" id="NameTemplate">
+    <div class="item-name">{{:DisplayName}}</div>
+</script>
+<script type="text/x-jsrender" id="NameHeader">
+    <div class="item-name">Name</div>
+</script>
+<script type="text/x-jsrender" id="ActionsTemplate">
+    {{if UserId != @ViewBag.CurrentUserId}}
+    <div>
+        <span><a href="javascript:void(0);" class="deleteUser" title="" data-username="{{:DisplayName}}" data-userid="{{:UserId}}"><i class="su su-close"></i> Remove</a></span>
+    </div>
+    {{/if}}
+</script>
+
+<div id="base_container" class="EditPageContainer" ng-app="GroupEditApp" ng:controller="GroupEditController">
+
+    <div id="partialPlaceHolder">
+
+        <div class="GroupHeaderContainer col-sm-12 col-md-12 col-lg-12 no-left-padding no-right-padding padding15">
+            <div class="col-xs-6 GroupHead no-left-padding">
+                <a href="/administration/user-management/groups" title="Groups">
+                    <span class="report-security-head">
+                        <i class="su su-back"> </i>
+                    </span>
+                </a>
+                <span ng-bind="allGroupDetails.GroupName" title="{{allGroupDetails.GroupName}}"></span>
+            </div>
+            <div class="col-xs-6 GroupButtons no-right-padding">
+                <a type="button" class="btn btn-default" title="" href="/administration/permissions/groups/edit?groupId=@Request["groupId"]">Manage Permissions</a>
+                @if (Convert.ToInt32(Request["groupId"]) != 1)
+                {
+                    <input type="button" class="btn btn-danger deleteGroup delete" title="" data-groupid="@Request["groupId"]" value="Delete Group" data-groupname="{{allGroupDetails.GroupName}}" />
+                }
+            </div>
+        </div>
+
+
+        <div class="EditPagebody col-xs-12 no-padding">
+            <form class="TabContent col-xs-12 group_form" id="InfoContainer" autocomplete="off">
+                <div class="row">
+                    <div class="GroupInfoLabel col-xs-2 pull-left">Name<span class="Mandatory">*</span></div>
+                    <div class="GroupInfoText col-xs-4 pull-left" id="group_name">
+                        <input type="text" autocomplete="off" placeholder="Group name" name="groupname" ng-bind="allGroupDetails.GroupName" ng-value="allGroupDetails.GroupName" class="form-control NotificationContent" id="GroupInfoName">
+                    </div>
+                    <div class="col-xs-6 no-padding"><span id="invalid_Groupname" class="ErrorMessage" title="Please enter group name" data-content=""></span></div>
+                </div>
+                <div class="row">
+                    <div class="GroupInfoLabel col-md-2 pull-left">Description</div>
+                    <div class="GroupInfoText col-md-7 pull-left">
+                        <textarea class="form-control NotificationContent" maxlength="1024" id="GroupInfoDescription" ng-bind="allGroupDetails.GroupDescription"></textarea>
+                        <div>
+                            *1024 characters maximum
+                        </div>
+                    </div>
+                </div>
+                <div class="GroupInfoLabel col-md-4 pull-left"></div>
+                <div class="col-md-5 pull-left rightAlign">
+                    <span id="group_edit_confirmation"></span>
+                    <input id="GroupTItleContainerSaveButton" title="" class="GroupSaveButton rightAlign btn btn-primary small-inner-margin noMargin" type="button" value="Save" name="save">
+                </div>
+            </form>
+            <input type="hidden" name="hiddengroupId" id="hiddengroupId" value="@Request["groupId"]" />
+            <div id="PeopleContainer" class="TabContent col-xs-9 page-inner-small-padding droppable">
+                <div class="col-xs-12 right-align no-padding">
+                    <span style="" class="userListText">Add user :</span>
+                    <select class="selectpicker" multiple autofocus="" data-live-search="true" title='Select user(s)' id="userList" style="float: right;">
+                        <option ng-repeat="user in allUsers" value="{{user.UserId}}">{{user.DisplayName}}</option>
+                    </select>
+                    <input id="UserSaveButton" disabled="" title="Add selected user(s) to the group" class="GroupSaveButton btn btn-success right-align" type="button" value="Add" name="save" />
+                    <div id="searchArea">
+                        <input type="text" id="searchGroupUsers" placeholder="Search users" />
+                        <span class="su su-search search-group-users" title="Search users"></span>
+                    </div>
+                </div>
+                <div id="Grid" data-gridName="EditGroup">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="DeleteGroupArea" class="no-padding">
+        <iframe src="" style="border: 0;" id="DeleteGroupIframe" border="0" width="100%" height="100%"></iframe>
+    </div>
+</div>

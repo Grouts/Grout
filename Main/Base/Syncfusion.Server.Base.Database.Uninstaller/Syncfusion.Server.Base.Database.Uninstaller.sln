@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Syncfusion.Server.Base.Database.Uninstaller", "Syncfusion.Server.Base.Database.Uninstaller.csproj", "{FCB8A749-2987-46B1-83B7-5C1775C7DC82}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Syncfusion.Server.Base.DataClasses", "..\Syncfusion.Server.Base.DataClasses\Syncfusion.Server.Base.DataClasses.csproj", "{449786A6-2C04-4B49-B164-045A69A0400D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Syncfusion.Server.Base.Encryption", "..\Syncfusion.Server.Base.Encryption\Syncfusion.Server.Base.Encryption.csproj", "{386412A5-E588-4A2C-8DE9-EF8697340FE2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FCB8A749-2987-46B1-83B7-5C1775C7DC82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCB8A749-2987-46B1-83B7-5C1775C7DC82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCB8A749-2987-46B1-83B7-5C1775C7DC82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCB8A749-2987-46B1-83B7-5C1775C7DC82}.Release|Any CPU.Build.0 = Release|Any CPU
+		{449786A6-2C04-4B49-B164-045A69A0400D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{449786A6-2C04-4B49-B164-045A69A0400D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{449786A6-2C04-4B49-B164-045A69A0400D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{449786A6-2C04-4B49-B164-045A69A0400D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{386412A5-E588-4A2C-8DE9-EF8697340FE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{386412A5-E588-4A2C-8DE9-EF8697340FE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{386412A5-E588-4A2C-8DE9-EF8697340FE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{386412A5-E588-4A2C-8DE9-EF8697340FE2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

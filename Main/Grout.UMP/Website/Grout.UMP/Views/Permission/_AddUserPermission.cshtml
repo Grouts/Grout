@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/styles/iframe","~/styles/AddUserPermission")
+
+    @Scripts.Render("~/scripts/iframe","~/scripts/AddUserPermission")
+
+    <script>
+        $(document).ready(function () {
+            parent.$("#AddPermission_wrapper").ejWaitingPopup("hide");
+            $("#AccessSelection").selectpicker("refresh");
+            $("#EntitySelection").selectpicker("refresh");
+            $("#ScopeSelection").selectpicker("refresh");
+        });
+        var entityObj = JSON.parse(@Html.Raw(Json.Encode(ViewBag.PermissionEntity)));
+        var app = angular.module('PermissionApp', ['ejangular']);
+
+        app.controller('AddPermissionController', function ($scope) {
+            $scope.entities = entityObj;
+        });
+    </script>
+
+</head>
+    <div class="col-lg-12 no-padding" ng-app="PermissionApp" id="PopupContainer">
+        <div ng-controller="AddPermissionController" id="AddPermissionController">
+            <div class="col-md-12 header-menu">
+                <div class="col-xs-6 no-padding">
+                    <span class="su su-open Head-icon"></span>
+                    <span class="PopupTitle">Add Permission</span>
+                </div>
+                <div class="col-xs-6 no-padding">
+                    <a href="javascript:void(0);" class="PopupClose"><span class="su su-close"></span></a>
+                    
+                </div>
+                <div class="subhead-menu col-xs-12 no-padding">Select the permission to add to the user</div>
+            </div>
+
+            <div class="dialogBody col-xs-12 no-padding">
+                <div class="col-xs-12 no-left-padding padding20 no-bottom-padding no-right-padding">
+                    <div class="col-xs-4">Access mode</div>
+                    <div class="col-xs-8 no-left-padding">
+                        <select id="AccessSelection" class="selectpicker" data-size="5" title="Select access mode">
+                            <option value="2">Read</option>
+                            <option value="6">Read, Write</option>
+                            <option value="14">Read, Write, Delete</option>
+							<option value="1">Create</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-xs-12 no-left-padding no-bottom-padding padding15 no-right-padding">
+                    <div class="col-xs-4">Entity</div>
+                    <div class="col-xs-8 no-left-padding drop-up">
+                        <select id="EntitySelection" data-live-search="false" class="selectpicker" data-size="3" title="Select entity">
+                            <option value="{{Entity.Id}}" ng-repeat="Entity in entities" data-entity-type="{{Entity.Type}}" ng-bind="Entity.Name"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-xs-12 no-left-padding padding15 no-right-padding">
+                    <div class="col-xs-4">Scope</div>
+                    <div class="col-xs-8 no-left-padding drop-up">
+                        <select id="ScopeSelection" data-live-search="true" class="selectpicker" title="Select scope" data-size="4" disabled>
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 dialogFooter rightAlign no-right-padding no-left-padding permission-pad-top">
+                <div class="col-xs-8 message-area">
+                    <div class="col-md-12 ErrorMessage"></div>
+                    <div class="col-md-12 SuccessMessage"></div>
+                </div>
+                <div class="col-xs-4 button-area rightAlign">
+                    <input type="button" name="Save" value="Add" class="btn btn-primary rightAlign" id="SavePermission" />
+                    <input type="button" id="CancelGroup" class="btn btn-link rightAlign PopupClose" value="Cancel" />
+                </div>
+            </div>
+        </div>
+    </div>
+<input type="hidden" id="userIdHidden" value="@ViewBag.userId" />
+
+</html>

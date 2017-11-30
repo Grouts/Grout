@@ -1,0 +1,184 @@
+﻿@{
+    ViewBag.Title = GlobalAppSettings.SystemSettings.OrganizationName + "—Schedules";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model List<ScheduleViewModel>
+
+@section styles{
+    @Styles.Render("~/styles/schedules")
+}
+
+@section scripts{
+
+    @Scripts.Render("~/scripts/scheduleslisting")
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            addPlacehoder("#searchArea");
+            var schedules = @Html.Raw(Json.Encode(Model));
+            schedules = ej.parseJSON(schedules);
+
+            ej.support.enableLocalizedSort = true;
+            $("#scheduleGrid").ejGrid({
+                dataSource: schedules,
+                allowPaging: true,
+				pageSettings: { pageSize: 20 },
+                allowSorting: true,
+                allowSearching: true,
+                allowFiltering: true,
+                filterSettings: { filterType: "menu" },
+                enableAltRow: true,
+                gridLines:ej.Grid.GridLines.Horizontal,
+                recordClick: manageSchedule,
+				actionBegin: "fnActionBegin",
+				actionComplete:function(args){
+					if(args.model.currentViewData.length==0){
+						rowBound(38);
+					}
+				},
+				rowDataBound: function(){
+					var height=$(".e-gridcontent").height();
+					if(height!=null){
+						rowBound(height);
+					}
+				},
+				dataBound: function (args) {
+					refreshFooterPosition($(".e-gridcontent").height());
+				},
+                columns: [
+                         {
+                             field: "Name",
+                             headerText: "Name",
+                            templateID: "#ScheduleTemplate",
+                            headerTemplateID: "#itemNameHeader",
+                            type: "string",
+                             width: 100
+                         },
+                         {
+                            field: "ItemName",
+                            headerText: "Report",
+                            templateID: "#ReportTemplate",
+                            type: "string",
+                            width: 100
+                        },
+                        {
+                        field: "LastRunString",
+                        headerText: "Last Run",
+                        visible:!(window.innerWidth<1200),
+                        width: 70,
+                        allowSorting:false,
+                        allowFiltering: false
+                    },
+                    {
+                        field: "NextScheduleString",
+                        headerText: "Next Scheduled Run",
+                        width: 70,
+                        allowSorting:false,
+                        allowFiltering: false
+                    },
+                    {
+                        field: "Status",
+                        headerText: "Status",
+                        width: 70,
+						allowSorting:false,
+						templateID: "#statusTemplate",
+                        allowFiltering: false
+                    },
+                    {
+                        template: true,
+                        templateID: "#options",
+                        width:(window.innerWidth>1200)?15: 25,
+						allowSorting:false,
+                        allowFiltering: false
+                    }
+                ]
+            });
+        });
+
+       
+    </script>
+}
+<script type="text/x-jsrender" id="ReportTemplate">
+    <div ><a href="/reports/view?id={{:ItemId}}" title="{{:ItemName}}" target="_blank">{{:ItemName}}</a></div>
+</script>
+<script type="text/x-jsrender" id="statusTemplate">
+	<span class="{{toLowerCase:Status}}"></span>
+	{{:Status}}
+</script>
+<script type="text/x-jsrender" id="ScheduleTemplate">
+    <div class="item-name">{{:Name}}</div>
+</script>
+<script type="text/x-jsrender" id="itemNameHeader">
+    <div class="item-name">Name</div>
+</script>
+<script type="text/x-jsrender" id="options">
+    <div class="dropdown">
+        <span class="dropdown-toggle option-icon" title="Actions" data-toggle="dropdown">
+            <span class="su su-options"> </span>
+        </span>
+        <ul class="dropdown-menu" role="menu">
+            <li class="menu-group">
+                <a href="javascript:void(0);" title="Run now" class="onDemand-schedule" data-scheduleid="{{:Id}}" data-itemname="{{:ItemName}}" data-itemid="{{:ItemId}}">
+                    <span class="su su-play" data-scheduleid="{{:Id}}" data-itemname="{{:ItemName}}" data-itemid="{{:ItemId}}"></span>
+                    Run Now
+                </a>
+            </li>
+            
+            {{if Status=="Active"}}
+			<hr />
+                <li class="menu-group">
+                <a href="javascript:void(0);" title="Disable" class="disable-schedule" data-scheduleid="{{:Id}}" data-itemname="{{:ItemName}}" data-itemid="{{:ItemId}}">
+                    <span class="su su-disable" data-scheduleid="{{:Id}}" data-itemname="{{:ItemName}}" data-itemid="{{:ItemId}}"></span>
+                    Disable
+                </a>
+            </li>
+            
+            {{else Status=="Inactive"}}
+			<hr />
+                <li class="menu-group">
+                <a href="javascript:void(0);" title="Enable" class="enable-schedule" data-scheduleid="{{:Id}}" data-itemname="{{:ItemName}}" data-itemid="{{:ItemId}}">
+                    <span class="su su-enable" data-scheduleid="{{:Id}}" data-itemname="{{:ItemName}}" data-itemid="{{:ItemId}}"></span>
+                    Enable
+                </a>
+            </li>
+            {{/if}}
+
+            {{if CanWrite}}
+			<hr />
+            <li title="Edit">
+                <a href="javascript:void(0);" title="Edit" class="edit-schedule" data-scheduleid="{{:Id}}" data-itemname="{{:ItemName}}" data-itemid="{{:ItemId}}">
+                    <span class="su su-edit" style="color:GrayText;" data-scheduleid="{{:Id}}" data-itemname="{{:ItemName}}" data-itemid="{{:ItemId}}"></span>
+                    Edit
+                </a>
+            </li>
+            {{/if}}
+
+            {{if CanDelete}}
+            <li title="Delete">
+                <a href="javascript:void(0);" title="Delete" class="remove-schedule" data-scheduleid="{{:Id}}" data-itemname="{{:ItemName}}" data-itemid="{{:ItemId}}">
+                    <span class="su su-delete" style="color:red;" data-scheduleid="{{:Id}}" data-itemname="{{:ItemName}}" data-itemid="{{:ItemId}}"></span>
+                    Delete
+                </a>
+            </li>
+            {{/if}}
+        </ul>
+    </div>
+
+</script>
+<div id="searchArea">
+    <input type="text" id="searchSchedules" placeholder="Search schedules"/>
+    <span class="su su-search search-schedule" title="Search schedules"></span>
+</div>
+<div class="heading">
+    SCHEDULES
+</div>
+<div id="schedulesGridContainer">
+    <div id="scheduleGrid" class="schedule-grid">
+    </div>
+</div>
+<div id="PopupContainer" style="display:none">
+	
+ <iframe width="875" height="600" id="scheduler_popup_iframe" class="datasource-popup-frame"></iframe>
+</div>
+<div id="schedule_delete_confirmation" class="no-padding"></div>
+

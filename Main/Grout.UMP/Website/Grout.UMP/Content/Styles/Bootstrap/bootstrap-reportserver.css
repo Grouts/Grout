@@ -1,0 +1,163 @@
+body {
+    font-family: Calibri;
+    background-color: #F4F4F4;
+}
+
+h1, .h1, h2, .h2, h3, .h3 {
+    margin-top: 5px;
+}
+
+* {
+    outline: medium none;
+}
+
+.row {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+table {
+    border-collapse: separate;
+}
+
+@media (min-width: 992px) {
+    .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {
+        margin-top: 10px;
+    }
+}
+.form-control {
+    color: #333;
+}
+
+.form-control[disabled],
+.form-control[readonly],
+fieldset[disabled] .form-control {
+    cursor: pointer;
+}
+
+.btn {
+    padding: 6px 20px;
+}
+
+@media (max-width: 480px) and (orientation: landscape) {
+    .login-container {
+        width: 300px;
+        border-radius: 5px;
+        background-color: #ededed;
+        margin: 0 auto;
+        margin-top: 100px;
+    }
+}
+
+.close:hover,
+.close:focus {
+    color: #ccc;
+}
+
+
+.su-close{
+    color: #7f7f7f;
+    font-size: 14px;
+    font-weight: lighter;
+}
+
+    .su-close:hover {
+        color: #337ab7;
+    }
+
+@media (min-width: 768px) {
+    .modal-dialog {
+        width: 600px;
+        margin: 100px auto;
+    }
+}
+
+
+td,
+th {
+    padding: 0;
+}
+
+a:hover,
+a:focus {
+    text-decoration: none;
+}
+
+.no-bottom-padding {
+    padding-bottom: 0 !important;
+}
+
+.no-padding {
+    padding: 0 !important;
+}
+
+.hide-content {
+    display: none;
+}
+
+.visible-content {
+    display: block;
+}
+
+.rightAlign {
+    text-align: right;
+}
+
+.leftAlign {
+    float: left !important;
+}
+
+.noMargin {
+    margin: 0 !important;
+}
+
+.padding20 {
+    padding: 20px;
+}
+
+.padding15 {
+    padding: 15px;
+}
+.paddingbottom15
+{
+    padding-bottom:15px !important;
+}
+.e-dialog .su-close {
+    color: #333333;
+}
+
+    .e-dialog .su-close:hover {
+        color: #337ab7;
+    }
+
+    .glyphicon-ok::before {
+	content: "\e62b" !important;
+    font-family:"Server" !important;
+}
+
+    .fixed-footer{
+        position:fixed;
+        bottom:0;
+    }
+    .white-bg{
+        background-color:white;
+    }
+
+.bootstrap-select > .btn {
+    padding-left: 11px !important;
+}
+.has-error  label {
+    color: #a94442;
+}
+.has-error  input {
+    border-color: #a94442;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+}
+.has-error .ValidationErrorImage{
+	display:block;
+}
+.ValidationErrorImage
+{
+	display:none;
+}

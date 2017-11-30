@@ -1,0 +1,70 @@
+﻿@{
+    var itemType = (ItemType)Model.Value;
+    var itemTypeName = itemType.ToString().ToLower() == "datasource" ? "Data Source" : itemType.ToString();
+}
+
+@if (Model.Success)
+{
+
+    <div class="col-lg-12 no-padding" id="PopupContainer">
+        <div class="col-md-12 header-menu header-pad-top header-menu-margin">
+            <div class="col-xs-6 no-padding">
+                <span class="su su-delete Head-icon"></span>
+                <span class="PopupTitle">Delete @(itemTypeName)</span>
+            </div>
+            <div class="col-xs-6 no-padding">
+                <a href="javascript:void(0);" title="Close" class="PopupClose"><span class="su su-close"></span></a>
+            </div>
+        </div>
+        <div class="dialogBody col-xs-12 no-padding delete-dialog-body">
+            <div class="col-xs-12">
+                <div class="deleteItem"><span style="white-space:nowrap;float:left">Are you sure you want to delete @(itemTypeName)—&nbsp;</span><span id="delete_item_name" class="delete-item-body">@ViewData["ItemName"]</span>?</div>
+            </div>
+        </div>
+        <div class="col-xs-12 dialogFooter rightAlign no-right-padding no-left-padding">
+            <div class="col-xs-4"></div>
+            <div class="col-xs-8 no-padding rightAlign validationArea">
+                <input type="button" class="btn btn-danger rightAlign" value="Yes" id="delete_item" data-item-id="@ViewData["ItemId"]" data-itemtype="@(Model.Value)" tabindex="1" autofocus />
+                <input type="button" id="Cancel" class="btn btn-link rightAlign PopupClose" value="No" onclick="onDeleteItemDialogClose()" tabindex="2" />
+            </div>
+            <div class="col-xs-8 no-padding centerAlign successArea" style="display:none">
+                <input title="" type="button" id="Cancel" class="btn btn-default PopupClose" value="OK" onclick="onDeleteItemDialogClose()" tabindex="3" autofocus />
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="col-lg-12 no-padding" id="PopupContainer">
+        <div class="col-md-12 header-menu  header-pad-top header-menu-margin">
+            <div class="col-xs-6 no-padding">
+                <span class="su su-delete Head-icon"></span>
+                <span class="PopupTitle">Delete @(itemTypeName)</span>
+            </div>
+            <div class="col-xs-6 no-padding">
+                <a href="javascript:void(0);" title="Close" class="PopupClose"><span class="su su-close"></span></a>
+            </div>
+        </div>
+        <div class="dialogBody col-xs-12 no-padding  delete-dialog-body">
+            <div class=" col-xs-12">
+                @switch ((ItemType)Model.Value)
+                {
+                    case ItemType.Category:
+                        <div class="deleteItem"><span>Cannot delete&nbsp;</span><span class="delete-item-body">"@ViewData["ItemName"]"</span><span>&nbsp;as the Category contains reports.</span></div>
+                        break;
+                    case ItemType.Report:
+                    <div class="deleteItem"><span>Cannot delete&nbsp;</span><span class="delete-item-body">"@ViewData["ItemName"]"</span><span>&nbsp;as the Report has schedules.</span></div>
+                        break;
+                    case ItemType.Datasource:
+                    <div class="deleteItem"><span>Cannot delete&nbsp;</span><span class="delete-item-body">"@ViewData["ItemName"]"</span><span>&nbsp;as the Data Source is being used by reports.</span></div>
+                        break;
+                }
+            </div>
+        </div>
+        <div class="col-xs-12 dialogFooter rightAlign no-right-padding no-left-padding">
+            <div class="col-xs-12 no-padding centerAlign">
+                <input title="" type="button" id="Cancel" class="btn btn-default PopupClose" value="OK" onclick="onDeleteItemDialogClose()" tabindex="1" autofocus />
+            </div>
+        </div>
+    </div>
+}

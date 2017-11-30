@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{05A00DFA-0909-4FD1-9BF7-78892B23F226}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Syncfusion.Server.Base.Reports.SchedulerService</RootNamespace>
+    <AssemblyName>Syncfusion.Server.Base.Reports.SchedulerService</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Configuration.Install">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScheduleModel.cs" />
+    <Compile Include="SchedulerJob.cs" />
+    <Compile Include="SchedulerService.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SchedulerServiceInstaller.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TaskExtensions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+    </None>
+    <None Include="App.Debug.config">
+      <DependentUpon>App.config</DependentUpon>
+    </None>
+    <None Include="App.Release.config">
+      <DependentUpon>App.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Syncfusion.Server.Base.DataClasses\Syncfusion.Server.Base.DataClasses.csproj">
+      <Project>{1ba39b38-7635-48f9-b2d8-160935d73e56}</Project>
+      <Name>Syncfusion.Server.Base.DataClasses</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Syncfusion.Server.Base.Logger\Syncfusion.Server.Base.Logger.csproj">
+      <Project>{9f894d1f-acb0-41ad-900e-b747c3f17a89}</Project>
+      <Name>Syncfusion.Server.Base.Logger</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Syncfusion.Server.Base.Reports.Scheduler\Syncfusion.Server.Base.Reports.Scheduler.csproj">
+      <Project>{80d01ede-29ee-4c18-9c7a-fac7563b742d}</Project>
+      <Name>Syncfusion.Server.Base.Reports.Scheduler</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Syncfusion.Server.Base\Syncfusion.Server.Base.csproj">
+      <Project>{bbb2c80a-5cca-408f-8526-f4ffda93c556}</Project>
+      <Name>Syncfusion.Server.Base</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <UsingTask TaskName="TransformXml" AssemblyFile="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v12.0\Web\Microsoft.Web.Publishing.Tasks.dll" />
+  <Target Name="AfterBuild">
+    <TransformXml Source="App.config" Transform="App.$(ConfigurationName).config" Destination="$(OutputPath)\$(TargetFileName).config" />
+  </Target>
+</Project>

@@ -1,0 +1,284 @@
+﻿@{
+    ViewBag.Title = GlobalAppSettings.SystemSettings.OrganizationName + " - Administration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section styles{
+    @Styles.Render("~/styles/administration-page")
+}
+
+@section scripts{
+    <script type="text/javascript">
+
+        var SystemSettingsProperties = @Html.Raw(Json.Encode(@ViewBag.SystemSettings));
+        $(document).ready(function() {
+
+            $("#mail_secure_auth").ejCheckBox({
+                size: "medium",
+                checked: "@ViewBag.SystemSettings.MailSettingsIsSecureAuthentication" == "True" ? true : false,
+                change: function(e) {
+                    if ($("#mail_password").val() == "") {
+                        if (parseInt($("#port_number").val()) != SystemSettingsProperties.MailSettingsPort
+                            || $("#smtp_address").val() != SystemSettingsProperties.MailSettingsHost
+                            || $("#mail_display_name").val() != SystemSettingsProperties.MailSettingsSenderName
+                            || $("#mail_user_name").val() != SystemSettingsProperties.MailSettingsAddress
+                            || this.model.checked != SystemSettingsProperties.MailSettingsIsSecureAuthentication) {
+                            $("#mail_password").attr("placeholder", "Please enter password");
+                        } else {
+                            $("#mail_password").attr("placeholder", "••••••••");
+                        }
+                    }
+                }
+            });          
+        });
+        
+
+        $(function() {
+            var listTimeZone = @Html.Raw(Json.Encode(@ViewBag.listTimeZone));
+            $("#time_zone").val("@ViewBag.SystemTimeZone.Id");
+            $("#time_zone").selectpicker("refresh");
+        });
+
+    </script>
+
+    @Scripts.Render("~/scripts/administration-page")
+}
+
+@Html.Partial("../Shared/_FixedLeftSection", new ViewDataDictionary { { "IsCategoryLising", "false" } })
+
+<div id="base_container" class="Edit-system-settings-container">
+
+
+    <form id="look-and-feel-container" class="col-md-12 fomr-horizontal" autocomplete="off">
+
+
+        <div id="organization-block" class=" col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+            <div class="main-section" id="general-setting-header" class="pull-left page-inner-small-padding btn-holder">
+                <div class="title section-heading">SITE SETTINGS</div>
+
+            </div>
+            <div class="separator"></div>
+            <div class="general-sub-section">
+                <div class="form-group">
+                    <label for="site-orgname" class="col-sm-2 control-label">Organization name</label>
+                    <div class="col-sm-10">
+                        <input type="text" id="site-orgname" class="form-control site-orgname-fields" placeholder="Enter your Organization Name" value="@ViewBag.SystemSettings.OrganizationName" data-original-value="@ViewBag.SystemSettings.OrganizationName" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="site_url" class="col-sm-2 control-label">Site URL(http://)</label>
+                    <div class="col-sm-10">
+                        <input type="text" id="site_url" name="site_url" class="form-control site-url-fields" placeholder="Enter your URL" value="@ViewBag.SystemSettings.BaseUrl" data-original-value="@ViewBag.SystemSettings.BaseUrl" />
+                        <span class="validation-errors"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 sub-section login-screen-div">
+                <div class="title col-lg-12 col-md-12 col-sm-12 col-xs-12  sub-section-heading">Log in screen</div>
+                <div class="secondary-sub-section">
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Image</label>
+                        <div class="col-sm-10">
+                            <div class="input-group">
+                                <input type="text" id="upload-login-image-textbox" class="form-control" value="Browse file path" disabled>
+                                <span id="upload-login-image-addon" title="Upload" class="input-group-addon">
+                                    <div id="upload-login-image" class="settings-upload-button">
+                                    </div>
+                                </span>
+                            </div>
+                            <div class="section-light-sub-content">
+                                *240x120 pixels preferred
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="txt_welcome_note" class="col-sm-2 control-label">Welcome note</label>
+                        <div class="col-sm-10">
+                            <textarea rows="3" maxlength="70" id="txt_welcome_note" class="form-control welcome-note-text NotificationContent" placeholder="Welcome note">@ViewBag.SystemSettings.WelcomeNoteText</textarea>
+                            <div class="section-light-sub-content">*70 characters maximum</div>
+                        </div>
+                    </div>
+                    <div class="login-image">
+                        <div id="login_image_container" class="center-img">
+                            <img id="login_logo_img" src="~/Content/Images/Application/@ViewBag.SystemSettings.LoginLogo" width="240" height="120" />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 sub-section main-screen-div">
+                <div class="title col-lg-12 col-md-12 col-sm-12 col-xs-12  sub-section-heading">Main screen</div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Image</label>
+                    <div class="col-sm-10">
+                        <div class="input-group">
+                            <input type="text" id="upload-Main-screen-image-textbox" class="form-control" value="Browse file path" disabled>
+                            <span id="upload-Main-screen-image-addon" title="Upload" class="input-group-addon"><div id="upload-Main-screen-image" class="settings-upload-button"></div></span>
+                        </div>
+
+
+                        <div class="section-light-sub-content">
+                            *40x40 pixels preferred
+                        </div>
+
+                    </div>
+                </div>
+                <div class="main-screen-image">
+                    <div id="mainscreen_image_container" class="center-img">
+                        <img id="mainscreen_logo_img" src="~/Content/Images/Application/@ViewBag.SystemSettings.MainScreenLogo" width="40" height="40" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 sub-section favicon-screen-div">
+                <div class="title col-lg-12 col-md-12 col-sm-12 col-xs-12  sub-section-heading">Favicon</div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Image</label>
+                    <div class="col-sm-10">
+                        <div class="input-group">
+                            <input type="text" id="upload-favicon-image-textbox" class="form-control" value="Browse file path" disabled>
+                            <span id="upload-favicon-image-addon" title="Upload" class="input-group-addon">
+                                <div id="upload-favicon-image" class="settings-upload-button"></div>
+                            </span>
+                        </div>
+                        <div class="section-light-sub-content">
+                            *16x16 pixels preferred
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="favicon-image">
+                    <div class="favicon-image-container">
+                        <img src="~/Content/Images/Application/@ViewBag.SystemSettings.FavIcon" width="16" height="16" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 sub-section  global-dashboard-settings-div">
+                <div class="title col-lg-12 col-md-12 col-sm-12 col-xs-12   sub-section-heading">Display</div>
+                <div class="form-group">
+                    <label for="time_zone" class="col-sm-2 control-label">Time zone</label>
+                    <div class="dropup col-sm-10">
+                        <select id='time_zone' class='selectpicker form-control' data-size='10' title='Select Timezone' data-live-search='true' data-live-search-placeholder='Search'>
+                            @foreach (var timeZone in @ViewBag.listTimeZone)
+                            {
+                                <option value="@timeZone.Id">@timeZone.DisplayName</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="ejMM_DD_YYYY" class="col-sm-2 control-label">Date format</label>
+                    <div class="col-sm-10">
+                        <div class="radio-btn no-padding">
+                            <input type="radio" id="MM_DD_YYYY" name="date_format" value="MM/dd/yyyy" checked='checked' />
+                            <label for="MM_DD_YYYY">MM/DD/YYYY</label>
+                        </div>
+                        <div class="radio-btn no-padding">
+                            <input type="radio" id="DD_MM_YYYY" name="date_format" value="dd/MM/yyyy" />
+                            <label for="DD_MM_YYYY">DD/MM/YYYY</label>
+                        </div>
+                        <div class="radio-btn no-padding">
+                            <input type="radio" id="DD_MMM_YYYY" name="date_format" value="d MMM, yyyy" />
+                            <label for="DD_MMM_YYYY">DD MMM YYYY</label>
+                        </div>
+                        <div class="radio-btn no-padding">
+                            <input type="radio" id="MMM_DD_YYYY" name="date_format" value="MMM d, yyyy" />
+                            <label for="MMM_DD_YYYY">MMM DD YYYY</label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </form>
+
+
+    <div id="mail-settings-container" class="col-md-12 col-lg-12 col-sm-12">
+        <div id="email-setting" class="col-md-12 col-lg-12 col-sm-12">
+            <div id="email-setting-header" class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <h5>EMAIL SETTINGS</h5>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding">
+                <h5>Configuration for sending e-mails from the Grout</h5>
+            </div>
+        </div>
+        <form id="email-setting-body" autocomplete="off">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="form-label-field col-lg-2 col-md-2 col-sm-3 col-xs-4">
+                    <span class="mail-settings-label">SMTP Server</span>
+                </div>
+                <div class="form-input-field col-lg-4 col-md-5 col-sm-6 col-xs-8">
+                    <input type="text" id="smtp_address" class="form-control mail-settings-fields" name="smtp_address" placeholder="Please enter SMTP server" value="@ViewBag.SystemSettings.MailSettingsHost" />
+                    <span class="validation-errors"></span>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="form-label-field col-lg-2 col-md-2 col-sm-3 col-xs-4">
+                    <span class="mail-settings-label">SMTP Port</span>
+                </div>
+                <div class="form-input-field col-lg-4 col-md-5 col-sm-6 col-xs-8">
+                    <input type="text" id="port_number" class="form-control mail-settings-fields" name="port_number" placeholder="Please enter SMTP port" value="@ViewBag.SystemSettings.MailSettingsPort" />
+                    <span class="validation-errors"></span>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="form-label-field col-lg-2 col-md-2 col-sm-3 col-xs-4">
+                    <span class="mail-settings-label">Sender Name</span>
+                </div>
+                <div class="form-input-field col-lg-4 col-md-5 col-sm-6 col-xs-8">
+                    <input type="text" id="mail_display_name" class="form-control mail-settings-fields" name="mail_display_name" placeholder="Please enter sender name" value="@ViewBag.SystemSettings.MailSettingsSenderName" />
+                    <span class="validation-errors"></span>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                <div class="form-label-field col-lg-2 col-md-2 col-sm-3 col-xs-4">
+                    <span class="mail-settings-label">Sender email</span>
+                </div>
+                <div class="form-input-field col-lg-4 col-md-5 col-sm-6 col-xs-8">
+                    <input type="text" id="mail_user_name" class="form-control mail-settings-fields" name="mail_user_name" placeholder="Please enter sender email" value="@ViewBag.SystemSettings.MailSettingsAddress"  />
+                    <span class="validation-errors"></span>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="form-label-field col-lg-2 col-md-2 col-sm-3 col-xs-4">
+                    <span class="mail-settings-label">Password</span>
+                </div>
+                <div class="form-input-field col-lg-4 col-md-5 col-sm-6 col-xs-8">
+                    <input type="text" style="display:none;">
+                    <input type="password" id="mail_password" class="form-control mail-settings-fields" name="mail_password" placeholder="••••••••" />
+                    <div class="show-hide-password su su-eye"></div>
+                    <span class="validation-errors"></span>
+                </div>
+            </div>
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="form-label-field col-lg-2 col-md-2 col-sm-3 col-xs-4">
+                    <span class="mail-settings-label">Enable SSL</span>
+                </div>
+                <div class="form-input-field col-lg-4 col-md-5 col-sm-6 col-xs-8">
+                    <div class="secure-auth-container">
+                        <input type="checkbox" id="mail_secure_auth" value="" />
+                        <label for="mail_secure_auth">
+                            <span></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <a href="/" class="btn btn-default pull-right" id="UpdateSystemSettingsCancel" title="">Cancel</a>
+    <input type="button" title="" id="UpdateSystemSettings" name="UpdateSystemSettings" class="btn btn-primary UpdateSystemSettings" value="Save" />
+    <div id="confirmationMessageTop" class="confirmatioMessage validate-success">Settings has been updated successfully.</div>
+    <a href="/" class="btn btn-default pull-right" id="UpdateSystemSettingsCancel-bottom" title="">Cancel</a>
+    <input type="button" title="" id="UpdateSystemSettings-bottom" name="UpdateSystemSettings" class="btn btn-primary" value="Save" />
+    <div id="confirmationMessageBottom" class="confirmatioMessage validate-success">Settings has been updated successfully.</div>
+</div>

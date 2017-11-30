@@ -1,0 +1,147 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>
+        New data source popup
+    </title>
+    @Styles.Render("~/styles/add-datasource")
+    @Scripts.Render("~/scripts/add-datasource")
+</head>
+<body style="background-color:white">
+    <div class="col-md-12 header-menu">
+        <span class="su su-datasource Head-icon"></span>
+        <span class="PopupTitle">Add Data Source</span>
+        <a href="javascript:void(0);" title="Close" class="PopupClose" onclick="parent.onDataSourceDialogClose()"><span class="su su-close"></span></a>
+    </div>
+    <form id="datasource_popup_module" autocomplete="off">
+        <div class="datasource-btns">
+            <div class="pull-right">
+                <input type='button' title='' id="publish_datasource" value='Add' onclick="addNewDataSource()" class='btn btn-primary' tabindex="16">
+                <input type='button' title="" value='Cancel' class='btn btn-link' onclick="parent.onDataSourceDialogClose()" tabindex="17">
+            </div>
+        </div>
+        <div id='new_datasource_tab_content' class='col-md-12 rdl-datasource-tab-contents'>
+            <div class='col-md-12 no-top-margin new-datasource-content-holder' id='new_datasource_content_holder'>
+                <table id='datasource_table'>
+
+                    <tr>
+                        <td>
+                            <div class="bottom-margin30">Name<span class="Mandatory">*</span></div>
+                        </td>
+                        <td>
+                            <input type='text' name="new_datasource_name" id='new_datasource_name' autofocus class='form-control validate-fields bottom-margin30' maxlength="100" tabindex="1" />
+                            <span id='datasource_name_validation_error' class='datasource-validation-messages'></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="bottom-margin30">Description</div>
+                        </td>
+                        <td>
+                            <textarea name="new_datasource_description" id='new_datasource_description' class='form-control bottom-margin30' maxlength="1024" tabindex="2"></textarea>
+                            <div class="notification">
+                                *1024 characters maximum
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><div class="bottom-margin30">Data Source type</div></td>
+                        <td>
+                            <div class="bottom-margin30">
+                                <select id="datasource_type" class="selectpicker" data-size="5" title="Select Data Source" style="width:100%" tabindex="3">
+                                    <option value="SQL">Microsoft SQL Server</option>
+                                    <option value="SQLCe">SQLCE</option>
+                                    <option value="OLEDB">OLE DB</option>
+                                    <option value="ORACLE">Oracle</option>
+                                    <option value="ODBC">ODBC</option>
+                                    <option value="XML">XML</option>
+                                </select>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="bottom-margin30">Connection string<span class="Mandatory">*</span></div>
+                        </td>
+                        <td>
+                            <textarea name="new_datasource_connectionstring" id='new_datasource_connectionstring' class='form-control validate-fields  bottom-margin30' tabindex="4"></textarea>
+                            <span id='datasource_connstring_validation_error' class='datasource-validation-messages'></span>
+                        </td>
+                    </tr>
+                    <tr id="connect_prop">
+                        <td>
+                            <span>Connect using:</span>
+                        </td>
+                        <td>
+                            <div class="full-width connection-types">
+                                <div class="full-width no-margin no-padding">
+                                    <input type="radio" id="connect_option_prompt" name="connect_using" value="Prompt" checked="checked" tabindex="5" />
+                                    <label for="connect_option_prompt" class="radio-btn-labels labels">Credentials supplied by the user running the report</label>
+                                </div>
+                                <div class="full-width connection-sub-types page-indent">
+                                    <span>Display the following text to prompt user for a username and password:</span>
+                                </div>
+                                <div class="full-width connection-sub-types page-indent">
+                                    <input type="text" name="prompt_text"id="prompt_text" value="Type or enter a username and password to access the Data Source:" class="form-control connection-type-prompt bottom-margin30" tabindex="6" />
+                                </div>
+                                <div class="full-width connection-sub-types page-indent">
+                                    <input id="enable_windows_prompt" type="checkbox" class="nodetext connection-type-prompt" tabindex="7" />
+                                    <label for="enable_windows_prompt" class="clslab NotificationContent  cbk-labels">Use as Windows credentials when connecting to the Data Source</label>
+                                </div>
+                            </div>
+                            <div class="full-width connection-types">
+                                <div class="full-width no-margin no-padding">
+                                    <input type="radio" id="connect_option_store" name="connect_using" value="Store" tabindex="8" />
+                                    <label for="connect_option_store" class="radio-btn-labels labels">Credentials stored securely in the report server</label>
+                                </div>
+                                <div class="full-width connection-sub-types page-indent" style="padding-left: 17px;">
+                                    <table>
+                                        <tr>
+                                            <td>Username:</td>
+                                            <td>
+                                                <input type="text" name="connection_stored_username" class="form-control connection-type-server validate-fields edit-text-fields" id="connection_stored_username" style="width: 250px;" tabindex="9" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Password:</td>
+                                            <td>
+                                                <input type="password" name="connection_stored_password" class="form-control connection-type-server validate-fields edit-text-fields" id="connection_stored_password" style="width: 250px;" tabindex="10" />
+                                                <span class="su su-eye ViewGreen showHidePassword"></span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <span id="datasource_credential_validation_error1" class="datasource-validation-messages username-error"></span>
+                                    <span id="datasource_credential_validation_error2" class="datasource-validation-messages password-error"></span>
+                                </div>
+                                <div class="full-width connection-sub-types page-indent">
+                                    <input id="enable_windows_stored" type="checkbox" class="nodetext connection-type-server" tabindex="11" />
+                                    <label for="enable_windows_stored" class="clslab NotificationContent cbk-labels">Use as Windows credentials when connecting to the Data Source</label>
+                                </div>
+                                <div class="full-width connection-sub-types page-indent">
+                                    <input id="enable_impersonate" type="checkbox" class="nodetext connection-type-server" tabindex="12" />
+                                    <label for="enable_impersonate" class="clslab NotificationContent labels cbk-labels">Impersonate the authenticated user after a connection has been made to the Data Source</label>
+                                </div>
+                            </div>
+                            <div class="full-width connection-types">
+                                <input type="radio" id="connect_option_windows" name="connect_using" value="Integrated" tabindex="13" />
+                                <label for="connect_option_windows" class="radio-btn-labels labels">Windows Integrated Security</label>
+                            </div>
+                            <div class="full-width connection-types">
+                                <input type="radio" id="connect_option_none" name="connect_using" value="None" tabindex="14" />
+                                <label for="connect_option_none" class="radio-btn-labels labels">Credentials are not required</label>
+                            </div>
+                            <div class="full-width connection-types">
+                                <input id="test_connection" type="button" value="Test Connection" onclick="onTestDataSourceConnection()" class="btn btn-success" tabindex="15">
+                            </div>
+                            <div class="full-width connection-types">
+                                <span id="connection_test_validation_error" class="datasource-validation-messages"></span>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

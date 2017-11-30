@@ -1,0 +1,193 @@
+.e-grid {
+
+
+    .item-name {
+        margin-left: 30px;
+    }
+
+    .e-gridheader {
+        border-bottom: 2px solid #ddd;
+
+        .e-table {
+            .e-columnheader {
+                .e-headercell {
+                    background-color: #fff;
+                    height: 50px;
+
+                    .e-headercelldiv {
+                        font-family: Calibri;
+                        font-size: 16px;
+                        font-weight: 600;
+                        color: #1b1c1c;
+
+                        .item-name {
+                            float: left;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .e-gridcontent {
+        .e-table {
+            .e-rowcell {
+                height: 20px;
+                font-size: 14px;
+                font-weight: 400;
+                font-family: Calibri;
+				
+				div{
+					line-height: 18px;
+				}
+				
+                .dropdown-menu {
+                    a {
+                        color: #1b1c1c;
+                    }
+                }
+
+                a {
+                    color: #226bb4;
+                    white-space: normal;
+                    word-break: break-all;
+                }
+
+                white-space: normal;
+                word-break: break-all;
+            }
+
+            .e-active {
+                a {
+                    color: #fff;
+                }
+
+                .dropdown-menu {
+                    a {
+                        color: #1b1c1c;
+                    }
+                }
+            }
+
+            .e-alt_row {
+                background-color: #fff;
+
+                .dropdown-menu {
+                    a {
+                        color: #1b1c1c;
+                    }
+                }
+
+                &:hover {
+                    background-color: #f7f7f7;
+                }
+            }
+
+            .dropdown {
+                hr {
+                    margin-top: 5px;
+                    margin-bottom: 5px;
+                    margin-left: -5px;
+                    margin-right: -5px;
+                }
+            }
+
+            .emptyrecord {
+                padding: 10px 10px 10px 38px;
+            }
+        }
+    }
+
+    .e-pager {
+        font-family: Calibri;
+        height: 25px;
+        padding-bottom: 15px;
+        padding-top: 15px;
+    }
+
+    .e-filterDialoge {
+        .e-dlgBtns {
+            input {
+                padding: 6px 20px;
+                border-radius: 4px;
+                font-size: 14px;
+                cursor: pointer;
+            }
+
+                input[value='Filter'] {
+                    background-color: #337ab7;
+                    border-color: #2e6da4;
+                    color: #fff;
+                }
+
+                    input[value='Filter']:hover {
+                        background-color: #286090;
+                        border-color: #204d74;
+                        color: #fff;
+                    }
+
+                input[value='Clear'] {
+                    border-radius: 0;
+                    color: #337ab7;
+                    font-weight: 400;
+                    border-color: transparent;
+                }
+
+                    input[value='Clear']:hover {
+                        background-color: transparent;
+                        color: #23527c;
+                        text-decoration: underline;
+                    }
+        }
+    }
+}
+
+.e-waitpopup-pane.e-widget.e-gridwaitingpopup {
+    background-color: #f4f4f4 !important;
+    opacity: 0.5;
+}
+
+#itemsGrid {
+    margin-left: 1px;
+}
+
+.option-icon {
+    border-radius: 5px;
+    border: 0 none;
+    cursor: pointer;
+    display: none;
+    padding: 4px 2px;
+    position: absolute;
+    top: -12px;
+    border: 1px solid #fff;
+
+    &:hover {
+        border: 1px solid #e2e2e2 !important;
+    }
+}
+
+.e-hover {
+    .option-icon {
+        display: block;
+        border: 1px solid #f7f7f7;
+    }
+}
+
+.e-active {
+    .option-icon {
+        display: block;
+        border: 0 none;
+        border: 1px solid #428bca;
+    }
+}
+
+.e-select {
+    border-left-color: #ccc !important;
+}
+
+@media (max-width: 1199px){
+    .option-icon {
+        border: none;
+        display: block;
+    }
+}

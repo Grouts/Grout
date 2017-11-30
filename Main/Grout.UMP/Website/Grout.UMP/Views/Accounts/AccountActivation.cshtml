@@ -1,0 +1,84 @@
+﻿@{
+    ViewBag.Title = "Account Activation";
+}
+
+<html>
+<head>
+    <title> @ViewBag.Title </title>
+
+    @Styles.Render("~/styles/account-activate")
+    
+    <style>
+        .showHidePassword {
+            right: 10px;
+            top: 10px;
+        }
+    </style>
+
+
+
+    <link rel="icon" href="~/Content/Images/Application/@GlobalAppSettings.SystemSettings.FavIcon" onerror="if (this.href != '~/Content/Images/Application/Grout_Favicon.png') this.href = '~/Content/Images/Application/Grout_Favicon.png';" />
+</head>
+
+    <body class="account-activation-bg">
+        <div class="content">
+            <div class="col-lg-12 no-padding section-center-alignment " id="image_container">
+                <img src="~/Content/Images/Application/@GlobalAppSettings.SystemSettings.LoginLogo" onerror="if (this.src != '/Content/Images/Application/Grout_Login_Logo.png') this.src = '/Content/Images/Application/Grout_Login_Logo.png';" />
+            </div>
+            @if (ViewBag.AccountPresentDetails)
+            {
+                <form class="col-lg-12" id="Account_Activation_Fields_Container">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-lg-12 page-inner-padding section-center-alignment no-bottom-padding account-activation-title"><h3>Welcome to @GlobalAppSettings.SystemSettings.OrganizationName - User account activation</h3></div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-lg-12 page-inner-padding section-center-alignment no-bottom-padding account-activation-caption"><h4>Create new password</h4></div>
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-lg-12 password-form-element-container">
+                        <div class="auto-margin relative-position">
+                            <input placeholder="New Password" type="password" name="new_password" id="new_password" required class="form-control password-form-element" /><span class="su su-eye ViewGreen showHidePassword"></span>
+                            <span id="password_validate" class="text-right-alignment page-inner-small-padding no-right-padding no-top-padding validationmessages  validation-messages password-validate-holder"></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-lg-12 password-form-element-container">
+                        <div class="auto-margin relative-position">
+                            <input placeholder="Confirm Password" type="password" name="Confirm_password" id="Confirm_password" required class="form-control password-form-element" /><span class="su su-eye ViewGreen showHidePassword"></span>
+                            <span id="re_password_validate" class="text-right-alignment page-inner-small-padding no-right-padding no-top-padding validationmessages  validation-messages password-validate-holder"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-lg-12 password-form-element-container">
+                        <input type="button" class="btn btn-success save-activate" id="Save_Activate" value="Save & Activate" />
+                    </div>
+                </form>
+                <div class="col-lg-12" id="Account_Activated_Message_Container">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-lg-12 page-inner-padding section-center-alignment no-bottom-padding account-activation-title">@GlobalAppSettings.SystemSettings.OrganizationName Account Activated</div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-lg-12 section-center-alignment no-padding no-margin account-activated-title">You have successfully activated your @GlobalAppSettings.SystemSettings.OrganizationName Account<br />click <a href="/">here</a> to log in to your account</div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-lg-12 section-center-alignment no-padding no-margin account-activated-title"></div>
+                </div>
+
+
+            }
+            else
+            {
+                <div class="col-lg-12 col-md-12 col-sm-12 col-lg-12 page-inner-padding section-center-alignment no-bottom-padding account-activation-title">Invalid Activation Link</div>
+            }
+        <div id="base_footer_Div">
+            <hr class="bottom-hr-line" />
+            <footer>
+
+                <p class="pull-left">Powered by <img width="100" height="25" src="~/Content/Images/Application/Grout_Footer_Logo.png" alt="Grout" /> | Copyright &copy; 2001 - @DateTime.Now.Year Grout Inc | All Rights Reserved</p>
+                @*<p class="pull-right"><a href="javascript:void(0);">Documentation </a>| <a href="javascript:void(0);">Sales</a> |<a href=javascript:void(0);"> Support</a></p>*@
+            </footer>
+        </div>
+        </div>
+            <script>
+                var userid = @Html.Raw(Json.Encode(@ViewBag.Userid));
+            </script>
+
+            @Scripts.Render("~/scripts/account-activate")
+
+        
+    </body>
+</html>
+
+
+
+

@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+    <link href="../content/styles/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="../content/styles/EssentialJS/report_viewer/ej.widgets.all.min.css" rel="stylesheet" type="text/css" />
+    <script src="../scripts/jQuery/jquery-1.10.2.min.js" type="text/javascript"></script>
+    <script src="../scripts/jQuery/jquery.easing-1.3.min.js" type="text/javascript"></script>
+    <script src="../scripts/jQuery/jquery.globalize.min.js" type="text/javascript"></script>
+    <script src="../scripts/EssentialJS/ej.web.all.rdl.min.js" type="text/javascript"></script>
+    <title>@GlobalAppSettings.SystemSettings.OrganizationName - View Report - @ViewBag.ItemName</title>
+    <link rel="icon" href="~/Content/Images/Application/@GlobalAppSettings.SystemSettings.FavIcon" onerror="if (this.href != '~/Content/Images/Application/Grout_Favicon.png') this.href = '~/Content/Images/Application/Grout_Favicon.png';" />
+</head>
+<body style="overflow:hidden;position:static; margin: 0; padding: 0; width: 100%; height: 100%">
+    <div id="sync_report_viewer" style="height: 100%"></div>
+</body>
+</html>
+<script type="text/javascript">
+    @{
+        var baseUrl= new UriBuilder(HttpContext.Current.Request.Url.Scheme, HttpContext.Current.Request.Url.Host, HttpContext.Current.Request.Url.Port);
+    }
+
+    $(function () {
+        $("#sync_report_viewer").ejReportViewer(
+        {
+            reportServiceUrl: "../api/reportcontrolapi",
+            processingMode: ej.ReportViewer.ProcessingMode.Remote,
+            reportPath: "@ViewBag.ItemId",
+            reportServerUrl: "@baseUrl" + "api/reportserverapi",
+            reportLoaded: "onReportLoaded"
+        });
+    });
+</script>

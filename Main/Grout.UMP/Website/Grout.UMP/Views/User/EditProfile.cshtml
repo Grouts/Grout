@@ -1,0 +1,120 @@
+﻿@{
+    ViewBag.Title = GlobalAppSettings.SystemSettings.OrganizationName + " - Edit Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section styles{
+    @Styles.Render("~/Styles/edit-profile")
+}
+
+@section scripts{
+    @Scripts.Render("~/Scripts/edit-profile")
+
+    <script>
+        $(document).ready(function () {
+            var fulldata = JSON.parse(@Html.Raw(Json.Encode(ViewBag.ProfileDetail)));
+            window.dateFormat = "@GlobalAppSettings.SystemSettings.DateFormat";
+            editUser(fulldata, "@GlobalAppSettings.SystemSettings.DateFormat");
+			addPlacehoder(".user-profile-table");
+        });
+    </script>
+}
+
+<div id="edit_Profile_base_div" class="col-md-12 no-margin">
+    <input type="hidden" id="userId" value="@HttpContext.Current.User.Identity.Name" />
+    <div class="col-xs-12 profile-edit no-padding" id="UserProfileMaster">
+        <div id="edit_Profile_heading_div">
+            <label class="section-heading" id="UserHead"></label>
+                <a href="/profile/change-password" class="btn btn-success pull-right" title="">Change Password</a>
+        </div>
+        <div class="col-xs-12" id="edit_profile_form_div">
+            <form class="col-xs-8 edit_profile_form" autocomplete="off">
+                <table class="user-profile-table" cellpadding="20">
+                    <tr>
+                        <td valign="top" class="NotificationContent">
+                            Profile Picture<br />
+                            <span style="color: #555555; font-size: 13px; visibility:visible">*200x200 pixel size recommended.</span>
+                        </td>
+                        <td>
+                            <div class="img-view-holder">
+                                <img id="profile-picture1" src="/User/Avatar?Username=@HttpContext.Current.User.Identity.Name&ImageSize=150" />
+                                <span class="su su-edit" id="avatarButtonclick" title="Edit profile picture"></span>
+                                <span class="su su-delete" id="avatarDeleteclick" title="Delete profile picture"></span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="">Username</td>
+                        <td>
+                            <input type="text" id="user_name" class="form-control" disabled="disabled" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="">First name<span class="Mandatory">*</span> </td>
+                        <td>
+                           
+                                <input type="text" id="user_firstname" placeholder="Please enter first name" class="form-control" name="first-name" />
+                            
+                        </td>
+                        <td>
+                            <span id="first_name_validation" class="alertMessages"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="">Last name</td>
+                        <td>
+                           
+                                <input type="text" id="user_lastname" placeholder="Please enter last name" class="form-control" />
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="">Email address<span class="Mandatory">*</span> </td>
+                        <td>
+                              
+                                <input type="text" id="user_email" placeholder="Please enter email address" class="form-control" name="email-address" />
+                            
+                        </td>
+                        <td>
+                            <span id="email_duplicate_validation" class="alertMessages"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="">
+                            Phone number
+                        </td>
+                        <td>
+                            
+                                <input type="text" id="contact_no" placeholder="Please enter phone number" class="form-control" />
+                            
+                        </td>
+                        <td>
+                            <span id="contact_validation" class="alertMessages"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            
+                            <a href="/profile" class="btn btn-default pull-right LeftMargin15" title="">Cancel</a>
+                            <input type="button" value="Save" class="btn btn-primary pull-right" id="user-profile-save" onclick="onEditProfileClick()" />
+                        </td>
+                        <td>
+                            <h5 id="success_message"></h5>
+                        </td>
+                    </tr>                    
+
+                </table>
+            </form>
+            <div class="col-xs-4 no-padding change_password">
+                <span class="userprofie section-light-sub-content pull-right">
+                    Last Modified : <span id="LastModified">@ViewBag.ModifiedDate.ToString(GlobalAppSettings.SystemSettings.DateFormat) @ViewBag.ModifiedDate.ToString("hh:mm:ss tt")</span>
+                </span>
+            </div>
+        </div>        
+    </div>
+</div>
+<input type="hidden" id="Image" value="" />
+<span id="baseurl" data-url="/"></span>
+
+@Html.Partial("_ProfilePictureUploadBox")
