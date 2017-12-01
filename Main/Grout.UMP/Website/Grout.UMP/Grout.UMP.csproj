@@ -215,13 +215,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionFilters\AdminActionFilter.cs" />
-    <Compile Include="ActionFilters\ApiAuthenticationActionFilter.cs" />
-    <Compile Include="ActionFilters\ApiItemAccessActionFilter.cs" />
-    <Compile Include="ActionFilters\ApiItemAddActionFilter.cs" />
-    <Compile Include="ActionFilters\ApiItemEditActionFilter.cs" />
-    <Compile Include="ActionFilters\AppicationVersionValidationActionFilter.cs" />
-    <Compile Include="ActionFilters\ItemAccessActionFilter.cs" />
-    <Compile Include="ActionFilters\ItemsOfCategoryActionFilter.cs" />
     <Compile Include="ActionFilters\NoCacheActionFilter.cs" />
     <Content Include="Content\Images\Application\Startup\Grout_Favicon.png" />
     <Content Include="Content\Images\Application\Startup\Grout_Startup_Logo.png" />
@@ -256,7 +249,6 @@
     <Compile Include="Models\Administration\SystemSettingsModel.cs" />
     <Compile Include="Models\API\Accounts.cs" />
     <Compile Include="Models\API\ApiHandler.cs" />
-    <Compile Include="Models\API\Viewer.cs" />
     <Compile Include="Models\User\CsvUserImport.cs" />
     <Compile Include="Models\Environment\ImageManager.cs" />
     <Compile Include="Models\Environment\SearchManager.cs" />
@@ -422,10 +414,6 @@
     <ProjectReference Include="..\..\..\Base\Grout.Base.Encryption\Grout.Base.Encryption.csproj">
       <Project>{386412a5-e588-4a2c-8de9-ef8697340fe2}</Project>
       <Name>Grout.Base.Encryption</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\Base\Grout.Base.Item\Grout.Base.Item.csproj">
-      <Project>{4f319d68-2a0d-4c94-ac4b-76e29718e144}</Project>
-      <Name>Grout.Base.Item</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Base\Grout.Base.Logger\Grout.Base.Logger.csproj">
       <Project>{9F894D1F-ACB0-41AD-900E-B747C3F17A89}</Project>

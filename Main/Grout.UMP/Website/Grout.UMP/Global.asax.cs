@@ -34,7 +34,7 @@ namespace Grout.UMP
                 Location = OutputCacheLocation.Client,
                 NoStore = true
             });
-            GlobalFilters.Filters.Add(new AppicationVersionValidationActionFilter());
+            //GlobalFilters.Filters.Add(new AppicationVersionValidationActionFilter());
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

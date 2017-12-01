@@ -14,7 +14,6 @@ using System.Xml;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
 using Grout.Base.DataClasses;
-using Grout.Base.Item;
 using Grout.Base.Logger;
 
 namespace Grout.UMP.Models
@@ -356,7 +355,7 @@ namespace Grout.UMP.Models
         {
             try
             {
-                var itemManagement = new ItemManagement();
+                //var itemManagement = new ItemManagement();
                 //var item = new Item();
                 var userManagement = new UserManagement();
 
