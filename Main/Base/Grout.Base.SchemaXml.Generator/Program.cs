@@ -1,13 +1,8 @@
-﻿using Grout.Base.Data;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace Grout.Base.SchemaXml.Generator
 {
@@ -17,16 +12,30 @@ namespace Grout.Base.SchemaXml.Generator
         {
             var dbGrout = new DB_Grout();
             var connectionString = "Data Source=.;Initial Catalog=Grout;user id=sa;password=Admin@123";
-            var dbCreationScript = File.ReadAllText("ColumnDetector.txt");
+            var dbCreationScript = File.ReadAllText("ColumnDetector.sql");
             var connection = new SqlConnection(connectionString);
 
-            var dataprovider = new SqlRelationalDataAdapter(connectionString);
+            var result = new DataTable();
 
-            var result = dataprovider.ExecuteReaderQuery(dbCreationScript);
-            var obj = result.DataTable.AsEnumerable().Select(r => r.Field<string>("query")).FirstOrDefault();
-            using (TextWriter w = File.CreateText("schema.xml"))
+            var adapter = new SqlDataAdapter(dbCreationScript, connection);
+            try
             {
-                w.WriteLine(obj);
+                adapter.Fill(result);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                adapter.Dispose();
+                connection.Close();
+            }
+
+            var dataClasses = result.AsEnumerable().Select(r => r.Field<string>("query")).FirstOrDefault();
+            using (TextWriter w = File.CreateText(AppDomain.CurrentDomain.BaseDirectory + "../../../Grout.Base.Data/DataBase/DB_GruntUMP.cs"))
+            {
+                w.WriteLine(dataClasses);
             }
         }
     }

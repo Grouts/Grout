@@ -50,17 +50,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Grout.Base.DataClasses\Grout.Base.DataClasses.csproj">
-      <Project>{449786a6-2c04-4b49-b164-045a69a0400d}</Project>
-      <Name>Grout.Base.DataClasses</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Grout.Base.Data\Grout.Base.Data.csproj">
-      <Project>{7c8c0247-0794-43c1-a356-577be43e31f7}</Project>
-      <Name>Grout.Base.Data</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="ColumnDetector.txt">
+    <Content Include="ColumnDetector.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
