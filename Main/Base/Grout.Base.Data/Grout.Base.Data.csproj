@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataBase\DbColumnDeSerializer.cs" />
+    <Compile Include="DataBase\DB_GruntUMP.cs" />
     <Compile Include="DataBase\DB_SyncUMP.cs" />
     <Compile Include="DataProvider\SqlCeRelationalDataAdapter.cs" />
     <Compile Include="DataProvider\SqlRelationalDataAdapter.cs" />
@@ -64,6 +65,16 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryGenerator\SqlCeQueryBuilder.cs" />
     <Compile Include="QueryGenerator\SqlQueryBuilder.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Grout.Base.DataClasses\Grout.Base.DataClasses.csproj">
+      <Project>{449786a6-2c04-4b49-b164-045a69a0400d}</Project>
+      <Name>Grout.Base.DataClasses</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Grout.Base.Logger\Grout.Base.Logger.csproj">
+      <Project>{9f894d1f-acb0-41ad-900e-b747c3f17a89}</Project>
+      <Name>Grout.Base.Logger</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

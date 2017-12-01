@@ -6,7 +6,7 @@ declare @OuterClassObject varchar(max) = ''
 declare @InnerClassObjectesObject varchar(max) = ''
 declare @InnerClassObject varchar(max) = ''
 
-set @OuterClassObject = 'DB_Grout dbGrout = new DB_Grout
+set @OuterClassObject = 'public DB_Grout()
     {'
 
 
@@ -22,9 +22,6 @@ from
     FROM   sys.objects AS T
 WHERE  T.type_desc = 'USER_TABLE'
 ) s
-
-set @OuterClass = @OuterClass  + '
-}'
 
 
 DECLARE @tablenameid nvarchar(max) -- or the appropriate type
@@ -64,7 +61,7 @@ set @InnerClass = @InnerClass  + '
 set @InnerClasses=@InnerClasses+@InnerClass
 
 
-set @InnerClassObject = @TableName + '= new '+@TableName+' { '
+set @InnerClassObject = 'this.' + @TableName + '= new '+@TableName+' { '
 select @InnerClassObject = @InnerClassObject + ColumnName + '="' + ColumnName + '",'
 from
 (
@@ -76,7 +73,7 @@ from
 ) t
 order by ColumnId
 
-set @InnerClassObject = @InnerClassObject  + '},'
+set @InnerClassObject = @InnerClassObject  + '};'
 set @InnerClassObjectesObject=@InnerClassObjectesObject+@InnerClassObject
 
 
@@ -85,10 +82,7 @@ END
 
 CLOSE the_cursor
 DEALLOCATE the_cursor
-set @InnerClassObjectesObject = @InnerClassObjectesObject  + '};'
-set @OuterClass=@OuterClass + @InnerClasses
-set @OuterClassObject=@OuterClassObject + @InnerClassObjectesObject
-
-Set @OuterClass = @OuterClass + @OuterClassObject
+set @InnerClassObjectesObject = @OuterClassObject + @InnerClassObjectesObject  + '}'
+set @OuterClass=@OuterClass + @InnerClassObjectesObject +'}'+ @InnerClasses
 
 select @OuterClass as query
