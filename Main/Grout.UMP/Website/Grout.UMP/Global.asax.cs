@@ -39,9 +39,7 @@ namespace Grout.UMP
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            GlobalAppSettings.InitializeDataBaseColumns(AppDomain.CurrentDomain.BaseDirectory +
-                                                        WebConfigurationManager.AppSettings["SystemConfigurationPath"] +
-                                                        ServerSetup.DbSchema);
+
 
             GlobalAppSettings.InitializeSystemSettings(GlobalAppSettings.GetConfigFilepath() + ServerSetup.Configuration);
 

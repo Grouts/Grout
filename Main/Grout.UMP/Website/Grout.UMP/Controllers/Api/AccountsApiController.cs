@@ -11,19 +11,18 @@ namespace Grout.UMP.Controllers
     public class AccountsApiController : ApiController
     {
         private readonly Accounts accounts = new Accounts();
-        private readonly Designer designerApi=new Designer();
 
         /// <summary>
         /// Api for reprot designer
         /// </summary>
         /// <param name="itemRequest">Itemrequest from report designer contains username,password</param>
         /// <returns>Boolean</returns>
-        public bool Login(ItemRequest itemRequest)
-        {
-            var apiResponse = designerApi.Login(itemRequest.UserName, itemRequest.Password);
-            var apiData = (ApiData) apiResponse.Data;
-            return apiData.Success;
-        }
+        //public bool Login(ItemRequest itemRequest)
+        //{
+        //    var apiResponse = designerApi.Login(itemRequest.UserName, itemRequest.Password);
+        //    var apiData = (ApiData) apiResponse.Data;
+        //    return apiData.Success;
+        //}
 
         /// <summary>
         /// Api for report designer to identify whether request from UMP server or SSRS server

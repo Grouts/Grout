@@ -99,42 +99,42 @@ namespace Grout.UMP.Models
                 var userGroup = groupManagement.AddUserInGroup(Convert.ToInt32(result.ReturnValue), 1);
                 LogExtension.LogInfo("Is user added in super admin?" + userGroup, MethodBase.GetCurrentMethod());
 
-                var permissionSet = new PermissionSet();
+                //var permissionSet = new PermissionSet();
 
-                permissionSet.AddPermissionToGroup(new Permission
-                {
-                    PermissionAccess = PermissionAccess.Create,
-                    PermissionEntity = PermissionEntity.AllCategories,
-                    TargetId = 1
-                });
+                //permissionSet.AddPermissionToGroup(new Permission
+                //{
+                //    PermissionAccess = PermissionAccess.Create,
+                //    PermissionEntity = PermissionEntity.AllCategories,
+                //    TargetId = 1
+                //});
 
-                permissionSet.AddPermissionToGroup(new Permission
-                {
-                    PermissionAccess = PermissionAccess.Create,
-                    PermissionEntity = PermissionEntity.AllReports,
-                    TargetId = 1
-                });
+                //permissionSet.AddPermissionToGroup(new Permission
+                //{
+                //    PermissionAccess = PermissionAccess.Create,
+                //    PermissionEntity = PermissionEntity.AllReports,
+                //    TargetId = 1
+                //});
 
-                permissionSet.AddPermissionToGroup(new Permission
-                {
-                    PermissionAccess = PermissionAccess.Create,
-                    PermissionEntity = PermissionEntity.AllSchedules,
-                    TargetId = 1
-                });
+                //permissionSet.AddPermissionToGroup(new Permission
+                //{
+                //    PermissionAccess = PermissionAccess.Create,
+                //    PermissionEntity = PermissionEntity.AllSchedules,
+                //    TargetId = 1
+                //});
 
-                permissionSet.AddPermissionToGroup(new Permission
-                {
-                    PermissionAccess = PermissionAccess.Create,
-                    PermissionEntity = PermissionEntity.AllDataSources,
-                    TargetId = 1
-                });
+                //permissionSet.AddPermissionToGroup(new Permission
+                //{
+                //    PermissionAccess = PermissionAccess.Create,
+                //    PermissionEntity = PermissionEntity.AllDataSources,
+                //    TargetId = 1
+                //});
 
-                permissionSet.AddPermissionToGroup(new Permission
-                {
-                    PermissionAccess = PermissionAccess.Create,
-                    PermissionEntity = PermissionEntity.AllFiles,
-                    TargetId = 1
-                });
+                //permissionSet.AddPermissionToGroup(new Permission
+                //{
+                //    PermissionAccess = PermissionAccess.Create,
+                //    PermissionEntity = PermissionEntity.AllFiles,
+                //    TargetId = 1
+                //});
             }
             else
             {
@@ -357,7 +357,7 @@ namespace Grout.UMP.Models
             try
             {
                 var itemManagement = new ItemManagement();
-                var item = new Item();
+                //var item = new Item();
                 var userManagement = new UserManagement();
 
                 var userDetail = userManagement.FindUserByUserId(1);
@@ -365,147 +365,147 @@ namespace Grout.UMP.Models
                     HttpContext.Current.Request.Url.Host, HttpContext.Current.Request.Url.Port).ToString();
                 var dataSourceId = Guid.Empty;
 
-                #region AddCategory
+                //#region AddCategory
 
-                var category = new ItemDetail()
-                {
-                    Name = "Sample Reports",
-                    Description = "Check our sample reports in this category",
-                    CreatedById = userDetail.UserId,
-                    CreatedDate = DateTime.UtcNow.ToString(GlobalAppSettings.GetDateTimeFormat()),
-                    ItemType = ItemType.Category,
-                    ModifiedById = userDetail.UserId,
-                    ModifiedDate = DateTime.UtcNow.ToString(GlobalAppSettings.GetDateTimeFormat())
-                };
-                item.AddNewCategory(category);
+                //var category = new ItemDetail()
+                //{
+                //    Name = "Sample Reports",
+                //    Description = "Check our sample reports in this category",
+                //    CreatedById = userDetail.UserId,
+                //    CreatedDate = DateTime.UtcNow.ToString(GlobalAppSettings.GetDateTimeFormat()),
+                //    ItemType = ItemType.Category,
+                //    ModifiedById = userDetail.UserId,
+                //    ModifiedDate = DateTime.UtcNow.ToString(GlobalAppSettings.GetDateTimeFormat())
+                //};
+                //item.AddNewCategory(category);
 
-                #endregion
+                //#endregion
 
-                #region Add Data Sources
+                //#region Add Data Sources
 
-                List<FileInfo> dataSourceList =
-                   new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + "\\SampleReports").GetFiles("*.rds").ToList();
+                //List<FileInfo> dataSourceList =
+                //   new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + "\\SampleReports").GetFiles("*.rds").ToList();
 
-                dataSourceList = dataSourceList.OrderByDescending(o => o.Name).ToList();
+                //dataSourceList = dataSourceList.OrderByDescending(o => o.Name).ToList();
 
                 
 
-                foreach (var dataSource in dataSourceList)
-                {
-                    DataSourceDefinition dataSourceDefinition;
-                    var xmlSerializer = new XmlSerializer(typeof(DataSourceDefinition));
-                    using (var reader = new StreamReader(dataSource.FullName))
-                    {
-                        dataSourceDefinition = (DataSourceDefinition)xmlSerializer.Deserialize(reader);
-                        reader.Close();
-                    }
-                    var itemRequest = new ItemRequest
-                    {
-                        Description = "This is a sample data source.",
-                        DataSourceDefinition = dataSourceDefinition,
-                        ItemType = ItemType.Datasource,
-                        Name = Path.GetFileNameWithoutExtension(dataSource.Name),
-                        UserName = userDetail.UserName,
-                        Password = userDetail.Password
-                    };
+                //foreach (var dataSource in dataSourceList)
+                //{
+                //    DataSourceDefinition dataSourceDefinition;
+                //    var xmlSerializer = new XmlSerializer(typeof(DataSourceDefinition));
+                //    using (var reader = new StreamReader(dataSource.FullName))
+                //    {
+                //        dataSourceDefinition = (DataSourceDefinition)xmlSerializer.Deserialize(reader);
+                //        reader.Close();
+                //    }
+                //    var itemRequest = new ItemRequest
+                //    {
+                //        Description = "This is a sample data source.",
+                //        DataSourceDefinition = dataSourceDefinition,
+                //        ItemType = ItemType.Datasource,
+                //        Name = Path.GetFileNameWithoutExtension(dataSource.Name),
+                //        UserName = userDetail.UserName,
+                //        Password = userDetail.Password
+                //    };
 
-                    using (var webclient = new WebClient())
-                    {
-                        var serializer = new DataContractJsonSerializer(typeof(ItemRequest));
-                        var memoryStream = new MemoryStream();
+                //    using (var webclient = new WebClient())
+                //    {
+                //        var serializer = new DataContractJsonSerializer(typeof(ItemRequest));
+                //        var memoryStream = new MemoryStream();
 
-                        serializer.WriteObject(memoryStream, itemRequest);
+                //        serializer.WriteObject(memoryStream, itemRequest);
 
-                        var data = Encoding.UTF8.GetString(memoryStream.ToArray(), 0, (int)memoryStream.Length);
+                //        var data = Encoding.UTF8.GetString(memoryStream.ToArray(), 0, (int)memoryStream.Length);
 
-                        webclient.Headers["Content-type"] = "application/json";
-                        webclient.Encoding = Encoding.UTF8;
+                //        webclient.Headers["Content-type"] = "application/json";
+                //        webclient.Encoding = Encoding.UTF8;
 
-                        var apiResult = webclient.UploadString(baseUrl.TrimEnd('/') + "/api/reportserverapi/add-data-source", "POST", data);
+                //        var apiResult = webclient.UploadString(baseUrl.TrimEnd('/') + "/api/reportserverapi/add-data-source", "POST", data);
 
-                        var itemResponse = JsonConvert.DeserializeObject<ItemResponse>(apiResult);
-                        dataSourceId = itemResponse.PublishedItemId;
-                    }
-                }
+                //        var itemResponse = JsonConvert.DeserializeObject<ItemResponse>(apiResult);
+                //        dataSourceId = itemResponse.PublishedItemId;
+                //    }
+                //}
 
-                #endregion
+                //#endregion
 
-                #region AddReports
+                //#region AddReports
 
-                var temporaryDirectory = Path.Combine(GlobalAppSettings.GetItemsPath() + "Temporary_Files");
+                //var temporaryDirectory = Path.Combine(GlobalAppSettings.GetItemsPath() + "Temporary_Files");
 
-                if (Directory.Exists(temporaryDirectory) == false)
-                {
-                    Directory.CreateDirectory(temporaryDirectory);
-                }
+                //if (Directory.Exists(temporaryDirectory) == false)
+                //{
+                //    Directory.CreateDirectory(temporaryDirectory);
+                //}
 
-                List<FileInfo> reportList =
-                    new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + "\\SampleReports").GetFiles("*.rdl").ToList();
+                //List<FileInfo> reportList =
+                //    new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + "\\SampleReports").GetFiles("*.rdl").ToList();
 
-                reportList = reportList.OrderByDescending(o => o.Name).ToList();
+                //reportList = reportList.OrderByDescending(o => o.Name).ToList();
 
-                foreach (var report in reportList)
-                {
-                    var xmlDocument = new XmlDocument();
-                    xmlDocument.Load(report.FullName);
+                //foreach (var report in reportList)
+                //{
+                //    var xmlDocument = new XmlDocument();
+                //    xmlDocument.Load(report.FullName);
 
-                    var dataSourceNodes = xmlDocument.GetElementsByTagName("DataSource");
+                //    var dataSourceNodes = xmlDocument.GetElementsByTagName("DataSource");
                     
-                    foreach (var dataSourceNode in dataSourceNodes)
-                    {
-                        var xmlLinkedNode = dataSourceNode as XmlLinkedNode;
-                        foreach (var childNodes in xmlLinkedNode.ChildNodes)
-                        {
-                            var xmlChildLinkedNode = childNodes as XmlLinkedNode;
-                            if (xmlChildLinkedNode.Name == "DataSourceReference")
-                            {
-                                xmlChildLinkedNode.InnerText = dataSourceId.ToString();
-                            }
-                        }
-                    }
-                    var tempReportName = temporaryDirectory + "\\" + report.Name;
-                    xmlDocument.Save(tempReportName);
+                //    foreach (var dataSourceNode in dataSourceNodes)
+                //    {
+                //        var xmlLinkedNode = dataSourceNode as XmlLinkedNode;
+                //        foreach (var childNodes in xmlLinkedNode.ChildNodes)
+                //        {
+                //            var xmlChildLinkedNode = childNodes as XmlLinkedNode;
+                //            if (xmlChildLinkedNode.Name == "DataSourceReference")
+                //            {
+                //                xmlChildLinkedNode.InnerText = dataSourceId.ToString();
+                //            }
+                //        }
+                //    }
+                //    var tempReportName = temporaryDirectory + "\\" + report.Name;
+                //    xmlDocument.Save(tempReportName);
 
-                    var itemRequest = new ItemRequest
-                    {
-                        CategoryId = itemManagement.GetItemDetailsFromItemName(category.Name, ItemType.Category).Id,
-                        DataSourceMappingInfo = new List<DataSourceMappingInfo>
-                        {
-                            new DataSourceMappingInfo
-                            {
-                                DataSourceId = dataSourceId,
-                                Name = Path.GetFileNameWithoutExtension(dataSourceList.FirstOrDefault().Name)
-                            }
-                        },
-                        Description = "This is a sample report.",
-                        ItemContent = File.ReadAllBytes(tempReportName),
-                        ItemType = ItemType.Report,
-                        Name = Path.GetFileNameWithoutExtension(tempReportName),
-                        UserName = userDetail.UserName,
-                        Password = userDetail.Password
-                    };
+                //    var itemRequest = new ItemRequest
+                //    {
+                //        CategoryId = itemManagement.GetItemDetailsFromItemName(category.Name, ItemType.Category).Id,
+                //        DataSourceMappingInfo = new List<DataSourceMappingInfo>
+                //        {
+                //            new DataSourceMappingInfo
+                //            {
+                //                DataSourceId = dataSourceId,
+                //                Name = Path.GetFileNameWithoutExtension(dataSourceList.FirstOrDefault().Name)
+                //            }
+                //        },
+                //        Description = "This is a sample report.",
+                //        ItemContent = File.ReadAllBytes(tempReportName),
+                //        ItemType = ItemType.Report,
+                //        Name = Path.GetFileNameWithoutExtension(tempReportName),
+                //        UserName = userDetail.UserName,
+                //        Password = userDetail.Password
+                //    };
 
-                    using (var webclient = new WebClient())
-                    {
-                        var serializer = new DataContractJsonSerializer(typeof(ItemRequest));
-                        var memoryStream = new MemoryStream();
+                //    using (var webclient = new WebClient())
+                //    {
+                //        var serializer = new DataContractJsonSerializer(typeof(ItemRequest));
+                //        var memoryStream = new MemoryStream();
 
-                        serializer.WriteObject(memoryStream, itemRequest);
+                //        serializer.WriteObject(memoryStream, itemRequest);
 
-                        var data = Encoding.UTF8.GetString(memoryStream.ToArray(), 0, (int)memoryStream.Length);
+                //        var data = Encoding.UTF8.GetString(memoryStream.ToArray(), 0, (int)memoryStream.Length);
 
-                        webclient.Headers["Content-type"] = "application/json";
-                        webclient.Encoding = Encoding.UTF8;
+                //        webclient.Headers["Content-type"] = "application/json";
+                //        webclient.Encoding = Encoding.UTF8;
 
-                        var apiResult = webclient.UploadString(baseUrl.TrimEnd('/') + "/api/reportserverapi/add-report", "POST", data);
+                //        var apiResult = webclient.UploadString(baseUrl.TrimEnd('/') + "/api/reportserverapi/add-report", "POST", data);
 
-                        var itemResponse = JsonConvert.DeserializeObject<ItemResponse>(apiResult);
-                    }
-                }
+                //        var itemResponse = JsonConvert.DeserializeObject<ItemResponse>(apiResult);
+                //    }
+                //}
 
-                LogExtension.LogInfo("Sample reports has been added successfully.", MethodBase.GetCurrentMethod());
+                //LogExtension.LogInfo("Sample reports has been added successfully.", MethodBase.GetCurrentMethod());
 
-                #endregion
+                //#endregion
             }
             catch (Exception ex)
             {

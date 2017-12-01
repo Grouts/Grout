@@ -39,7 +39,7 @@ BEGIN
 
 set @TableName = @tablenameid
 set @InnerClass = 'public class DB_' + @TableName + '
-    {'
+    { public string DB_TableName { get; set; }'
 select @InnerClass = @InnerClass + '
     public string ' + ColumnName + ' { get; set; }
 '
@@ -61,7 +61,7 @@ set @InnerClass = @InnerClass  + '
 set @InnerClasses=@InnerClasses+@InnerClass
 
 
-set @InnerClassObject = 'this.DB_' + @TableName + '= new DB_'+@TableName+' { '
+set @InnerClassObject = 'this.DB_' + @TableName + '= new DB_'+@TableName+' { DB_TableName = "' +@TableName +'", '
 select @InnerClassObject = @InnerClassObject + ColumnName + '="' + ColumnName + '",'
 from
 (
