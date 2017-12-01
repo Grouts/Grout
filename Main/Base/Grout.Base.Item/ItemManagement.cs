@@ -1104,7 +1104,7 @@ namespace Grout.Base.Item
                                 TableName = GlobalAppSettings.DbColumns.DB_Item.DB_TableName,
                                 JoinedColumn = GlobalAppSettings.DbColumns.DB_Item.CreatedById,
                                 Operation = Conditions.Equals,
-                                ParentTableColumn = GlobalAppSettings.DbColumns.DB_User.Id,
+                                ParentTableColumn = GlobalAppSettings.DbColumns.DB_User.UserId,
                                 ParentTable = GlobalAppSettings.DbColumns.DB_User.DB_TableName
                             }
                         },
@@ -1119,7 +1119,7 @@ namespace Grout.Base.Item
                             new JoinColumn
                             {
                                 TableName = joinAliasName,
-                                JoinedColumn = GlobalAppSettings.DbColumns.DB_User.Id,
+                                JoinedColumn = GlobalAppSettings.DbColumns.DB_User.UserId,
                                 Operation = Conditions.Equals,
                                 ParentTableColumn = GlobalAppSettings.DbColumns.DB_Item.ModifiedById,
                                 ParentTable = GlobalAppSettings.DbColumns.DB_Item.DB_TableName
@@ -1896,7 +1896,7 @@ namespace Grout.Base.Item
                             new JoinColumn
                             {
                                 TableName = CurrentUser,
-                                JoinedColumn = GlobalAppSettings.DbColumns.DB_User.Id,
+                                JoinedColumn = GlobalAppSettings.DbColumns.DB_User.UserId,
                                 Operation = Conditions.Equals,
                                 ParentTableColumn = GlobalAppSettings.DbColumns.DB_ItemLog.UpdatedUserId,
                                 ParentTable = GlobalAppSettings.DbColumns.DB_ItemLog.DB_TableName,
@@ -1914,7 +1914,7 @@ namespace Grout.Base.Item
                             new JoinColumn
                             {
                                 TableName = TargetUser,
-                                JoinedColumn = GlobalAppSettings.DbColumns.DB_User.Id,
+                                JoinedColumn = GlobalAppSettings.DbColumns.DB_User.UserId,
                                 Operation = Conditions.Equals,
                                 ParentTableColumn = GlobalAppSettings.DbColumns.DB_ItemLog.UpdatedUserId,
                                 ParentTable = GlobalAppSettings.DbColumns.DB_ItemLog.DB_TableName
@@ -2895,7 +2895,7 @@ namespace Grout.Base.Item
                         new JoinColumn
                         {
                             TableName = GlobalAppSettings.DbColumns.DB_User.DB_TableName,
-                            JoinedColumn = GlobalAppSettings.DbColumns.DB_User.Id,
+                            JoinedColumn = GlobalAppSettings.DbColumns.DB_User.UserId,
                             Operation = Conditions.Equals,
                             ParentTableColumn = GlobalAppSettings.DbColumns.DB_ItemVersion.CreatedById
                         }
@@ -3291,7 +3291,7 @@ namespace Grout.Base.Item
                                 TableName = GlobalAppSettings.DbColumns.DB_Item.DB_TableName,
                                 JoinedColumn = GlobalAppSettings.DbColumns.DB_Item.CreatedById,
                                 Operation = Conditions.Equals,
-                                ParentTableColumn = GlobalAppSettings.DbColumns.DB_User.Id,
+                                ParentTableColumn = GlobalAppSettings.DbColumns.DB_User.UserId,
                                 ParentTable = GlobalAppSettings.DbColumns.DB_User.DB_TableName
                             }
                         },
@@ -3306,7 +3306,7 @@ namespace Grout.Base.Item
                             new JoinColumn
                             {
                                 TableName = joinAliasName,
-                                JoinedColumn = GlobalAppSettings.DbColumns.DB_User.Id,
+                                JoinedColumn = GlobalAppSettings.DbColumns.DB_User.UserId,
                                 Operation = Conditions.Equals,
                                 ParentTableColumn = GlobalAppSettings.DbColumns.DB_Item.ModifiedById,
                                 ParentTable = GlobalAppSettings.DbColumns.DB_Item.DB_TableName
@@ -4147,7 +4147,7 @@ namespace Grout.Base.Item
                                 TableName = GlobalAppSettings.DbColumns.DB_Item.DB_TableName,
                                 JoinedColumn = GlobalAppSettings.DbColumns.DB_Item.CreatedById,
                                 Operation = Conditions.Equals,
-                                ParentTableColumn = GlobalAppSettings.DbColumns.DB_User.Id,
+                                ParentTableColumn = GlobalAppSettings.DbColumns.DB_User.UserId,
                                 ParentTable = GlobalAppSettings.DbColumns.DB_User.DB_TableName
                             }
                         },
@@ -4162,7 +4162,7 @@ namespace Grout.Base.Item
                             new JoinColumn
                             {
                                 TableName = joinAliasName,
-                                JoinedColumn = GlobalAppSettings.DbColumns.DB_User.Id,
+                                JoinedColumn = GlobalAppSettings.DbColumns.DB_User.UserId,
                                 Operation = Conditions.Equals,
                                 ParentTableColumn = GlobalAppSettings.DbColumns.DB_Item.ModifiedById,
                                 ParentTable = GlobalAppSettings.DbColumns.DB_Item.DB_TableName
@@ -4484,7 +4484,7 @@ namespace Grout.Base.Item
                         new JoinColumn
                         {
                             TableName = GlobalAppSettings.DbColumns.DB_User.DB_TableName,
-                            JoinedColumn = GlobalAppSettings.DbColumns.DB_User.Id,
+                            JoinedColumn = GlobalAppSettings.DbColumns.DB_User.UserId,
                             Operation = Conditions.Equals,
                             ParentTableColumn = GlobalAppSettings.DbColumns.DB_ItemVersion.CreatedById
                         }
@@ -4721,13 +4721,13 @@ namespace Grout.Base.Item
                      GlobalAppSettings.DbColumns.DB_Item.DB_TableName + "].[" + GlobalAppSettings.DbColumns.DB_Item.Id +
                      "]=UnionResult.Id" +
                      " INNER JOIN [" + GlobalAppSettings.DbColumns.DB_User.DB_TableName + "] ON [" +
-                     GlobalAppSettings.DbColumns.DB_User.DB_TableName + "].[" + GlobalAppSettings.DbColumns.DB_User.Id +
+                     GlobalAppSettings.DbColumns.DB_User.DB_TableName + "].[" + GlobalAppSettings.DbColumns.DB_User.UserId +
                      "]=[" + GlobalAppSettings.DbColumns.DB_Item.DB_TableName + "].[" +
                      GlobalAppSettings.DbColumns.DB_Item.CreatedById + "]" +
                      " INNER JOIN [" + GlobalAppSettings.DbColumns.DB_User.DB_TableName + "]  AS User_modified ON [" +
                      GlobalAppSettings.DbColumns.DB_Item.DB_TableName + "].[" +
                      GlobalAppSettings.DbColumns.DB_Item.ModifiedById + "]=User_modified.[" +
-                     GlobalAppSettings.DbColumns.DB_User.Id + "]" +
+                     GlobalAppSettings.DbColumns.DB_User.UserId + "]" +
                      " LEFT JOIN [" + GlobalAppSettings.DbColumns.DB_Item.DB_TableName + "] AS ParentItemTable ON [" +
                      GlobalAppSettings.DbColumns.DB_Item.DB_TableName + "].[" + GlobalAppSettings.DbColumns.DB_Item.ParentId +
                      "]=ParentItemTable.[Id]";
@@ -5032,13 +5032,13 @@ namespace Grout.Base.Item
                      GlobalAppSettings.DbColumns.DB_Item.DB_TableName + "].[" + GlobalAppSettings.DbColumns.DB_Item.Id +
                      "]=UnionResult.Id" +
                      " INNER JOIN [" + GlobalAppSettings.DbColumns.DB_User.DB_TableName + "] ON [" +
-                     GlobalAppSettings.DbColumns.DB_User.DB_TableName + "].[" + GlobalAppSettings.DbColumns.DB_User.Id +
+                     GlobalAppSettings.DbColumns.DB_User.DB_TableName + "].[" + GlobalAppSettings.DbColumns.DB_User.UserId +
                      "]=[" + GlobalAppSettings.DbColumns.DB_Item.DB_TableName + "].[" +
                      GlobalAppSettings.DbColumns.DB_Item.CreatedById + "]" +
                      " INNER JOIN [" + GlobalAppSettings.DbColumns.DB_User.DB_TableName + "]  AS User_modified ON [" +
                      GlobalAppSettings.DbColumns.DB_Item.DB_TableName + "].[" +
                      GlobalAppSettings.DbColumns.DB_Item.ModifiedById + "]=User_modified.[" +
-                     GlobalAppSettings.DbColumns.DB_User.Id + "]" +
+                     GlobalAppSettings.DbColumns.DB_User.UserId + "]" +
                      " LEFT JOIN [" + GlobalAppSettings.DbColumns.DB_Item.DB_TableName + "] AS ParentItemTable ON [" +
                      GlobalAppSettings.DbColumns.DB_Item.DB_TableName + "].[" + GlobalAppSettings.DbColumns.DB_Item.ParentId +
                      "]=ParentItemTable.[Id]";

@@ -95,12 +95,12 @@ namespace Grout.UMP.Models
 
             var result = data.DataTable.AsEnumerable().Select(row => new Group
             {
-                GroupId = row.Field<int>(GlobalAppSettings.DbColumns.DB_Group.Id),
+                GroupId = row.Field<int>(GlobalAppSettings.DbColumns.DB_Group.GroupId),
                 GroupName = row.Field<string>(GlobalAppSettings.DbColumns.DB_Group.Name),
                 GroupDescription = row.Field<string>(GlobalAppSettings.DbColumns.DB_Group.Description),
                 GroupColor = row.Field<string>(GlobalAppSettings.DbColumns.DB_Group.Color),
                 CanDelete =
-                    (row.Field<int>(GlobalAppSettings.DbColumns.DB_Group.Id) == 1) ? false : true
+                    (row.Field<int>(GlobalAppSettings.DbColumns.DB_Group.GroupId) == 1) ? false : true
              
             }).Skip(skipValue).Take(takeValue).ToList();
             

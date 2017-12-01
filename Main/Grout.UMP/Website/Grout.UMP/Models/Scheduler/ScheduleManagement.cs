@@ -678,7 +678,7 @@ namespace Grout.UMP.Models
                             new JoinColumn
                             {
                                 TableName = GlobalAppSettings.DbColumns.DB_User.DB_TableName,
-                                JoinedColumn = GlobalAppSettings.DbColumns.DB_User.Id,
+                                JoinedColumn = GlobalAppSettings.DbColumns.DB_User.UserId,
                                 Operation = Conditions.Equals,
                                 ParentTableColumn = GlobalAppSettings.DbColumns.DB_SubscribedUser.RecipientUserId,
                                 ParentTable = GlobalAppSettings.DbColumns.DB_SubscribedUser.DB_TableName
@@ -761,7 +761,7 @@ namespace Grout.UMP.Models
                             new JoinColumn
                             {
                                 TableName = GlobalAppSettings.DbColumns.DB_Group.DB_TableName,
-                                JoinedColumn = GlobalAppSettings.DbColumns.DB_Group.Id,
+                                JoinedColumn = GlobalAppSettings.DbColumns.DB_Group.GroupId,
                                 Operation = Conditions.Equals,
                                 ParentTableColumn = GlobalAppSettings.DbColumns.DB_SubscribedGroup.RecipientGroupId,
                                 ParentTable = GlobalAppSettings.DbColumns.DB_SubscribedGroup.DB_TableName

@@ -86,7 +86,7 @@ namespace Grout.Base
 
                 var result = new Result();
 
-                var outputColumn = new List<string> { GlobalAppSettings.DbColumns.DB_User.Id };
+                var outputColumn = new List<string> { GlobalAppSettings.DbColumns.DB_User.UserId };
                 result = _dataProvider.ExecuteScalarQuery(_queryBuilder.AddToTable(
                     GlobalAppSettings.DbColumns.DB_User.DB_TableName, values, outputColumn),
                     GlobalAppSettings.ConnectionString);
@@ -166,7 +166,7 @@ namespace Grout.Base
                 };
                 if (groupId != null)
                     elements.Add(GlobalAppSettings.DbColumns.DB_UserLog.GroupId, groupId);
-                var output = new List<string> { GlobalAppSettings.DbColumns.DB_UserLog.Id };
+                var output = new List<string> { GlobalAppSettings.DbColumns.DB_UserLog.UserLogId };
                 var result =
                     _dataProvider.ExecuteScalarQuery(
                         _queryBuilder.AddToTable(GlobalAppSettings.DbColumns.DB_UserLog.DB_TableName, elements, output));
@@ -282,7 +282,7 @@ namespace Grout.Base
                         result.DataTable.AsEnumerable()
                             .Select(row => new User
                             {
-                                UserId = row.Field<int>(GlobalAppSettings.DbColumns.DB_User.Id),
+                                UserId = row.Field<int>(GlobalAppSettings.DbColumns.DB_User.UserId),
                                 UserName = row.Field<string>(GlobalAppSettings.DbColumns.DB_User.UserName),
                                 FirstName = row.Field<string>(GlobalAppSettings.DbColumns.DB_User.FirstName),
                                 LastName = row.Field<string>(GlobalAppSettings.DbColumns.DB_User.LastName),
@@ -422,7 +422,7 @@ namespace Grout.Base
                         result.DataTable.AsEnumerable()
                             .Select(row => new User
                             {
-                                UserId = row.Field<int>(GlobalAppSettings.DbColumns.DB_User.Id),
+                                UserId = row.Field<int>(GlobalAppSettings.DbColumns.DB_User.UserId),
                                 UserName = row.Field<string>(GlobalAppSettings.DbColumns.DB_User.UserName),
                                 FirstName = row.Field<string>(GlobalAppSettings.DbColumns.DB_User.FirstName),
                                 LastName = row.Field<string>(GlobalAppSettings.DbColumns.DB_User.LastName),
@@ -453,7 +453,7 @@ namespace Grout.Base
                 {
                     new ConditionColumn
                     {
-                        ColumnName = GlobalAppSettings.DbColumns.DB_User.Id,
+                        ColumnName = GlobalAppSettings.DbColumns.DB_User.UserId,
                         Condition = Conditions.Equals,
                         Value = userId
                     }
@@ -554,7 +554,7 @@ namespace Grout.Base
                         result.DataTable.AsEnumerable()
                             .Select(row => new User
                             {
-                                UserId = row.Field<int>(GlobalAppSettings.DbColumns.DB_User.Id),
+                                UserId = row.Field<int>(GlobalAppSettings.DbColumns.DB_User.UserId),
                                 UserName = row.Field<string>(GlobalAppSettings.DbColumns.DB_User.UserName),
                                 FirstName = row.Field<string>(GlobalAppSettings.DbColumns.DB_User.FirstName),
                                 LastName = row.Field<string>(GlobalAppSettings.DbColumns.DB_User.LastName),
@@ -594,7 +594,7 @@ namespace Grout.Base
                 {
                     new ConditionColumn
                     {
-                        ColumnName = GlobalAppSettings.DbColumns.DB_User.Id,
+                        ColumnName = GlobalAppSettings.DbColumns.DB_User.UserId,
                         Condition = Conditions.Equals,
                         Value = userId
                     },
@@ -616,7 +616,7 @@ namespace Grout.Base
                         result.DataTable.AsEnumerable()
                             .Select(row => new User
                             {
-                                UserId = row.Field<int>(GlobalAppSettings.DbColumns.DB_User.Id),
+                                UserId = row.Field<int>(GlobalAppSettings.DbColumns.DB_User.UserId),
                                 UserName = row.Field<string>(GlobalAppSettings.DbColumns.DB_User.UserName),
                                 FirstName = row.Field<string>(GlobalAppSettings.DbColumns.DB_User.FirstName),
                                 LastName = row.Field<string>(GlobalAppSettings.DbColumns.DB_User.LastName),
@@ -680,7 +680,7 @@ namespace Grout.Base
                         result.DataTable.AsEnumerable()
                             .Select(row => new User
                             {
-                                UserId = row.Field<int>(GlobalAppSettings.DbColumns.DB_User.Id),
+                                UserId = row.Field<int>(GlobalAppSettings.DbColumns.DB_User.UserId),
                                 UserName = row.Field<string>(GlobalAppSettings.DbColumns.DB_User.UserName),
                                 FirstName = row.Field<string>(GlobalAppSettings.DbColumns.DB_User.FirstName),
                                 LastName = row.Field<string>(GlobalAppSettings.DbColumns.DB_User.LastName),
@@ -802,7 +802,7 @@ namespace Grout.Base
                 {
                     new ConditionColumn
                     {
-                        ColumnName = GlobalAppSettings.DbColumns.DB_User.Id,
+                        ColumnName = GlobalAppSettings.DbColumns.DB_User.UserId,
                         Condition = Conditions.Equals,
                         Value = userId
                     }
@@ -846,7 +846,7 @@ namespace Grout.Base
                 {
                     new ConditionColumn
                     {
-                        ColumnName = GlobalAppSettings.DbColumns.DB_User.Id,
+                        ColumnName = GlobalAppSettings.DbColumns.DB_User.UserId,
                         Condition = Conditions.Equals,
                         Value = userId
                     }
@@ -879,7 +879,7 @@ namespace Grout.Base
                         result.DataTable.AsEnumerable()
                             .Select(row => new User
                             {
-                                UserId = row.Field<int>(GlobalAppSettings.DbColumns.DB_User.Id),
+                                UserId = row.Field<int>(GlobalAppSettings.DbColumns.DB_User.UserId),
                                 UserName = row.Field<string>(GlobalAppSettings.DbColumns.DB_User.UserName),
                                 FirstName = row.Field<string>(GlobalAppSettings.DbColumns.DB_User.FirstName),
                                 LastName = row.Field<string>(GlobalAppSettings.DbColumns.DB_User.LastName),
@@ -978,7 +978,7 @@ namespace Grout.Base
                         result.DataTable.AsEnumerable()
                             .Select(row => new User
                             {
-                                UserId = row.Field<int>(GlobalAppSettings.DbColumns.DB_User.Id),
+                                UserId = row.Field<int>(GlobalAppSettings.DbColumns.DB_User.UserId),
                                 UserName = row.Field<string>(GlobalAppSettings.DbColumns.DB_User.UserName),
                                 FirstName = row.Field<string>(GlobalAppSettings.DbColumns.DB_User.FirstName),
                                 LastName = row.Field<string>(GlobalAppSettings.DbColumns.DB_User.LastName),
@@ -1024,7 +1024,7 @@ namespace Grout.Base
                         result.DataTable.AsEnumerable()
                             .Select(row => new User
                             {
-                                UserId = row.Field<int>(GlobalAppSettings.DbColumns.DB_User.Id),
+                                UserId = row.Field<int>(GlobalAppSettings.DbColumns.DB_User.UserId),
                                 UserName = row.Field<string>(GlobalAppSettings.DbColumns.DB_User.UserName),
                                 FirstName = row.Field<string>(GlobalAppSettings.DbColumns.DB_User.FirstName),
                                 LastName = row.Field<string>(GlobalAppSettings.DbColumns.DB_User.LastName),
@@ -1187,7 +1187,7 @@ namespace Grout.Base
                 {
                     new ConditionColumn
                     {
-                        ColumnName = GlobalAppSettings.DbColumns.DB_User.Id,
+                        ColumnName = GlobalAppSettings.DbColumns.DB_User.UserId,
                         Condition = Conditions.Equals,
                         Value = userId
                     }
@@ -1296,7 +1296,7 @@ namespace Grout.Base
                         _queryBuilder.SelectTopRecordsFromTable(GlobalAppSettings.DbColumns.DB_User.DB_TableName,
                             new List<SelectedColumn>
                             {
-                                new SelectedColumn {ColumnName = GlobalAppSettings.DbColumns.DB_User.Id}
+                                new SelectedColumn {ColumnName = GlobalAppSettings.DbColumns.DB_User.UserId}
                             }, 1,
                             whereColumns, null,
                             null, null));
@@ -1305,7 +1305,7 @@ namespace Grout.Base
                     var firstRecord = result.DataTable.AsEnumerable().FirstOrDefault();
                     if (firstRecord == null) return userId;
                     return firstRecord
-                        .Field<int>(GlobalAppSettings.DbColumns.DB_User.Id);
+                        .Field<int>(GlobalAppSettings.DbColumns.DB_User.UserId);
                 }
                 return userId;
             }
@@ -1325,7 +1325,7 @@ namespace Grout.Base
                 {
                     new ConditionColumn
                     {
-                        ColumnName = GlobalAppSettings.DbColumns.DB_User.Id,
+                        ColumnName = GlobalAppSettings.DbColumns.DB_User.UserId,
                         Condition = Conditions.Equals,
                         Value = userId
                     }
@@ -1370,7 +1370,7 @@ namespace Grout.Base
                 {
                     new ConditionColumn
                     {
-                        ColumnName = GlobalAppSettings.DbColumns.DB_User.Id,
+                        ColumnName = GlobalAppSettings.DbColumns.DB_User.UserId,
                         Condition = Conditions.Equals,
                         Value = userId
                     }
@@ -1412,7 +1412,7 @@ namespace Grout.Base
                 {
                     new ConditionColumn
                     {
-                        ColumnName = GlobalAppSettings.DbColumns.DB_User.Id,
+                        ColumnName = GlobalAppSettings.DbColumns.DB_User.UserId,
                         Condition = Conditions.Equals,
                         Value = userId
                     }
@@ -1453,7 +1453,7 @@ namespace Grout.Base
                 {
                     new ConditionColumn
                     {
-                        ColumnName = GlobalAppSettings.DbColumns.DB_User.Id,
+                        ColumnName = GlobalAppSettings.DbColumns.DB_User.UserId,
                         Condition = Conditions.Equals,
                         Value = userId,
                     }
@@ -1491,10 +1491,10 @@ namespace Grout.Base
             var query = "SELECT GroupTable." + GlobalAppSettings.DbColumns.DB_Group.Name + " as GroupName, User1." +
                         GlobalAppSettings.DbColumns.DB_User.FirstName + ", User1." +
                         GlobalAppSettings.DbColumns.DB_User.Picture + ", UserLog." +
-                        GlobalAppSettings.DbColumns.DB_UserLog.Id + ", UserLog." +
+                        GlobalAppSettings.DbColumns.DB_UserLog.UserLogId + ", UserLog." +
                         GlobalAppSettings.DbColumns.DB_UserLog.UserLogTypeId + ", UserLog." +
                         GlobalAppSettings.DbColumns.DB_UserLog.UpdatedUserId + ", User1." +
-                        GlobalAppSettings.DbColumns.DB_User.Id + " AS CurrentUserId, UserLog." +
+                        GlobalAppSettings.DbColumns.DB_User.UserId + " AS CurrentUserId, UserLog." +
                         GlobalAppSettings.DbColumns.DB_UserLog.GroupId + ", UserLog." +
                         GlobalAppSettings.DbColumns.DB_UserLog.OldValue + ", UserLog." +
                         GlobalAppSettings.DbColumns.DB_UserLog.NewValue + ", UserLog." +
@@ -1506,17 +1506,17 @@ namespace Grout.Base
                         GlobalAppSettings.DbColumns.DB_UserLogType.Name + " FROM [" +
                         GlobalAppSettings.DbColumns.DB_User.DB_TableName + "] AS User1 INNER JOIN " +
                         GlobalAppSettings.DbColumns.DB_UserLog.DB_TableName + " AS UserLog ON User1." +
-                        GlobalAppSettings.DbColumns.DB_User.Id + " = UserLog." +
+                        GlobalAppSettings.DbColumns.DB_User.UserId + " = UserLog." +
                         GlobalAppSettings.DbColumns.DB_UserLog.UpdatedUserId + " INNER JOIN [" +
                         GlobalAppSettings.DbColumns.DB_User.DB_TableName + "] AS User2 ON UserLog." +
                         GlobalAppSettings.DbColumns.DB_UserLog.TargetUserId + " = User2." +
-                        GlobalAppSettings.DbColumns.DB_User.Id + " INNER JOIN " +
+                        GlobalAppSettings.DbColumns.DB_User.UserId + " INNER JOIN " +
                         GlobalAppSettings.DbColumns.DB_UserLogType.DB_TableName + " AS UserLogType ON UserLog." +
                         GlobalAppSettings.DbColumns.DB_UserLog.UserLogTypeId + " = UserLogType." +
-                        GlobalAppSettings.DbColumns.DB_UserLogType.Id + " LEFT OUTER JOIN [" +
+                        GlobalAppSettings.DbColumns.DB_UserLogType.UserLogTypeId + " LEFT OUTER JOIN [" +
                         GlobalAppSettings.DbColumns.DB_Group.DB_TableName + "] AS GroupTable ON UserLog." +
                         GlobalAppSettings.DbColumns.DB_UserLog.GroupId + " = GroupTable." +
-                        GlobalAppSettings.DbColumns.DB_Group.Id;
+                        GlobalAppSettings.DbColumns.DB_Group.GroupId;
             query = _queryBuilder.ApplyWhereClause(query, whereConditionColumns);
             return _dataProvider.ExecuteReaderQuery(query);
         }
@@ -1524,7 +1524,7 @@ namespace Grout.Base
         public Result SystemLogView(List<ConditionColumn> whereConditionColumns)
         {
             var viewquery = "SELECT User1." + GlobalAppSettings.DbColumns.DB_User.FirstName + ",User1." +
-                            GlobalAppSettings.DbColumns.DB_User.Id + " AS CurrentUserId, User1." +
+                            GlobalAppSettings.DbColumns.DB_User.UserId + " AS CurrentUserId, User1." +
                             GlobalAppSettings.DbColumns.DB_User.Picture + ", SystemLog." +
                             GlobalAppSettings.DbColumns.DB_SystemLog.LogId + ", SystemLog." +
                             GlobalAppSettings.DbColumns.DB_SystemLog.SystemLogTypeId + ", SystemLog." +
@@ -1537,14 +1537,14 @@ namespace Grout.Base
                             GlobalAppSettings.DbColumns.DB_SystemLogType.Name + " FROM [" +
                             GlobalAppSettings.DbColumns.DB_User.DB_TableName + "] AS User1 INNER JOIN " +
                             GlobalAppSettings.DbColumns.DB_SystemLog.DB_TableName + " AS SystemLog ON User1." +
-                            GlobalAppSettings.DbColumns.DB_User.Id + " = SystemLog." +
+                            GlobalAppSettings.DbColumns.DB_User.UserId + " = SystemLog." +
                             GlobalAppSettings.DbColumns.DB_SystemLog.UpdatedUserId + " INNER JOIN  [" +
                             GlobalAppSettings.DbColumns.DB_User.DB_TableName + "] AS User2 ON SystemLog." +
                             GlobalAppSettings.DbColumns.DB_SystemLog.TargetUserId + " = User2." +
-                            GlobalAppSettings.DbColumns.DB_User.Id + " INNER JOIN " +
+                            GlobalAppSettings.DbColumns.DB_User.UserId + " INNER JOIN " +
                             GlobalAppSettings.DbColumns.DB_SystemLogType.DB_TableName +
                             " AS SystemLogType ON SystemLogType." +
-                            GlobalAppSettings.DbColumns.DB_SystemLogType.Id + " = SystemLog." +
+                            GlobalAppSettings.DbColumns.DB_SystemLogType.SystemLogTypeId + " = SystemLog." +
                             GlobalAppSettings.DbColumns.DB_SystemLog.SystemLogTypeId + "";
             var query = _queryBuilder.ApplyWhereClause(viewquery, whereConditionColumns);
             return _dataProvider.ExecuteReaderQuery(query);
@@ -1608,7 +1608,7 @@ namespace Grout.Base
                                     TableName = GlobalAppSettings.DbColumns.DB_UserGroup.DB_TableName,
                                     JoinedColumn = GlobalAppSettings.DbColumns.DB_UserGroup.GroupId,
                                     Operation = Conditions.Equals,
-                                    ParentTableColumn = GlobalAppSettings.DbColumns.DB_Group.Id,
+                                    ParentTableColumn = GlobalAppSettings.DbColumns.DB_Group.GroupId,
                                     ParentTable = GlobalAppSettings.DbColumns.DB_Group.DB_TableName
                                 }
                             },
@@ -1623,7 +1623,7 @@ namespace Grout.Base
                                 new JoinColumn
                                 {
                                     TableName = GlobalAppSettings.DbColumns.DB_User.DB_TableName,
-                                    JoinedColumn = GlobalAppSettings.DbColumns.DB_User.Id,
+                                    JoinedColumn = GlobalAppSettings.DbColumns.DB_User.UserId,
                                     Operation = Conditions.Equals,
                                     ParentTableColumn = GlobalAppSettings.DbColumns.DB_UserGroup.UserId,
                                     ParentTable = GlobalAppSettings.DbColumns.DB_UserGroup.DB_TableName
@@ -1642,7 +1642,7 @@ namespace Grout.Base
                             .Select(row => new UserGroup
                             {
                                 UserId = row.Field<int>(GlobalAppSettings.DbColumns.DB_UserGroup.UserId),
-                                Id = row.Field<int>(GlobalAppSettings.DbColumns.DB_Group.Id),
+                                Id = row.Field<int>(GlobalAppSettings.DbColumns.DB_Group.GroupId),
                                 Name = row.Field<string>(GlobalAppSettings.DbColumns.DB_Group.Name),
                                 Color = row.Field<string>(GlobalAppSettings.DbColumns.DB_Group.Color)
                             }).Distinct().ToList();
@@ -1711,7 +1711,7 @@ namespace Grout.Base
             {
                 new ConditionColumn
                 {
-                    ColumnName = GlobalAppSettings.DbColumns.DB_User.Id,
+                    ColumnName = GlobalAppSettings.DbColumns.DB_User.UserId,
                     Condition = Conditions.Equals,
                     Value = userId
                 }
@@ -1765,7 +1765,7 @@ namespace Grout.Base
                         GlobalAppSettings.DbColumns.DB_User.LastName + " AS LastName,a." +
                         GlobalAppSettings.DbColumns.DB_User.Email + " AS Email,a." +
                         GlobalAppSettings.DbColumns.DB_User.IsActive + " AS IsActive,a." +
-                        GlobalAppSettings.DbColumns.DB_User.Id + " AS Id,a."
+                        GlobalAppSettings.DbColumns.DB_User.UserId + " AS Id,a."
                         + GlobalAppSettings.DbColumns.DB_User.DisplayName +
                         " as DisplayName FROM [" +
                         GlobalAppSettings.DbColumns.DB_User.DB_TableName + "] AS a where a." +

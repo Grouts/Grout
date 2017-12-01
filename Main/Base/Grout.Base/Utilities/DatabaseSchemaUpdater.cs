@@ -43,7 +43,7 @@ namespace Grout.Base.Utilities
             string version;
             try
             {
-                var result = GlobalAppSettings.DataProvider.ExecuteReaderQuery(GlobalAppSettings.QueryBuilder.SelectAllRecordsFromTable(GlobalAppSettings.DbColumns.DB_ServerVersion.DB_TableName));
+                var result = GlobalAppSettings.DataProvider.ExecuteReaderQuery(GlobalAppSettings.QueryBuilder.SelectAllRecordsFromTable(GlobalAppSettings.DbColumns.DB_ApplicationVersion.DB_TableName));
                 if (result != null && result.DataTable != null && result.DataTable.Rows.Count > 0)
                 {
                     version = result.DataTable.Rows[0].Field<string>("VersionNumber").ToLower();
@@ -132,9 +132,9 @@ namespace Grout.Base.Utilities
                 {
                     var values = new Dictionary<string, object>
                     {
-                        {GlobalAppSettings.DbColumns.DB_ServerVersion.VersionNumber, version}
+                        {GlobalAppSettings.DbColumns.DB_ApplicationVersion.VersionNumber, version}
                     };
-                    query.Append(GlobalAppSettings.QueryBuilder.AddToTable(GlobalAppSettings.DbColumns.DB_ServerVersion.DB_TableName,
+                    query.Append(GlobalAppSettings.QueryBuilder.AddToTable(GlobalAppSettings.DbColumns.DB_ApplicationVersion.DB_TableName,
                         values));
                 }
                 else
@@ -143,7 +143,7 @@ namespace Grout.Base.Utilities
                 {
                     new UpdateColumn
                     {
-                        ColumnName = GlobalAppSettings.DbColumns.DB_ServerVersion.VersionNumber,
+                        ColumnName = GlobalAppSettings.DbColumns.DB_ApplicationVersion.VersionNumber,
                         Value = version
                     }
                 };
@@ -151,12 +151,12 @@ namespace Grout.Base.Utilities
                 {
                     new ConditionColumn
                     {
-                        ColumnName = GlobalAppSettings.DbColumns.DB_ServerVersion.VersionNumber,
+                        ColumnName = GlobalAppSettings.DbColumns.DB_ApplicationVersion.VersionNumber,
                         Condition = Conditions.Equals,
                         Value = installedVersion
                     }
                 };
-                    query.Append(GlobalAppSettings.QueryBuilder.UpdateRowInTable(GlobalAppSettings.DbColumns.DB_ServerVersion.DB_TableName, updateColumns, whereColumns));
+                    query.Append(GlobalAppSettings.QueryBuilder.UpdateRowInTable(GlobalAppSettings.DbColumns.DB_ApplicationVersion.DB_TableName, updateColumns, whereColumns));
                 }
 
                 GlobalAppSettings.DataProvider.ExecuteNonQuery(query.ToString());

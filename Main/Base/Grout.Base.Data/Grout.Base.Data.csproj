@@ -54,9 +54,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataBase\DbColumnDeSerializer.cs" />
     <Compile Include="DataBase\DB_GruntUMP.cs" />
-    <Compile Include="DataBase\DB_SyncUMP.cs" />
     <Compile Include="DataProvider\SqlCeRelationalDataAdapter.cs" />
     <Compile Include="DataProvider\SqlRelationalDataAdapter.cs" />
     <Compile Include="Helpers\QueryHelper.cs" />

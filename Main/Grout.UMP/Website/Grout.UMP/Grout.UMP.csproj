@@ -448,10 +448,6 @@
       <Project>{9F894D1F-ACB0-41AD-900E-B747C3F17A89}</Project>
       <Name>Grout.Base.Logger</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Base\Grout.Base.Reports.Scheduler\Grout.Base.Reports.Scheduler.csproj">
-      <Project>{80d01ede-29ee-4c18-9c7a-fac7563b742d}</Project>
-      <Name>Grout.Base.Reports.Scheduler</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\Base\Grout.Base\Grout.Base.csproj">
       <Project>{bbb2c80a-5cca-408f-8526-f4ffda93c556}</Project>
       <Name>Grout.Base</Name>

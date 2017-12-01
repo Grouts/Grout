@@ -72,12 +72,12 @@ namespace Grout.Base
                         result.DataTable.AsEnumerable()
                             .Select(row => new Group
                             {
-                                GroupId = row.Field<int>(GlobalAppSettings.DbColumns.DB_Group.Id),
+                                GroupId = row.Field<int>(GlobalAppSettings.DbColumns.DB_Group.GroupId),
                                 GroupName = row.Field<string>(GlobalAppSettings.DbColumns.DB_Group.Name),
                                 GroupDescription = row.Field<string>(GlobalAppSettings.DbColumns.DB_Group.Description),
                                 GroupColor = row.Field<string>(GlobalAppSettings.DbColumns.DB_Group.Color),
                                 CanDelete =
-                                    (row.Field<int>(GlobalAppSettings.DbColumns.DB_Group.Id) == 1) ? false : true
+                                    (row.Field<int>(GlobalAppSettings.DbColumns.DB_Group.GroupId) == 1) ? false : true
                             }).ToList();
                 }
                 return groupList;
@@ -107,7 +107,7 @@ namespace Grout.Base
                 };
                 var output = new List<string>
                 {
-                    GlobalAppSettings.DbColumns.DB_Group.Id
+                    GlobalAppSettings.DbColumns.DB_Group.GroupId
                 };
                 var result = _dataProvider.ExecuteScalarQuery(_queryBuilder.AddToTable(
                     GlobalAppSettings.DbColumns.DB_Group.DB_TableName,
@@ -134,7 +134,7 @@ namespace Grout.Base
                 {
                     new ConditionColumn
                     {
-                        ColumnName = GlobalAppSettings.DbColumns.DB_Group.Id,
+                        ColumnName = GlobalAppSettings.DbColumns.DB_Group.GroupId,
                         Condition = Conditions.Equals,
                         Value = groupId
                     }
@@ -257,7 +257,7 @@ namespace Grout.Base
                         result.DataTable.AsEnumerable()
                             .Select(row => new Group
                             {
-                                GroupId = row.Field<int>(GlobalAppSettings.DbColumns.DB_Group.Id),
+                                GroupId = row.Field<int>(GlobalAppSettings.DbColumns.DB_Group.GroupId),
                                 GroupName = row.Field<string>(GlobalAppSettings.DbColumns.DB_Group.Name),
                                 GroupDescription = row.Field<string>(GlobalAppSettings.DbColumns.DB_Group.Description),
                                 GroupColor = row.Field<string>(GlobalAppSettings.DbColumns.DB_Group.Color)
@@ -282,7 +282,7 @@ namespace Grout.Base
                 {
                     new ConditionColumn
                     {
-                        ColumnName = GlobalAppSettings.DbColumns.DB_Group.Id,
+                        ColumnName = GlobalAppSettings.DbColumns.DB_Group.GroupId,
                         Condition = Conditions.Equals,
                         Value = groupId
                     },
@@ -304,7 +304,7 @@ namespace Grout.Base
                         result.DataTable.AsEnumerable()
                             .Select(row => new Group
                             {
-                                GroupId = row.Field<int>(GlobalAppSettings.DbColumns.DB_Group.Id),
+                                GroupId = row.Field<int>(GlobalAppSettings.DbColumns.DB_Group.GroupId),
                                 GroupName = row.Field<string>(GlobalAppSettings.DbColumns.DB_Group.Name),
                                 GroupDescription = row.Field<string>(GlobalAppSettings.DbColumns.DB_Group.Description),
                                 GroupColor = row.Field<string>(GlobalAppSettings.DbColumns.DB_Group.Color)
@@ -355,7 +355,7 @@ namespace Grout.Base
                                 new JoinColumn
                                 {
                                     TableName = GlobalAppSettings.DbColumns.DB_User.DB_TableName,
-                                    JoinedColumn = GlobalAppSettings.DbColumns.DB_User.Id,
+                                    JoinedColumn = GlobalAppSettings.DbColumns.DB_User.UserId,
                                     Operation = Conditions.Equals,
                                     ParentTableColumn = GlobalAppSettings.DbColumns.DB_UserGroup.UserId,
                                     ParentTable = GlobalAppSettings.DbColumns.DB_UserGroup.DB_TableName
@@ -393,7 +393,7 @@ namespace Grout.Base
                         result.DataTable.AsEnumerable()
                             .Select(row => new User
                             {
-                                UserId = row.Field<int>(GlobalAppSettings.DbColumns.DB_User.Id),
+                                UserId = row.Field<int>(GlobalAppSettings.DbColumns.DB_User.UserId),
                                 UserName = row.Field<string>(GlobalAppSettings.DbColumns.DB_User.UserName),
                                 FirstName = row.Field<string>(GlobalAppSettings.DbColumns.DB_User.FirstName),
                                 LastName = row.Field<string>(GlobalAppSettings.DbColumns.DB_User.LastName),
@@ -438,7 +438,7 @@ namespace Grout.Base
                 {
                     new ConditionColumn
                     {
-                        ColumnName = GlobalAppSettings.DbColumns.DB_Group.Id,
+                        ColumnName = GlobalAppSettings.DbColumns.DB_Group.GroupId,
                         Condition = Conditions.Equals,
                         Value = groupId
                     }
@@ -502,7 +502,7 @@ namespace Grout.Base
                 {
                     new ConditionColumn
                     {
-                        ColumnName = GlobalAppSettings.DbColumns.DB_Group.Id,
+                        ColumnName = GlobalAppSettings.DbColumns.DB_Group.GroupId,
                         Condition = Conditions.Equals,
                         Value = groupId
                     }

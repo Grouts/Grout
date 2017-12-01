@@ -6,14 +6,14 @@ declare @OuterClassObject varchar(max) = ''
 declare @InnerClassObjectesObject varchar(max) = ''
 declare @InnerClassObject varchar(max) = ''
 
-set @OuterClassObject = 'public Db_Grout()
+set @OuterClassObject = 'public DB_Grout()
     {'
 
 
-set @OuterClass = 'public class Db_Grout
+set @OuterClass = 'public class DB_Grout
     {'
 select @OuterClass = @OuterClass + '
-    public Db_' + TableName + ' Db_' + TableName + ' { get; set; }
+    public DB_' + TableName + ' DB_' + TableName + ' { get; set; }
 '
 from
 (
@@ -38,7 +38,7 @@ WHILE @@FETCH_STATUS = 0
 BEGIN
 
 set @TableName = @tablenameid
-set @InnerClass = 'public class Db_' + @TableName + '
+set @InnerClass = 'public class DB_' + @TableName + '
     {'
 select @InnerClass = @InnerClass + '
     public string ' + ColumnName + ' { get; set; }
@@ -61,7 +61,7 @@ set @InnerClass = @InnerClass  + '
 set @InnerClasses=@InnerClasses+@InnerClass
 
 
-set @InnerClassObject = 'this.Db_' + @TableName + '= new Db_'+@TableName+' { '
+set @InnerClassObject = 'this.DB_' + @TableName + '= new DB_'+@TableName+' { '
 select @InnerClassObject = @InnerClassObject + ColumnName + '="' + ColumnName + '",'
 from
 (

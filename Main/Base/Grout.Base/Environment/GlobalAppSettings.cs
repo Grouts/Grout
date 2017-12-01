@@ -21,7 +21,7 @@ namespace Grout.Base
     {
         public GlobalAppSettings()
         {
-            GroutColumns = new Db_Grout();
+            DbColumns = new DB_Grout();
         }
 
         public static DataBaseType DbSupport { get; set; }
@@ -38,9 +38,7 @@ namespace Grout.Base
 
         public static DateTime LocalSystemTime { get; set; }
 
-        public static DB_SyncUMP DbColumns { get; set; }
-
-        public static Db_Grout GroutColumns { get; set; }
+        public static DB_Grout DbColumns { get; set; }
 
         public static bool IsLatestVersion { get; set; }
 
@@ -220,7 +218,7 @@ namespace Grout.Base
             {
                 new ConditionColumn
                 {
-                    ColumnName = DbColumns.DB_User.Id,
+                    ColumnName = DbColumns.DB_User.UserId,
                     TableName = DbColumns.DB_User.DB_TableName,
                     Value = userId,
                     Condition = Conditions.Equals
@@ -235,7 +233,7 @@ namespace Grout.Base
                 },
                 new ConditionColumn
                 {
-                    ColumnName = DbColumns.DB_Group.Id,
+                    ColumnName = DbColumns.DB_Group.GroupId,
                     TableName = DbColumns.DB_Group.DB_TableName,
                     Value = 1,
                     LogicalOperator = LogicalOperators.AND,
@@ -270,7 +268,7 @@ namespace Grout.Base
                             new JoinColumn
                             {
                                 TableName = DbColumns.DB_User.DB_TableName,
-                                JoinedColumn = DbColumns.DB_User.Id,
+                                JoinedColumn = DbColumns.DB_User.UserId,
                                 Operation = Conditions.Equals,
                                 ParentTableColumn = DbColumns.DB_UserGroup.UserId,
                                 ParentTable = DbColumns.DB_UserGroup.DB_TableName
@@ -289,7 +287,7 @@ namespace Grout.Base
                                 TableName = DbColumns.DB_UserGroup.DB_TableName,
                                 JoinedColumn = DbColumns.DB_UserGroup.GroupId,
                                 Operation = Conditions.Equals,
-                                ParentTableColumn = DbColumns.DB_Group.Id,
+                                ParentTableColumn = DbColumns.DB_Group.GroupId,
                                 ParentTable = DbColumns.DB_Group.DB_TableName
                             }
                         },
@@ -302,7 +300,7 @@ namespace Grout.Base
                 new SelectedColumn
                 {
                     TableName = DbColumns.DB_User.DB_TableName,
-                    ColumnName = DbColumns.DB_User.Id
+                    ColumnName = DbColumns.DB_User.UserId
                 }
             };
 
@@ -316,14 +314,6 @@ namespace Grout.Base
 
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="path"></param>
-        public static void InitializeDataBaseColumns(string path)
-        {
-            DbColumns = new DbColumnDeSerializer().DeserializeTables(path);
-        }
 
         /// <summary>
         /// 

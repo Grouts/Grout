@@ -6,7 +6,6 @@ using System.Web.Http;
 using System.Web.Script.Serialization;
 using Grout.Base;
 using Grout.Base.DataClasses;
-using Grout.Base.Reports.Scheduler;
 using Grout.UMP.Models.API;
 
 namespace Grout.UMP.Controllers
