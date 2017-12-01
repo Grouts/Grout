@@ -224,7 +224,7 @@ namespace Grout.UMP
             routes.MapRoute(
                 "Default",
                 "",
-                new { controller = "Reports", action = "Reports", id = UrlParameter.Optional });
+                new { controller = "User", action = "Profile", id = UrlParameter.Optional });
 
             routes.RouteExistingFiles = true;
 

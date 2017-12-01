@@ -48,6 +48,13 @@ namespace Grout.UMP.Controllers
 
         public ActionResult Profile()
         {
+            var settings = new SystemSettingsSerializer().Deserialize(GlobalAppSettings.GetConfigFilepath() + ServerSetup.Configuration);
+
+            if (settings == null)
+            {
+                //FormsAuthentication.SignOut();
+                return Redirect("/startup");
+            }
             var userDetail = _userDetails.FindUserByUserId(Convert.ToInt32(HttpContext.User.Identity.Name));
             var userGroups = _userDetails.GetAllGroupsOfUser(Convert.ToInt32(HttpContext.User.Identity.Name));
             var groupString = string.Empty;
