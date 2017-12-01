@@ -21,7 +21,7 @@ namespace Grout.Base
     {
         public GlobalAppSettings()
         {
-            GroutColumns = new DB_Grout();
+            GroutColumns = new Db_Grout();
         }
 
         public static DataBaseType DbSupport { get; set; }
@@ -40,7 +40,7 @@ namespace Grout.Base
 
         public static DB_SyncUMP DbColumns { get; set; }
 
-        public static DB_Grout GroutColumns { get; set; }
+        public static Db_Grout GroutColumns { get; set; }
 
         public static bool IsLatestVersion { get; set; }
 
