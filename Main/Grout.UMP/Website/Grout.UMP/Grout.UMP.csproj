@@ -319,6 +319,7 @@
     <Content Include="Scripts\Category\AddCategory.js" />
     <Content Include="Scripts\Category\Category.js" />
     <Content Include="Scripts\Category\EditCategory.js" />
+    <Content Include="Scripts\controller\grunt-controller.js" />
     <Content Include="Scripts\DataSource\AddDataSource.js" />
     <Content Include="Scripts\DataSource\DataSource.js" />
     <Content Include="Scripts\DataSource\EditDataSource.js" />
