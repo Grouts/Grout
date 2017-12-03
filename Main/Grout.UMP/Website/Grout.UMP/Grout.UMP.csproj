@@ -1,7 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\MSBuild.Npm.0.5.1\build\MSBuild.Npm.props" Condition="Exists('..\packages\MSBuild.Npm.0.5.1\build\MSBuild.Npm.props')" />
+  <Import Project="..\packages\MSBuild.Grunt.0.5.1\build\MSBuild.Grunt.props" Condition="Exists('..\packages\MSBuild.Grunt.0.5.1\build\MSBuild.Grunt.props')" />
+  <Import Project="..\packages\MSBuild.Node.0.5.1\build\MSBuild.Node.props" Condition="Exists('..\packages\MSBuild.Node.0.5.1\build\MSBuild.Node.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
+    <LocalNodePath>$(MSBuildProjectDirectory)\.bin</LocalNodePath>
+    <NodeModulePath>$(MSBuildProjectDirectory)\.bin</NodeModulePath>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>
@@ -26,6 +31,8 @@
     <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
     <Use64BitIISExpress />
     <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -287,7 +294,21 @@
     <Content Include="Content\Styles\EssentialJS\report_viewer\images\waitingpopup.gif" />
     <Content Include="Content\Styles\font-Server.css" />
     <Content Include="Content\Styles\Jcrop\Jcrop.min.css" />
+    <Content Include="css\bootstrap-grid.css" />
+    <Content Include="css\bootstrap-grid.min.css" />
+    <Content Include="css\bootstrap-reboot.css" />
+    <Content Include="css\bootstrap-reboot.min.css" />
+    <Content Include="css\bootstrap.css" />
+    <Content Include="css\bootstrap.min.css" />
+    <Content Include="css\toastr.min.css" />
     <Content Include="Global.asax" />
+    <Content Include="gruntfile.js" />
+    <Content Include="index.html" />
+    <Content Include="minified\dependency.min.js" />
+    <Content Include="minified\index.html" />
+    <Content Include="minified\main.css" />
+    <Content Include="minified\main.min.js" />
+    <Content Include="minified\templates.min.js" />
     <Content Include="Scripts\Administration\SystemSettings.js" />
     <Content Include="Scripts\AngularJS\angular-sanitize.js" />
     <Content Include="Scripts\AngularJS\angular.min.js" />
@@ -301,12 +322,31 @@
     <Content Include="Scripts\DataSource\AddDataSource.js" />
     <Content Include="Scripts\DataSource\DataSource.js" />
     <Content Include="Scripts\DataSource\EditDataSource.js" />
+    <Content Include="Scripts\dependency\angular\angular-ngcsv.min.js" />
+    <Content Include="Scripts\dependency\angular\angular-resource.min.js" />
+    <Content Include="Scripts\dependency\angular\angular-route.min.js" />
+    <Content Include="Scripts\dependency\angular\angular-sanitize.min.js" />
+    <Content Include="Scripts\dependency\angular\angular.min.js" />
+    <Content Include="Scripts\dependency\angular\ngDraggable.js" />
+    <Content Include="Scripts\dependency\angular\ngDraggable.min.js" />
+    <Content Include="Scripts\dependency\angular\ngStorage.js" />
+    <Content Include="Scripts\dependency\angular\ngStorage.min.js" />
+    <Content Include="Scripts\dependency\bootstrap\bootstrap.js" />
+    <Content Include="Scripts\dependency\bootstrap\bootstrap.min.js" />
+    <Content Include="Scripts\dependency\bootstrap\ui-bootstrap-tpls.min.js" />
+    <Content Include="Scripts\dependency\jQuery\jquery-3.2.1.min.js" />
+    <Content Include="Scripts\dependency\jQuery\jquery-ui.js" />
+    <Content Include="Scripts\dependency\jQuery\jquery-ui.min.js" />
+    <Content Include="Scripts\dependency\lodash.min.js" />
+    <Content Include="Scripts\dependency\moment.min.js" />
+    <Content Include="Scripts\dependency\toastr.min.js" />
     <Content Include="Scripts\EssentialJS\ej.web.all.rdl.min.js" />
     <Content Include="Scripts\EssentialJS\ej.widget.all.13.2.min.js" />
     <Content Include="Scripts\File\AddFile.js" />
     <Content Include="Scripts\File\EditFile.js" />
     <Content Include="Scripts\File\File.js" />
     <Content Include="Scripts\Accounts\ForgotPassword.js" />
+    <Content Include="Scripts\global.js" />
     <Content Include="Scripts\Group\DeleteGroupUser.js" />
     <Content Include="Scripts\Group\EditGroup.js" />
     <Content Include="Scripts\Items\Items.js" />
@@ -322,6 +362,7 @@
     <Content Include="Scripts\Report\Report.js" />
     <Content Include="Scripts\Report\SelectDataSource.js" />
     <Content Include="Scripts\Report\AddRdlReport.js" />
+    <Content Include="Scripts\route.js" />
     <Content Include="Scripts\Scheduler\ScheduleListing.js" />
     <Content Include="Scripts\Scheduler\Scheduler.js" />
     <Content Include="Scripts\System\CheckMailSettings.js" />
@@ -336,6 +377,13 @@
     <Content Include="Scripts\Accounts\Login.js" />
     <Content Include="Scripts\Permission\Permission.js" />
     <Content Include="Scripts\System\SystemSettings.js" />
+    <Content Include="README.md" />
+    <None Include=".bin\git.cmd" />
+    <None Include=".bin\grunt.cmd" />
+    <None Include=".bin\node.cmd" />
+    <None Include=".bin\npm.cmd" />
+    <Content Include="package.json" />
+    <None Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -350,6 +398,11 @@
     <Folder Include="Dependencies\Others\" />
     <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="SampleReports\" />
+    <Folder Include="Scripts\config\" />
+    <Folder Include="Scripts\controller\" />
+    <Folder Include="Scripts\features\" />
+    <Folder Include="Scripts\service\" />
+    <Folder Include="Scripts\shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Permission\UserPermission.cshtml" />
@@ -538,6 +591,26 @@
     </VisualStudio>
   </ProjectExtensions>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\MSBuild.Node.0.5.1\build\MSBuild.Node.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MSBuild.Node.0.5.1\build\MSBuild.Node.props'))" />
+    <Error Condition="!Exists('..\packages\MSBuild.Node.0.5.1\build\MSBuild.Node.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MSBuild.Node.0.5.1\build\MSBuild.Node.targets'))" />
+    <Error Condition="!Exists('..\packages\MSBuild.Bower.0.5.1\build\MSBuild.Bower.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MSBuild.Bower.0.5.1\build\MSBuild.Bower.props'))" />
+    <Error Condition="!Exists('..\packages\MSBuild.Bower.0.5.1\build\MSBuild.Bower.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MSBuild.Bower.0.5.1\build\MSBuild.Bower.targets'))" />
+    <Error Condition="!Exists('..\packages\MSBuild.Grunt.0.5.1\build\MSBuild.Grunt.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MSBuild.Grunt.0.5.1\build\MSBuild.Grunt.props'))" />
+    <Error Condition="!Exists('..\packages\MSBuild.Grunt.0.5.1\build\MSBuild.Grunt.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MSBuild.Grunt.0.5.1\build\MSBuild.Grunt.targets'))" />
+    <Error Condition="!Exists('..\packages\MSBuild.Gulp.0.5.1\build\MSBuild.Gulp.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MSBuild.Gulp.0.5.1\build\MSBuild.Gulp.props'))" />
+    <Error Condition="!Exists('..\packages\MSBuild.Gulp.0.5.1\build\MSBuild.Gulp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MSBuild.Gulp.0.5.1\build\MSBuild.Gulp.targets'))" />
+    <Error Condition="!Exists('..\packages\MSBuild.Npm.0.5.1\build\MSBuild.Npm.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MSBuild.Npm.0.5.1\build\MSBuild.Npm.props'))" />
+    <Error Condition="!Exists('..\packages\MSBuild.Npm.0.5.1\build\MSBuild.Npm.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MSBuild.Npm.0.5.1\build\MSBuild.Npm.targets'))" />
+  </Target>
+  <Import Project="..\packages\MSBuild.Node.0.5.1\build\MSBuild.Node.targets" Condition="Exists('..\packages\MSBuild.Node.0.5.1\build\MSBuild.Node.targets')" />
+  <Import Project="..\packages\MSBuild.Bower.0.5.1\build\MSBuild.Bower.targets" Condition="Exists('..\packages\MSBuild.Bower.0.5.1\build\MSBuild.Bower.targets')" />
+  <Import Project="..\packages\MSBuild.Grunt.0.5.1\build\MSBuild.Grunt.targets" Condition="Exists('..\packages\MSBuild.Grunt.0.5.1\build\MSBuild.Grunt.targets')" />
+  <Import Project="..\packages\MSBuild.Gulp.0.5.1\build\MSBuild.Gulp.targets" Condition="Exists('..\packages\MSBuild.Gulp.0.5.1\build\MSBuild.Gulp.targets')" />
+  <Import Project="..\packages\MSBuild.Npm.0.5.1\build\MSBuild.Npm.targets" Condition="Exists('..\packages\MSBuild.Npm.0.5.1\build\MSBuild.Npm.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

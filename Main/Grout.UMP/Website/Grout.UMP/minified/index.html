@@ -1,0 +1,88 @@
+<!DOCTYPE html> 
+<html lang="en" ng-app="Grout"> 
+<head> 
+    <meta charset="utf-8" /> 
+    <title>Grout</title> 
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
+
+    <!-- injector:css -->
+    <link rel="stylesheet" href="/minified/main.css">
+    <!-- endinjector --> 
+    <!-- injector:js -->
+    <script src="/minified/dependency.min.js"></script>
+    <script src="/Scripts/global.js"></script>
+    <script src="/Scripts/route.js"></script>
+    <script src="/Scripts/Accounts/ForgotPassword.js"></script>
+    <script src="/Scripts/Accounts/Login.js"></script>
+    <script src="/Scripts/Administration/SystemSettings.js"></script>
+    <script src="/Scripts/AngularJS/angular-sanitize.js"></script>
+    <script src="/Scripts/AngularJS/angular.min.js"></script>
+    <script src="/Scripts/AngularJS/ej.widget.angular.min.js"></script>
+    <script src="/Scripts/Bootstrap/bootstrap-select.min.js"></script>
+    <script src="/Scripts/Bootstrap/bootstrap.min.js"></script>
+    <script src="/Scripts/Bootstrap/respond.min.js"></script>
+    <script src="/Scripts/Category/AddCategory.js"></script>
+    <script src="/Scripts/Category/Category.js"></script>
+    <script src="/Scripts/Category/EditCategory.js"></script>
+    <script src="/Scripts/Core/UMP.Core.js"></script>
+    <script src="/Scripts/DataSource/AddDataSource.js"></script>
+    <script src="/Scripts/DataSource/DataSource.js"></script>
+    <script src="/Scripts/DataSource/EditDataSource.js"></script>
+    <script src="/Scripts/EssentialJS/ej.web.all.rdl.min.js"></script>
+    <script src="/Scripts/EssentialJS/ej.widget.all.13.2.min.js"></script>
+    <script src="/Scripts/EssentialJS/jsrender.min.js"></script>
+    <script src="/Scripts/File/AddFile.js"></script>
+    <script src="/Scripts/File/EditFile.js"></script>
+    <script src="/Scripts/File/File.js"></script>
+    <script src="/Scripts/Group/DeleteGroupUser.js"></script>
+    <script src="/Scripts/Group/EditGroup.js"></script>
+    <script src="/Scripts/Group/Group.js"></script>
+    <script src="/Scripts/Items/ItemActions.js"></script>
+    <script src="/Scripts/Items/ItemVersion.js"></script>
+    <script src="/Scripts/Items/Items.js"></script>
+    <script src="/Scripts/Jcrop/Jcrop.min.js"></script>
+    <script src="/Scripts/Permission/GroupPermission.js"></script>
+    <script src="/Scripts/Permission/Permission.js"></script>
+    <script src="/Scripts/Report/AddRdlReport.js"></script>
+    <script src="/Scripts/Report/Report.js"></script>
+    <script src="/Scripts/Report/SelectDataSource.js"></script>
+    <script src="/Scripts/Scheduler/ScheduleListing.js"></script>
+    <script src="/Scripts/Scheduler/Scheduler.js"></script>
+    <script src="/Scripts/System/CheckMailSettings.js"></script>
+    <script src="/Scripts/System/SystemSettings.js"></script>
+    <script src="/Scripts/User/AccountActivation.js"></script>
+    <script src="/Scripts/User/ActiveDirectory.js"></script>
+    <script src="/Scripts/User/EditProfile.js"></script>
+    <script src="/Scripts/User/SynchronizeUsers.js"></script>
+    <script src="/Scripts/User/UserManagement.js"></script>
+    <script src="/Scripts/User/UserManagementProfile.js"></script>
+    <script src="/Scripts/jQuery/jquery-1.10.2.min.js"></script>
+    <script src="/Scripts/jQuery/jquery.easing-1.3.min.js"></script>
+    <script src="/Scripts/jQuery/jquery.globalize.min.js"></script>
+    <script src="/Scripts/jQuery/jquery.validate.min.js"></script>
+    <script src="/Scripts/jQuery/jsrender.min.js"></script>
+    <script src="/minified/templates.min.js"></script>
+    <!-- endinjector -->    
+
+
+</head> 
+<body ng-controller="RootController"> 
+    <div class="screen-protector" ng-show="blockUi"> 
+    </div> 
+ 
+    <div class="wrapper" ng-class="{blockui:blockUI==true}"> 
+        <div class="wrap"> 
+            <div ng-include="'/Views/header.html'" ng-if="!isPageNotDefined"></div> 
+ 
+            <div class="content-wrap container-fluid"> 
+                <div ng-view></div> 
+            </div> 
+        </div> 
+ 
+        <div class="footer text-center"> 
+            &copy;&nbsp;Copyright 2017 Grout. All Rights Reserved.
+        </div> 
+    </div> 
+</body> 
+</html> 

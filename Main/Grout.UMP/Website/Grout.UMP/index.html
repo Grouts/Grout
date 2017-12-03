@@ -1,0 +1,34 @@
+<!DOCTYPE html> 
+<html lang="en" ng-app="Grout"> 
+<head> 
+    <meta charset="utf-8" /> 
+    <title>Grout</title> 
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
+
+    <!-- injector:css --> 
+    <!-- endinjector --> 
+    <!-- injector:js --> 
+    <!-- endinjector -->    
+
+
+</head> 
+<body ng-controller="RootController"> 
+    <div class="screen-protector" ng-show="blockUi"> 
+    </div> 
+ 
+    <div class="wrapper" ng-class="{blockui:blockUI==true}"> 
+        <div class="wrap"> 
+            <div ng-include="'/Views/header.html'" ng-if="!isPageNotDefined"></div> 
+ 
+            <div class="content-wrap container-fluid"> 
+                <div ng-view></div> 
+            </div> 
+        </div> 
+ 
+        <div class="footer text-center"> 
+            &copy;&nbsp;Copyright 2017 Grout. All Rights Reserved.
+        </div> 
+    </div> 
+</body> 
+</html> 
