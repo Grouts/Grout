@@ -399,7 +399,6 @@
     <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="SampleReports\" />
     <Folder Include="Scripts\config\" />
-    <Folder Include="Scripts\controller\" />
     <Folder Include="Scripts\features\" />
     <Folder Include="Scripts\service\" />
     <Folder Include="Scripts\shared\" />
